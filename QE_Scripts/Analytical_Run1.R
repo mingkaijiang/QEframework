@@ -7,8 +7,6 @@
 #### 3. baseline N cycle
 ####
 ################################################################################
-
-
 #### Functions
 Perform_Analytical_Run1 <- function(f.flag = 1, cDF, eDF) {
     #### Function to perform analytical run 1 simulations
@@ -21,11 +19,11 @@ Perform_Analytical_Run1 <- function(f.flag = 1, cDF, eDF) {
     ######### Main program
     source("Parameters/Analytical_Run1_Parameters.R")
     
-    # create a range of nc for shoot to initiate
+    ### create a range of nc for shoot to initiate
     nfseq <- round(seq(0.001, 0.1, by = 0.001),5)
     a_nf <- as.data.frame(allocn(nfseq))
     
-    # calculate photosynthetic constraint at CO2 = 350
+    ### calculate photosynthetic constraint at CO2 = 350
     Photo350 <- photo_constraint_full_cn(nfseq, a_nf, CO2_1)
 
     ### calculate very long term NC and PC constraint on NPP, respectively
@@ -80,7 +78,6 @@ Perform_Analytical_Run1 <- function(f.flag = 1, cDF, eDF) {
     # eDF[eDF$Run == 1 & eDF$CO2 == 350, 3:8] <- equil350DF
     
     ##### CO2 = 700
-    
     # N:C ratio
     nfseq <- round(seq(0.001, 0.1, by = 0.001),5)
     a_nf <- as.data.frame(allocn(nfseq))
