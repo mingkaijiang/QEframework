@@ -20,20 +20,19 @@ Here we are evaluating the alternative assumption for wood stoichiometric flexib
 
 ## Procedures
 
-Below I use step-by-step codes to generate the results.
+Below I use step-by-step guidance to generate the results.
 
 Firstly, we need to source all the functions and set up the workspace, via:
 
 ``` {r, message=FALSE}
-setwd("/Users/mingkaijiang/Documents/Research/Projects/Quasi-equilibrium-test/QE_framework/Git")
-source("/Users/mingkaijiang/Documents/Research/Projects/Quasi-equilibrium-test/QE_framework/Git/QE_Analyses/prepare_R.R")
+source("QE_Analyses/prepare_R.R")
 
 ```
 
 Then we source the QE scripts:
 
 ``` {r, message = FALSE}
-scriptfiles <- dir("/Users/mingkaijiang/Documents/Research/Projects/Quasi-equilibrium-test/QE_framework/Git/QE_Scripts", 
+scriptfiles <- dir("QE_Scripts", 
                    pattern="[.]R$", recursive = TRUE, full.names = TRUE)
 for(b in scriptfiles)source(b)
 
@@ -66,7 +65,7 @@ edf1.r2 <- edf.r2[edf.r2$CO2 == 350, ]
 edf2.r2 <- edf.r2[edf.r2$CO2 == 700, ]
 
 # graphic settings
-par(mfrow = c(1,2), mar=c(5.1,6.1,2.1,2.1))
+par(mar=c(5.1,6.1,2.1,2.1))
 
 ```
 
