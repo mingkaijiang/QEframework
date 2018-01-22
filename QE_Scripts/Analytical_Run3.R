@@ -27,10 +27,10 @@ Perform_Analytical_Run3 <- function(f.flag = 1) {
     Photo350 <- photo_constraint_full_cn(nfseq, a_nf, CO2_1)
 
     ### calculate very long term NC and PC constraint on NPP, respectively
-    NCVLONG <- VLong_constraint_N(nf=nfseq, nfdf=a_nf)
+    NCVLONG <- NConsVLong_expl_min(df=nfseq, a=a_nf)
     
     ### finding the equilibrium point between photosynthesis and very long term nutrient constraints
-    VLong_equil <- solveVLong_full_cn(CO2=CO2_1)
+    VLong_equil <- solveVLong_expl_min(CO2=CO2_1)
     
     ### Get Cpassive from very-long nutrient cycling solution
     aequiln <- allocn(VLong_equil$equilnf)
@@ -39,11 +39,11 @@ Perform_Analytical_Run3 <- function(f.flag = 1) {
     CpassVLong <- omegap*VLong_equil$equilNPP/pass$decomp_p/(1-pass$qpq)*1000.0
     
     ### Calculate long term nutrient constraint
-    NCLONG <- Long_constraint_N(nfseq, a_nf, CpassVLong,
+    NCLONG <- NConsLong_expl_min(nfseq, a_nf, CpassVLong,
                                 NinL = Nin)#+NrelwoodVLong)
     
     ### Find long term equilibrium point
-    Long_equil <- solveLong_full_cn(CO2=CO2_1, Cpass=CpassVLong, NinL = Nin)#+NrelwoodVLong)
+    Long_equil <- solveLong_expl_min(CO2=CO2_1, Cpass=CpassVLong, NinL = Nin)#+NrelwoodVLong)
     
     ### Get Cslow from long nutrient cycling solution
     omegas <- aequiln$af*pass$omegafs + aequiln$ar*pass$omegars
@@ -53,26 +53,26 @@ Perform_Analytical_Run3 <- function(f.flag = 1) {
     NrelwoodVLong <- aequiln$aw*aequiln$nw*VLong_equil$equilNPP*1000.0
     
     ### Calculate medium term nutrient constraint
-    NCMEDIUM <- NConsMedium(df=nfseq, 
-                            a=a_nf, 
-                            Cpass=CpassVLong, 
-                            Cslow=CslowLong, 
-                            NinL = Nin+NrelwoodVLong)
+    NCMEDIUM <- NConsMedium_expl_min(df=nfseq, 
+                                     a=a_nf, 
+                                     Cpass=CpassVLong, 
+                                     Cslow=CslowLong, 
+                                     NinL = Nin+NrelwoodVLong)
     
     ### Solve medium term nutrient equilibrium point
-    Medium_equil_350 <- solveMedium(CO2=CO2_1, 
-                                    Cpass=CpassVLong, 
-                                    Cslow=CslowLong, 
-                                    NinL = Nin+NrelwoodVLong)
+    Medium_equil_350 <- solveMedium_expl_min(CO2=CO2_1, 
+                                             Cpass=CpassVLong, 
+                                             Cslow=CslowLong, 
+                                             NinL = Nin+NrelwoodVLong)
     
 
     out350DF <- data.frame(CO2_1, nfseq, Photo350, NCVLONG$NPP_N, 
                            NCLONG$NPP, NCMEDIUM$NPP)
     colnames(out350DF) <- c("CO2", "nc", "NPP_photo", "NPP_VL",
                             "NPP_L", "NPP_M")
-    equil350DF <- data.frame(CO2_1, VLong_equil, Long_equil)
+    equil350DF <- data.frame(CO2_1, VLong_equil, Long_equil, Medium_equil_350)
     colnames(equil350DF) <- c("CO2", "nc_VL", "NPP_VL", 
-                              "nc_L", "NPP_L")
+                              "nc_L", "NPP_L", "nc_M", "NPP_M")
     
     ##### CO2 = 700
     ### N:C ratio
@@ -83,18 +83,18 @@ Perform_Analytical_Run3 <- function(f.flag = 1) {
     Photo700 <- photo_constraint_full_cn(nfseq, a_nf, CO2_2)
     
     ### calculate very long term NC and PC constraint on NPP, respectively
-    NCVLONG <- VLong_constraint_N(nf=nfseq, nfdf=a_nf)
+    NCVLONG <- NConsVLong_expl_min(df=nfseq, a=a_nf)
     
     ### finding the equilibrium point between photosynthesis and very long term nutrient constraints
-    VLong_equil <- solveVLong_full_cn(CO2=CO2_2)
+    VLong_equil <- solveVLong_expl_min(CO2=CO2_2)
     
     ### Find long term equilibrium point
-    Long_equil <- solveLong_full_cn(CO2=CO2_2, Cpass=CpassVLong, NinL = Nin)
+    Long_equil <- solveLong_expl_min(CO2=CO2_2, Cpass=CpassVLong, NinL = Nin)
     
     ### Find medium term equilibrium point
-    Medium_equil_350 <- solveMedium(CO2_1, Cpass = CpassVLong, Cslow = CslowLong, 
+    Medium_equil_350 <- solveMedium_expl_min(CO2_1, Cpass = CpassVLong, Cslow = CslowLong, 
                                              NinL=Nin+NrelwoodVLong)
-    Medium_equil_700 <- solveMedium(CO2_2, Cpass = CpassVLong, Cslow = CslowLong, 
+    Medium_equil_700 <- solveMedium_expl_min(CO2_2, Cpass = CpassVLong, Cslow = CslowLong, 
                                              NinL=Nin+NrelwoodVLong)
     
     out700DF <- data.frame(CO2_2, nfseq, Photo700, 
@@ -102,9 +102,9 @@ Perform_Analytical_Run3 <- function(f.flag = 1) {
     colnames(out700DF) <- c("CO2", "nc", "NPP_photo", "NPP_VL",
                             "NPP_L", "NPP_M")
     
-    equil700DF <- data.frame(CO2_2, VLong_equil, Long_equil)
+    equil700DF <- data.frame(CO2_2, VLong_equil, Long_equil, Medium_equil_700)
     colnames(equil700DF) <- c("CO2", "nc_VL", "NPP_VL", 
-                              "nc_L", "NPP_L")
+                              "nc_L", "NPP_L", "nc_M", "NPP_M")
  
     ### get the point instantaneous NPP response to doubling of CO2
     df700 <- as.data.frame(cbind(round(nfseq,3), Photo700))

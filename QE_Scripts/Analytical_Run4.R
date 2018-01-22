@@ -1,22 +1,24 @@
 
-#### Analytical script Run 2
+#### Analytical script Run 4
 ####
 #### Assumptions:
-#### 1. baseline model
-#### 2. fixed wood NC
-#### 3. baseline N cycle
+#### 1. baseline N cycle model
+#### 2. fixed wood NC ratio
+#### 3. explicit mineral N pool simulated
+#### 4. Same as Run 3, except fixed wood NC
+#### 5. Same as Run 2, except explicit mineral N
 ####
 ################################################################################
 #### Functions
-Perform_Analytical_Run2 <- function(f.flag = 1) {
-    #### Function to perform analytical run 2 simulations
+Perform_Analytical_Run4 <- function(f.flag = 1) {
+    #### Function to perform analytical run 4 simulations
     #### eDF: stores equilibrium points
     #### cDF: stores constraint points (curves)
     #### f.flag: = 1 simply plot analytical solution file
     #### f.flag: = 2 return a list consisting of two dataframes
 
     ######### Main program
-    source("Parameters/Analytical_Run2_Parameters.R")
+    source("Parameters/Analytical_Run4_Parameters.R")
     
     ### create a range of nc for shoot to initiate
     nfseq <- round(seq(0.001, 0.1, by = 0.001),5)
@@ -26,10 +28,10 @@ Perform_Analytical_Run2 <- function(f.flag = 1) {
     Photo350 <- photo_constraint_full_cn(nfseq, a_nf, CO2_1)
 
     ### calculate very long term NC and PC constraint on NPP, respectively
-    NCVLONG <- VLong_constraint_N(nf=nfseq, nfdf=a_nf)
+    NCVLONG <- NConsVLong_expl_min(df=nfseq, a=a_nf)
     
     ### finding the equilibrium point between photosynthesis and very long term nutrient constraints
-    VLong_equil <- solveVLong_full_cn(CO2=CO2_1)
+    VLong_equil <- solveVLong_expl_min(CO2=CO2_1)
     
     ### Get Cpassive from very-long nutrient cycling solution
     aequiln <- allocn(VLong_equil$equilnf)
@@ -38,11 +40,11 @@ Perform_Analytical_Run2 <- function(f.flag = 1) {
     CpassVLong <- omegap*VLong_equil$equilNPP/pass$decomp_p/(1-pass$qpq)*1000.0
     
     ### Calculate long term nutrient constraint
-    NCLONG <- Long_constraint_N(nfseq, a_nf, CpassVLong,
+    NCLONG <- NConsLong_expl_min(nfseq, a_nf, CpassVLong,
                                 NinL = Nin)#+NrelwoodVLong)
     
     ### Find long term equilibrium point
-    Long_equil <- solveLong_full_cn(CO2=CO2_1, Cpass=CpassVLong, NinL = Nin)#+NrelwoodVLong)
+    Long_equil <- solveLong_expl_min(CO2=CO2_1, Cpass=CpassVLong, NinL = Nin)#+NrelwoodVLong)
     
     ### Get Cslow from long nutrient cycling solution
     omegas <- aequiln$af*pass$omegafs + aequiln$ar*pass$omegars
@@ -52,16 +54,17 @@ Perform_Analytical_Run2 <- function(f.flag = 1) {
     NrelwoodVLong <- aequiln$aw*aequiln$nw*VLong_equil$equilNPP*1000.0
     
     ### Calculate medium term nutrient constraint
-    NCMEDIUM <- NConsMedium(df=nfseq, 
-                            a=a_nf, 
-                            Cpass=CpassVLong, 
-                            Cslow=CslowLong, 
-                            NinL = Nin+NrelwoodVLong)
+    NCMEDIUM <- NConsMedium_expl_min(df=nfseq, 
+                                     a=a_nf, 
+                                     Cpass=CpassVLong, 
+                                     Cslow=CslowLong, 
+                                     NinL = Nin+NrelwoodVLong)
     
-    Medium_equil_350 <- solveMedium(CO2=CO2_1, 
-                                    Cpass=CpassVLong, 
-                                    Cslow=CslowLong, 
-                                    NinL = Nin+NrelwoodVLong)
+    ### Solve medium term nutrient equilibrium point
+    Medium_equil_350 <- solveMedium_expl_min(CO2=CO2_1, 
+                                             Cpass=CpassVLong, 
+                                             Cslow=CslowLong, 
+                                             NinL = Nin+NrelwoodVLong)
     
 
     out350DF <- data.frame(CO2_1, nfseq, Photo350, NCVLONG$NPP_N, 
@@ -81,18 +84,18 @@ Perform_Analytical_Run2 <- function(f.flag = 1) {
     Photo700 <- photo_constraint_full_cn(nfseq, a_nf, CO2_2)
     
     ### calculate very long term NC and PC constraint on NPP, respectively
-    NCVLONG <- VLong_constraint_N(nf=nfseq, nfdf=a_nf)
+    NCVLONG <- NConsVLong_expl_min(df=nfseq, a=a_nf)
     
     ### finding the equilibrium point between photosynthesis and very long term nutrient constraints
-    VLong_equil <- solveVLong_full_cn(CO2=CO2_2)
+    VLong_equil <- solveVLong_expl_min(CO2=CO2_2)
     
     ### Find long term equilibrium point
-    Long_equil <- solveLong_full_cn(CO2=CO2_2, Cpass=CpassVLong, NinL = Nin)
+    Long_equil <- solveLong_expl_min(CO2=CO2_2, Cpass=CpassVLong, NinL = Nin)
     
     ### Find medium term equilibrium point
-    Medium_equil_350 <- solveMedium(CO2_1, Cpass = CpassVLong, Cslow = CslowLong, 
+    Medium_equil_350 <- solveMedium_expl_min(CO2_1, Cpass = CpassVLong, Cslow = CslowLong, 
                                              NinL=Nin+NrelwoodVLong)
-    Medium_equil_700 <- solveMedium(CO2_2, Cpass = CpassVLong, Cslow = CslowLong, 
+    Medium_equil_700 <- solveMedium_expl_min(CO2_2, Cpass = CpassVLong, Cslow = CslowLong, 
                                              NinL=Nin+NrelwoodVLong)
     
     out700DF <- data.frame(CO2_2, nfseq, Photo700, 
@@ -110,8 +113,8 @@ Perform_Analytical_Run2 <- function(f.flag = 1) {
     
     if (f.flag == 1) {
         
-        ### plot 2-d plots of nf vs. npp and nf vs. pf
-        tiff("Plots/Analytical_Run2_2d.tiff",
+        ### plot 2-d plots of nf vs. npp 
+        tiff("Plots/Analytical_Run4_2d.tiff",
              width = 5, height = 5, units = "in", res = 300)
         par(mar=c(5.1,6.1,2.1,2.1))
         
@@ -132,8 +135,7 @@ Perform_Analytical_Run2 <- function(f.flag = 1) {
         points(equil700DF$nc_VL, equil700DF$NPP_VL, type="p", col="orange", pch = 19, cex = 2)
         points(equil700DF$nc_L, equil700DF$NPP_L,type="p", col="red", pch = 19, cex = 2)
         points(Medium_equil_700$equilnf, Medium_equil_700$equilNPP, type="p", col="purple", pch = 19, cex = 2)
-        # text(x=0.045, y=2.9, "(a)", cex = 2)
-        
+
         legend("bottomright", c("P350", "P700", "VL", "L", "M",
                             "A", "B", "C", "D", "E"),
                col=c("cyan","green", "tomato", "violet","darkred","blue", "darkgreen","purple","red", "orange"), 

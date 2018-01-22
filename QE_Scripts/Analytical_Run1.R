@@ -68,9 +68,9 @@ Perform_Analytical_Run1 <- function(f.flag = 1) {
                            NCLONG$NPP, NCMEDIUM$NPP)
     colnames(out350DF) <- c("CO2", "nc", "NPP_photo", "NPP_VL",
                             "NPP_L", "NPP_M")
-    equil350DF <- data.frame(CO2_1, VLong_equil, Long_equil)
+    equil350DF <- data.frame(CO2_1, VLong_equil, Long_equil, Medium_equil_350)
     colnames(equil350DF) <- c("CO2", "nc_VL", "NPP_VL", 
-                              "nc_L", "NPP_L")
+                              "nc_L", "NPP_L", "nc_M", "NPP_M")
     
     ##### CO2 = 700
     ### N:C ratio
@@ -100,9 +100,9 @@ Perform_Analytical_Run1 <- function(f.flag = 1) {
     colnames(out700DF) <- c("CO2", "nc", "NPP_photo", "NPP_VL",
                             "NPP_L", "NPP_M")
     
-    equil700DF <- data.frame(CO2_2, VLong_equil, Long_equil)
+    equil700DF <- data.frame(CO2_2, VLong_equil, Long_equil, Medium_equil_700)
     colnames(equil700DF) <- c("CO2", "nc_VL", "NPP_VL", 
-                              "nc_L", "NPP_L")
+                              "nc_L", "NPP_L", "nc_M", "NPP_M")
  
     ### get the point instantaneous NPP response to doubling of CO2
     df700 <- as.data.frame(cbind(round(nfseq,3), Photo700))
