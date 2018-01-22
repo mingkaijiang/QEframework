@@ -45,41 +45,6 @@ solveMedium_priming <- function(CO2,Cpass,Cslow,NinL) {
     return(ans)
 }
 
-# Find the medium term equilibrium nf and NPP under standard conditions - by finding the root
-# specifically for exudation model, without considering exudation
-solveMedium_full_cnp <- function(CO2,Cpass,Cslow,NinL,PinL) {
-    
-    #browser()
-    fn <- function(nf) {
-        photo_constraint_full_cnp(nf, inferpfVL(nf, allocn(nf)), 
-                                  allocn(nf), allocp(inferpfVL(nf, allocn(nf))), 
-                                  CO2) - NConsMedium(nf,allocn(nf),Cpass,Cslow,NinL)$NPP
-    }
-    equilnf <- uniroot(fn,interval=c(0.001,0.1))$root
-    equilpf <- inferpfVL(equilnf, allocn(equilnf))
-    equilNPP <- photo_constraint_full_cnp(equilnf, equilpf,
-                                          allocn(equilnf), allocp(equilpf), CO2)
-    ans <- data.frame(equilnf,equilpf,equilNPP)
-    return(ans)
-}
-
-# Find the medium term equilibrium nf and NPP under standard conditions - by finding the root
-# specifically for respiration model
-solveMedium_respiration <- function(CO2,Cpass,Cslow,NinL,PinL) {
-    
-    #browser()
-    fn <- function(nf) {
-        photo_constraint_respiration(nf, inferpfVL(nf, allocn(nf)), 
-                                    allocn(nf), allocp(inferpfVL(nf, allocn(nf))), 
-                                    CO2) - NConsMedium(nf,allocn(nf),Cpass,Cslow,NinL)$NPP
-    }
-    equilnf <- uniroot(fn,interval=c(0.0085,0.04))$root
-    equilpf <- inferpfVL(equilnf, allocn(equilnf))
-    equilNPP <- photo_constraint_respiration(equilnf, equilpf,
-                                             allocn(equilnf), allocp(equilpf), CO2)
-    ans <- data.frame(equilnf,equilpf,equilNPP)
-    return(ans)
-}
 
 # Find the medium term equilibrium nf and NPP under standard conditions - by finding the root
 # specifically for explicit mineral pools

@@ -13,15 +13,3 @@ ariz_dep_coef_n <- function(nf) {
     
     return(ariz)
 }
-
-ariz_dep_coef_p <- function(pf) {
-    # ariz0: minimum allocation to rhizodeposition
-    # ariz1: slope of allocation to rhizodeposition with leaf C:P
-    # cpref: reference leaf C:P ratio
-    
-    cpleaf <- 1.0/pf
-    
-    ariz <- ariz0 + ariz1 * pmax((cpleaf - cpref)/cpref, 0)
-    
-    return(ariz)
-}
