@@ -112,8 +112,8 @@ Perform_Analytical_Run2 <- function(f.flag = 1) {
         
         ### plot 2-d plots of nf vs. npp and nf vs. pf
         tiff("Plots/Analytical_Run2_2d.tiff",
-             width = 10, height = 5, units = "in", res = 300)
-        # par(mfrow=c(1,2), mar=c(5.1,6.1,2.1,2.1))
+             width = 5, height = 5, units = "in", res = 300)
+        par(mar=c(5.1,6.1,2.1,2.1))
         
         # shoot nc vs. NPP
         plot(out350DF$nc, out350DF$NPP_photo, xlim=c(0.001, 0.05),
