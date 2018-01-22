@@ -1,22 +1,23 @@
 
-#### Analytical script Run 1
+#### Analytical script Run 3
 ####
 #### Assumptions:
-#### 1. baseline model
-#### 2. Variable wood NC
-#### 3. baseline N cycle
+#### 1. baseline N cycle model
+#### 2. variable wood NC
+#### 3. explicit mineral N pool simulated
+####  4. Same as Run 1, except explicit mineral N pool
 ####
 ################################################################################
 #### Functions
-Perform_Analytical_Run1 <- function(f.flag = 1) {
-    #### Function to perform analytical run 1 simulations
+Perform_Analytical_Run3 <- function(f.flag = 1) {
+    #### Function to perform analytical run 2 simulations
     #### eDF: stores equilibrium points
     #### cDF: stores constraint points (curves)
     #### f.flag: = 1 simply plot analytical solution file
     #### f.flag: = 2 return a list consisting of two dataframes
 
     ######### Main program
-    source("Parameters/Analytical_Run1_Parameters.R")
+    source("Parameters/Analytical_Run3_Parameters.R")
     
     ### create a range of nc for shoot to initiate
     nfseq <- round(seq(0.001, 0.1, by = 0.001),5)
@@ -58,6 +59,7 @@ Perform_Analytical_Run1 <- function(f.flag = 1) {
                             Cslow=CslowLong, 
                             NinL = Nin+NrelwoodVLong)
     
+    ### Solve medium term nutrient equilibrium point
     Medium_equil_350 <- solveMedium(CO2=CO2_1, 
                                     Cpass=CpassVLong, 
                                     Cslow=CslowLong, 
@@ -110,8 +112,8 @@ Perform_Analytical_Run1 <- function(f.flag = 1) {
     
     if (f.flag == 1) {
         
-        ### plot 2-d plots of nf vs. npp and nf vs. pf
-        tiff("Plots/Analytical_Run1_2d.tiff",
+        ### plot 2-d plots of nf vs. npp 
+        tiff("Plots/Analytical_Run3_2d.tiff",
              width = 5, height = 5, units = "in", res = 300)
         par(mar=c(5.1,6.1,2.1,2.1))
         
