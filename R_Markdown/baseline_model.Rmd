@@ -18,16 +18,96 @@ The baseline model this study refers to compares the effect of wood NC stoichiom
 Here we are evaluating the alternative assumption for wood stoichiometric flexiblity on plant's CO2 response. Time is also a factor considered here, with VL (very-long), L (long), and M (medium) terms considered as the final model equilibrium point, passive SOM pool equilibrated, passive and slow SOM pools equilibrated, respectively. 
 
 
-```{r cars}
-summary(cars)
+## Procedures
+
+Below I use step-by-step codes to generate the results.
+
+Firstly, we need to source all the functions and set up the workspace, via:
+
+```
+source("QE_Analyses/prepare_R.R")
+
 ```
 
-## Including Plots
+Then we source the QE scripts:
 
-You can also embed plots, for example:
+```
+scriptfiles <- dir("QE_Scripts", pattern="[.]R$", recursive = TRUE, full.names = TRUE)
+for(b in scriptfiles)source(b)
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```
+
+Next, we run analytical run scripts to generate the pdf files and store the rest dataframes into data list:
+
+```
+#### Step 1: return plots
+Perform_Analytical_Run1(f.flag = 1)
+Perform_Analytical_Run2(f.flag = 1)
+
+#### Step 2: return data list
+r1 <- Perform_Analytical_Run1(f.flag = 2)
+r2 <- Perform_Analytical_Run2(f.flag = 2)
+
+```
+
+## Plots
+
+Analytical run 1 plot, that is, baseline model with variable wood NC ratio, is shown below:
+
+
+
+Analytical run 2 plot, that is, baseline model with fixed wood NC ratio, is shown below:
+
+
+
+```{r analytical, echo=FALSE}
+# pre-processing script, read in all R packages
+source("QE_Analyses/prepare_R.R")
+
+# There is a line in prepare_R that repeats this. For now, leave it here.
+scriptfiles <- dir("QE_Scripts", pattern="[.]R$", recursive = TRUE, full.names = TRUE)
+for(b in scriptfiles)source(b)
+
+# save the output and plot from each data list
+r1 <- Perform_Analytical_Run1(f.flag = 2)
+r2 <- Perform_Analytical_Run1(f.flag = 2)
+
+# split data list into data frames
+cdf.r1 <- r1$cDF
+cdf.r2 <- r2$cDF
+edf.r1 <- r1$eDF
+edf.r2 <- r2$eDF
+
+cdf1.r1 <- cdf.r1[cdf.r1$CO2 == 350, ]
+cdf2.r1 <- cdf.r1[cdf.r1$CO2 == 700, ]
+cdf1.r2 <- cdf.r2[cdf.r2$CO2 == 350, ]
+cdf2.r2 <- cdf.r2[cdf.r2$CO2 == 700, ]
+
+edf1.r1 <- edf.r1[edf.r1$CO2 == 350, ]
+edf2.r1 <- edf.r1[edf.r1$CO2 == 700, ]
+edf1.r2 <- edf.r2[edf.r2$CO2 == 350, ]
+edf2.r2 <- edf.r2[edf.r2$CO2 == 700, ]
+
+# graphic settings
+par(mfrow = c(1,2), mar=c(5.1,6.1,2.1,2.1))
+
+# plotting
+plot(cdf1.r1$nc, cdf1.r1$NPP_photo, xlim=c(0.001, 0.05),
+     ylim=c(0.5, 3), 
+     type = "l", xlab = "Shoot N:C ratio", 
+     ylab = expression(paste("Production [kg C ", m^-2, " ", yr^-1, "]")),
+     col="cyan", lwd = 3, cex.lab=1.5)
+points(cdf1.r1$nc, cdf1.r1$NPP_VL, type="l", col="tomato", lwd = 3)
+points(edf1.r1$nc_VL, edf1.r1$NPP_VL, type="p", pch = 19, col = "blue", cex = 2)
+points(cdf1.r1$nc, cdf1.r1$NPP_L, type='l',col="violet", lwd = 3)
+points(cdf1.r1$nc, cdf1.r1$NPP_M, type="l", col="darkred", lwd = 3)
+
+points(cdf2.r1$nc, cdf2.r1$NPP_photo, col="green", type="l", lwd = 3)
+points(edf2.r1$nc_VL, edf2.r1$NPP_VL, type="p", col="orange", pch = 19, cex = 2)
+points(edf2.r1$nc_L,edf2.r1$NPP_L,type="p", col="red", pch = 19, cex = 2)
+points(edf2.r2$equilnf, edf2.r2$NPP_M, type="p", col="purple", pch = 19, cex = 2)
+
+
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
