@@ -52,8 +52,6 @@ slow_pool <- function(df, a) {
     omegafs <- muf*omegams + (1-muf)*omegaus
     omegars <- mur*omegams + (1-mur)*omegavs
     
-    #browser()
-    
     # fraction of foliage and root litter being transferred to active pool
     transfer_fa <- muf*pma + (1-muf)*psa
     transfer_ra <- mur*pma + (1-mur)*psa
