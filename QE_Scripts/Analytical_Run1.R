@@ -116,18 +116,18 @@ Perform_Analytical_Run1 <- function(f.flag = 1) {
         # par(mfrow=c(1,2), mar=c(5.1,6.1,2.1,2.1))
         
         # shoot nc vs. NPP
-        plot(out350DF$nc, out350DF$NPP_350, xlim=c(0.01, 0.05),
+        plot(out350DF$nc, out350DF$NPP_photo, xlim=c(0.001, 0.05),
               ylim=c(0.5, 3), 
              type = "l", xlab = "Shoot N:C ratio", 
              ylab = expression(paste("Production [kg C ", m^-2, " ", yr^-1, "]")),
              col="cyan", lwd = 3, cex.lab=1.5)
         points(out350DF$nc, out350DF$NPP_VL, type="l", col="tomato", lwd = 3)
         points(equil350DF$nc_VL, equil350DF$NPP_VL, type="p", pch = 19, col = "blue", cex = 2)
-        points(out350DF$nc, out350DF$NPP_350_L, type='l',col="violet", lwd = 3)
+        points(out350DF$nc, out350DF$NPP_L, type='l',col="violet", lwd = 3)
         
         points(nfseq, NCMEDIUM$NPP, type="l", col="darkred", lwd = 3)
         
-        points(out700DF$nc, out700DF$NPP_700, col="green", type="l", lwd = 3)
+        points(out700DF$nc, out700DF$NPP_photo, col="green", type="l", lwd = 3)
         points(equil350DF$nc_VL, inst700$equilNPP, type="p", col = "darkgreen", pch=19, cex = 2)
         points(equil700DF$nc_VL, equil700DF$NPP_VL, type="p", col="orange", pch = 19, cex = 2)
         points(equil700DF$nc_L, equil700DF$NPP_L,type="p", col="red", pch = 19, cex = 2)

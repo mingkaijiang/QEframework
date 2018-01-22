@@ -7,8 +7,6 @@
 ###
 ### Author: Mingkai Jiang (m.jiang@westernsydney.edu.au)
 ### 
-
-
 #### ------------------------ General system stuffs ------------------------ #####
 ### Make sure everything is clear
 rm(list=ls(all=TRUE))
