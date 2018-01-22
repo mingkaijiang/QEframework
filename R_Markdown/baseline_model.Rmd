@@ -1,0 +1,33 @@
+---
+title: "QE framework baseline model"
+author: "Mingkai Jiang"
+date: "January 22, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+This R markdown file introduces the Quasi-equilibrium (QE) framework baseline model. The basline QE model is a carbon-nitrogen (C-N) coupled model that is based on the Generic Decomposition And Yield (GDAY) model, originally developed by Comins and McMurtrie (1993).
+
+The baseline model this study refers to compares the effect of wood NC stoichiometric flexiblity, with the 1st model has variable wood NC ratio and 2nd model has fixed wood NC ratio. 
+
+Here we are evaluating the alternative assumption for wood stoichiometric flexiblity on plant's CO2 response. Time is also a factor considered here, with VL (very-long), L (long), and M (medium) terms considered as the final model equilibrium point, passive SOM pool equilibrated, passive and slow SOM pools equilibrated, respectively. 
+
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
