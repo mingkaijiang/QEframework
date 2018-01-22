@@ -20,20 +20,19 @@ Here we are evaluating the alternative assumption for wood stoichiometric flexib
 
 ## Procedures
 
-Below I use step-by-step codes to generate the results.
+Below I use step-by-step guidance to generate the results.
 
 Firstly, we need to source all the functions and set up the workspace, via:
 
 ``` {r, message=FALSE}
-setwd("/Users/mingkaijiang/Documents/Research/Projects/Quasi-equilibrium-test/QE_framework/Git")
-source("/Users/mingkaijiang/Documents/Research/Projects/Quasi-equilibrium-test/QE_framework/Git/QE_Analyses/prepare_R.R")
+source("QE_Analyses/prepare_R.R")
 
 ```
 
 Then we source the QE scripts:
 
 ``` {r, message = FALSE}
-scriptfiles <- dir("/Users/mingkaijiang/Documents/Research/Projects/Quasi-equilibrium-test/QE_framework/Git/QE_Scripts", 
+scriptfiles <- dir("QE_Scripts", 
                    pattern="[.]R$", recursive = TRUE, full.names = TRUE)
 for(b in scriptfiles)source(b)
 
@@ -43,7 +42,7 @@ Next, we run analytical run scripts to generate the pdf files and store the rest
 
 ``` {r, message = FALSE}
 r1 <- Perform_Analytical_Run1(f.flag = 2)
-r2 <- Perform_Analytical_Run1(f.flag = 2)
+r2 <- Perform_Analytical_Run2(f.flag = 2)
 
 ```
 
@@ -66,12 +65,12 @@ edf1.r2 <- edf.r2[edf.r2$CO2 == 350, ]
 edf2.r2 <- edf.r2[edf.r2$CO2 == 700, ]
 
 # graphic settings
-par(mfrow = c(1,2), mar=c(5.1,6.1,2.1,2.1))
+par(mar=c(6.1,8.1,2.1,2.1), oma=c(2,6,2,2))
 
 ```
 
 Analytical run 1 plot, that is, baseline model with variable wood NC ratio, is shown below:
-```{r }
+```{r, echo=FALSE, fig.width = 5, fig.align="center"}
 # plotting
 plot(cdf1.r1$nc, cdf1.r1$NPP_photo, xlim=c(0.001, 0.05),
      ylim=c(0.5, 3), 
@@ -86,15 +85,31 @@ points(cdf1.r1$nc, cdf1.r1$NPP_M, type="l", col="darkred", lwd = 3)
 points(cdf2.r1$nc, cdf2.r1$NPP_photo, col="green", type="l", lwd = 3)
 points(edf2.r1$nc_VL, edf2.r1$NPP_VL, type="p", col="orange", pch = 19, cex = 2)
 points(edf2.r1$nc_L,edf2.r1$NPP_L,type="p", col="red", pch = 19, cex = 2)
+points(edf2.r1$equilnf, edf2.r1$NPP_M, type="p", col="purple", pch = 19, cex = 2)
+
+```
+
+
+Analytical run 2 plot, that is, baseline model with fixed wood NC ratio, is shown below:
+```{r, echo=FALSE, fig.width = 5, fig.align="center"}
+# plotting
+plot(cdf1.r2$nc, cdf1.r2$NPP_photo, xlim=c(0.001, 0.05),
+     ylim=c(0.5, 3), 
+     type = "l", xlab = "Shoot N:C ratio", 
+     ylab = expression(paste("Production [kg C ", m^-2, " ", yr^-1, "]")),
+     col="cyan", lwd = 3, cex.lab=1.5)
+points(cdf1.r2$nc, cdf1.r2$NPP_VL, type="l", col="tomato", lwd = 3)
+points(edf1.r2$nc_VL, edf1.r2$NPP_VL, type="p", pch = 19, col = "blue", cex = 2)
+points(cdf1.r2$nc, cdf1.r2$NPP_L, type='l',col="violet", lwd = 3)
+points(cdf1.r2$nc, cdf1.r2$NPP_M, type="l", col="darkred", lwd = 3)
+
+points(cdf2.r2$nc, cdf2.r2$NPP_photo, col="green", type="l", lwd = 3)
+points(edf2.r2$nc_VL, edf2.r2$NPP_VL, type="p", col="orange", pch = 19, cex = 2)
+points(edf2.r2$nc_L,edf2.r2$NPP_L,type="p", col="red", pch = 19, cex = 2)
 points(edf2.r2$equilnf, edf2.r2$NPP_M, type="p", col="purple", pch = 19, cex = 2)
 
 ```
 
 
 
-Analytical run 2 plot, that is, baseline model with fixed wood NC ratio, is shown below:
-
-
-
-
-The End. 
+##The End. 
