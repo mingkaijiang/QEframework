@@ -17,8 +17,12 @@ pacman::p_load(scatterplot3d,
 
 
 #### Sourcing all R files in the function subdirectory
-sourcefiles <- dir("Functions", pattern="[.]R$", recursive = TRUE, full.names = TRUE)
-for(z in sourcefiles)source(z)
+sourcefiles <- dir("QE_Functions", pattern="[.]R$", recursive = TRUE, full.names = TRUE)
+for(a in sourcefiles)source(a)
 
+#### Sourcing all QE scripts
+# scriptfiles <- dir("QE_Scripts", pattern="[.]R$", recursive = TRUE, full.names = TRUE)
+# for(b in scriptfiles)source(b)
 
+#### graphic default settings
 op <- par()
