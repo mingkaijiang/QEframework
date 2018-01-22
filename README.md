@@ -3,7 +3,14 @@
 This repository stores R codes for constructing the quasi-equilibrium (QE) framework, and for testing alternative model assumptions using this QE framework. 
 
 # Repository structure
-
+The "Run_programs.R" script is the master sheet that calls in all the functions, parameters, scripts to generate results. 
+The "QE_Functions" folder stores all the QE framework related functions. 
+The "QE_Scripts" folder stores all the QE related scripts that perform the analyses. 
+THe "QE_Analyses" folder stores all the post-processing functions and scripts for output purposes. 
+The "Parameters" folder stores all the input parameters used in the QE framework. 
+The "Plots" folder stores all the output figures. 
+The "Tables" folder stores all the output tables. 
+The "R_Markdown" folder stores all the R markdown script. 
 
 # Key literatures:
 
