@@ -12,7 +12,7 @@ Perform_Analytical_Run1 <- function(f.flag = 1) {
     #### Function to perform analytical run 1 simulations
     #### eDF: stores equilibrium points
     #### cDF: stores constraint points (curves)
-    #### f.flag: = 1 simply plot analytical solution file
+    #### f.flag: = 1 simply plot analytical solution and create individual pdf file
     #### f.flag: = 2 return a list consisting of two dataframes
 
     ######### Main program

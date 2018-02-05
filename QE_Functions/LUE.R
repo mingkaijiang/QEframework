@@ -38,7 +38,7 @@ LUE_full_cn_ellsworth <- function(nf, nfdf, CO2, NPP) {
     Ko <- 216876.747
     
     # return effective Michaelis-Menten coefficient for CO2 
-    km <- (Kc * (1.0 + oi / Ko))
+    # km <- (Kc * (1.0 + oi / Ko))
     km <- 461.998
     
     # Walker relationship
@@ -74,6 +74,8 @@ LUE_full_cn_ellsworth <- function(nf, nfdf, CO2, NPP) {
 ### Following two functions calculate NPP - will later need to be replaced by full model
 ### LUE function of N, SLA & Ca, based on full photosynthesis model
 LUE_full_cn_walker <- function(nf, nfdf, CO2, NPP) {
+    
+    # browser()
     
     ncontent <- NPP * nfdf$af / sf * nf
     

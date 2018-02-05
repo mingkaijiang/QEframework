@@ -14,6 +14,8 @@ photo_constraint_full_cn <- function(nf, nfdf, CO2) {
     # w = C content of biomass - needed to convert SLA from DM to C
     # cue = carbon use efficiency
     
+    # browser()
+    
     len <- length(nf)
     
     ans <- c()
