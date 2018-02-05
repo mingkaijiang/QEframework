@@ -21,8 +21,8 @@ sourcefiles <- dir("QE_Functions", pattern="[.]R$", recursive = TRUE, full.names
 for(a in sourcefiles)source(a)
 
 #### Sourcing all QE scripts
-# scriptfiles <- dir("QE_Scripts", pattern="[.]R$", recursive = TRUE, full.names = TRUE)
-# for(b in scriptfiles)source(b)
+scriptfiles <- dir("QE_Scripts", pattern="[.]R$", recursive = TRUE, full.names = TRUE)
+for(b in scriptfiles)source(b)
 
 #### graphic default settings
 op <- par()

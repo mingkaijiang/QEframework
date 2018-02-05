@@ -134,6 +134,9 @@ Perform_Analytical_Run2 <- function(f.flag = 1) {
         points(Medium_equil_700$equilnf, Medium_equil_700$equilNPP, type="p", col="purple", pch = 19, cex = 2)
         # text(x=0.045, y=2.9, "(a)", cex = 2)
         
+        abline(h = seq(0.5, 3.0, 0.5), v = seq(0.01, 0.05, 0.01), col="lightgray", lty = 3)
+        
+        
         legend("bottomright", c("P350", "P700", "VL", "L", "M",
                             "A", "B", "C", "D", "E"),
                col=c("cyan","green", "tomato", "violet","darkred","blue", "darkgreen","purple","red", "orange"), 

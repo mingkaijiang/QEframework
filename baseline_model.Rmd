@@ -25,89 +25,87 @@ Below I use step-by-step guidance to generate the results.
 Firstly, we need to source all the functions and set up the workspace, via:
 
 ``` {r, message=FALSE}
-source("QE_Analyses/prepare_R.R")
-
-```
-
-Then we source the QE scripts:
-
-``` {r, message = FALSE}
-scriptfiles <- dir("QE_Scripts", 
-                   pattern="[.]R$", recursive = TRUE, full.names = TRUE)
-for(b in scriptfiles)source(b)
+    source("QE_Analyses/prepare_R.R")
 
 ```
 
 Next, we run analytical run scripts to generate the pdf files and store the rest dataframes into data list:
 
 ``` {r, message = FALSE}
-r1 <- Perform_Analytical_Run1(f.flag = 2)
-r2 <- Perform_Analytical_Run2(f.flag = 2)
+    # baseline, variable wood NC, baseline N cycle model
+    r1 <- Perform_Analytical_Run1(f.flag = 2)
+    
+    # baseline, fixed wood NC, baseline N cycle model
+    r2 <- Perform_Analytical_Run2(f.flag = 2)
 
 ```
 
 
-``` {r, echo = FALSE}
-# split data list into data frames
-cdf.r1 <- r1$cDF
-cdf.r2 <- r2$cDF
-edf.r1 <- r1$eDF
-edf.r2 <- r2$eDF
-
-cdf1.r1 <- cdf.r1[cdf.r1$CO2 == 350, ]
-cdf2.r1 <- cdf.r1[cdf.r1$CO2 == 700, ]
-cdf1.r2 <- cdf.r2[cdf.r2$CO2 == 350, ]
-cdf2.r2 <- cdf.r2[cdf.r2$CO2 == 700, ]
-
-edf1.r1 <- edf.r1[edf.r1$CO2 == 350, ]
-edf2.r1 <- edf.r1[edf.r1$CO2 == 700, ]
-edf1.r2 <- edf.r2[edf.r2$CO2 == 350, ]
-edf2.r2 <- edf.r2[edf.r2$CO2 == 700, ]
-
-# graphic settings
-par(mar=c(6.1,8.1,2.1,2.1), oma=c(2,6,2,2))
+``` {r, echo = FALSE, message = FALSE, warning = FALSE}
+    # split data list into data frames
+    cdf.r1 <- r1$cDF
+    cdf.r2 <- r2$cDF
+    edf.r1 <- r1$eDF
+    edf.r2 <- r2$eDF
+    
+    cdf1.r1 <- cdf.r1[cdf.r1$CO2 == 350, ]
+    cdf2.r1 <- cdf.r1[cdf.r1$CO2 == 700, ]
+    cdf1.r2 <- cdf.r2[cdf.r2$CO2 == 350, ]
+    cdf2.r2 <- cdf.r2[cdf.r2$CO2 == 700, ]
+    
+    edf1.r1 <- edf.r1[edf.r1$CO2 == 350, ]
+    edf2.r1 <- edf.r1[edf.r1$CO2 == 700, ]
+    edf1.r2 <- edf.r2[edf.r2$CO2 == 350, ]
+    edf2.r2 <- edf.r2[edf.r2$CO2 == 700, ]
+    
+    # graphic settings
+    par(mar=c(6.1,8.1,2.1,2.1), oma=c(2,6,2,2))
 
 ```
 
 Analytical run 1 plot, that is, baseline model with variable wood NC ratio, is shown below:
 ```{r, echo=FALSE, fig.width = 5, fig.align="center"}
-# plotting
-plot(cdf1.r1$nc, cdf1.r1$NPP_photo, xlim=c(0.001, 0.05),
-     ylim=c(0.5, 3), 
-     type = "l", xlab = "Shoot N:C ratio", 
-     ylab = expression(paste("Production [kg C ", m^-2, " ", yr^-1, "]")),
-     col="cyan", lwd = 3, cex.lab=1.5)
-points(cdf1.r1$nc, cdf1.r1$NPP_VL, type="l", col="tomato", lwd = 3)
-points(edf1.r1$nc_VL, edf1.r1$NPP_VL, type="p", pch = 19, col = "blue", cex = 2)
-points(cdf1.r1$nc, cdf1.r1$NPP_L, type='l',col="violet", lwd = 3)
-points(cdf1.r1$nc, cdf1.r1$NPP_M, type="l", col="darkred", lwd = 3)
+    # plotting
 
-points(cdf2.r1$nc, cdf2.r1$NPP_photo, col="green", type="l", lwd = 3)
-points(edf2.r1$nc_VL, edf2.r1$NPP_VL, type="p", col="orange", pch = 19, cex = 2)
-points(edf2.r1$nc_L,edf2.r1$NPP_L,type="p", col="red", pch = 19, cex = 2)
-points(edf2.r1$equilnf, edf2.r1$NPP_M, type="p", col="purple", pch = 19, cex = 2)
 
+
+
+    plot(cdf1.r1$nc, cdf1.r1$NPP_photo, xlim=c(0.001, 0.05),
+         ylim=c(0.5, 3), 
+         type = "l", xlab = "Shoot N:C ratio", 
+         ylab = expression(paste("Production [kg C ", m^-2, " ", yr^-1, "]")),
+         col="cyan", lwd = 3, cex.lab=1.5)
+    points(cdf1.r1$nc, cdf1.r1$NPP_VL, type="l", col="tomato", lwd = 3, add= T)
+    points(edf1.r1$nc_VL, edf1.r1$NPP_VL, type="p", pch = 19, col = "blue", cex = 2)
+    points(cdf1.r1$nc, cdf1.r1$NPP_L, type='l',col="violet", lwd = 3)
+    points(cdf1.r1$nc, cdf1.r1$NPP_M, type="l", col="darkred", lwd = 3)
+    
+    points(cdf2.r1$nc, cdf2.r1$NPP_photo, col="green", type="l", lwd = 3)
+    points(edf2.r1$nc_VL, edf2.r1$NPP_VL, type="p", col="orange", pch = 19, cex = 2)
+    points(edf2.r1$nc_L,edf2.r1$NPP_L,type="p", col="red", pch = 19, cex = 2)
+    points(edf2.r1$equilnf, edf2.r1$NPP_M, type="p", col="purple", pch = 19, cex = 2)
+    
 ```
 
 
 Analytical run 2 plot, that is, baseline model with fixed wood NC ratio, is shown below:
 ```{r, echo=FALSE, fig.width = 5, fig.align="center"}
 # plotting
-plot(cdf1.r2$nc, cdf1.r2$NPP_photo, xlim=c(0.001, 0.05),
-     ylim=c(0.5, 3), 
-     type = "l", xlab = "Shoot N:C ratio", 
-     ylab = expression(paste("Production [kg C ", m^-2, " ", yr^-1, "]")),
-     col="cyan", lwd = 3, cex.lab=1.5)
-points(cdf1.r2$nc, cdf1.r2$NPP_VL, type="l", col="tomato", lwd = 3)
-points(edf1.r2$nc_VL, edf1.r2$NPP_VL, type="p", pch = 19, col = "blue", cex = 2)
-points(cdf1.r2$nc, cdf1.r2$NPP_L, type='l',col="violet", lwd = 3)
-points(cdf1.r2$nc, cdf1.r2$NPP_M, type="l", col="darkred", lwd = 3)
-
-points(cdf2.r2$nc, cdf2.r2$NPP_photo, col="green", type="l", lwd = 3)
-points(edf2.r2$nc_VL, edf2.r2$NPP_VL, type="p", col="orange", pch = 19, cex = 2)
-points(edf2.r2$nc_L,edf2.r2$NPP_L,type="p", col="red", pch = 19, cex = 2)
-points(edf2.r2$equilnf, edf2.r2$NPP_M, type="p", col="purple", pch = 19, cex = 2)
-
+#plot(cdf1.r2$nc, cdf1.r2$NPP_photo, xlim=c(0.001, 0.05),
+#     ylim=c(0.5, 3), 
+#     type = "l", xlab = "Shoot N:C ratio", 
+#     ylab = expression(paste("Production [kg C ", m^-2, " ", yr^-1, "]")),
+#     col="cyan", lwd = 3, cex.lab=1.5)
+#points(cdf1.r2$nc, cdf1.r2$NPP_VL, type="l", col="tomato", lwd = 3)
+#points(edf1.r2$nc_VL, edf1.r2$NPP_VL, type="p", pch = 19, col = "blue", cex = 2)
+#points(cdf1.r2$nc, cdf1.r2$NPP_L, type='l',col="violet", lwd = 3)
+#points(cdf1.r2$nc, cdf1.r2$NPP_M, type="l", col="darkred", lwd = 3)
+#
+#points(cdf2.r2$nc, cdf2.r2$NPP_photo, col="green", type="l", lwd = 3)
+#points(edf2.r2$nc_VL, edf2.r2$NPP_VL, type="p", col="orange", pch = 19, cex = 2)
+#points(edf2.r2$nc_L,edf2.r2$NPP_L,type="p", col="red", pch = 19, cex = 2)
+#points(edf2.r2$equilnf, edf2.r2$NPP_M, type="p", col="purple", pch = 19, cex = 2)
+#
 ```
 
 

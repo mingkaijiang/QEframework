@@ -115,6 +115,16 @@ Perform_Analytical_Run1 <- function(f.flag = 1) {
              width = 5, height = 5, units = "in", res = 300)
         par(mar=c(5.1,6.1,2.1,2.1))
         
+        ### nice plot
+        # require(plotly)
+        # plot_ly(data = out350DF, x = ~nc, y = ~NPP_photo,
+        #              name = "P350", type = "scatter", mode = "lines") %>%
+        #     add_trace(y = ~NPP_VL, name = "VL", mode = "lines") %>%
+        #     add_trace(y = ~NPP_L, name = "L", mode = "lines") %>%
+        #     add_trace(y = ~NPP_M, name = "M", mode = "lines") %>%
+        #     layout(xaxis = list(range = c(0.01, 0.05)),
+        #            yaxis = list(range = c(0, 3)))
+        
         ### shoot nc vs. NPP
         plot(out350DF$nc, out350DF$NPP_photo, xlim=c(0.001, 0.05),
               ylim=c(0.5, 3), 
@@ -132,6 +142,8 @@ Perform_Analytical_Run1 <- function(f.flag = 1) {
         points(equil700DF$nc_VL, equil700DF$NPP_VL, type="p", col="orange", pch = 19, cex = 2)
         points(equil700DF$nc_L, equil700DF$NPP_L,type="p", col="red", pch = 19, cex = 2)
         points(Medium_equil_700$equilnf, Medium_equil_700$equilNPP, type="p", col="purple", pch = 19, cex = 2)
+        
+        abline(h = seq(0.5, 3.0, 0.5), v = seq(0.01, 0.05, 0.01), col="lightgray", lty = 3)
 
         legend("bottomright", c("P350", "P700", "VL", "L", "M",
                             "A", "B", "C", "D", "E"),

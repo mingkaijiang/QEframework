@@ -22,7 +22,7 @@ source("QE_Analyses/prepare_R.R")
 ### To run analytical solution solutions for various model assumptions.
 ### All cases are labelled in numeric orders.
 ### The detailed descriptions of each case is available in their respective script comments
-source("R/Run_analytical_solutions.R")
+source("QE_Analyses/Run_analytical_solutions.R")
 
 
 
