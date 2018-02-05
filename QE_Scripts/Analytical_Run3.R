@@ -123,6 +123,9 @@ Perform_Analytical_Run3 <- function(f.flag = 1) {
              type = "l", xlab = "Shoot N:C ratio", 
              ylab = expression(paste("Production [kg C ", m^-2, " ", yr^-1, "]")),
              col="cyan", lwd = 3, cex.lab=1.5)
+        
+        abline(h = seq(0.5, 3.0, 0.5), v = seq(0.01, 0.05, 0.01), col="lightgray", lty = 3)
+        
         points(out350DF$nc, out350DF$NPP_VL, type="l", col="tomato", lwd = 3)
         points(equil350DF$nc_VL, equil350DF$NPP_VL, type="p", pch = 19, col = "blue", cex = 2)
         points(out350DF$nc, out350DF$NPP_L, type='l',col="violet", lwd = 3)
@@ -135,8 +138,6 @@ Perform_Analytical_Run3 <- function(f.flag = 1) {
         points(equil700DF$nc_L, equil700DF$NPP_L,type="p", col="red", pch = 19, cex = 2)
         points(Medium_equil_700$equilnf, Medium_equil_700$equilNPP, type="p", col="purple", pch = 19, cex = 2)
 
-        abline(h = seq(0.5, 3.0, 0.5), v = seq(0.01, 0.05, 0.01), col="lightgray", lty = 3)
-        
         legend("bottomright", c("P350", "P700", "VL", "L", "M",
                             "A", "B", "C", "D", "E"),
                col=c("cyan","green", "tomato", "violet","darkred","blue", "darkgreen","purple","red", "orange"), 
