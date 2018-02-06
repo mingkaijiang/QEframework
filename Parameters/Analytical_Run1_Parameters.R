@@ -57,5 +57,5 @@ daylen <- 8.0
 kn <- 0.3
 aroot <- 0.2
 aleaf <- 0.2
-ncs <- 0.05
+ncs <- 0.005   # nc ratio for slow pool. 0.05
 # pcs <- 0.0005
