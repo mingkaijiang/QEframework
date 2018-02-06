@@ -129,8 +129,8 @@ Perform_Analytical_Run1 <- function(f.flag = 1) {
         #            yaxis = list(range = c(0, 3)))
         
         ### shoot nc vs. NPP
-        plot(out350DF$nc, out350DF$NPP_photo, xlim=c(0.001, 0.05),
-              ylim=c(0.5, 3.0), 
+        plot(out350DF$nc, out350DF$NPP_photo, xlim=c(0.001, 0.03),
+              ylim=c(1.0, 2.0), 
              type = "l", xlab = "Shoot N:C ratio", 
              ylab = expression(paste("Production [kg C ", m^-2, " ", yr^-1, "]")),
              col="cyan", lwd = 3, cex.lab=1.5)
