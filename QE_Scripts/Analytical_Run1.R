@@ -28,28 +28,35 @@ Perform_Analytical_Run1 <- function(f.flag = 1) {
     P350 <- photo_constraint_full(nf=nfseq, nfdf=a_nf, CO2=CO2_1)
     P700 <- photo_constraint_full(nf=nfseq, nfdf=a_nf, CO2=CO2_2)
     
-    ### calculate very long term NC and PC constraint on NPP, respectively
+    ### calculate very long term NC constraint on NPP, respectively
     VL <- VL_constraint(nf=nfseq, nfdf=a_nf)
     
     ### finding the equilibrium point between photosynthesis and very long term nutrient constraints
     VL_eq <- solve_VL_full(CO2=CO2_1)
     
-    ### Get Cpassive from very-long nutrient cycling solution
-    aequiln <- allocn(VLong_equil$equilnf)
-    pass <- slow_pool(df=VLong_equil$equilnf, a=aequiln)
-    omegap <- aequiln$af*pass$omegafp + aequiln$ar*pass$omegarp
-    CpassVLong <- omegap*VLong_equil$equilNPP/pass$decomp_p/(1-pass$qpq)*1000.0
+    ### calculate nw and nr for VL equilibrated nf value
+    a_eq <- alloc(VL_eq$nf)
     
+    ### calculate soil parameters, e.g. reburial coef.
+    s_coef <- soil_coef(df=VL_eq$nf, a=a_eq)
+    omega_ap <- a_eq$af*s_coef$omega_af_pass + a_eq$ar*s_coef$omega_ar_pass
+    omega_as <- a_eq$af*s_coef$omega_af_slow + a_eq$ar*s_coef$omega_ar_slow
+    
+    ### Get C from very-long term nutrient cycling solution
+    ### return in g C m-2 
+    C_pass_VL <- omega_ap*VL_eq$NPP/s_coef$decomp_pass/(1-s_coef$qq_pass)*1000.0
+
     ### Calculate long term nutrient constraint
-    NCLONG <- Long_constraint_N(nfseq, a_nf, CpassVLong,
-                                NinL = Nin)
+    L <- L_constraint(df=nfseq, a=a_nf, 
+                      C_pass=C_pass_VL,
+                      Nin_L = Nin)
     
     ### Find long term equilibrium point
-    Long_equil <- solveLong_full_cn(CO2=CO2_1, Cpass=CpassVLong, NinL = Nin)
+    L_eq <- solve_L_full(CO2=CO2_1, C_pass=C_pass_VL, Nin_L = Nin)
     
     ### Get Cslow from long nutrient cycling solution
-    omegas <- aequiln$af*pass$omegafs + aequiln$ar*pass$omegars
-    CslowLong <- omegas*Long_equil$equilNPP/pass$decomp_s/(1-pass$qsq)*1000.0
+    ### return in g C m-2
+    C_slow_L <- omega_as*L_eq$NPP/s_coef$decomp_slow/(1-s_coef$qq_slow)*1000.0
     
     ### Calculate nutrient release from slow woody pool
     NrelwoodVLong <- aequiln$aw*aequiln$nw*VLong_equil$equilNPP*1000.0
