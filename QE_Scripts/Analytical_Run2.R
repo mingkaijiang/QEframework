@@ -125,9 +125,6 @@ Perform_Analytical_Run2 <- function(f.flag = 1) {
              ylab = expression(paste("Production [kg C ", m^-2, " ", yr^-1, "]")),
              col="cyan", lwd = 3, cex.lab=1.5)
         
-        ### why this point is off the line!
-        points(equil350DF$nc_M, equil350DF$NPP_M, col="red", lty = 3, cex=2)
-
         abline(h = seq(0.5, 3.0, 0.5), v = seq(0.01, 0.05, 0.01), col="lightgray", lty = 3)
         
         points(out350DF$nc, out350DF$NPP_VL, type="l", col="tomato", lwd = 3)

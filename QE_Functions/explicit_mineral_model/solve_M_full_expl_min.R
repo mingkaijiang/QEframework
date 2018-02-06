@@ -1,8 +1,10 @@
 # Find the medium term equilibrium nf and NPP under standard conditions - by finding the root
-solve_M_full <- function(CO2,C_pass,C_slow,Nin_L) {
+# specifically for considering explicit mineral N pool
+solve_M_full_expl_min <- function(CO2,C_pass,C_slow,Nin_L) {
     fn <- function(nf) {
         photo_constraint_full(nf, alloc(nf),
-                              CO2) - M_constraint(nf,alloc(nf), C_pass, C_slow, Nin_L)$NPP
+                              CO2) - M_constraint_expl_min(nf,alloc(nf), C_pass, 
+                                                           C_slow, Nin_L)$NPP
         
     }
     equilnf <- uniroot(fn,interval=c(0.001,0.1))$root

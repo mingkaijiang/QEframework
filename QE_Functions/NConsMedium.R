@@ -56,36 +56,6 @@ NConsMedium_priming <- function(df, a, Cpass, Cslow, NinL) {
     return(out)   
 }
 
-
-
-### Function for nutrient N constraint in medium term ie passive, leaching, wood considered
-# specifically for explicit mineral N
-NConsMedium_expl_min <- function(df, a, Cpass, Cslow, NinL) {
-    # passive pool burial 
-    pass <- slow_pool(df, a)
-    omegap <- a$af*pass$omegafp + a$ar*pass$omegarp 
-    omegas <- a$af*pass$omegafs + a$ar*pass$omegars 
-    
-    # equation for N constraint with passive, wood, and leaching
-    Npass <- (1-pass$qpq) * pass$decomp_p * Cpass * ncp
-    Nslow <- pass$decomp_s * Cslow * (1-pass$qsq) * ncs
-    
-    U0 <- NinL + Npass + Nslow   # will be a constant if decomp rate is constant
-    nwood <- a$aw*a$nw
-    nburial <- omegap*ncp + omegas*ncs
-    nleach <- leachn/(1-leachn) * (a$nfl*a$af + a$nr*(a$ar) + a$nw*a$aw)
-    
-    #NPP_NC <- ((U0 - nwood - nburial) / leachn) * nuptakerate / (a$nfl*a$af + a$nr*a$ar + a$nw*a$aw)   # will be in g C m-2 yr-1
-    NPP_NC <- (nuptakerate * U0) / ((a$nfl*a$af + a$nr*a$ar + a$nw*a$aw) * leachn + nuptakerate * nwood + nuptakerate * nburial)
-    
-    NPP <- NPP_NC*10^-3 # returned in kg C m-2 yr-1
-    
-    nleach <- leachn * (NPP_NC * (a$nfl*a$af + a$nr*a$ar + a$nw*a$aw)) /nuptakerate
-    
-    df <- data.frame(NPP, nwood,nburial,nleach,a$aw)
-    return(df)   
-}
-
 ### Function for nutrient N constraint in longterm ie passive, leaching, wood considered
 # specifically for uptake as a function of root - GDAY approach
 # i.e. N uptake as a saturating function of root biomass
