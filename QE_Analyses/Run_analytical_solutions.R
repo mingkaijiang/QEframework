@@ -8,9 +8,11 @@
 #### Run 3: baseline N cycle model, with explicit mineral N pool simulated, variable wood NC
 #### Run 4: baseline N cycle model, with explicit mineral N pool simulated, fixed wood NC
 #### Run 5: GDAY plant mineral N uptake function, variable wood NC
-#### Run 6: GDAY plant mineral N uptake function, fixed wood NC
-#### Run 7: O-CN plant mineral N uptake function, variable wood NC
-#### Run 8: O-CN plant mineral N uptake function, fixed wood NC
+#### Run 6: O-CN plant mineral N uptake function, variable wood NC
+#### Run 7: O-CN plant mineral N uptake function, fixed wood NC
+#### Run 8: CWD pool
+#### Run 9: variable passive SOM pool
+#### Run 10: CLM treatments
 
 
 ################################################################################
