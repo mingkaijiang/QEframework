@@ -9,8 +9,8 @@ nrho = 0.7
 # prho = 0.7
 nretrans = 0.5
 # pretrans = 0.6
-nwvar = TRUE     # TRUE
-# pwvar = TRUE     # TRUE
+nwvar = FALSE     
+# pwvar = TRUE     
 # LUE0=1.4
 # I0=3
 # Nref=0.04
@@ -59,3 +59,4 @@ aroot <- 0.2
 aleaf <- 0.2
 ncs <- 0.01   
 # pcs <- 0.0005
+nup <- 1.0        # n uptake rate yr-1

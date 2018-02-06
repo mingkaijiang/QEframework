@@ -16,30 +16,6 @@ NConsVLong <- function(df, a) {
     return(df)   
 }
 
-### Calculate the very long term nutrient cycling constraint for N, i.e. passive pool equilibrated
-# it is just Nin = Nleach
-# specifically for explicit mineral N pool
-NConsVLong_expl_min <- function(df, a) {
-    # passed are bf and nf, the allocation and plant N:C ratios
-    # parameters : 
-    # Nin is fixed N inputs (N fixed and deposition) in g m-2 yr-1 (could vary fixation)
-    # leachn is the rate of leaching of the mineral N pool (per year)
-    # nuptakerate is the rate of N uptake [yr-1] 
-    # Nmin is the mineral N pool
-    
-    # equation for N constraint with just leaching
-    U0 <- Nin
-    nleach <- leachn
-    
-    Nmin <- U0 / nleach
-    NPP_NC <- Nmin * nuptakerate / (a$nfl*a$af + a$nr*a$ar + a$nw*a$aw)
-    # The above equation is the same as:
-    # NPP_NC <- U0 * nuptakerate / (nleach * (a$nfl*a$af + a$nr*(a$ar) + a$nw*a$aw))
-    NPP_N <- NPP_NC*10^-3     # returned in kg C m-2 yr-1
-    
-    df <- data.frame(NPP_N,nleach)
-    return(df)   
-}
 
 ### Calculate the very long term nutrient cycling constraint for N, i.e. passive pool equilibrated
 # it is just Nin = Nleach

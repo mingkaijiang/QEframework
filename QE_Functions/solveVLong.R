@@ -1,17 +1,3 @@
-solveVLong_expl_min <- function(CO2) {
-    fn <- function(nf) {
-        photo_constraint_full_cn(nf, 
-                                  allocn(nf), 
-                                  CO2) - NConsVLong_expl_min(nf,allocn(nf))$NPP
-    }
-    equilnf <- uniroot(fn,interval=c(0.001,0.1))$root
-    equilNPP_N <- photo_constraint_full_cn(equilnf,
-                                            allocn(equilnf),  CO2)
-    
-    ans <- data.frame(equilnf,equilNPP_N)
-    return(ans)
-}
-
 
 
 # Find the very-long term equilibrium nf and NPP under standard conditions - by finding the root
