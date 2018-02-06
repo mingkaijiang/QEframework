@@ -92,39 +92,6 @@ NConsVLong_root_ocn_original <- function(df, a) {
     return(df)   
 }
 
-### Calculate the very long term nutrient cycling constraint for N, i.e. passive pool equilibrated
-# it is just Nin = Nleach
-# specifically for nuptake as a function of root biomass - GDAY approach
-# i.e. N uptake as a saturating function of root biomass
-NConsVLong_root_gday <- function(df, a) {                   # why this small?
-    # passed are bf and nf, the allocation and plant N:C ratios
-    # parameters : 
-    # Nin is fixed N inputs (N fixed and deposition) in g m-2 yr-1 (could vary fixation)
-    # leachn is the rate of leaching of the mineral N pool (per year)
-    # nuptakerate is the rate of N uptake [yr-1] 
-    # Nmin is the mineral N pool
-    # sr is the decay rate of root in yr-1
-    # kr is the value of root carbon at which 50% of the available N is taken up  
-    
-    
-    # equation for N constraint with just leaching
-    U0 <- Nin
-    Nmin <- Nin / leachn
-    A_NF <- a$nfl*a$af + a$nr*a$ar + a$nw*a$aw
-    root_biomass <- a$ar / sr
-    nleach <- Nmin * leachn
-    
-    #browser()
-    
-    # equation for NPP
-    #NPP_NC <- (root_biomass * Nmin - (A_NF * kr)) / (A_NF * root_biomass)
-    NPP_NC <- (Nmin - kr * A_NF / root_biomass ) / A_NF
-    NPP_N <- NPP_NC*10^-3     # returned in kg C m-2 yr-1
-    
-    #browser()
-    
-    df <- data.frame(NPP_N, nleach)
-    return(df)   
-}
+
 
 
