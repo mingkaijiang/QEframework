@@ -4,8 +4,8 @@
 #### Same as Run 7, except 
 #### 1. turn root exudation on
 #### 2. turn priming effect on (effect on passive SOM pool)
-#### 3. N only model (same as Run 2, but with explicit mineral N pool)
-#### 4. Fix wood stoichiometry (and therefore adjust wood nc parameters)
+#### 3. N only model with explicit mineral N considered
+#### 4. Fix wood stoichiometry (but need to adjust wood nc parameters)
 ####
 ################################################################################
 

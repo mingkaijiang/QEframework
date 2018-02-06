@@ -1,6 +1,6 @@
 #### Compute allocation coefficient of rizosphere deposition
 
-ariz_dep_coef_n <- function(nf) {
+ariz_dep_coef <- function(nf) {
     # ariz0: minimum allocation to rhizodeposition
     # ariz1: slope of allocation to rhizodeposition with leaf C:N
     # cnref: reference leaf C:N ratio for BD and NE PFTs: 25/42

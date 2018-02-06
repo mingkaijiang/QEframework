@@ -1,15 +1,14 @@
 
-### Allocation and plant N concentrations - required for both PS constraint and NC constraint
-# specifically for exudation 
-allocn_exudation <- function(nf) {
+allocn_prim <- function(nf) {
+    ### Allocation and plant N concentrations - required for both PS constraint and NC constraint
+    ### specifically for exudation and priming
     # parameters
     # nf is the NC ratio of foliage
     # nw is the NC ratio of wood if fixed; otherwise the ratio of wood N:C to foliage N:C
     # nwvar is whether or not to allow wood NC to vary
     # nrho is the ratio of root N:C to foliage N:C
     # nretrans is the fraction of foliage N:C retranslocated  
-    # 
-    
+
     len <- length(nf)
     ar <- af <- aw <- ariz <- nw <- nr <- nriz <- rep(0,len)  # initialise
     for (i in 1:len) {
@@ -30,7 +29,7 @@ allocn_exudation <- function(nf) {
     nriz <- nr
 
     # update allocation coefficient for rhizodeposition
-    ariz <- ariz_dep_coef_n(nf)
+    ariz <- ariz_dep_coef(nf)
     
     ret <- data.frame(nf,nfl,nw,nr,nriz,af,aw,ar,ariz)
     return(ret)

@@ -2,9 +2,10 @@
 #### Analytical script Run 7
 ####
 #### Assumptions:
-#### 1. baseline N cycle
-#### 2. Variable wood NC
-#### 3. Variable passive SOM pool
+#### 1. turn root exudation on
+#### 2. turn priming effect on (effect on passive SOM pool)
+#### 3. N only model with explicit mineral N considered
+#### 4. Fix wood stoichiometry (but need to adjust wood nc parameters)
 ####
 ################################################################################
 #### Functions
@@ -22,7 +23,7 @@ Perform_Analytical_Run7 <- function(f.flag = 1) {
     nfseq <- round(seq(0.001, 0.1, by = 0.001),5)
     
     ### create nc ratio for wood, root, and allocation coefficients
-    a_nf <- as.data.frame(alloc(nfseq))
+    a_nf <- as.data.frame(alloc_prim(nfseq))
     
     ### calculate photosynthetic constraint at CO2 = 350
     P350 <- photo_constraint_full(nf=nfseq, nfdf=a_nf, CO2=CO2_1)
