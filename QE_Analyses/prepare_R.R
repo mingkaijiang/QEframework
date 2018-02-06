@@ -24,5 +24,11 @@ for(a in sourcefiles)source(a)
 scriptfiles <- dir("QE_Scripts", pattern="[.]R$", recursive = TRUE, full.names = TRUE)
 for(b in scriptfiles)source(b)
 
+#### Create all directories
+if(!dir.exists("Plots")) {
+    dir.create("Plots")
+}
+
+
 #### graphic default settings
 op <- par()

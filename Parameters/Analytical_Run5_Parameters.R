@@ -59,4 +59,8 @@ aroot <- 0.2
 aleaf <- 0.2
 ncs <- 0.01   
 # pcs <- 0.0005
-nup <- 1.0            # N uptake rate yr-1
+
+### following are analytical run 5 specific parameters
+### i.e. GDAY N uptake of root biomass and mienral N pool
+sr = 1.5
+kr = 0.5

@@ -1,21 +1,23 @@
 
-#### Analytical script Run 4
+#### Analytical script Run 6
 ####
 #### Assumptions:
-#### 1. Fixed wood NC
-#### 2. baseline N cycle
-#### 3. Explicit mineral N pool
+#### 1. baseline N cycle
+#### 2. Variable wood NC
+#### 3. O-CN uptake as a function of root and mineral N
+####    that is, saturaing function of mineral N
+####
 ################################################################################
 #### Functions
-Perform_Analytical_Run4 <- function(f.flag = 1) {
-    #### Function to perform analytical run 4 simulations
+Perform_Analytical_Run6 <- function(f.flag = 1) {
+    #### Function to perform analytical run 6 simulations
     #### eDF: stores equilibrium points
     #### cDF: stores constraint points (curves)
     #### f.flag: = 1 simply plot analytical solution and create individual pdf file
     #### f.flag: = 2 return a list consisting of two dataframes
 
     ######### Main program
-    source("Parameters/Analytical_Run4_Parameters.R")
+    source("Parameters/Analytical_Run6_Parameters.R")
     
     ### create a range of nc for shoot to initiate
     nfseq <- round(seq(0.001, 0.1, by = 0.001),5)
@@ -27,11 +29,8 @@ Perform_Analytical_Run4 <- function(f.flag = 1) {
     P350 <- photo_constraint_full(nf=nfseq, nfdf=a_nf, CO2=CO2_1)
 
     ### calculate very long term NC constraint on NPP, respectively
-    VL <- VL_constraint_expl_min(df=nfseq, a=a_nf)
+    VL_eq <- VL_constraint_root_ocn(CO2_1)
     
-    ### finding the equilibrium point between photosynthesis and very long term nutrient constraints
-    VL_eq <- solve_VL_full_expl_min(CO2=CO2_1)
-
     ### calculate nw and nr for VL equilibrated nf value
     a_eq <- alloc(VL_eq$nf)
     
@@ -45,12 +44,12 @@ Perform_Analytical_Run4 <- function(f.flag = 1) {
     C_pass_VL <- omega_ap*VL_eq$NPP/s_coef$decomp_pass/(1-s_coef$qq_pass)*1000.0
 
     ### Calculate long term nutrient constraint
-    L <- L_constraint_expl_min(df=nfseq, a=a_nf, 
-                               C_pass=C_pass_VL, Nin_L = Nin)
+    L <- L_constraint_root_ocn(df=nfseq, a=a_nf, 
+                                C_pass=C_pass_VL,
+                                Nin_L = Nin)
     
     ### Find long term equilibrium point
-    L_eq <- solve_L_full_expl_min(CO2=CO2_1, C_pass=C_pass_VL, 
-                                  Nin_L = Nin)
+    L_eq <- solve_L_full_root_ocn(CO2=CO2_1, C_pass=C_pass_VL, Nin_L = Nin)
     
     ### Get Cslow from long nutrient cycling solution
     ### return in g C m-2
@@ -61,21 +60,21 @@ Perform_Analytical_Run4 <- function(f.flag = 1) {
     N_wood_L <- a_eq$aw*a_eq$nw*VL_eq$NPP*1000.0
     
     ### Calculate medium term nutrient constraint
-    M <- M_constraint_expl_min(df=nfseq,a=a_nf, 
-                               C_pass=C_pass_VL, 
-                               C_slow=C_slow_L, 
-                               Nin_L = Nin+N_wood_L)
+    M <- M_constraint_root_ocn(df=nfseq,a=a_nf, 
+                                C_pass=C_pass_VL, 
+                                C_slow=C_slow_L, 
+                                Nin_L = Nin+N_wood_L)
     
     ### calculate M equilibrium point
-    M_eq <- solve_M_full_expl_min(CO2=CO2_1, 
-                                  C_pass=C_pass_VL, 
-                                  C_slow=C_slow_L, 
-                                  Nin_L = Nin+N_wood_L)
+    M_eq <- solve_M_full_root_ocn(CO2=CO2_1, 
+                                   C_pass=C_pass_VL, 
+                                   C_slow=C_slow_L, 
+                                   Nin_L = Nin+N_wood_L)
     
 
-    out350DF <- data.frame(CO2_1, nfseq, P350, VL$NPP, 
+    out350DF <- data.frame(CO2_1, nfseq, P350, 
                            L$NPP, M$NPP)
-    colnames(out350DF) <- c("CO2", "nc", "NPP_photo", "NPP_VL",
+    colnames(out350DF) <- c("CO2", "nc", "NPP_photo", 
                             "NPP_L", "NPP_M")
     equil350DF <- data.frame(CO2_1, VL_eq, L_eq, M_eq)
     colnames(equil350DF) <- c("CO2", "nc_VL", "NPP_VL", 
@@ -85,21 +84,18 @@ Perform_Analytical_Run4 <- function(f.flag = 1) {
     ### photo constraint
     P700 <- photo_constraint_full(nf=nfseq, nfdf=a_nf, CO2=CO2_2)
     
-    ### VL equilibrated point with eCO2
-    VL_eq <- solve_VL_full_expl_min(CO2=CO2_2)
-    
     ### Find long term equilibrium point
-    L_eq <- solve_L_full_expl_min(CO2=CO2_2, C_pass=C_pass_VL, Nin_L = Nin)
+    L_eq <- solve_L_full_root_ocn(CO2=CO2_2, C_pass=C_pass_VL, Nin_L = Nin)
     
     ### Find medium term equilibrium point
-    M_eq <- solve_M_full_expl_min(CO2=CO2_2, 
-                                  C_pass=C_pass_VL, 
-                                  C_slow=C_slow_L, 
-                                  Nin_L = Nin+N_wood_L)
+    M_eq <- solve_M_full_root_ocn(CO2=CO2_2, 
+                                   C_pass=C_pass_VL, 
+                                   C_slow=C_slow_L, 
+                                   Nin_L = Nin+N_wood_L)
     
     out700DF <- data.frame(CO2_2, nfseq, P700, 
-                           VL$NPP, L$NPP, M$NPP)
-    colnames(out700DF) <- c("CO2", "nc", "NPP_photo", "NPP_VL",
+                           L$NPP, M$NPP)
+    colnames(out700DF) <- c("CO2", "nc", "NPP_photo", 
                             "NPP_L", "NPP_M")
     
     equil700DF <- data.frame(CO2_2, VL_eq, L_eq, M_eq)
@@ -113,7 +109,7 @@ Perform_Analytical_Run4 <- function(f.flag = 1) {
     if (f.flag == 1) {
         
         ### plot 2-d plots of nf vs. npp and nf vs. pf
-        tiff("Plots/Analytical_Run4_2d.tiff",
+        tiff("Plots/Analytical_Run6_2d.tiff",
              width = 5, height = 5, units = "in", res = 300)
         par(mar=c(5.1,6.1,2.1,2.1))
         
@@ -123,10 +119,8 @@ Perform_Analytical_Run4 <- function(f.flag = 1) {
              type = "l", xlab = "Shoot N:C ratio", 
              ylab = expression(paste("Production [kg C ", m^-2, " ", yr^-1, "]")),
              col="cyan", lwd = 3, cex.lab=1.5)
-        
+
         abline(h = seq(0.5, 3.0, 0.5), v = seq(0.01, 0.05, 0.01), col="lightgray", lty = 3)
-        
-        points(out350DF$nc, out350DF$NPP_VL, type="l", col="tomato", lwd = 3)
         
         points(equil350DF$nc_VL, equil350DF$NPP_VL, type="p", pch = 19, col = "blue", cex = 2)
         

@@ -19,7 +19,7 @@ photo_constraint_simple_cn <- function(nf, nfdf, CO2) {
     ans <- c()
     
     for (i in 1:len) {
-        fPC <- function(NPP) eqPC_simple_cn(nf[i], nfdf[i,], NPP, CO2) - NPP
+        fPC <- function(NPP) equil_photo_constraint_simple(nf[i], nfdf[i,], NPP, CO2) - NPP
         ans[i] <- uniroot(fPC,interval=c(0.1,20), trace=T)$root
     }
     

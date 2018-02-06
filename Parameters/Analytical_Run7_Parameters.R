@@ -59,4 +59,6 @@ aroot <- 0.2
 aleaf <- 0.2
 ncs <- 0.01   
 # pcs <- 0.0005
-nup <- 1.0            # N uptake rate yr-1
+
+# decay rate for wood
+sw = 0.02

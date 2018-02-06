@@ -1,7 +1,8 @@
 
 ### Function for nutrient N constraint in medium term 
-# not considering exudation
-M_constraint <- function(df, a, C_pass, C_slow, Nin_L) {
+# for GDAY representation of N uptake
+# saturating fucntion of root biomass
+M_constraint_root_gday <- function(df, a, C_pass, C_slow, Nin_L) {
     # passed are df and a, the allocation and plant N:C ratios
     # parameters : 
     # Nin is fixed N inputs (N deposition annd fixation) in g m-2 yr-1 (could vary fixation)
@@ -25,16 +26,21 @@ M_constraint <- function(df, a, C_pass, C_slow, Nin_L) {
     U0 <- Nin_L + Npass + Nslow   
     nwood <- a$aw*a$nw
     nburial <- omega_ap*ncp + omega_as*ncs
-    nleach <- leachn/(1-leachn) * (a$nfl*a$af + a$nr*(a$ar) + a$nw*a$aw)
+
+    # allocated N to plant
+    a_plant <- a$nfl*a$af + a$nr*a$ar + a$nw*a$aw
     
-    ### return g C m-2 yr-1
-    NPP_NC <- U0 / (nwood + nburial + nleach)   
+    # equation for NPP
+    NPP_NC <- (U0 - a_plant * leachn * kr * (sr / a$ar)) / (nwood + nburial + a_plant*leachn)
     
     ### return kg C m-2 yr-1
     NPP <- NPP_NC*10^-3 
     
-    df <- data.frame(NPP, Npass, Nslow, Nin_L-Nin, nwood, nburial, nleach)
-    colnames(df) <- c("NPP", "npass", "nslow", "nwoodrel", "nwood", "nburial", "nleach")
+    # leaching
+    nleach <- leachn * (U0 - nwood * NPP - nburial * NPP)
     
-    return(df)
+    out <- data.frame(NPP, Npass, Nslow, Nin_L-Nin, nwood, nburial, nleach)
+    colnames(out) <- c("NPP", "npass", "nslow", "nwoodrel", "nwood", "nburial", "nleach")
+    
+    return(out)
 }

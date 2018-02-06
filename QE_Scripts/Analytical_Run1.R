@@ -129,14 +129,11 @@ Perform_Analytical_Run1 <- function(f.flag = 1) {
         #            yaxis = list(range = c(0, 3)))
         
         ### shoot nc vs. NPP
-        plot(out350DF$nc, out350DF$NPP_photo, xlim=c(0.001, 0.05),
-              ylim=c(0.5, 3.0), 
+        plot(out350DF$nc, out350DF$NPP_photo, xlim=c(0.001, 0.03),
+              ylim=c(1.0, 2.0), 
              type = "l", xlab = "Shoot N:C ratio", 
              ylab = expression(paste("Production [kg C ", m^-2, " ", yr^-1, "]")),
              col="cyan", lwd = 3, cex.lab=1.5)
-        
-        ### why this point is off the line!
-        points(equil350DF$nc_M, equil350DF$NPP_M, col="red", lty = 3, cex=2)
 
         abline(h = seq(0.5, 3.0, 0.5), v = seq(0.01, 0.05, 0.01), col="lightgray", lty = 3)
         

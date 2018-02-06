@@ -1,7 +1,7 @@
 
 ### Function for nutrient N constraint in medium term 
-# not considering exudation
-M_constraint <- function(df, a, C_pass, C_slow, Nin_L) {
+# considering explicit mineral N pool
+M_constraint_expl_min <- function(df, a, C_pass, C_slow, Nin_L) {
     # passed are df and a, the allocation and plant N:C ratios
     # parameters : 
     # Nin is fixed N inputs (N deposition annd fixation) in g m-2 yr-1 (could vary fixation)
@@ -28,11 +28,15 @@ M_constraint <- function(df, a, C_pass, C_slow, Nin_L) {
     nleach <- leachn/(1-leachn) * (a$nfl*a$af + a$nr*(a$ar) + a$nw*a$aw)
     
     ### return g C m-2 yr-1
-    NPP_NC <- U0 / (nwood + nburial + nleach)   
+    NPP_NC <- (nup * U0) / ((a$nfl*a$af + a$nr*a$ar + a$nw*a$aw) * leachn + nup * nwood + nup * nburial)
     
     ### return kg C m-2 yr-1
     NPP <- NPP_NC*10^-3 
     
+    ### leaching
+    nleach <- leachn * (NPP_NC * (a$nfl*a$af + a$nr*a$ar + a$nw*a$aw)) /nup
+    
+    ### out df
     df <- data.frame(NPP, Npass, Nslow, Nin_L-Nin, nwood, nburial, nleach)
     colnames(df) <- c("NPP", "npass", "nslow", "nwoodrel", "nwood", "nburial", "nleach")
     
