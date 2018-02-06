@@ -12,12 +12,15 @@ photo_constraint_full_cn <- function(nf, nfdf, CO2) {
     # w = C content of biomass - needed to convert SLA from DM to C
     # cue = carbon use efficiency
     
+    ### check length of leaf nc
     len <- length(nf)
     
+    ### create output df
     ans <- c()
     
+    ### loop to find the unique solution
     for (i in 1:len) {
-        fPC <- function(NPP) eqPC_full_cn(nf[i], nfdf[i,], NPP, CO2) - NPP
+        fPC <- function(NPP) equil_photo_constraint_full_cn(nf[i], nfdf[i,], NPP, CO2) - NPP
         ans[i] <- uniroot(fPC,interval=c(0.1,20), trace=T)$root
     }
     
