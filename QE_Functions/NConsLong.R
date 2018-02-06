@@ -1,42 +1,4 @@
 
-
-
-### Function for nutrient N constraint in longterm ie passive, leaching, wood and CWD considered
-NConsLong_CWD <- function(df, a, Nin=0.4, leachn=0.05, 
-                          Tsoil = 15, Texture = 0.5, ligfl = 0.2, ligrl = 0.16,
-                          Cpass = 2680, ncp = 0.1, sw = 0.02) {
-    # passed are df and a, the allocation and plant N:C ratios
-    # parameters : 
-    # Nin is fixed N inputs (N deposition annd fixation) in g m-2 yr-1 (could vary fixation)
-    # nleach is the rate of n leaching of the mineral pool (per year)
-    # Tsoil is effective soil temperature for decomposition
-    # Texture is the fine soil fraction
-    # ligfl and ligrl are the lignin:C fractions in the foliage and root litter
-    # Cpass is the passive pool size in g C m-2
-    # ncp is the NC ratio of the passive pool in g N g-1 C
-    # sw is the decay rate of wood in yr-1
-    # ncwd is the rate of N storage in CWD pool in g N m-2 yr-1
-    
-    # passive pool burial 
-    pass <- passive(df, a, Tsoil, Texture, ligfl, ligrl)
-    omegap <- a$af*pass$omegaf + a$ar*pass$omegar 
-    
-    # equation for N constraint with passive, wood, CWD and leaching
-    U0 <- Nin + (1-pass$qq) * pass$decomp * Cpass * ncp   # will be a constant if decomp rate is constant
-    nwood <- a$aw*a$nw
-    nburial <- omegap*ncp
-    nleach <- leachn/(1-leachn) * (a$nfl*a$af + a$nr*a$ar + a$nw*a$aw)
-    ncwd <- nwood*sw   # do we need to consider fluxes lost from this pool? e.g. into active and slow?
-
-    NPP_NC <- U0 / (ncwd + nburial + nleach)   # will be in g C m-2 yr-1
-    NPP_N <- NPP_NC*10^-3 # returned in kg C m-2 yr-1
-    
-    df <- data.frame(NPP_N, nwood,nburial,nleach,a$aw)
-    return(df)   
-}
-
-
-
 ### Function for nutrient N constraint in longterm ie passive, leaching, wood considered
 ### specifically for the case of passive NC ratio depends on soil mineral N
 NConsLong_variable_pass <- function(df, a, Nin=0.4, leachn=0.05, eqNPP,
