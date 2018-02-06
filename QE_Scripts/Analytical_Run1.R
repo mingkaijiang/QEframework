@@ -74,7 +74,7 @@ Perform_Analytical_Run1 <- function(f.flag = 1) {
                         Nin_L = Nin+N_wood_L)
     
 
-    out350DF <- data.frame(CO2_1, nfseq, P350, VL$NPP_N, 
+    out350DF <- data.frame(CO2_1, nfseq, P350, VL$NPP, 
                            L$NPP, M$NPP)
     colnames(out350DF) <- c("CO2", "nc", "NPP_photo", "NPP_VL",
                             "NPP_L", "NPP_M")
@@ -99,7 +99,7 @@ Perform_Analytical_Run1 <- function(f.flag = 1) {
                          Nin_L = Nin+N_wood_L)
     
     out700DF <- data.frame(CO2_2, nfseq, P700, 
-                           VL$NPP_N, L$NPP, M$NPP)
+                           VL$NPP, L$NPP, M$NPP)
     colnames(out700DF) <- c("CO2", "nc", "NPP_photo", "NPP_VL",
                             "NPP_L", "NPP_M")
     

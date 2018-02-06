@@ -61,13 +61,15 @@ ncs <- 0.01
 # pcs <- 0.0005
 
 # priming related parameters
-ariz1 <- 0.2        # range: 0.2 - 1
-ariz0 <- 0.05       # range: 0.0 - 0.1
+nc_active <- 0.0666667         # NC ratio for active SOM pool
+ariz1 <- 0.2                   # range: 0.2 - 1
+ariz0 <- 0.05                  # range: 0.0 - 0.1
 cnref <- 25
 cpref <- 500
-cue_mic <- 0.3      # range: 0.3 - 0.7
-km <- 2             # scaling factor for SOM response; range: 1- 5
-prime_y <- 1.0      # 0.05
+cue_mic <- 0.3                 # range: 0.3 - 0.7
+km <- 2                        # scaling factor for SOM response; range: 1- 5
+prime_y <- 1.0                 # 0.05
 prime_z <- 2
 prime_y_slow <- 1.0
 prime_z_slow <- 2
+rhizo_cue <- 0.3

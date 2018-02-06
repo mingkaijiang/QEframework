@@ -1,5 +1,5 @@
 
-allocn_prim <- function(nf) {
+alloc_prim <- function(nf) {
     ### Allocation and plant N concentrations - required for both PS constraint and NC constraint
     ### specifically for exudation and priming
     # parameters

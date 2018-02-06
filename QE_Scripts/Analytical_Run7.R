@@ -32,10 +32,10 @@ Perform_Analytical_Run7 <- function(f.flag = 1) {
     VL <- VL_constraint(nf=nfseq, nfdf=a_nf)
     
     ### finding the equilibrium point between photosynthesis and very long term nutrient constraints
-    VL_eq <- solve_VL_full(CO2=CO2_1)
+    VL_eq <- solve_VL_full_prim(CO2=CO2_1)
 
     ### calculate nw and nr for VL equilibrated nf value
-    a_eq <- alloc(VL_eq$nf)
+    a_eq <- alloc_prim(VL_eq$nf)
     
     ### calculate soil parameters, e.g. reburial coef.
     s_coef <- soil_coef(df=VL_eq$nf, a=a_eq)
@@ -52,31 +52,42 @@ Perform_Analytical_Run7 <- function(f.flag = 1) {
 
     ### Calculate long term nutrient constraint
     L <- L_constraint(df=nfseq, a=a_nf, 
-                           C_pass=C_pass_VL,
-                           Nin_L = Nin)
+                      C_pass=C_pass_VL,
+                      Nin_L = Nin)
     
     ### Find long term equilibrium point
-    L_eq <- solve_L_full(CO2=CO2_1, C_pass=C_pass_VL, Nin_L = Nin)
+    L_eq <- solve_L_full_prim(CO2=CO2_1, C_pass=C_pass_VL, Nin_L = Nin)
     
     ### Get Cslow from long nutrient cycling solution
     ### return in g C m-2
-    C_slow_L <- omega_as*L_eq$NPP/s_coef$decomp_slow/(1-s_coef$qq_slow)*1000.0
+    ### does not consider priming
+    C_slow_L_prim_off <- omega_as*L_eq$NPP/s_coef$decomp_slow/(1-s_coef$qq_slow)*1000.0
     
+    # calculate N and C gaps based on priming effect
+    c_into_active <- VL_eq$NPP * a_eq$ar * a_eq$ariz * rhizo_cue * 1000.0
+    n_into_active <- c_into_active * a_eq$nr
+    n_active_gap <- c_into_active * nc_active - n_into_active
+    
+    # adjust decomposition of slow pool to close the N gap
+    decomp_slow_prim_on <- s_coef$decomp_slow * (1 + km) * pmax(c_into_active/(c_into_active + km), 0.3)
+    
+    # Calculate C slow based on exudation and new decomposition values
+    C_slow_L_prim_on <- omega_as*VL_eq$NPP/decomp_slow_prim_on/(1-s_coef$qq_slow)*1000.0
     
     ### Calculate medium term nutrient constraint
-    M <- M_constraint(df=nfseq,a=a_nf, 
-                      C_pass=C_pass_VL, 
-                      C_slow=C_slow_L, 
-                      Nin_L = Nin+N_wood_L)
+    M <- M_constraint_prim(df=nfseq,a=a_nf, 
+                           C_pass=C_pass_VL, 
+                           C_slow=C_slow_L_prim_on, 
+                           Nin_L = Nin+N_wood_L)
     
     ### calculate M equilibrium point
-    M_eq <- solve_M_full(CO2=CO2_1, 
-                        C_pass=C_pass_VL, 
-                        C_slow=C_slow_L, 
-                        Nin_L = Nin+N_wood_L)
+    M_eq <- solve_M_full_prim(CO2=CO2_1, 
+                              C_pass=C_pass_VL, 
+                              C_slow=C_slow_L_prim_on, 
+                              Nin_L = Nin+N_wood_L)
     
 
-    out350DF <- data.frame(CO2_1, nfseq, P350, VL$NPP_N, 
+    out350DF <- data.frame(CO2_1, nfseq, P350, VL$NPP, 
                            L$NPP, M$NPP)
     colnames(out350DF) <- c("CO2", "nc", "NPP_photo", "NPP_VL",
                             "NPP_L", "NPP_M")
@@ -89,19 +100,19 @@ Perform_Analytical_Run7 <- function(f.flag = 1) {
     P700 <- photo_constraint_full(nf=nfseq, nfdf=a_nf, CO2=CO2_2)
     
     ### VL equilibrated point with eCO2
-    VL_eq <- solve_VL_full(CO2=CO2_2)
+    VL_eq <- solve_VL_full_prim(CO2=CO2_2)
     
     ### Find long term equilibrium point
-    L_eq <- solve_L_full(CO2=CO2_2, C_pass=C_pass_VL, Nin_L = Nin)
+    L_eq <- solve_L_full_prim(CO2=CO2_2, C_pass=C_pass_VL, Nin_L = Nin)
     
     ### Find medium term equilibrium point
-    M_eq <- solve_M_full(CO2=CO2_2, 
+    M_eq <- solve_M_full_prim(CO2=CO2_2, 
                          C_pass=C_pass_VL, 
-                         C_slow=C_slow_L, 
+                         C_slow=C_slow_L_prim_on, 
                          Nin_L = Nin+N_wood_L)
     
     out700DF <- data.frame(CO2_2, nfseq, P700, 
-                           VL$NPP_N, L$NPP, M$NPP)
+                           VL$NPP, L$NPP, M$NPP)
     colnames(out700DF) <- c("CO2", "nc", "NPP_photo", "NPP_VL",
                             "NPP_L", "NPP_M")
     
@@ -122,7 +133,7 @@ Perform_Analytical_Run7 <- function(f.flag = 1) {
         
         ### shoot nc vs. NPP
         plot(out350DF$nc, out350DF$NPP_photo, xlim=c(0.001, 0.03),
-              ylim=c(1.0, 2.0), 
+              ylim=c(0, 2.0), 
              type = "l", xlab = "Shoot N:C ratio", 
              ylab = expression(paste("Production [kg C ", m^-2, " ", yr^-1, "]")),
              col="cyan", lwd = 3, cex.lab=1.5)
