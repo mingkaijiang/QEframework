@@ -8,7 +8,7 @@ solve_L_full <- function(CO2,C_pass,Nin_L) {
     equilNPP <- photo_constraint_full(equilnf, 
                                     alloc(equilnf), CO2)
     ans <- data.frame(equilnf, equilNPP)
-    colnames(ans) <- c("nc", "NPP")
+    colnames(ans) <- c("nf", "NPP")
     
     return(ans)
 }
