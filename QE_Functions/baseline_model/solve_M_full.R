@@ -15,5 +15,6 @@ solve_M_full <- function(CO2,C_pass,C_slow,Nin_L) {
 
     ans <- data.frame(equilnf,equilNPP)
     colnames(ans) <- c("nf", "NPP")
+    
     return(ans)
 }
