@@ -21,7 +21,7 @@ L_constraint_CWD <- function(df, a, C_pass, Nin_L) {
     nwood <- a$aw*a$nw
     nburial <- omega_ap*ncp
     nleach <- leachn/(1-leachn) * (a$nfl*a$af + a$nr*a$ar + a$nw*a$aw)
-    ncwd <- nwood*sw   # do we need to consider fluxes lost from this pool? e.g. into active and slow?
+    ncwd <- nwood/sw   # do we need to consider fluxes lost from this pool? e.g. into active and slow?
     
     # return NPP
     NPP_NC <- U0 / (ncwd + nburial + nleach)   
