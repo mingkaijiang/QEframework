@@ -20,11 +20,14 @@ Perform_Analytical_Run1 <- function(f.flag = 1) {
     
     ### create a range of nc for shoot to initiate
     nfseq <- round(seq(0.001, 0.1, by = 0.001),5)
+    
+    ### create nc ratio for wood, root, and allocation coefficients
     a_nf <- as.data.frame(allocn(nfseq))
     
     ### calculate photosynthetic constraint at CO2 = 350
-    Photo350 <- photo_constraint_full_cn(nfseq, a_nf, CO2_1)
-
+    P350 <- photo_constraint_full_cn(nfseq, a_nf, CO2_1)
+    P700 <- photo_constraint_full_cn(nfseq, a_nf, CO2_2)
+    
     ### calculate very long term NC and PC constraint on NPP, respectively
     NCVLONG <- VLong_constraint_N(nf=nfseq, nfdf=a_nf)
     
@@ -39,10 +42,10 @@ Perform_Analytical_Run1 <- function(f.flag = 1) {
     
     ### Calculate long term nutrient constraint
     NCLONG <- Long_constraint_N(nfseq, a_nf, CpassVLong,
-                                NinL = Nin)#+NrelwoodVLong)
+                                NinL = Nin)
     
     ### Find long term equilibrium point
-    Long_equil <- solveLong_full_cn(CO2=CO2_1, Cpass=CpassVLong, NinL = Nin)#+NrelwoodVLong)
+    Long_equil <- solveLong_full_cn(CO2=CO2_1, Cpass=CpassVLong, NinL = Nin)
     
     ### Get Cslow from long nutrient cycling solution
     omegas <- aequiln$af*pass$omegafs + aequiln$ar*pass$omegars
@@ -90,8 +93,6 @@ Perform_Analytical_Run1 <- function(f.flag = 1) {
     Long_equil <- solveLong_full_cn(CO2=CO2_2, Cpass=CpassVLong, NinL = Nin)
     
     ### Find medium term equilibrium point
-    Medium_equil_350 <- solveMedium(CO2_1, Cpass = CpassVLong, Cslow = CslowLong, 
-                                             NinL=Nin+NrelwoodVLong)
     Medium_equil_700 <- solveMedium(CO2_2, Cpass = CpassVLong, Cslow = CslowLong, 
                                              NinL=Nin+NrelwoodVLong)
     
@@ -126,11 +127,15 @@ Perform_Analytical_Run1 <- function(f.flag = 1) {
         #            yaxis = list(range = c(0, 3)))
         
         ### shoot nc vs. NPP
-        plot(out350DF$nc, out350DF$NPP_photo, xlim=c(0.001, 0.05),
-              ylim=c(0.5, 3), 
+        plot(out350DF$nc, out350DF$NPP_photo, xlim=c(0.018, 0.030),
+              ylim=c(1.605, 1.7), 
              type = "l", xlab = "Shoot N:C ratio", 
              ylab = expression(paste("Production [kg C ", m^-2, " ", yr^-1, "]")),
              col="cyan", lwd = 3, cex.lab=1.5)
+        
+        points(equil350DF$nc_VL, equil350DF$NPP_L, col="black", lty = 3)
+        points(equil350DF$nc_VL, equil350DF$NPP_M, col="red", lty = 3)
+        points(equil700DF$nc_VL, equil700DF$NPP_M, col="red", lty = 3)
         
         abline(h = seq(0.5, 3.0, 0.5), v = seq(0.01, 0.05, 0.01), col="lightgray", lty = 3)
         

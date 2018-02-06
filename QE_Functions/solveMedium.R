@@ -25,6 +25,7 @@ solveMedium <- function(CO2,Cpass,Cslow,NinL) {
     equilnf <- uniroot(fn,interval=c(0.001,0.1))$root
     equilNPP <- photo_constraint_full_cn(equilnf, 
                                          allocn(equilnf), CO2)
+    # browser()
     ans <- data.frame(equilnf,equilNPP)
     return(ans)
 }

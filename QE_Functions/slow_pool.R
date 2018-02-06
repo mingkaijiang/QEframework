@@ -14,7 +14,8 @@ slow_pool <- function(df, a) {
     psp <- 0.03
     
     # fraction of C released from passive pool that is re-buried in it
-    qpq <-  ppa*(pap + psp*pas)/(1-pas*psa)   
+    qpq <-  ppa*(pap + psp*pas)/(1-pas*psa)
+    
     # fraction of C released from slow pool that is re-buried in it
     qsq <- (pas*ppa*psp + pas*psa) / (1 - ppa*pap)
     
