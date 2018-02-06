@@ -4,7 +4,7 @@
 #### Assumptions:
 #### 1. baseline N cycle
 #### 2. Variable wood NC
-#### 3. CWD considered
+#### 3. Variable passive SOM pool
 ####
 ################################################################################
 #### Functions
@@ -47,15 +47,15 @@ Perform_Analytical_Run7 <- function(f.flag = 1) {
     
     ### Calculate nutrient release from CWD woody pool
     ### return in g N m-2 yr-1
-    N_wood_VL <- a_eq$aw*a_eq$nw*VL_eq$NPP*1000.0
+    N_wood_L <- a_eq$aw*a_eq$nw*VL_eq$NPP*1000.0
 
     ### Calculate long term nutrient constraint
-    L <- L_constraint_CWD(df=nfseq, a=a_nf, 
+    L <- L_constraint(df=nfseq, a=a_nf, 
                            C_pass=C_pass_VL,
-                           Nin_L = Nin + N_wood_VL)
+                           Nin_L = Nin)
     
     ### Find long term equilibrium point
-    L_eq <- solve_L_full_CWD(CO2=CO2_1, C_pass=C_pass_VL, Nin_L = Nin)
+    L_eq <- solve_L_full(CO2=CO2_1, C_pass=C_pass_VL, Nin_L = Nin)
     
     ### Get Cslow from long nutrient cycling solution
     ### return in g C m-2
@@ -66,13 +66,13 @@ Perform_Analytical_Run7 <- function(f.flag = 1) {
     M <- M_constraint(df=nfseq,a=a_nf, 
                       C_pass=C_pass_VL, 
                       C_slow=C_slow_L, 
-                      Nin_L = Nin+N_wood_VL)
+                      Nin_L = Nin+N_wood_L)
     
     ### calculate M equilibrium point
     M_eq <- solve_M_full(CO2=CO2_1, 
                         C_pass=C_pass_VL, 
                         C_slow=C_slow_L, 
-                        Nin_L = Nin+N_wood_VL)
+                        Nin_L = Nin+N_wood_L)
     
 
     out350DF <- data.frame(CO2_1, nfseq, P350, VL$NPP_N, 
@@ -91,13 +91,13 @@ Perform_Analytical_Run7 <- function(f.flag = 1) {
     VL_eq <- solve_VL_full(CO2=CO2_2)
     
     ### Find long term equilibrium point
-    L_eq <- solve_L_full_CWD(CO2=CO2_2, C_pass=C_pass_VL, Nin_L = Nin + N_wood_VL)
+    L_eq <- solve_L_full(CO2=CO2_2, C_pass=C_pass_VL, Nin_L = Nin)
     
     ### Find medium term equilibrium point
     M_eq <- solve_M_full(CO2=CO2_2, 
                          C_pass=C_pass_VL, 
                          C_slow=C_slow_L, 
-                         Nin_L = Nin+N_wood_VL)
+                         Nin_L = Nin+N_wood_L)
     
     out700DF <- data.frame(CO2_2, nfseq, P700, 
                            VL$NPP_N, L$NPP, M$NPP)
