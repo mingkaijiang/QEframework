@@ -22,17 +22,17 @@ Perform_Analytical_Run1 <- function(f.flag = 1) {
     nfseq <- round(seq(0.001, 0.1, by = 0.001),5)
     
     ### create nc ratio for wood, root, and allocation coefficients
-    a_nf <- as.data.frame(allocn(nfseq))
+    a_nf <- as.data.frame(alloc(nfseq))
     
     ### calculate photosynthetic constraint at CO2 = 350
-    P350 <- photo_constraint_full_cn(nf=nfseq, nfdf=a_nf, CO2=CO2_1)
-    P700 <- photo_constraint_full_cn(nf=nfseq, nfdf=a_nf, CO2=CO2_2)
+    P350 <- photo_constraint_full(nf=nfseq, nfdf=a_nf, CO2=CO2_1)
+    P700 <- photo_constraint_full(nf=nfseq, nfdf=a_nf, CO2=CO2_2)
     
     ### calculate very long term NC and PC constraint on NPP, respectively
-    NCVLONG <- VLong_constraint_N(nf=nfseq, nfdf=a_nf)
+    VL <- VL_constraint(nf=nfseq, nfdf=a_nf)
     
     ### finding the equilibrium point between photosynthesis and very long term nutrient constraints
-    VLong_equil <- solveVLong_full_cn(CO2=CO2_1)
+    VL_eq <- solve_VL_full(CO2=CO2_1)
     
     ### Get Cpassive from very-long nutrient cycling solution
     aequiln <- allocn(VLong_equil$equilnf)

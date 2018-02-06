@@ -1,5 +1,5 @@
 ### Allocation and plant N concentrations - required for both PS constraint and NC constraint
-allocn <- function(nf) {
+alloc <- function(nf) {
     # parameters
     # nf is the NC ratio of foliage
     # nw is the NC ratio of wood if fixed; otherwise the ratio of wood N:C to foliage N:C

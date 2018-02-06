@@ -1,11 +1,10 @@
 ### This function implements photosynthetic constraint - solve by finding the root
 ### Based on the full photosynthesis model for c and n only
-photo_constraint_full_cn <- function(nf, nfdf, CO2) {
+photo_constraint_full <- function(nf, nfdf, CO2) {
     # parameters
     # nf is variable
     # making it pass af (fractional allocation to foliage) because this may also be variable
     # CO2 = co2 concentration 
-    # Nref = leaf N:C for saturation of photosynthesis
     # kext = light extinction coeffciency
     # SLA = specific leaf area in m2 kg-1 DM
     # sf = turnover rate of foliage in yr-1
@@ -20,7 +19,9 @@ photo_constraint_full_cn <- function(nf, nfdf, CO2) {
     
     ### loop to find the unique solution
     for (i in 1:len) {
-        fPC <- function(NPP) equil_photo_constraint_full_cn(nf[i], nfdf[i,], NPP, CO2) - NPP
+        fPC <- function(NPP) {
+            equil_photo_constraint_full(nf[i], nfdf[i,], NPP, CO2) - NPP
+        }
         ans[i] <- uniroot(fPC,interval=c(0.1,20), trace=T)$root
     }
     
