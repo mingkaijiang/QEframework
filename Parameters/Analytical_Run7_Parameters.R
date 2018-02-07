@@ -3,13 +3,13 @@ CO2_1 <- 350.0  # 350
 CO2_2 <- 700.0  # 700
 
 #### define parameters
-nwood = 0.005      # 0.005 
+nwood = 0.005       # 0.005 
 # pwood = 0.00003   # 0.00003
 nrho = 0.7
 # prho = 0.7
 nretrans = 0.5
 # pretrans = 0.6
-nwvar = TRUE     # TRUE
+nwvar = FALSE     # TRUE
 # pwvar = TRUE     # TRUE
 # LUE0=1.4
 # I0=3
@@ -62,14 +62,9 @@ ncs <- 0.01
 
 # priming related parameters
 nc_active <- 0.0666667         # NC ratio for active SOM pool
-ariz1 <- 0.2                   # range: 0.2 - 1
-ariz0 <- 0.05                  # range: 0.0 - 0.1
+ariz1 <- 1.0                   # range: 0.2 - 1
+ariz0 <- 0.01                  # range: 0.0 - 0.1
 cnref <- 25
-cpref <- 500
 cue_mic <- 0.3                 # range: 0.3 - 0.7
 km <- 2                        # scaling factor for SOM response; range: 1- 5
-prime_y <- 1.0                 # 0.05
-prime_z <- 2
-prime_y_slow <- 1.0
-prime_z_slow <- 2
 rhizo_cue <- 0.3

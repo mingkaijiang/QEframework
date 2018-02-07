@@ -28,9 +28,17 @@ alloc_prim <- function(nf) {
     nr <- nrho*nf
     nriz <- nr
 
-    # update allocation coefficient for rhizodeposition
+    # fraction of root allocated to rhizosphere 
     ariz <- ariz_dep_coef(nf)
     
+    # update ar and ariz so that af + aw + ar + ariz = 1
+    # ar_new <- (1 - ariz) * ar
+    # ariz_new <- ariz * ar
+    
+    # out df
     ret <- data.frame(nf,nfl,nw,nr,nriz,af,aw,ar,ariz)
+    colnames(ret) <- c("nf", "nfl", "nw", "nr", "nriz",
+                       "af", "aw", "ar", "ariz")
+    
     return(ret)
 }

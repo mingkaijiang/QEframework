@@ -8,8 +8,10 @@ ariz_dep_coef <- function(nf) {
     
     cnleaf <- 1.0/nf
     
-    #ariz <- pmin(0.9, ariz0 + ariz1 * pmax((cnleaf - cnref)/cnref, 0))
-    ariz <- ariz0 + ariz1 * pmax((cnleaf - cnref)/cnref, 0)
+    # assume you can allocate a max of 80% of root NPP as exudates
+    ariz <- ariz0 + ariz1 * pmax(pmin((cnleaf - cnref)/cnref, 0.8), 0)
+
+    # browser()
     
     return(ariz)
 }

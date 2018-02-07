@@ -39,21 +39,24 @@ Perform_Analytical_Run7 <- function(f.flag = 1) {
     
     ### calculate soil parameters, e.g. reburial coef.
     s_coef <- soil_coef(df=VL_eq$nf, a=a_eq)
-    omega_ap <- a_eq$af*s_coef$omega_af_pass + a_eq$ar*s_coef$omega_ar_pass
-    omega_as <- a_eq$af*s_coef$omega_af_slow + a_eq$ar*s_coef$omega_ar_slow
+    
+    ### note: a fraction of root is used for exudation
+    ###       so they should be excluded here. 
+    omega_ap <- a_eq$af*s_coef$omega_af_pass + (a_eq$ar-a_eq$ar*a_eq$ariz)*s_coef$omega_ar_pass
+    omega_as <- a_eq$af*s_coef$omega_af_slow + (a_eq$ar-a_eq$ar*a_eq$ariz)*s_coef$omega_ar_slow
     
     ### Get C from very-long term nutrient cycling solution
     ### return in g C m-2 
     C_pass_VL <- omega_ap*VL_eq$NPP/s_coef$decomp_pass/(1-s_coef$qq_pass)*1000.0
     
-    ### Calculate nutrient release from CWD woody pool
+    ### Calculate nutrient release from woody pool
     ### return in g N m-2 yr-1
     N_wood_L <- a_eq$aw*a_eq$nw*VL_eq$NPP*1000.0
 
     ### Calculate long term nutrient constraint
-    L <- L_constraint(df=nfseq, a=a_nf, 
-                      C_pass=C_pass_VL,
-                      Nin_L = Nin)
+    L <- L_constraint_prim(df=nfseq, a=a_nf, 
+                            C_pass=C_pass_VL,
+                            Nin_L = Nin)
     
     ### Find long term equilibrium point
     L_eq <- solve_L_full_prim(CO2=CO2_1, C_pass=C_pass_VL, Nin_L = Nin)
@@ -73,17 +76,18 @@ Perform_Analytical_Run7 <- function(f.flag = 1) {
     
     # Calculate C slow based on exudation and new decomposition values
     C_slow_L_prim_on <- omega_as*VL_eq$NPP/decomp_slow_prim_on/(1-s_coef$qq_slow)*1000.0
+    C_slow_L_test <- C_slow_L_prim_off - (n_active_gap / ncs)
     
     ### Calculate medium term nutrient constraint
     M <- M_constraint_prim(df=nfseq,a=a_nf, 
                            C_pass=C_pass_VL, 
-                           C_slow=C_slow_L_prim_on, 
+                           C_slow=C_slow_L_test, 
                            Nin_L = Nin+N_wood_L)
     
     ### calculate M equilibrium point
     M_eq <- solve_M_full_prim(CO2=CO2_1, 
                               C_pass=C_pass_VL, 
-                              C_slow=C_slow_L_prim_on, 
+                              C_slow=C_slow_L_test, 
                               Nin_L = Nin+N_wood_L)
     
 

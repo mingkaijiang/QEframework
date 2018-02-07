@@ -27,8 +27,10 @@ M_constraint_prim <- function(df, a, C_pass, C_slow, Nin_L) {
         fPC <- function(NPP) {
             # passive and slow pool burial 
             pass <- soil_coef_prim(df[i], a[i,], NPP)
-            omega_ap <- a[i,]$af*pass$omega_af_pass + a[i,]$ar*pass$omega_ar_pass 
-            omega_as <- a[i,]$af*pass$omega_af_slow + a[i,]$ar*pass$omega_ar_slow 
+            
+            # again, exclude exudation from root allocation
+            omega_ap <- a[i,]$af*pass$omega_af_pass + (a[i,]$ar-a[i,]$ar*a[i,]$ariz)*pass$omega_ar_pass 
+            omega_as <- a[i,]$af*pass$omega_af_slow + (a[i,]$ar-a[i,]$ar*a[i,]$ariz)*pass$omega_ar_slow 
             
             # equation for N constraint with passive, slow, wood, and leaching
             Npass <- (1-s_coef$qq_pass) * s_coef$decomp_pass * C_pass * ncp
