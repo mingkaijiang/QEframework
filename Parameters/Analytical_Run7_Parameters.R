@@ -51,6 +51,5 @@ nc_active <- 0.0666667         # NC ratio for active SOM pool
 ariz1 <- 1.0                   # range: 0.2 - 1
 ariz0 <- 0.01                  # range: 0.0 - 0.1
 cnref <- 25
-cue_mic <- 0.3                 # range: 0.3 - 0.7
 km <- 2                        # scaling factor for SOM response; range: 1- 5
-rhizo_cue <- 0.3
+rhizo_cue <- 0.3               # range 0.3 - 0.7

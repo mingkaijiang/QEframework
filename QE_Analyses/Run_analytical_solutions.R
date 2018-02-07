@@ -26,7 +26,7 @@ Perform_Analytical_Run3(f.flag = 1)
 Perform_Analytical_Run4(f.flag = 1)
 Perform_Analytical_Run5(f.flag = 1)
 Perform_Analytical_Run6(f.flag = 1)
-#Perform_Analytical_Run7(f.flag = 1)
+Perform_Analytical_Run7(f.flag = 1)
 #Perform_Analytical_Run8(f.flag = 1)
 
 #### Step 2: return data list
@@ -36,7 +36,7 @@ r3 <- Perform_Analytical_Run3(f.flag = 2)
 r4 <- Perform_Analytical_Run4(f.flag = 2)
 r5 <- Perform_Analytical_Run5(f.flag = 2)
 r6 <- Perform_Analytical_Run6(f.flag = 2)
-#r7 <- Perform_Analytical_Run7(f.flag = 2)
+r7 <- Perform_Analytical_Run7(f.flag = 2)
 #r8 <- Perform_Analytical_Run8(f.flag = 2)
 
 ################################################################################
