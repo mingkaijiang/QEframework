@@ -73,6 +73,8 @@ soil_coef_prim <- function(df, a, in_npp) {
     # calculate the extra C and N input into active SOM,
     # and the gap between what's needed and what's provided
     c_into_active <- in_npp * a$ar * a$ariz * rhizo_cue * 1000.0
+    n_into_active <- c_into_active * a$nr
+    n_active_gap <- c_into_active * nc_active - n_into_active
     
     # adjust decomposition rate of slow pool to close the N gap
     decomp_slow <- decomp_slow_old * (1 + km) * pmax(c_into_active/(c_into_active + km), 0.3)

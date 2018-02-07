@@ -32,10 +32,14 @@ M_constraint_prim <- function(df, a, C_pass, C_slow, Nin_L) {
             omega_ap <- a[i,]$af*pass$omega_af_pass + (a[i,]$ar-a[i,]$ar*a[i,]$ariz)*pass$omega_ar_pass 
             omega_as <- a[i,]$af*pass$omega_af_slow + (a[i,]$ar-a[i,]$ar*a[i,]$ariz)*pass$omega_ar_slow 
             
+            # Calculate C slow based on exudation and new decomposition values
+            C_slow_new <- omega_as*NPP/pass$decomp_slow/(1-pass$qq_slow)*1000.0
+
             # equation for N constraint with passive, slow, wood, and leaching
-            Npass <- (1-s_coef$qq_pass) * s_coef$decomp_pass * C_pass * ncp
-            Nslow <- (1-s_coef$qq_slow) * s_coef$decomp_slow * C_slow * ncs
+            Npass <- (1-pass$qq_pass) * pass$decomp_pass * C_pass * ncp
+            Nslow <- (1-pass$qq_slow) * pass$decomp_slow * C_slow_new * ncs
             
+
             U0 <- Nin_L + Npass + Nslow
             nwood <- a[i,]$aw*a[i,]$nw
             nburial <- omega_ap*ncp + omega_as*ncs

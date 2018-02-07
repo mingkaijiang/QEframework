@@ -76,18 +76,20 @@ Perform_Analytical_Run7 <- function(f.flag = 1) {
     
     # Calculate C slow based on exudation and new decomposition values
     C_slow_L_prim_on <- omega_as*VL_eq$NPP/decomp_slow_prim_on/(1-s_coef$qq_slow)*1000.0
-    C_slow_L_test <- C_slow_L_prim_off - (n_active_gap / ncs)
+    
+    # 2nd method to calculate new C slow pool
+    C_slow_L_prim_on_2 <- C_slow_L_prim_off - (n_active_gap / ncs) 
     
     ### Calculate medium term nutrient constraint
     M <- M_constraint_prim(df=nfseq,a=a_nf, 
                            C_pass=C_pass_VL, 
-                           C_slow=C_slow_L_test, 
+                           C_slow=C_slow_L_prim_on, 
                            Nin_L = Nin+N_wood_L)
     
     ### calculate M equilibrium point
     M_eq <- solve_M_full_prim(CO2=CO2_1, 
                               C_pass=C_pass_VL, 
-                              C_slow=C_slow_L_test, 
+                              C_slow=C_slow_L_prim_on, 
                               Nin_L = Nin+N_wood_L)
     
 
