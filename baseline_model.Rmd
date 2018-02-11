@@ -1,7 +1,7 @@
 ---
 title: "QE framework baseline model"
 author: "Mingkai Jiang"
-date: "January 22, 2018"
+date: "Feb 12, 2018"
 output: html_document
 ---
 
@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 This R markdown file introduces the Quasi-equilibrium (QE) framework baseline model. The basline QE model is a carbon-nitrogen (C-N) coupled model that is based on the Generic Decomposition And Yield (GDAY) model, originally developed by Comins and McMurtrie (1993).
 
-The baseline model this study refers to compares the effect of wood NC stoichiometric flexiblity, with the 1st model has variable wood NC ratio and 2nd model has fixed wood NC ratio. 
+The baseline model in this study compares the effect of wood NC stoichiometric flexiblity, with the 1st model has variable wood NC ratio and 2nd model has fixed wood NC ratio. 
 
 Here we are evaluating the alternative assumption for wood stoichiometric flexiblity on plant's CO2 response. Time is also a factor considered here, with VL (very-long), L (long), and M (medium) terms considered as the final model equilibrium point, passive SOM pool equilibrated, passive and slow SOM pools equilibrated, respectively. 
 
@@ -21,8 +21,6 @@ Here we are evaluating the alternative assumption for wood stoichiometric flexib
 ## Procedures
 
 Below I use step-by-step guidance to generate the results.
-
-Firstly, we need to source all the functions and set up the workspace, via:
 
 ``` {r, message=FALSE}
     source("QE_Analyses/prepare_R.R")
@@ -32,16 +30,24 @@ Firstly, we need to source all the functions and set up the workspace, via:
 Next, we run analytical run scripts to generate the pdf files and store the rest dataframes into data list:
 
 ``` {r, message = FALSE}
-    # baseline, variable wood NC, baseline N cycle model
-    r1 <- Perform_Analytical_Run1(f.flag = 2)
-    
-    # baseline, fixed wood NC, baseline N cycle model
-    r2 <- Perform_Analytical_Run2(f.flag = 2)
+    source("QE_Analyses/Run_analytical_solutions.R")
 
 ```
 
 
-``` {r, echo = FALSE, message = FALSE, warning = FALSE}
+``` {r, echo=FALSE, message = FALSE, warning=FALSE}
+    # graphic settings
+    # par(mar=c(6.1,8.1,2.1,2.1), oma=c(2,6,2,2))
+
+    # library
+    require(ggplot2)
+
+```
+
+Now, I am plotting QE framework for each individual model assumption.
+
+#### Run 1: Baseline N model with variable wood NC ratio
+``` {r, echo = FALSE, fig.width = 5, fig.align="center", message = FALSE, warning = FALSE}
     # split data list into data frames
     cdf.r1 <- r1$cDF
     cdf.r2 <- r2$cDF
@@ -57,35 +63,32 @@ Next, we run analytical run scripts to generate the pdf files and store the rest
     edf2.r1 <- edf.r1[edf.r1$CO2 == 700, ]
     edf1.r2 <- edf.r2[edf.r2$CO2 == 350, ]
     edf2.r2 <- edf.r2[edf.r2$CO2 == 700, ]
+
     
-    # graphic settings
-    par(mar=c(6.1,8.1,2.1,2.1), oma=c(2,6,2,2))
+    ### plot run 1
+    ggplot() + 
+        geom_line(data=cdf1.r1, aes(x=nc, y=NPP_photo), color="cyan") +
+        geom_line(data=cdf1.r1, aes(x=nc, y=NPP_VL), color="tomato") +
+        geom_line(data=cdf1.r1, aes(x=nc, y=NPP_L), color="violet") +
+        geom_line(data=cdf1.r1, aes(x=nc, y=NPP_M), color="darkred") +
+        geom_line(data=cdf2.r1, aes(x=nc, y=NPP_photo), color="green") +
+        geom_point(data=edf1.r1, aes(x=nc_VL, y=NPP_VL), color="blue") +
+        geom_point(data=edf2.r1, aes(x=nc_L, y=NPP_L), color="red") +
+        geom_point(data=edf2.r1, aes(x=nc_M, y=NPP_M), color="purple") +
+        geom_point(data=edf2.r1, aes(x=nc_VL, y=NPP_VL), color="orange") +
+        geom_point(data=edf2.r1, aes(x=nc_VL, y=NPP_VL), color="blue") +
+        ylim(1.0, 2.0) + 
+        xlim(0.001, 0.03) +
+        labs(x="Shoot N:C Ratio", 
+             y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
+        theme_linedraw() +
+        theme(panel.grid.minor=element_blank(),
+              legend.justification=c(0,1),
+              legend.position=c(0,1))
+
 
 ```
 
-Analytical run 1 plot, that is, baseline model with variable wood NC ratio, is shown below:
-```{r, echo=FALSE, fig.width = 5, fig.align="center"}
-    # plotting
-
-
-
-
-    plot(cdf1.r1$nc, cdf1.r1$NPP_photo, xlim=c(0.001, 0.05),
-         ylim=c(0.5, 3), 
-         type = "l", xlab = "Shoot N:C ratio", 
-         ylab = expression(paste("Production [kg C ", m^-2, " ", yr^-1, "]")),
-         col="cyan", lwd = 3, cex.lab=1.5)
-    points(cdf1.r1$nc, cdf1.r1$NPP_VL, type="l", col="tomato", lwd = 3, add= T)
-    points(edf1.r1$nc_VL, edf1.r1$NPP_VL, type="p", pch = 19, col = "blue", cex = 2)
-    points(cdf1.r1$nc, cdf1.r1$NPP_L, type='l',col="violet", lwd = 3)
-    points(cdf1.r1$nc, cdf1.r1$NPP_M, type="l", col="darkred", lwd = 3)
-    
-    points(cdf2.r1$nc, cdf2.r1$NPP_photo, col="green", type="l", lwd = 3)
-    points(edf2.r1$nc_VL, edf2.r1$NPP_VL, type="p", col="orange", pch = 19, cex = 2)
-    points(edf2.r1$nc_L,edf2.r1$NPP_L,type="p", col="red", pch = 19, cex = 2)
-    points(edf2.r1$equilnf, edf2.r1$NPP_M, type="p", col="purple", pch = 19, cex = 2)
-    
-```
 
 
 Analytical run 2 plot, that is, baseline model with fixed wood NC ratio, is shown below:

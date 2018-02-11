@@ -110,6 +110,9 @@ Perform_Analytical_Run3 <- function(f.flag = 1) {
     df700 <- as.data.frame(cbind(round(nfseq,3), P700))
     inst700 <- inst_NPP(equil350DF$nc_VL, df700)
     
+    equil350DF$NPP_I <- inst700$equilNPP
+    equil700DF$NPP_I <- inst700$equilNPP
+    
     if (f.flag == 1) {
         
         ### plot 2-d plots of nf vs. npp and nf vs. pf

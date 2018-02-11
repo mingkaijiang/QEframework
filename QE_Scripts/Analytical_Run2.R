@@ -110,6 +110,8 @@ Perform_Analytical_Run2 <- function(f.flag = 1) {
     ### get the point instantaneous NPP response to doubling of CO2
     df700 <- as.data.frame(cbind(round(nfseq,3), P700))
     inst700 <- inst_NPP(equil350DF$nc_VL, df700)
+    equil350DF$NPP_I <- inst700$equilNPP
+    equil700DF$NPP_I <- inst700$equilNPP
     
     if (f.flag == 1) {
         

@@ -10,7 +10,7 @@
 #### Run 5: GDAY plant mineral N uptake function, variable wood NC
 #### Run 6: O-CN plant mineral N uptake function, variable wood NC
 #### Run 7: Priming effect (i.e. exudation and faster turnover of slow SOM pool, fixed wood)
-#### Run 8: 
+#### Run 8: Priming effect (i.e. exudation and faster turnover of slow SOM pool, variable wood)
 #### Run 9: 
 #### Run 10: CLM treatments
 
@@ -27,7 +27,7 @@ Perform_Analytical_Run4(f.flag = 1)
 Perform_Analytical_Run5(f.flag = 1)
 Perform_Analytical_Run6(f.flag = 1)
 Perform_Analytical_Run7(f.flag = 1)
-#Perform_Analytical_Run8(f.flag = 1)
+Perform_Analytical_Run8(f.flag = 1)
 
 #### Step 2: return data list
 r1 <- Perform_Analytical_Run1(f.flag = 2)
@@ -37,7 +37,7 @@ r4 <- Perform_Analytical_Run4(f.flag = 2)
 r5 <- Perform_Analytical_Run5(f.flag = 2)
 r6 <- Perform_Analytical_Run6(f.flag = 2)
 r7 <- Perform_Analytical_Run7(f.flag = 2)
-#r8 <- Perform_Analytical_Run8(f.flag = 2)
+r8 <- Perform_Analytical_Run8(f.flag = 2)
 
 ################################################################################
 #### End
