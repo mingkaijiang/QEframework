@@ -2,9 +2,9 @@
 #### Analytical script Run 9
 ####
 #### Assumptions:
-#### 1. C cost of plant N as CLM 
+#### 1. CLM approach of N uptake
 #### 2. Variable wood NC
-#### Literature: Fisher et al. 2010. GB1014. 
+#### Literature: Ghimire et al., 2016
 ####
 ################################################################################
 #### Functions
@@ -28,10 +28,10 @@ Perform_Analytical_Run9 <- function(f.flag = 1) {
     P350 <- photo_constraint_full(nf=nfseq, nfdf=a_nf, CO2=CO2_1)
 
     ### calculate very long term NC constraint on NPP, respectively
-    VL <- VL_constraint(nf=nfseq, nfdf=a_nf)
+    VL <- VL_constraint_baseline_CLM(df=nfseq, a=a_nf)
     
     ### finding the equilibrium point between photosynthesis and very long term nutrient constraints
-    VL_eq <- solve_VL_full(CO2=CO2_1)
+    VL_eq <- solve_VL_full_baseline_CLM(CO2=CO2_1)
 
     ### calculate nw and nr for VL equilibrated nf value
     a_eq <- alloc(VL_eq$nf)
@@ -46,12 +46,12 @@ Perform_Analytical_Run9 <- function(f.flag = 1) {
     C_pass_VL <- omega_ap*VL_eq$NPP/s_coef$decomp_pass/(1-s_coef$qq_pass)*1000.0
 
     ### Calculate long term nutrient constraint
-    L <- L_constraint(df=nfseq, a=a_nf, 
-                      C_pass=C_pass_VL,
-                      Nin_L = Nin)
+    L <- L_constraint_baseline_CLM(df=nfseq, a=a_nf, 
+                                   C_pass=C_pass_VL,
+                                   Nin_L = Nin)
     
     ### Find long term equilibrium point
-    L_eq <- solve_L_full(CO2=CO2_1, C_pass=C_pass_VL, Nin_L = Nin)
+    L_eq <- solve_L_full_baseline_CLM(CO2=CO2_1, C_pass=C_pass_VL, Nin_L = Nin)
     
     ### Get Cslow from long nutrient cycling solution
     ### return in g C m-2
@@ -62,16 +62,16 @@ Perform_Analytical_Run9 <- function(f.flag = 1) {
     N_wood_L <- a_eq$aw*a_eq$nw*VL_eq$NPP*1000.0
     
     ### Calculate medium term nutrient constraint
-    M <- M_constraint(df=nfseq,a=a_nf, 
-                      C_pass=C_pass_VL, 
-                      C_slow=C_slow_L, 
-                      Nin_L = Nin+N_wood_L)
+    M <- M_constraint_baseline_CLM(df=nfseq,a=a_nf, 
+                                  C_pass=C_pass_VL, 
+                                  C_slow=C_slow_L, 
+                                  Nin_L = Nin+N_wood_L)
     
     ### calculate M equilibrium point
-    M_eq <- solve_M_full(CO2=CO2_1, 
-                        C_pass=C_pass_VL, 
-                        C_slow=C_slow_L, 
-                        Nin_L = Nin+N_wood_L)
+    M_eq <- solve_M_full_baseline_CLM(CO2=CO2_1, 
+                                      C_pass=C_pass_VL, 
+                                      C_slow=C_slow_L, 
+                                      Nin_L = Nin+N_wood_L)
     
 
     out350DF <- data.frame(CO2_1, nfseq, P350, VL$NPP, 
@@ -87,16 +87,16 @@ Perform_Analytical_Run9 <- function(f.flag = 1) {
     P700 <- photo_constraint_full(nf=nfseq, nfdf=a_nf, CO2=CO2_2)
     
     ### VL equilibrated point with eCO2
-    VL_eq <- solve_VL_full(CO2=CO2_2)
+    VL_eq <- solve_VL_full_baseline_CLM(CO2=CO2_2)
     
     ### Find long term equilibrium point
-    L_eq <- solve_L_full(CO2=CO2_2, C_pass=C_pass_VL, Nin_L = Nin)
+    L_eq <- solve_L_full_baseline_CLM(CO2=CO2_2, C_pass=C_pass_VL, Nin_L = Nin)
     
     ### Find medium term equilibrium point
-    M_eq <- solve_M_full(CO2=CO2_2, 
-                         C_pass=C_pass_VL, 
-                         C_slow=C_slow_L, 
-                         Nin_L = Nin+N_wood_L)
+    M_eq <- solve_M_full_baseline_CLM(CO2=CO2_2, 
+                                      C_pass=C_pass_VL, 
+                                      C_slow=C_slow_L, 
+                                      Nin_L = Nin+N_wood_L)
     
     out700DF <- data.frame(CO2_2, nfseq, P700, 
                            VL$NPP, L$NPP, M$NPP)
