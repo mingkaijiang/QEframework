@@ -42,12 +42,22 @@ Next, we run analytical run scripts to generate the pdf files and store the rest
     # library
     require(ggplot2)
 
+    # two nice color palette for color blind
+    # The palette with grey:
+    cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+
+    # The palette with black:
+    cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+
 ```
 
 Now, I am plotting QE framework for each individual model assumption.
 
+<br/>
+<br/>
+
 #### Run 1: Baseline N model with variable wood NC ratio
-``` {r, echo = FALSE, fig.width = 5, fig.align="center", message = FALSE, warning = FALSE}
+``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE}
     # split data list into data frames
     cdf.r1 <- r1$cDF
     cdf.r2 <- r2$cDF
@@ -67,24 +77,36 @@ Now, I am plotting QE framework for each individual model assumption.
     
     ### plot run 1
     ggplot() + 
-        geom_line(data=cdf1.r1, aes(x=nc, y=NPP_photo), color="cyan") +
-        geom_line(data=cdf1.r1, aes(x=nc, y=NPP_VL), color="tomato") +
-        geom_line(data=cdf1.r1, aes(x=nc, y=NPP_L), color="violet") +
-        geom_line(data=cdf1.r1, aes(x=nc, y=NPP_M), color="darkred") +
-        geom_line(data=cdf2.r1, aes(x=nc, y=NPP_photo), color="green") +
-        geom_point(data=edf1.r1, aes(x=nc_VL, y=NPP_VL), color="blue") +
-        geom_point(data=edf2.r1, aes(x=nc_L, y=NPP_L), color="red") +
-        geom_point(data=edf2.r1, aes(x=nc_M, y=NPP_M), color="purple") +
-        geom_point(data=edf2.r1, aes(x=nc_VL, y=NPP_VL), color="orange") +
-        geom_point(data=edf2.r1, aes(x=nc_VL, y=NPP_VL), color="blue") +
+        geom_line(data=cdf1.r1, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
+        geom_line(data=cdf1.r1, aes(x=nc, y=NPP_VL, col="VL"), size=0.5, linetype="dotted") + 
+        geom_line(data=cdf1.r1, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
+        geom_line(data=cdf1.r1, aes(x=nc, y=NPP_M, col="M"), size=0.5, linetype="dotted") +            
+        geom_line(data=cdf2.r1, aes(x=nc, y=NPP_photo, col="C700"), size=0.5, linetype="dotted") +     
+        geom_point(data=edf1.r1, aes(x=nc_VL, y=NPP_VL, fill="A"), 
+                color="black", shape=21, size=3) + 
+        geom_point(data=edf2.r1, aes(x=nc_L, y=NPP_L, fill="D"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf2.r1, aes(x=nc_M, y=NPP_M, fill="C"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf2.r1, aes(x=nc_VL, y=NPP_VL, fill="E"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf1.r1, aes(x=nc_VL, y=NPP_I, fill="B"), 
+                   shape=21, color="black", size=3) +
         ylim(1.0, 2.0) + 
         xlim(0.001, 0.03) +
         labs(x="Shoot N:C Ratio", 
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
-              legend.justification=c(0,1),
-              legend.position=c(0,1))
+              axis.text=element_text(size=12),
+              axis.title=element_text(size=14),
+              legend.text=element_text(size=12),
+              legend.title=element_text(size=14)) +
+        scale_colour_manual(name="Constraint line", 
+                            values = c("C350" = "darkblue", "C700" = cbbPalette[3], "VL" = "red",
+                                       "L" = "orange", "M" = "purple")) +
+        scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
+                                                      "D" = "orange", "E" = "red")) 
 
 
 ```
@@ -93,22 +115,8 @@ Now, I am plotting QE framework for each individual model assumption.
 
 Analytical run 2 plot, that is, baseline model with fixed wood NC ratio, is shown below:
 ```{r, echo=FALSE, fig.width = 5, fig.align="center"}
-# plotting
-#plot(cdf1.r2$nc, cdf1.r2$NPP_photo, xlim=c(0.001, 0.05),
-#     ylim=c(0.5, 3), 
-#     type = "l", xlab = "Shoot N:C ratio", 
-#     ylab = expression(paste("Production [kg C ", m^-2, " ", yr^-1, "]")),
-#     col="cyan", lwd = 3, cex.lab=1.5)
-#points(cdf1.r2$nc, cdf1.r2$NPP_VL, type="l", col="tomato", lwd = 3)
-#points(edf1.r2$nc_VL, edf1.r2$NPP_VL, type="p", pch = 19, col = "blue", cex = 2)
-#points(cdf1.r2$nc, cdf1.r2$NPP_L, type='l',col="violet", lwd = 3)
-#points(cdf1.r2$nc, cdf1.r2$NPP_M, type="l", col="darkred", lwd = 3)
-#
-#points(cdf2.r2$nc, cdf2.r2$NPP_photo, col="green", type="l", lwd = 3)
-#points(edf2.r2$nc_VL, edf2.r2$NPP_VL, type="p", col="orange", pch = 19, cex = 2)
-#points(edf2.r2$nc_L,edf2.r2$NPP_L,type="p", col="red", pch = 19, cex = 2)
-#points(edf2.r2$equilnf, edf2.r2$NPP_M, type="p", col="purple", pch = 19, cex = 2)
-#
+
+
 ```
 
 
