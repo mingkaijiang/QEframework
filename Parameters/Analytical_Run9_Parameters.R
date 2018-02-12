@@ -49,3 +49,10 @@ ncs <- 0.01
 # C cost of N upatake specific parameters
 sd <- 1      # soil water depth, unit: m
 et <- 0.0016 / 24 / 3600
+kr <- 0.01    # unit kg C m-2
+kn2 <- 1     # kg C m-2
+kc2 <- 1     # kg C m-2
+a1 <- -3.62
+b1 <- 0.27
+c1 <- 25.15
+s1 <- -6.25
