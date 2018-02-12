@@ -58,24 +58,19 @@ Now, I am plotting QE framework for each individual model assumption.
 
 #### Run 1: Baseline N model with variable wood NC ratio
 ``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE}
-    # split data list into data frames
+    ### split the data.list into two data frames
     cdf.r1 <- r1$cDF
-    cdf.r2 <- r2$cDF
     edf.r1 <- r1$eDF
-    edf.r2 <- r2$eDF
-    
+
+    ### extract CO2 conc. from constraint DF
     cdf1.r1 <- cdf.r1[cdf.r1$CO2 == 350, ]
     cdf2.r1 <- cdf.r1[cdf.r1$CO2 == 700, ]
-    cdf1.r2 <- cdf.r2[cdf.r2$CO2 == 350, ]
-    cdf2.r2 <- cdf.r2[cdf.r2$CO2 == 700, ]
-    
+
+    ### extract CO2 conc. from eq DF
     edf1.r1 <- edf.r1[edf.r1$CO2 == 350, ]
     edf2.r1 <- edf.r1[edf.r1$CO2 == 700, ]
-    edf1.r2 <- edf.r2[edf.r2$CO2 == 350, ]
-    edf2.r2 <- edf.r2[edf.r2$CO2 == 700, ]
 
-    
-    ### plot run 1
+    ### plot
     ggplot() + 
         geom_line(data=cdf1.r1, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
         geom_line(data=cdf1.r1, aes(x=nc, y=NPP_VL, col="VL"), size=0.5, linetype="dotted") + 
@@ -111,14 +106,107 @@ Now, I am plotting QE framework for each individual model assumption.
 
 ```
 
+Here, the QE framework indicates that, the VL and L line constraints are very much similar. 
 
+<br/>
+<br/>
 
-Analytical run 2 plot, that is, baseline model with fixed wood NC ratio, is shown below:
-```{r, echo=FALSE, fig.width = 5, fig.align="center"}
+#### Run 2: Baseline N model with fixed wood NC ratio
+```{r, echo=FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE}
 
+    ### split the data.list into two data frames
+    cdf.r2 <- r2$cDF
+    edf.r2 <- r2$eDF
+
+    ### extract CO2 conc. from constraint DF
+    cdf1.r2 <- cdf.r2[cdf.r2$CO2 == 350, ]
+    cdf2.r2 <- cdf.r2[cdf.r2$CO2 == 700, ]
+    
+    ### extract CO2 conc. from eq DF
+    edf1.r2 <- edf.r2[edf.r2$CO2 == 350, ]
+    edf2.r2 <- edf.r2[edf.r2$CO2 == 700, ]
+    
+    ### plot
+    ggplot() + 
+        geom_line(data=cdf1.r2, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
+        geom_line(data=cdf1.r2, aes(x=nc, y=NPP_VL, col="VL"), size=0.5, linetype="dotted") + 
+        geom_line(data=cdf1.r2, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
+        geom_line(data=cdf1.r2, aes(x=nc, y=NPP_M, col="M"), size=0.5, linetype="dotted") +            
+        geom_line(data=cdf2.r2, aes(x=nc, y=NPP_photo, col="C700"), size=0.5, linetype="dotted") +     
+        geom_point(data=edf1.r2, aes(x=nc_VL, y=NPP_VL, fill="A"), 
+                color="black", shape=21, size=3) + 
+        geom_point(data=edf2.r2, aes(x=nc_L, y=NPP_L, fill="D"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf2.r2, aes(x=nc_M, y=NPP_M, fill="C"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf2.r2, aes(x=nc_VL, y=NPP_VL, fill="E"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf1.r2, aes(x=nc_VL, y=NPP_I, fill="B"), 
+                   shape=21, color="black", size=3) +
+        ylim(1.0, 2.0) + 
+        xlim(0.001, 0.03) +
+        labs(x="Shoot N:C Ratio", 
+             y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
+        theme_linedraw() +
+        theme(panel.grid.minor=element_blank(),
+              axis.text=element_text(size=12),
+              axis.title=element_text(size=14),
+              legend.text=element_text(size=12),
+              legend.title=element_text(size=14)) +
+        scale_colour_manual(name="Constraint line", 
+                            values = c("C350" = "darkblue", "C700" = cbbPalette[3], "VL" = "red",
+                                       "L" = "orange", "M" = "purple")) +
+        scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
+                                                      "D" = "orange", "E" = "red")) 
 
 ```
 
+Comparing variable (Run 1) and fixed (Run 2) wood NC ratio treatment, two key features emerge:
+
+        - 1. The equilibrium points shift towards lower N:C ratio and NPP regions under fixed wood NC assumption.
+        - 2. VL and L line are more separable under fixed wood NC assumption.
+        
+<br/>
+<br/>  
+
+#### Run 3: 
+
+<br/>
+<br/>
+
+#### Run 4: 
+
+
+<br/>
+<br/>
+
+#### Run 5: 
+
+
+<br/>
+<br/>
+
+#### Run 6: 
+
+
+<br/>
+<br/>
+
+#### Run 7: 
+
+
+
+<br/>
+<br/>
+
+#### Run 8: 
+
+
+
+<br/>
+<br/>
+<br/>
+<br/>
 
 
 ##The End. 
