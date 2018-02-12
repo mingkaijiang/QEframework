@@ -488,6 +488,7 @@ There is no VL constraint curve because NPP cancels out for all possible leaf NC
 
 ```
 
+Here we see that priming is not really doing a lot. The treatment for priming effect is that, we have certain C allocated to root exudated and help decomposition of slow SOM, hence more N is recycled back at the M term. 
 
 <br/>
 <br/>
@@ -542,6 +543,31 @@ There is no VL constraint curve because NPP cancels out for all possible leaf NC
 
 ```
 
+Under variable wood NC assumption, we see that the M, L and VL line overlap with each other. This means that, the slow pool decomposion is hugely stimulated by root exudates, making this as large a pool as the passive N release pool. Previously (under variable wood NC but without priming effect) the combination of slow SOM and wood pools should be very small, because little N is stored in wood pool and the decomposition of slow SOM is not as fast as the decomposition of slow SOM stimualted by root exudates. 
+
+``` {r, echo=FALSE}
+    ### compute % change in NC and NPP under eCO2 condition
+    chang7 <- (edf2.r7[,2:8] - edf1.r7[,2:8]) / edf1.r7[,2:8] * 100
+    chang7$NPP_I <- (edf1.r7[,"NPP_I"] - edf1.r7[,"NPP_VL"]) / edf1.r7[,"NPP_VL"] * 100
+
+    chang8 <- (edf2.r8[,2:8] - edf1.r8[,2:8]) / edf1.r8[,2:8] * 100
+    chang8$NPP_I <- (edf1.r8[,"NPP_I"] - edf1.r8[,"NPP_VL"]) / edf1.r8[,"NPP_VL"] * 100
+    
+    ### organize the df for output
+    changeDF <- round(rbind(chang2, chang1, chang7, chang8),1)
+    changeDF[1,"Run"] <- "Baseline, fixed NC" 
+    changeDF[2,"Run"] <- "Baseline, variable NC" 
+    changeDF[3,"Run"] <- "Priming, fixed NC" 
+    changeDF[4,"Run"] <- "Priming, variable NC" 
+    changeDF <- changeDF[,c("Run", "NPP_I", "NPP_M", "NPP_L", "NPP_VL", 
+                            "nc_M", "nc_L", "nc_VL")]
+    
+    ### table output
+    kable(changeDF, row.names=F, format = "markdown")
+
+```
+
+Comparing the CO2 effect across models (baseline vs. priming effect), we see that priming effect only stimulated little extra M term NPP under eCO2 as compared to the baseline model, under fixed wood NC assumption. However, the fixed model comparison tells a completely different story. M term response hugely differ, with priming stimulated an almost double M-term NPP response to eCO2 as compared to the baseline model. 
 
 <br/>
 <br/>
