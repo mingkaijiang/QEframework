@@ -571,8 +571,34 @@ Comparing the CO2 effect across models (baseline vs. priming effect), we see tha
 
 <br/>
 <br/>
+
+#### C cost of N uptake - CLM approach
+This treatment is based on Fisher et al. (2010) and Shi et al. (2015).
+
+There are 4 pathways through which N is absorbed:
+
+    - Diffusion - as part of advection
+    - Retranslocation
+    - Active uptake
+    - BNF
+
+Retranslocation or resorption requires C to synthesize the enzymes and regulatory elements that degrade and remobilize leaf nutrients, and to drive the translocation stream in which the nutrients are suspended. 
+
+Active uptake is an ion-specific enzyme-catalyzed process analogous to Michaelis-Menten kinetics. Energy demand for ion uptake can consume a substantial amount of total respiratory C to move N against concentration gradients. 
+
+BNF is performed by bacteria living in symbiosis within root modules on certain types of plants. 
+
+## To-do list:
+Below is a continuous update of the to-do list of this project:
+
+    - Check parameter sensitivity for priming effect.
+    - Consider different n uptake rate and graphically demonstrate its effect
+    - Add equations for GDAY and O-CN representation of N uptake as function of mineral N and root biomass
+    - Add graphic introduction (i.e. a previous QE framework figure)
+    - Summary table comparing all model assumptions and their CO2 effect (% change)
+
 <br/>
 <br/>
-
-
+<br/>
+<br/>
 ##The End. 

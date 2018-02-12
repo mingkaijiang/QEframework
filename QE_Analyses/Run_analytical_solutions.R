@@ -11,8 +11,8 @@
 #### Run 6: O-CN plant mineral N uptake function, variable wood NC
 #### Run 7: Priming effect (i.e. exudation and faster turnover of slow SOM pool, fixed wood)
 #### Run 8: Priming effect (i.e. exudation and faster turnover of slow SOM pool, variable wood)
-#### Run 9: 
-#### Run 10: CLM treatments
+#### Run 9: C cost of plant N uptake - CLM, variable wood
+#### Run 10: 
 
 
 ################################################################################
