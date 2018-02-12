@@ -84,6 +84,9 @@ Perform_Analytical_Run6 <- function(f.flag = 1) {
     ### photo constraint
     P700 <- photo_constraint_full(nf=nfseq, nfdf=a_nf, CO2=CO2_2)
     
+    ### VL under eCO2
+    VL_eq <- VL_constraint_root_ocn(CO2_2)
+    
     ### Find long term equilibrium point
     L_eq <- solve_L_full_root_ocn(CO2=CO2_2, C_pass=C_pass_VL, Nin_L = Nin)
     

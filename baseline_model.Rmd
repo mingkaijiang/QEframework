@@ -36,11 +36,9 @@ Next, we run analytical run scripts to generate the pdf files and store the rest
 
 
 ``` {r, echo=FALSE, message = FALSE, warning=FALSE}
-    # graphic settings
-    # par(mar=c(6.1,8.1,2.1,2.1), oma=c(2,6,2,2))
-
     # library
     require(ggplot2)
+    require(knitr)
 
     # two nice color palette for color blind
     # The palette with grey:
@@ -165,42 +163,384 @@ Comparing variable (Run 1) and fixed (Run 2) wood NC ratio treatment, two key fe
 
         - 1. The equilibrium points shift towards lower N:C ratio and NPP regions under fixed wood NC assumption.
         - 2. VL and L line are more separable under fixed wood NC assumption.
-        
+
+Variable wood stoichiometry means that there's less nutrient stored in the wood storage pool, hence more N is recycling at fast timescale for higher NPP production at higher N:C ratio (higher N:C means C is assimilated at higher N availability). 
+
+Percent change in shoot N:C ratio and NPP at I, M, L and VL timepoints are summarized below:
+
+``` {r, echo=FALSE}
+    ### compute % change in NC and NPP under eCO2 condition
+    chang1 <- (edf2.r1[,2:8] - edf1.r1[,2:8]) / edf1.r1[,2:8] * 100
+    chang1$NPP_I <- (edf1.r1[,"NPP_I"] - edf1.r1[,"NPP_VL"]) / edf1.r1[,"NPP_VL"] * 100
+
+    chang2 <- (edf2.r2[,2:8] - edf1.r2[,2:8]) / edf1.r2[,2:8] * 100
+    chang2$NPP_I <- (edf1.r2[,"NPP_I"] - edf1.r2[,"NPP_VL"]) / edf1.r2[,"NPP_VL"] * 100
+    
+    ### organize the df for output
+    changeDF <- round(rbind(chang1, chang2),1)
+    changeDF[1,"Run"] <- "variable NC" 
+    changeDF[2,"Run"] <- "fixed NC" 
+    changeDF <- changeDF[,c("Run", "NPP_I", "NPP_M", "NPP_L", "NPP_VL", 
+                            "nc_M", "nc_L", "nc_VL")]
+    
+    ### table output
+    kable(changeDF, row.names=F, format = "markdown")
+
+```
+
+Comparing variable to fixed wood stoichiometric treatment, we have less CO2 fertilization effect at the I term but more CO2 fertilization effect at M, L and VL terms. NC ratios for M, L and VL terms decreased more under fixed than variable wood NC assumption. 
+
+Under fixed wood NC scenario, more N is stored in woody pool at the M term, leaving less N available for M-term NPP, thus the significant less M term CO2 fertilization effect. 
+
 <br/>
 <br/>  
 
-#### Run 3: 
+#### Run 3: Explicit mineral N pool, variable wood NC ratio
+``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE}
+    ### split the data.list into two data frames
+    cdf.r3 <- r3$cDF
+    edf.r3 <- r3$eDF
+
+    ### extract CO2 conc. from constraint DF
+    cdf1.r3 <- cdf.r3[cdf.r3$CO2 == 350, ]
+    cdf2.r3 <- cdf.r3[cdf.r3$CO2 == 700, ]
+
+    ### extract CO2 conc. from eq DF
+    edf1.r3 <- edf.r3[edf.r3$CO2 == 350, ]
+    edf2.r3 <- edf.r3[edf.r3$CO2 == 700, ]
+
+    ### plot
+    ggplot() + 
+        geom_line(data=cdf1.r3, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
+        geom_line(data=cdf1.r3, aes(x=nc, y=NPP_VL, col="VL"), size=0.5, linetype="dotted") + 
+        geom_line(data=cdf1.r3, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
+        geom_line(data=cdf1.r3, aes(x=nc, y=NPP_M, col="M"), size=0.5, linetype="dotted") +            
+        geom_line(data=cdf2.r3, aes(x=nc, y=NPP_photo, col="C700"), size=0.5, linetype="dotted") +     
+        geom_point(data=edf1.r3, aes(x=nc_VL, y=NPP_VL, fill="A"), 
+                color="black", shape=21, size=3) + 
+        geom_point(data=edf2.r3, aes(x=nc_L, y=NPP_L, fill="D"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf2.r3, aes(x=nc_M, y=NPP_M, fill="C"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf2.r3, aes(x=nc_VL, y=NPP_VL, fill="E"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf1.r3, aes(x=nc_VL, y=NPP_I, fill="B"), 
+                   shape=21, color="black", size=3) +
+        ylim(1.0, 2.0) + 
+        xlim(0.001, 0.03) +
+        labs(x="Shoot N:C Ratio", 
+             y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
+        theme_linedraw() +
+        theme(panel.grid.minor=element_blank(),
+              axis.text=element_text(size=12),
+              axis.title=element_text(size=14),
+              legend.text=element_text(size=12),
+              legend.title=element_text(size=14)) +
+        scale_colour_manual(name="Constraint line", 
+                            values = c("C350" = "darkblue", "C700" = cbbPalette[3], "VL" = "red",
+                                       "L" = "orange", "M" = "purple")) +
+        scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
+                                                      "D" = "orange", "E" = "red")) 
+
+
+```
+
+Given that N uptake rate is assumed to be 1, here this QE framework should be exactly the same as the Run 1 simulation (or at least be visually the same). Visually, there is minor difference comparing this graph to Run 1 graph, but I think this small difference can be neglected. 
 
 <br/>
 <br/>
 
-#### Run 4: 
+#### Run 4: Explicit mineral N pool, fixed wood NC ratio
+``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE}
+    ### split the data.list into two data frames
+    cdf.r4 <- r4$cDF
+    edf.r4 <- r4$eDF
+
+    ### extract CO2 conc. from constraint DF
+    cdf1.r4 <- cdf.r4[cdf.r4$CO2 == 350, ]
+    cdf2.r4 <- cdf.r4[cdf.r4$CO2 == 700, ]
+
+    ### extract CO2 conc. from eq DF
+    edf1.r4 <- edf.r4[edf.r4$CO2 == 350, ]
+    edf2.r4 <- edf.r4[edf.r4$CO2 == 700, ]
+
+    ### plot
+    ggplot() + 
+        geom_line(data=cdf1.r4, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
+        geom_line(data=cdf1.r4, aes(x=nc, y=NPP_VL, col="VL"), size=0.5, linetype="dotted") + 
+        geom_line(data=cdf1.r4, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
+        geom_line(data=cdf1.r4, aes(x=nc, y=NPP_M, col="M"), size=0.5, linetype="dotted") +            
+        geom_line(data=cdf2.r4, aes(x=nc, y=NPP_photo, col="C700"), size=0.5, linetype="dotted") +     
+        geom_point(data=edf1.r4, aes(x=nc_VL, y=NPP_VL, fill="A"), 
+                color="black", shape=21, size=3) + 
+        geom_point(data=edf2.r4, aes(x=nc_L, y=NPP_L, fill="D"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf2.r4, aes(x=nc_M, y=NPP_M, fill="C"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf2.r4, aes(x=nc_VL, y=NPP_VL, fill="E"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf1.r4, aes(x=nc_VL, y=NPP_I, fill="B"), 
+                   shape=21, color="black", size=3) +
+        ylim(1.0, 2.0) + 
+        xlim(0.001, 0.03) +
+        labs(x="Shoot N:C Ratio", 
+             y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
+        theme_linedraw() +
+        theme(panel.grid.minor=element_blank(),
+              axis.text=element_text(size=12),
+              axis.title=element_text(size=14),
+              legend.text=element_text(size=12),
+              legend.title=element_text(size=14)) +
+        scale_colour_manual(name="Constraint line", 
+                            values = c("C350" = "darkblue", "C700" = cbbPalette[3], "VL" = "red",
+                                       "L" = "orange", "M" = "purple")) +
+        scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
+                                                      "D" = "orange", "E" = "red")) 
+
+
+```
+
+Given that N uptake rate is assumed to be 1, here this QE framework should be exactly the same as the Run 2 simulation (or at least be visually the same).
+
+Here (run 3 and 4), minral N pool is made explicit. By modifying mineral N uptake rate, we should be able to see different QE points as the uptake of N will change. 
+
+<br/>
+<br/>
+
+#### Run 5: N uptake as a saturating function of root biomass, variable wood NC (GDAY approach)
+``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE}
+    ### split the data.list into two data frames
+    cdf.r5 <- r5$cDF
+    edf.r5 <- r5$eDF
+
+    ### extract CO2 conc. from constraint DF
+    cdf1.r5 <- cdf.r5[cdf.r5$CO2 == 350, ]
+    cdf2.r5 <- cdf.r5[cdf.r5$CO2 == 700, ]
+
+    ### extract CO2 conc. from eq DF
+    edf1.r5 <- edf.r5[edf.r5$CO2 == 350, ]
+    edf2.r5 <- edf.r5[edf.r5$CO2 == 700, ]
+
+    ### plot
+    ggplot() + 
+        geom_line(data=cdf1.r5, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
+        geom_line(data=cdf1.r5, aes(x=nc, y=NPP_VL, col="VL"), size=0.5, linetype="dotted") + 
+        geom_line(data=cdf1.r5, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
+        geom_line(data=cdf1.r5, aes(x=nc, y=NPP_M, col="M"), size=0.5, linetype="dotted") +            
+        geom_line(data=cdf2.r5, aes(x=nc, y=NPP_photo, col="C700"), size=0.5, linetype="dotted") +     
+        geom_point(data=edf1.r5, aes(x=nc_VL, y=NPP_VL, fill="A"), 
+                color="black", shape=21, size=3) + 
+        geom_point(data=edf2.r5, aes(x=nc_L, y=NPP_L, fill="D"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf2.r5, aes(x=nc_M, y=NPP_M, fill="C"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf2.r5, aes(x=nc_VL, y=NPP_VL, fill="E"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf1.r5, aes(x=nc_VL, y=NPP_I, fill="B"), 
+                   shape=21, color="black", size=3) +
+        ylim(1.0, 2.2) + 
+        xlim(0.001, 0.03) +
+        labs(x="Shoot N:C Ratio", 
+             y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
+        theme_linedraw() +
+        theme(panel.grid.minor=element_blank(),
+              axis.text=element_text(size=12),
+              axis.title=element_text(size=14),
+              legend.text=element_text(size=12),
+              legend.title=element_text(size=14)) +
+        scale_colour_manual(name="Constraint line", 
+                            values = c("C350" = "darkblue", "C700" = cbbPalette[3], "VL" = "red",
+                                       "L" = "orange", "M" = "purple")) +
+        scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
+                                                      "D" = "orange", "E" = "red")) 
+
+
+```
+
+Here, uptake rate of N is represented mathematically as a saturating function of root biomass and linearly depend upon mineral N pool. We also assumed variable wood NC ratio to make it comparable to Run 1. 
+
+<br/>
+<br/>
+
+#### Run 6: N uptake as a saturating function of mineral N, variable wood NC ratio (O-CN approach)
+``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE}
+    ### split the data.list into two data frames
+    cdf.r6 <- r6$cDF
+    edf.r6 <- r6$eDF
+
+    ### extract CO2 conc. from constraint DF
+    cdf1.r6 <- cdf.r6[cdf.r6$CO2 == 350, ]
+    cdf2.r6 <- cdf.r6[cdf.r6$CO2 == 700, ]
+
+    ### extract CO2 conc. from eq DF
+    edf1.r6 <- edf.r6[edf.r6$CO2 == 350, ]
+    edf2.r6 <- edf.r6[edf.r6$CO2 == 700, ]
+
+    ### plot
+    ggplot() + 
+        geom_line(data=cdf1.r6, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
+        geom_line(data=cdf1.r6, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
+        geom_line(data=cdf1.r6, aes(x=nc, y=NPP_M, col="M"), size=0.5, linetype="dotted") +            
+        geom_line(data=cdf2.r6, aes(x=nc, y=NPP_photo, col="C700"), size=0.5, linetype="dotted") +     
+        geom_point(data=edf1.r6, aes(x=nc_VL, y=NPP_VL, fill="A"), 
+                   color="black", shape=21, size=3) + 
+        geom_point(data=edf2.r6, aes(x=nc_L, y=NPP_L, fill="D"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf2.r6, aes(x=nc_M, y=NPP_M, fill="C"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf2.r6, aes(x=nc_VL, y=NPP_VL, fill="E"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf1.r6, aes(x=nc_VL, y=NPP_I, fill="B"), 
+                   shape=21, color="black", size=1) +
+        ylim(1.0, 2.2) + 
+        xlim(0.001, 0.03) +
+        labs(x="Shoot N:C Ratio", 
+             y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
+        theme_linedraw() +
+        theme(panel.grid.minor=element_blank(),
+              axis.text=element_text(size=12),
+              axis.title=element_text(size=14),
+              legend.text=element_text(size=12),
+              legend.title=element_text(size=14)) +
+        scale_colour_manual(name="Constraint line", 
+                            values = c("C350" = "darkblue", "C700" = cbbPalette[3], 
+                                       "L" = "orange", "M" = "purple")) +
+        scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
+                                                      "D" = "orange", "E" = "red")) 
+
+
+```
+
+Here, mineral N uptake rate is a saturating function of mineral N pool and also linearly depend upon root biomass. The mathematical formular is similar to those represented in O-CN model.
+
+There is no VL constraint curve because NPP cancels out for all possible leaf NC values (not shown here but it's in the equation). This means that, the VL-term CO2 fertilization effect is the same as the initial response, which means it is a full CO2 fertilization response. Over shorter timescales, we the NPP responses are similar, as the table below demonstrated. 
+
+``` {r, echo=FALSE}
+    ### compute % change in NC and NPP under eCO2 condition
+    chang5 <- (edf2.r5[,2:8] - edf1.r5[,2:8]) / edf1.r5[,2:8] * 100
+    chang5$NPP_I <- (edf1.r5[,"NPP_I"] - edf1.r5[,"NPP_VL"]) / edf1.r5[,"NPP_VL"] * 100
+
+    chang6 <- (edf2.r6[,2:8] - edf1.r6[,2:8]) / edf1.r6[,2:8] * 100
+    chang6$NPP_I <- (edf1.r6[,"NPP_I"] - edf1.r6[,"NPP_VL"]) / edf1.r6[,"NPP_VL"] * 100
+    
+    ### organize the df for output
+    changeDF <- round(rbind(chang5, chang6),1)
+    changeDF[1,"Run"] <- "GDAY" 
+    changeDF[2,"Run"] <- "OCN" 
+    changeDF <- changeDF[,c("Run", "NPP_I", "NPP_M", "NPP_L", "NPP_VL", 
+                            "nc_M", "nc_L", "nc_VL")]
+    
+    ### table output
+    kable(changeDF, row.names=F, format = "markdown")
+
+```
+
+<br/>
+<br/>
+
+#### Run 7: Priming effect, fixed wood NC ratio
+``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE}
+    ### split the data.list into two data frames
+    cdf.r7 <- r7$cDF
+    edf.r7 <- r7$eDF
+
+    ### extract CO2 conc. from constraint DF
+    cdf1.r7 <- cdf.r7[cdf.r7$CO2 == 350, ]
+    cdf2.r7 <- cdf.r7[cdf.r7$CO2 == 700, ]
+
+    ### extract CO2 conc. from eq DF
+    edf1.r7 <- edf.r7[edf.r7$CO2 == 350, ]
+    edf2.r7 <- edf.r7[edf.r7$CO2 == 700, ]
+
+    ### plot
+    ggplot() + 
+        geom_line(data=cdf1.r7, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
+        geom_line(data=cdf1.r7, aes(x=nc, y=NPP_VL, col="VL"), size=0.5, linetype="dotted") + 
+        geom_line(data=cdf1.r7, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
+        geom_line(data=cdf1.r7, aes(x=nc, y=NPP_M, col="M"), size=0.5, linetype="dotted") +            
+        geom_line(data=cdf2.r7, aes(x=nc, y=NPP_photo, col="C700"), size=0.5, linetype="dotted") +     
+        geom_point(data=edf1.r7, aes(x=nc_VL, y=NPP_VL, fill="A"), 
+                color="black", shape=21, size=3) + 
+        geom_point(data=edf2.r7, aes(x=nc_L, y=NPP_L, fill="D"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf2.r7, aes(x=nc_M, y=NPP_M, fill="C"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf2.r7, aes(x=nc_VL, y=NPP_VL, fill="E"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf1.r7, aes(x=nc_VL, y=NPP_I, fill="B"), 
+                   shape=21, color="black", size=3) +
+        ylim(1.0, 2.0) + 
+        xlim(0.001, 0.03) +
+        labs(x="Shoot N:C Ratio", 
+             y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
+        theme_linedraw() +
+        theme(panel.grid.minor=element_blank(),
+              axis.text=element_text(size=12),
+              axis.title=element_text(size=14),
+              legend.text=element_text(size=12),
+              legend.title=element_text(size=14)) +
+        scale_colour_manual(name="Constraint line", 
+                            values = c("C350" = "darkblue", "C700" = cbbPalette[3], "VL" = "red",
+                                       "L" = "orange", "M" = "purple")) +
+        scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
+                                                      "D" = "orange", "E" = "red")) 
+
+
+```
 
 
 <br/>
 <br/>
 
-#### Run 5: 
+#### Run 8: Priming effect, variable wood NC ratio
+``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE}
+    ### split the data.list into two data frames
+    cdf.r8 <- r8$cDF
+    edf.r8 <- r8$eDF
+
+    ### extract CO2 conc. from constraint DF
+    cdf1.r8 <- cdf.r8[cdf.r8$CO2 == 350, ]
+    cdf2.r8 <- cdf.r8[cdf.r8$CO2 == 700, ]
+
+    ### extract CO2 conc. from eq DF
+    edf1.r8 <- edf.r8[edf.r8$CO2 == 350, ]
+    edf2.r8 <- edf.r8[edf.r8$CO2 == 700, ]
+
+    ### plot
+    ggplot() + 
+        geom_line(data=cdf1.r8, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
+        geom_line(data=cdf1.r8, aes(x=nc, y=NPP_VL, col="VL"), size=0.5, linetype="dotted") + 
+        geom_line(data=cdf1.r8, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
+        geom_line(data=cdf1.r8, aes(x=nc, y=NPP_M, col="M"), size=0.5, linetype="dotted") +            
+        geom_line(data=cdf2.r8, aes(x=nc, y=NPP_photo, col="C700"), size=0.5, linetype="dotted") +     
+        geom_point(data=edf1.r8, aes(x=nc_VL, y=NPP_VL, fill="A"), 
+                color="black", shape=21, size=3) + 
+        geom_point(data=edf2.r8, aes(x=nc_L, y=NPP_L, fill="D"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf2.r8, aes(x=nc_M, y=NPP_M, fill="C"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf2.r8, aes(x=nc_VL, y=NPP_VL, fill="E"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf1.r8, aes(x=nc_VL, y=NPP_I, fill="B"), 
+                   shape=21, color="black", size=3) +
+        ylim(1.0, 2.0) + 
+        xlim(0.001, 0.03) +
+        labs(x="Shoot N:C Ratio", 
+             y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
+        theme_linedraw() +
+        theme(panel.grid.minor=element_blank(),
+              axis.text=element_text(size=12),
+              axis.title=element_text(size=14),
+              legend.text=element_text(size=12),
+              legend.title=element_text(size=14)) +
+        scale_colour_manual(name="Constraint line", 
+                            values = c("C350" = "darkblue", "C700" = cbbPalette[3], "VL" = "red",
+                                       "L" = "orange", "M" = "purple")) +
+        scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
+                                                      "D" = "orange", "E" = "red")) 
 
 
-<br/>
-<br/>
-
-#### Run 6: 
-
-
-<br/>
-<br/>
-
-#### Run 7: 
-
-
-
-<br/>
-<br/>
-
-#### Run 8: 
-
+```
 
 
 <br/>
