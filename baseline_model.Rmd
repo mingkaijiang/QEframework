@@ -17,6 +17,8 @@ The baseline model in this study compares the effect of wood NC stoichiometric f
 
 Here we are evaluating the alternative assumption for wood stoichiometric flexiblity on plant's CO2 response. Time is also a factor considered here, with VL (very-long), L (long), and M (medium) terms considered as the final model equilibrium point, passive SOM pool equilibrated, passive and slow SOM pools equilibrated, respectively. 
 
+![GDAY model framework](Model_Framework.png)
+
 
 ## Procedures
 

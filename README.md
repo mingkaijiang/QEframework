@@ -18,6 +18,9 @@
 <br/> The **Plots** folder stores all the output figures. 
 <br/> The **Tables** folder stores all the output tables. 
 <br/> The **R_Markdown** folder stores all the R markdown script. 
+
+# Model framework
+![GDAY model framework](Model_Framework.png)
     
 # Key literatures:
     
