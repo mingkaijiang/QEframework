@@ -26,7 +26,7 @@ L_constraint_root_clm <- function(df, a, C_pass, Nin_L) {
                                 a$nr) / (umax * (a$ar/sr) * scalar_temp * scalar_n
                                          - (a$af * a$nf + a$aw * a$nw + a$ar * a$nr))
     
-    #browser()
+    browser()
     
     # will be in g C m-2 yr-1
     NPP_NC <- (U0 - nleach) / (nburial) 
