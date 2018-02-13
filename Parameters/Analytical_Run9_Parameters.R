@@ -46,5 +46,10 @@ aroot <- 0.2
 aleaf <- 0.2
 ncs <- 0.01   
 
-# CLM baseline model
-nup <- 1
+# CLM N uptake model
+umax <- 2.7 * (10^-8) * 3600 * 24 * 365   # g N g C-1 yr-1
+ksmin <- 1.0     # g N m-2
+scalar_temp <- 1.5 ^ ((Tsoil - 25)/10)
+cn.leaf.min <- 10
+cn.leaf.max <- 100
+sr <- 1.5

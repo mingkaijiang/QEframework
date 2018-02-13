@@ -28,10 +28,10 @@ Perform_Analytical_Run9 <- function(f.flag = 1) {
     P350 <- photo_constraint_full(nf=nfseq, nfdf=a_nf, CO2=CO2_1)
 
     ### calculate very long term NC constraint on NPP, respectively
-    VL <- VL_constraint_baseline_CLM(df=nfseq, a=a_nf)
+    VL <- VL_constraint_root_clm(df=nfseq, a=a_nf)
     
     ### finding the equilibrium point between photosynthesis and very long term nutrient constraints
-    VL_eq <- solve_VL_full_baseline_CLM(CO2=CO2_1)
+    VL_eq <- solve_VL_full_root_clm(CO2=CO2_1)
 
     ### calculate nw and nr for VL equilibrated nf value
     a_eq <- alloc(VL_eq$nf)
@@ -46,9 +46,9 @@ Perform_Analytical_Run9 <- function(f.flag = 1) {
     C_pass_VL <- omega_ap*VL_eq$NPP/s_coef$decomp_pass/(1-s_coef$qq_pass)*1000.0
 
     ### Calculate long term nutrient constraint
-    L <- L_constraint_baseline_CLM(df=nfseq, a=a_nf, 
-                                   C_pass=C_pass_VL,
-                                   Nin_L = Nin)
+    L <- L_constraint_root_clm(df=nfseq, a=a_nf, 
+                               C_pass=C_pass_VL,
+                               Nin_L = Nin)
     
     ### Find long term equilibrium point
     L_eq <- solve_L_full_baseline_CLM(CO2=CO2_1, C_pass=C_pass_VL, Nin_L = Nin)

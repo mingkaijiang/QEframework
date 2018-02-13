@@ -15,15 +15,13 @@ VL_constraint_baseline_CLM <- function(df, a) {
     Nmin <- U0 / nleach
     
     # Calculate NPP
-    NPP_NC <- Nmin * nup / (a$nfl*a$af + a$nr*a$ar + a$nw*a$aw)
-    # The above equation is the same as:
-    # NPP_NC <- U0 * nuptakerate / (nleach * (a$nfl*a$af + a$nr*(a$ar) + a$nw*a$aw))
-    
+    NPP_act <- Nmin / soil_n
+ 
     # return in kg C m-2 yr-1
-    NPP_N <- NPP_NC*10^-3     
+    NPP <- NPP_act*10^-3     
     
     # out df
-    df <- data.frame(NPP_N,nleach)
+    df <- data.frame(NPP,nleach)
     colnames(df) <- c("NPP", "nleach")
     
     return(df)   
