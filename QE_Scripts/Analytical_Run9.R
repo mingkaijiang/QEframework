@@ -19,7 +19,7 @@ Perform_Analytical_Run9 <- function(f.flag = 1) {
     source("Parameters/Analytical_Run9_Parameters.R")
     
     ### create a range of nc for shoot to initiate
-    nfseq <- round(seq(0.001, 0.1, by = 0.001),5)
+    nfseq <- round(seq(0.001, 0.05, by = 0.001),5)
     
     ### create nc ratio for wood, root, and allocation coefficients
     a_nf <- as.data.frame(alloc(nfseq))
@@ -51,7 +51,7 @@ Perform_Analytical_Run9 <- function(f.flag = 1) {
                                Nin_L = Nin)
     
     ### Find long term equilibrium point
-    L_eq <- solve_L_full_baseline_CLM(CO2=CO2_1, C_pass=C_pass_VL, Nin_L = Nin)
+    L_eq <- solve_L_full_root_clm(CO2=CO2_1, C_pass=C_pass_VL, Nin_L = Nin)
     
     ### Get Cslow from long nutrient cycling solution
     ### return in g C m-2
@@ -62,7 +62,7 @@ Perform_Analytical_Run9 <- function(f.flag = 1) {
     N_wood_L <- a_eq$aw*a_eq$nw*VL_eq$NPP*1000.0
     
     ### Calculate medium term nutrient constraint
-    M <- M_constraint_baseline_CLM(df=nfseq,a=a_nf, 
+    M <- M_constraint_root_clm(df=nfseq,a=a_nf, 
                                   C_pass=C_pass_VL, 
                                   C_slow=C_slow_L, 
                                   Nin_L = Nin+N_wood_L)

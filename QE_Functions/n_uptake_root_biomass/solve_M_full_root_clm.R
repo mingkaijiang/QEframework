@@ -5,7 +5,7 @@ solve_M_full_root_clm <- function(CO2,C_pass,C_slow,Nin_L) {
                               CO2) - M_constraint_root_clm(nf,alloc(nf), C_pass, C_slow, Nin_L)$NPP
         
     }
-    equilnf <- uniroot(fn,interval=c(0.001,0.1))$root
+    equilnf <- uniroot(fn,interval=c(0.001,0.05))$root
     
     equilNPP <- photo_constraint_full(equilnf, 
                                       alloc(equilnf), CO2)

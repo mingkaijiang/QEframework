@@ -3,6 +3,9 @@
 # i.e. N uptake as a saturating function of mineral N
 M_constraint_root_clm <- function(df, a, C_pass, C_slow, Nin_L) {
     
+    # nc scalar
+    scalar_n <- (1/df - cn.leaf.min) / (cn.leaf.max - cn.leaf.min)
+    
     # passive pool burial 
     s_coef <- soil_coef(df, a)
     omega_ap <- a$af*s_coef$omega_af_pass + a$ar*s_coef$omega_ar_pass 
@@ -18,9 +21,10 @@ M_constraint_root_clm <- function(df, a, C_pass, C_slow, Nin_L) {
     nburial <- omega_ap*ncp + omega_as*ncs
  
     # n leach
-    nleach <- leachn * k * (a$af * a$nf + a$aw * a$nw + a$ar * 
-                                a$nr) / (vmax * (a$ar/sr) - (a$af * a$nf + 
-                                                                 a$aw * a$nw + a$ar * a$nr))
+    nleach <- leachn * ksmin * (a$af * a$nf + a$aw * a$nw + a$ar * 
+                                a$nr) / (umax * (a$ar/sr) * scalar_temp * scalar_n - (a$af * a$nf + a$aw * a$nw + a$ar * a$nr))
+    
+    #browser()
     
     # in g C m-2 yr-1
     NPP_NC <- (U0 - nleach) / (nwood + nburial)
