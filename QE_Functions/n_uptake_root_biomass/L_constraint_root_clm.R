@@ -23,16 +23,15 @@ L_constraint_root_clm <- function(df, a, C_pass, Nin_L) {
     U0 <- Nin_L + (1-pass$qq_pass) * pass$decomp_pass * C_pass * ncp   
     nburial <- omega_ap*ncp
     nleach <- leachn * ksmin * (a$af * a$nf + a$aw * a$nw + a$ar * 
-                                a$nr) / (umax * (a$ar/sr) * scalar_temp * scalar_n
-                                         - (a$af * a$nf + a$aw * a$nw + a$ar * a$nr))
-    
-    browser()
+                                a$nr) / (umax * (a$ar/sr) * scalar_temp * scalar_n - (a$af * a$nf + a$aw * a$nw + a$ar * a$nr))
     
     # will be in g C m-2 yr-1
     NPP_NC <- (U0 - nleach) / (nburial) 
     
     # returned in kg C m-2 yr-1
     NPP <- NPP_NC*10^-3 
+    
+    # browser()
     
     out <- data.frame(NPP, nburial, nleach)
     

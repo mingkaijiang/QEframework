@@ -580,6 +580,11 @@ Comparing the CO2 effect across models (baseline vs. priming effect), we see tha
 <br/>
 <br/>
 
+
+### CLM N uptake 
+
+
+
 ### C cost of N uptake - CLM approach
 This treatment is based on Fisher et al. (2010) and Shi et al. (2015).
 

@@ -21,8 +21,11 @@ VL_constraint_root_clm <- function(df, a) {
     arg1 <- (a$ar / sr) * umax
     arg2 <- Nmin / (Nmin + ksmin)
     
-    # total n uptake as g N m-2 yr-1
+    # total n uptake as g N m-2 s-1
     n_uptake <- arg1 * arg2 * scalar_temp * scalar_n
+    
+    # convert from s-1 to yr-1
+    n_uptake <- n_uptake * 3600 * 24 * 365
     
     # NPP as g C m-2 yr-1
     NPP <- n_uptake / (a$nfl*a$af + a$nr*a$ar + a$nw*a$aw)

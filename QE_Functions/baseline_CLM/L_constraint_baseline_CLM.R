@@ -1,5 +1,5 @@
 
-### Function for nutrient N constraint in longterm ie passive, leaching, wood considered
+### Function for nutrient N constraint in longterm ie passive, leaching considered
 L_constraint_baseline_CLM <- function(df, a, C_pass, Nin_L) {
     # passed are df and a, the allocation and plant N:C ratios
     # parameters : 
