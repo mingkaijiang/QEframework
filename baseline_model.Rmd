@@ -2,14 +2,17 @@
 title: "QE framework baseline model"
 author: "Mingkai Jiang"
 date: "Feb 12, 2018"
-output: html_document
+output:
+  html_document:
+    toc: true
+    theme: united
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Introduction
+## 1. Introduction
 
 This R markdown file introduces the Quasi-equilibrium (QE) framework baseline model. The basline QE model is a carbon-nitrogen (C-N) coupled model that is based on the Generic Decomposition And Yield (GDAY) model, originally developed by Comins and McMurtrie (1993).
 
@@ -17,10 +20,16 @@ The baseline model in this study compares the effect of wood NC stoichiometric f
 
 Here we are evaluating the alternative assumption for wood stoichiometric flexiblity on plant's CO2 response. Time is also a factor considered here, with VL (very-long), L (long), and M (medium) terms considered as the final model equilibrium point, passive SOM pool equilibrated, passive and slow SOM pools equilibrated, respectively. 
 
-![GDAY model framework](Model_Framework.png)
 
+# 2. Model structure
 
-## Procedures
+<p align="center">
+<img src="Model_framework.png" width = "400" height = "400">
+</p>
+
+The entire QE framework is built based on the model structure of the Generic Decomposition And Yield (G'DAY) model, as shown in the figure above. 
+
+## 3. Procedures
 
 Below I use step-by-step guidance to generate the results.
 
@@ -56,7 +65,7 @@ Now, I am plotting QE framework for each individual model assumption.
 <br/>
 <br/>
 
-#### Run 1: Baseline N model with variable wood NC ratio
+### Run 1: Baseline N model with variable wood NC ratio
 ``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE}
     ### split the data.list into two data frames
     cdf.r1 <- r1$cDF
@@ -111,7 +120,7 @@ Here, the QE framework indicates that, the VL and L line constraints are very mu
 <br/>
 <br/>
 
-#### Run 2: Baseline N model with fixed wood NC ratio
+### Run 2: Baseline N model with fixed wood NC ratio
 ```{r, echo=FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE}
 
     ### split the data.list into two data frames
@@ -197,7 +206,7 @@ Under fixed wood NC scenario, more N is stored in woody pool at the M term, leav
 <br/>
 <br/>  
 
-#### Run 3: Explicit mineral N pool, variable wood NC ratio
+### Run 3: Explicit mineral N pool, variable wood NC ratio
 ``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE}
     ### split the data.list into two data frames
     cdf.r3 <- r3$cDF
@@ -252,7 +261,7 @@ Given that N uptake rate is assumed to be 1, here this QE framework should be ex
 <br/>
 <br/>
 
-#### Run 4: Explicit mineral N pool, fixed wood NC ratio
+### Run 4: Explicit mineral N pool, fixed wood NC ratio
 ``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE}
     ### split the data.list into two data frames
     cdf.r4 <- r4$cDF
@@ -309,7 +318,7 @@ Here (run 3 and 4), minral N pool is made explicit. By modifying mineral N uptak
 <br/>
 <br/>
 
-#### Run 5: N uptake as a saturating function of root biomass, variable wood NC (GDAY approach)
+### Run 5: N uptake as a saturating function of root biomass, variable wood NC (GDAY approach)
 ``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE}
     ### split the data.list into two data frames
     cdf.r5 <- r5$cDF
@@ -364,7 +373,7 @@ Here, uptake rate of N is represented mathematically as a saturating function of
 <br/>
 <br/>
 
-#### Run 6: N uptake as a saturating function of mineral N, variable wood NC ratio (O-CN approach)
+### Run 6: N uptake as a saturating function of mineral N, variable wood NC ratio (O-CN approach)
 ``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE}
     ### split the data.list into two data frames
     cdf.r6 <- r6$cDF
@@ -440,7 +449,7 @@ There is no VL constraint curve because NPP cancels out for all possible leaf NC
 <br/>
 <br/>
 
-#### Run 7: Priming effect, fixed wood NC ratio
+### Run 7: Priming effect, fixed wood NC ratio
 ``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE}
     ### split the data.list into two data frames
     cdf.r7 <- r7$cDF
@@ -495,7 +504,7 @@ Here we see that priming is not really doing a lot. The treatment for priming ef
 <br/>
 <br/>
 
-#### Run 8: Priming effect, variable wood NC ratio
+### Run 8: Priming effect, variable wood NC ratio
 ``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE}
     ### split the data.list into two data frames
     cdf.r8 <- r8$cDF
@@ -574,7 +583,7 @@ Comparing the CO2 effect across models (baseline vs. priming effect), we see tha
 <br/>
 <br/>
 
-#### C cost of N uptake - CLM approach
+### C cost of N uptake - CLM approach
 This treatment is based on Fisher et al. (2010) and Shi et al. (2015).
 
 There are 4 pathways through which N is absorbed:
@@ -590,7 +599,7 @@ Active uptake is an ion-specific enzyme-catalyzed process analogous to Michaelis
 
 BNF is performed by bacteria living in symbiosis within root modules on certain types of plants. 
 
-## To-do list:
+## 4. To-do list:
 Below is a continuous update of the to-do list of this project:
 
     - Check parameter sensitivity for priming effect.
@@ -601,6 +610,4 @@ Below is a continuous update of the to-do list of this project:
 
 <br/>
 <br/>
-<br/>
-<br/>
-##The End. 
+
