@@ -12,7 +12,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## 1. Introduction
+# 1. Introduction
 
 This R markdown file introduces the Quasi-equilibrium (QE) framework baseline model. The basline QE model is a carbon-nitrogen (C-N) coupled model that is based on the Generic Decomposition And Yield (GDAY) model, originally developed by Comins and McMurtrie (1993).
 
@@ -29,7 +29,7 @@ Here we are evaluating the alternative assumption for wood stoichiometric flexib
 
 The entire QE framework is built based on the model structure of the Generic Decomposition And Yield (G'DAY) model, as shown in the figure above. 
 
-## 3. Procedures
+# 3. Procedures
 
 Below I use step-by-step guidance to generate the results.
 
@@ -61,9 +61,6 @@ Next, we run analytical run scripts to generate the pdf files and store the rest
 ```
 
 Now, I am plotting QE framework for each individual model assumption.
-
-<br/>
-<br/>
 
 ### Run 1: Baseline N model with variable wood NC ratio
 ``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE}
@@ -599,14 +596,22 @@ Active uptake is an ion-specific enzyme-catalyzed process analogous to Michaelis
 
 BNF is performed by bacteria living in symbiosis within root modules on certain types of plants. 
 
+<br/>
+
 ## 4. To-do list:
 Below is a continuous update of the to-do list of this project:
 
+    - Test CLM N uptake function (essentially it's the same as O-CN, with some additional parameters)
+    - Test CLM and Ellsworth representation of photosynthesis
+    - Test CLM representation of C cost of N uptake
     - Check parameter sensitivity for priming effect.
     - Consider different n uptake rate and graphically demonstrate its effect
     - Add equations for GDAY and O-CN representation of N uptake as function of mineral N and root biomass
     - Add graphic introduction (i.e. a previous QE framework figure)
     - Summary table comparing all model assumptions and their CO2 effect (% change)
+    - Equation derivations
+    - Look at relationships beyond NPP and leaf NC
+    - Add GDAY simulations (time series result)
 
 <br/>
 <br/>
