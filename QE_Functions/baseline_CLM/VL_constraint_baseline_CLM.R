@@ -1,23 +1,25 @@
 VL_constraint_baseline_CLM <- function(df,a) {
-    # passed are bf and nf, the allocation and plant N:C ratios
-    # parameters : 
-    # Nin is fixed N inputs (N fixed and deposition) in g m-2 yr-1 (could vary fixation)
-    # leachn is the rate of leaching of the mineral N pool (per year)
-    # nup is the rate of N uptake [yr-1] 
-    # Nmin is the mineral N pool
-    
+    ### parameters:
+    ###            f: fraction of plant enters into soil
+    ###            nsoil: soil NC ratio
+
     # equation for N constraint with just leaching
     U0 <- Nin
     
+    # Calculate Nmin
+    Nmin <- Nin / leachn
+    
     # Calculate NPP
-    nleach <- leachn/(1-leachn) * (a$nfl*a$af + a$nr*a$ar + a$nw*a$aw)
+    NPP_act <- Nmin / ((1-f) * (a$nfl*a$af + a$nr*a$ar + a$nw*a$aw) + nsoil)
  
     # return in kg C m-2 yr-1
-    NPP <- U0 / nleach *10^-3     
+    NPP <- NPP_act *10^-3    
+    
+    browser()
     
     # out df
-    out <- data.frame(NPP,nleach)
-    colnames(out) <- c("NPP", "nleach")
+    out <- data.frame(NPP,Nmin)
+    colnames(out) <- c("NPP", "nmin")
     
     return(out)   
 }
