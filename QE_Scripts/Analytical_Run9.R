@@ -109,6 +109,11 @@ Perform_Analytical_Run9 <- function(f.flag = 1) {
     points(L_act_eq$nf, L_act_eq$NPP, col="purple",pch=19)
     points(M_act_eq$nf, M_act_eq$NPP, col="cyan",pch=19)
     
+    
+    ### Notes: try to write equations based on potential NPP (i.e. N saturated)
+    ### and match with the equations in QE, so that you can understand how to treat
+    ### the np-ns equation (i.e. immobilization) !!!!!
+    
 
     out350DF <- data.frame(CO2_1, nfseq, P350, VL$NPP, 
                            L$NPP, M$NPP)
