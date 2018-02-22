@@ -1,16 +1,6 @@
 
-### Function for nutrient N constraint in medium term 
-# considering explicit mineral N pool
-M_constraint_baseline_CLM <- function(df, a, C_pass, C_slow, Nin_L) {
-    # passed are df and a, the allocation and plant N:C ratios
-    # parameters : 
-    # Nin is fixed N inputs (N deposition annd fixation) in g m-2 yr-1 (could vary fixation)
-    # nleach is the rate of n leaching of the mineral pool (per year)
-    # Tsoil is effective soil temperature for decomposition
-    # Texture is the fine soil fraction
-    # ligfl and ligrl are the lignin:C fractions in the foliage and root litter
-    # Cpass is the passive pool size in g C m-2
-    # ncp is the NC ratio of the passive pool in g N g-1 C
+M_constraint_baseline_CLM_actual <- function(df, a, C_pass, C_slow, Nin_L) {
+ 
     
     # passive pool burial 
     s_coef <- soil_coef(df, a)
@@ -25,20 +15,17 @@ M_constraint_baseline_CLM <- function(df, a, C_pass, C_slow, Nin_L) {
     U0 <- Nin_L + Npass + Nslow   
     nwood <- a$aw*a$nw
     nburial <- omega_ap*ncp + omega_as*ncs
-    nleach <- leachn/(1-leachn) * (a$nfl*a$af + a$nr*(a$ar) + a$nw*a$aw)
+    nplant <- a$nfl*a$af + a$nr*a$ar + a$nw*a$aw
     
     ### return g C m-2 yr-1
-    NPP_NC <- (nup * U0) / ((a$nfl*a$af + a$nr*a$ar + a$nw*a$aw) * leachn + nup * nwood + nup * nburial)
+    NPP_NC <- U0 / (nwood + (1+leachn) * (nplant + nburial * (nsoil - nplant)))
     
     ### return kg C m-2 yr-1
     NPP <- NPP_NC*10^-3 
-    
-    ### leaching
-    nleach <- leachn * (NPP_NC * (a$nfl*a$af + a$nr*a$ar + a$nw*a$aw)) /nup
-    
+  
     ### out df
-    df <- data.frame(NPP, Npass, Nslow, Nin_L-Nin, nwood, nburial, nleach)
-    colnames(df) <- c("NPP", "npass", "nslow", "nwoodrel", "nwood", "nburial", "nleach")
+    out <- data.frame(df, NPP)
+    colnames(out) <- c("nf", "NPP")
     
-    return(df)
+    return(out)
 }

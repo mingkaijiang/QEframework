@@ -1,4 +1,5 @@
-VL_constraint_baseline_CLM <- function(df,a) {
+VL_constraint_baseline_CLM_actual <- function(a) {
+    ### Calculating actual NPP based on nutrient recycling
     ### parameters:
     ###            f: fraction of plant enters into soil
     ###            nsoil: soil NC ratio
@@ -9,17 +10,18 @@ VL_constraint_baseline_CLM <- function(df,a) {
     # Calculate Nmin
     Nmin <- Nin / leachn
     
+    nplant <- a$nfl*a$af + a$nr*a$ar + a$nw*a$aw
+    
     # Calculate NPP
-    NPP_act <- Nmin / ((1-f) * (a$nfl*a$af + a$nr*a$ar + a$nw*a$aw) + nsoil)
- 
+    NPP_act <- Nmin / (nplant + f * (nsoil - nplant))
+    # NPP_act <- Nmin / (f * nsoil)
+    
     # return in kg C m-2 yr-1
     NPP <- NPP_act *10^-3    
     
-    browser()
-    
     # out df
-    out <- data.frame(NPP,Nmin)
-    colnames(out) <- c("NPP", "nmin")
+    out <- data.frame(a$nf, NPP)
+    colnames(out) <- c("nf", "NPP")
     
     return(out)   
 }
