@@ -64,7 +64,7 @@ Perform_Analytical_Run9 <- function(f.flag = 1) {
     
     ### Find actual L term equilibrium point
     L_act_eq <- L_constraint_baseline_CLM_actual(df=L_pot_eq$nf, a=a_pot_eq, 
-                                                 C_pass=C_pass_VL_act,
+                                                 C_pass=C_pass_VL_pot,
                                                  Nin_L = Nin)
     
     ### Get Cslow from long nutrient cycling solution
@@ -94,9 +94,9 @@ Perform_Analytical_Run9 <- function(f.flag = 1) {
     
     ### actual M NPP equilibrium point
     M_act_eq <- M_constraint_baseline_CLM_actual(df=M_pot_eq$nf,a=a_pot_eq, 
-                                                 C_pass=C_pass_VL_act, 
-                                                 C_slow=C_slow_L_act, 
-                                                 Nin_L = Nin+N_wood_L_act)
+                                                 C_pass=C_pass_VL_pot, 
+                                                 C_slow=C_slow_L_pot, 
+                                                 Nin_L = Nin+N_wood_L_pot)
     
     plot(nfseq, P350, ylim=c(0,3), type="l")
     points(nfseq, VL$NPP, col="pink", type="l")
@@ -105,7 +105,7 @@ Perform_Analytical_Run9 <- function(f.flag = 1) {
     points(L_pot_eq$nf, L_pot_eq$NPP, col="yellow")
     points(M_pot_eq$nf, M_pot_eq$NPP, col="black")
     # actual equilibrium points
-    points(VL_pot_eq$nf, VL_act_eq$NPP, col="blue")
+    points(VL_pot_eq$nf, VL_act_eq$NPP, col="blue", pch=19)
     points(L_act_eq$nf, L_act_eq$NPP, col="purple",pch=19)
     points(M_act_eq$nf, M_act_eq$NPP, col="cyan",pch=19)
     
@@ -123,16 +123,16 @@ Perform_Analytical_Run9 <- function(f.flag = 1) {
     P700 <- photo_constraint_full(nf=nfseq, nfdf=a_nf, CO2=CO2_2)
     
     ### VL equilibrated point with eCO2
-    VL_eq <- solve_VL_full_baseline_CLM(CO2=CO2_2)
+    VL_eq <- solve_VL_full(CO2=CO2_2)
     
     ### Find long term equilibrium point
-    L_eq <- solve_L_full_baseline_CLM(CO2=CO2_2, C_pass=C_pass_VL, Nin_L = Nin)
+    L_eq <- solve_L_full(CO2=CO2_2, C_pass=C_pass_VL, Nin_L = Nin)
     
     ### Find medium term equilibrium point
-    M_eq <- solve_M_full_baseline_CLM(CO2=CO2_2, 
-                                      C_pass=C_pass_VL, 
-                                      C_slow=C_slow_L, 
-                                      Nin_L = Nin+N_wood_L)
+    M_eq <- solve_M_full(CO2=CO2_2, 
+                         C_pass=C_pass_VL, 
+                         C_slow=C_slow_L, 
+                         Nin_L = Nin+N_wood_L)
     
     out700DF <- data.frame(CO2_2, nfseq, P700, 
                            VL$NPP, L$NPP, M$NPP)

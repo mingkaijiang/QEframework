@@ -18,7 +18,8 @@ M_constraint_baseline_CLM_actual <- function(df, a, C_pass, C_slow, Nin_L) {
     nplant <- a$nfl*a$af + a$nr*a$ar + a$nw*a$aw
     
     ### return g C m-2 yr-1
-    NPP_NC <- U0 / (nwood + (1+leachn) * (nplant + nburial * (nsoil - nplant)))
+    #NPP_NC <- U0 / (nwood + (1+leachn) * (nplant + (omega_ap + omega_as) * (nburial - nplant)))
+    NPP_NC <- U0 / (nwood + (1+leachn) * (nplant + nburial))
     
     ### return kg C m-2 yr-1
     NPP <- NPP_NC*10^-3 
