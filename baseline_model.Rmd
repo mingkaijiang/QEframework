@@ -57,13 +57,15 @@ Next, we run analytical run scripts to generate the pdf files and store the rest
 
     # The palette with black:
     cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+    
+    save.plot <- T
 
 ```
 
 Now, I am plotting QE framework for each individual model assumption.
 
 ### Run 1: Baseline N model with variable wood NC ratio
-``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE}
+``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE, include=FALSE}
     ### split the data.list into two data frames
     cdf.r1 <- r1$cDF
     edf.r1 <- r1$eDF
@@ -76,7 +78,7 @@ Now, I am plotting QE framework for each individual model assumption.
     edf1.r1 <- edf.r1[edf.r1$CO2 == 350, ]
     edf2.r1 <- edf.r1[edf.r1$CO2 == 700, ]
     ### plot
-    ggplot() + 
+    p<-ggplot() + 
         geom_line(data=cdf1.r1, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
         geom_line(data=cdf1.r1, aes(x=nc, y=NPP_VL, col="VL"), size=0.5, linetype="dotted") + 
         geom_line(data=cdf1.r1, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
@@ -101,13 +103,20 @@ Now, I am plotting QE framework for each individual model assumption.
               axis.text=element_text(size=12),
               axis.title=element_text(size=14),
               legend.text=element_text(size=12),
-              legend.title=element_text(size=14)) +
+              legend.title=element_text(size=14),
+              panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
                             values = c("C350" = "darkblue", "C700" = cbbPalette[3], "VL" = "red",
                                        "L" = "orange", "M" = "purple")) +
         scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
                                                       "D" = "orange", "E" = "red")) 
 
+    plot(p)
+    if (save.plot) {
+        pdf("Plots/Run01.pdf", width=8, height=6)
+        plot(p)
+        dev.off()
+    } 
 ```
 
 Here, the QE framework indicates that, the VL and L line constraints are very much similar. 
@@ -131,7 +140,7 @@ Here, the QE framework indicates that, the VL and L line constraints are very mu
     edf2.r2 <- edf.r2[edf.r2$CO2 == 700, ]
     
     ### plot
-    ggplot() + 
+    p<-ggplot() + 
         geom_line(data=cdf1.r2, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
         geom_line(data=cdf1.r2, aes(x=nc, y=NPP_VL, col="VL"), size=0.5, linetype="dotted") + 
         geom_line(data=cdf1.r2, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
@@ -156,13 +165,19 @@ Here, the QE framework indicates that, the VL and L line constraints are very mu
               axis.text=element_text(size=12),
               axis.title=element_text(size=14),
               legend.text=element_text(size=12),
-              legend.title=element_text(size=14)) +
+              legend.title=element_text(size=14),
+              panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
                             values = c("C350" = "darkblue", "C700" = cbbPalette[3], "VL" = "red",
                                        "L" = "orange", "M" = "purple")) +
         scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
                                                       "D" = "orange", "E" = "red")) 
-
+    plot(p)
+    if (save.plot) {
+        pdf("Plots/Run02.pdf", width=8, height=6)
+        plot(p)
+        dev.off()
+    } 
 ```
 
 Comparing variable (Run 1) and fixed (Run 2) wood NC ratio treatment, two key features emerge:
@@ -216,7 +231,7 @@ Under fixed wood NC scenario, more N is stored in woody pool at the M term, leav
     edf2.r3 <- edf.r3[edf.r3$CO2 == 700, ]
 
     ### plot
-    ggplot() + 
+    p<-ggplot() + 
         geom_line(data=cdf1.r3, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
         geom_line(data=cdf1.r3, aes(x=nc, y=NPP_VL, col="VL"), size=0.5, linetype="dotted") + 
         geom_line(data=cdf1.r3, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
@@ -241,14 +256,20 @@ Under fixed wood NC scenario, more N is stored in woody pool at the M term, leav
               axis.text=element_text(size=12),
               axis.title=element_text(size=14),
               legend.text=element_text(size=12),
-              legend.title=element_text(size=14)) +
+              legend.title=element_text(size=14),
+              panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
                             values = c("C350" = "darkblue", "C700" = cbbPalette[3], "VL" = "red",
                                        "L" = "orange", "M" = "purple")) +
         scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
                                                       "D" = "orange", "E" = "red")) 
 
-
+    plot(p)
+    if (save.plot) {
+        pdf("Plots/Run03.pdf", width=8, height=6)
+        plot(p)
+        dev.off()
+    } 
 ```
 
 Given that N uptake rate is assumed to be 1, here this QE framework should be exactly the same as the Run 1 simulation (or at least be visually the same). Visually, there is minor difference comparing this graph to Run 1 graph, but I think this small difference can be neglected. 
@@ -271,7 +292,7 @@ Given that N uptake rate is assumed to be 1, here this QE framework should be ex
     edf2.r4 <- edf.r4[edf.r4$CO2 == 700, ]
 
     ### plot
-    ggplot() + 
+    p<-ggplot() + 
         geom_line(data=cdf1.r4, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
         geom_line(data=cdf1.r4, aes(x=nc, y=NPP_VL, col="VL"), size=0.5, linetype="dotted") + 
         geom_line(data=cdf1.r4, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
@@ -296,14 +317,20 @@ Given that N uptake rate is assumed to be 1, here this QE framework should be ex
               axis.text=element_text(size=12),
               axis.title=element_text(size=14),
               legend.text=element_text(size=12),
-              legend.title=element_text(size=14)) +
+              legend.title=element_text(size=14),
+              panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
                             values = c("C350" = "darkblue", "C700" = cbbPalette[3], "VL" = "red",
                                        "L" = "orange", "M" = "purple")) +
         scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
                                                       "D" = "orange", "E" = "red")) 
 
-
+    plot(p)
+    if (save.plot) {
+        pdf("Plots/Run04.pdf", width=8, height=6)
+        plot(p)
+        dev.off()
+    } 
 ```
 
 Given that N uptake rate is assumed to be 1, here this QE framework should be exactly the same as the Run 2 simulation (or at least be visually the same).
@@ -328,7 +355,7 @@ Here (run 3 and 4), minral N pool is made explicit. By modifying mineral N uptak
     edf2.r5 <- edf.r5[edf.r5$CO2 == 700, ]
 
     ### plot
-    ggplot() + 
+    p<-ggplot() + 
         geom_line(data=cdf1.r5, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
         geom_line(data=cdf1.r5, aes(x=nc, y=NPP_VL, col="VL"), size=0.5, linetype="dotted") + 
         geom_line(data=cdf1.r5, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
@@ -353,14 +380,20 @@ Here (run 3 and 4), minral N pool is made explicit. By modifying mineral N uptak
               axis.text=element_text(size=12),
               axis.title=element_text(size=14),
               legend.text=element_text(size=12),
-              legend.title=element_text(size=14)) +
+              legend.title=element_text(size=14),
+              panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
                             values = c("C350" = "darkblue", "C700" = cbbPalette[3], "VL" = "red",
                                        "L" = "orange", "M" = "purple")) +
         scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
                                                       "D" = "orange", "E" = "red")) 
 
-
+    plot(p)
+    if (save.plot) {
+        pdf("Plots/Run05.pdf", width=8, height=6)
+        plot(p)
+        dev.off()
+    } 
 ```
 
 Here, uptake rate of N is represented mathematically as a saturating function of root biomass and linearly depend upon mineral N pool. We also assumed variable wood NC ratio to make it comparable to Run 1. 
@@ -383,7 +416,7 @@ Here, uptake rate of N is represented mathematically as a saturating function of
     edf2.r6 <- edf.r6[edf.r6$CO2 == 700, ]
 
     ### plot
-    ggplot() + 
+    p<-ggplot() + 
         geom_line(data=cdf1.r6, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
         geom_line(data=cdf1.r6, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
         geom_line(data=cdf1.r6, aes(x=nc, y=NPP_M, col="M"), size=0.5, linetype="dotted") +            
@@ -407,14 +440,20 @@ Here, uptake rate of N is represented mathematically as a saturating function of
               axis.text=element_text(size=12),
               axis.title=element_text(size=14),
               legend.text=element_text(size=12),
-              legend.title=element_text(size=14)) +
+              legend.title=element_text(size=14),
+              panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
                             values = c("C350" = "darkblue", "C700" = cbbPalette[3], 
                                        "L" = "orange", "M" = "purple")) +
         scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
                                                       "D" = "orange", "E" = "red")) 
 
-
+    plot(p)
+    if (save.plot) {
+        pdf("Plots/Run06.pdf", width=8, height=6)
+        plot(p)
+        dev.off()
+    } 
 ```
 
 Here, mineral N uptake rate is a saturating function of mineral N pool and also linearly depend upon root biomass. The mathematical formular is similar to those represented in O-CN model.
@@ -459,7 +498,7 @@ There is no VL constraint curve because NPP cancels out for all possible leaf NC
     edf2.r7 <- edf.r7[edf.r7$CO2 == 700, ]
 
     ### plot
-    ggplot() + 
+    p<-ggplot() + 
         geom_line(data=cdf1.r7, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
         geom_line(data=cdf1.r7, aes(x=nc, y=NPP_VL, col="VL"), size=0.5, linetype="dotted") + 
         geom_line(data=cdf1.r7, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
@@ -484,13 +523,19 @@ There is no VL constraint curve because NPP cancels out for all possible leaf NC
               axis.text=element_text(size=12),
               axis.title=element_text(size=14),
               legend.text=element_text(size=12),
-              legend.title=element_text(size=14)) +
+              legend.title=element_text(size=14),
+              panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
                             values = c("C350" = "darkblue", "C700" = cbbPalette[3], "VL" = "red",
                                        "L" = "orange", "M" = "purple")) +
         scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
                                                       "D" = "orange", "E" = "red")) 
-
+    plot(p)
+    if (save.plot) {
+        pdf("Plots/Run07.pdf", width=8, height=6)
+        plot(p)
+        dev.off()
+    } 
 
 ```
 
@@ -514,7 +559,7 @@ Here we see that priming is not really doing a lot. The treatment for priming ef
     edf2.r8 <- edf.r8[edf.r8$CO2 == 700, ]
 
     ### plot
-    ggplot() + 
+    p<-ggplot() + 
         geom_line(data=cdf1.r8, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
         geom_line(data=cdf1.r8, aes(x=nc, y=NPP_VL, col="VL"), size=0.5, linetype="dotted") + 
         geom_line(data=cdf1.r8, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
@@ -539,14 +584,20 @@ Here we see that priming is not really doing a lot. The treatment for priming ef
               axis.text=element_text(size=12),
               axis.title=element_text(size=14),
               legend.text=element_text(size=12),
-              legend.title=element_text(size=14)) +
+              legend.title=element_text(size=14),
+              panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
                             values = c("C350" = "darkblue", "C700" = cbbPalette[3], "VL" = "red",
                                        "L" = "orange", "M" = "purple")) +
         scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
                                                       "D" = "orange", "E" = "red")) 
 
-
+    plot(p)
+    if (save.plot) {
+        pdf("Plots/Run08.pdf", width=8, height=6)
+        plot(p)
+        dev.off()
+    } 
 ```
 
 Under variable wood NC assumption, we see that the M, L and VL line overlap with each other. This means that, the slow pool decomposion is hugely stimulated by root exudates, making this as large a pool as the passive N release pool. Previously (under variable wood NC but without priming effect) the combination of slow SOM and wood pools should be very small, because little N is stored in wood pool and the decomposition of slow SOM is not as fast as the decomposition of slow SOM stimualted by root exudates. 
