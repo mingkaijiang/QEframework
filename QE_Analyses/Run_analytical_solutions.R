@@ -20,14 +20,14 @@
 ###         = 2 return list of two dataframes
 
 #### Step 1: return plots
-Perform_Analytical_Run1(f.flag = 1)          
-Perform_Analytical_Run2(f.flag = 1)
-Perform_Analytical_Run3(f.flag = 1)
-Perform_Analytical_Run4(f.flag = 1)
-Perform_Analytical_Run5(f.flag = 1)
-Perform_Analytical_Run6(f.flag = 1)
-Perform_Analytical_Run7(f.flag = 1)
-Perform_Analytical_Run8(f.flag = 1)
+#Perform_Analytical_Run1(f.flag = 1)          
+#Perform_Analytical_Run2(f.flag = 1)
+#Perform_Analytical_Run3(f.flag = 1)
+#Perform_Analytical_Run4(f.flag = 1)
+#Perform_Analytical_Run5(f.flag = 1)
+#Perform_Analytical_Run6(f.flag = 1)
+#Perform_Analytical_Run7(f.flag = 1)
+#Perform_Analytical_Run8(f.flag = 1)
 
 #### Step 2: return data list
 r1 <- Perform_Analytical_Run1(f.flag = 2)

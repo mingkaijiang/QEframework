@@ -1,7 +1,12 @@
 ##### MAIN PROGRAM
 mcm_model <- function() {
+    
+    source("Parameters/Analytical_Run1_Parameters.R")
+    
+    # nc array
     nfseq <- seq(0.005,0.05,by=0.001)
-    # need allocation fractions here
+    
+    # allocation
     a_vec <- alloc_mcm(nfseq)
     
     # plot photosynthetic constraints
@@ -13,23 +18,36 @@ mcm_model <- function() {
     
     #solve very-long nutrient cycling constraint
     VLong <- solveVLong(co2=350)
+    
     #get Cpassive from very-long nutrient cycling solution
     aequil <- alloc_mcm(VLong$equilnf)
-    pass <- passive(nf=VLong$equilnf, a=aequil)
-    omegap <- aequil$af*pass$omegaf + aequil$ar*pass$omegar
-    CpassVLong <- omegap*VLong$equilNPP/pass$decomp/(1-pass$qq)*1000.0
+    
+    pass <- slow_pool(df=VLong$equilnf, a=aequil)
+    omegap <- aequil$af*pass$omegafp + aequil$ar*pass$omegarp
+    omegas <- aequil$af*pass$omegafs + aequil$ar*pass$omegars
+    
+    CpassVLong <- omegap*VLong$equilNPP/pass$decomp_p/(1-pass$qpq)*1000.0
+    
     NrelwoodVLong <- aequil$aw*aequil$nw*VLong$equilNPP*1000
     
     #now plot long-term constraint with this Cpassive
-    NCHUGH <- NConsLong(nf = nfseq,a = a_vec, Cpass=CpassVLong, Nin = 1.0+NrelwoodVLong)
+    NCHUGH <- NConsLong(df = nfseq,a = a_vec, Cpass=CpassVLong, NinL = Nin)
     
     # Solve longterm equilibrium
-    equil_long_350 <- solveLong(co2=350, Cpass=CpassVLong, Nin = 1.0+NrelwoodVLong)
-    equil_long_700 <- solveLong(co2=700, Cpass=CpassVLong, Nin = 1.0+NrelwoodVLong)
+    equil_long_350 <- solveLong(co2=350, Cpass=CpassVLong, Nin = Nin)
+    equil_long_700 <- solveLong(co2=700, Cpass=CpassVLong, Nin = Nin)
     
     # get the point instantaneous NPP response to doubling of CO2
     df700 <- as.data.frame(cbind(round(nfseq,3), PC700))
-    ncref <- round(VLong$equilnf,3)
+
+    # slow soil pool
+    CslowLong <- omegas*equil_long_350$equilNPP/pass$decomp_s/(1-pass$qsq)*1000.0
+    
+    # plot medium nutrient cycling constraint
+    NCMEDIUM <- NConsMedium(nfseq, a_vec, CpassVLong, CslowLong, Nin+NrelwoodVLong)
+    
+    # solve medium term equilibrium at CO2 = 700 ppm
+    equil_medium_700 <- solveMedium(CO2_2,Cpass=CpassVLong,Cslow=CslowLong,Nin=Nin+NrelwoodVLong)
     
     ## locate the intersect between VL nutrient constraint and CO2 = 700
     VLong700 <- solveVLong(co2=700)
@@ -37,10 +55,11 @@ mcm_model <- function() {
     # calculate inst NPP
     inst700 <- inst_NPP(VLong$equilnf, df700)
     
-    cDF <- data.frame(nfseq, PC350, PC700, NCHUGH$NPP, NCVLONG$NPP)
-    colnames(cDF) <- c("nc", "P350", "P700", "L", "VL")
-    eDF <- cbind(VLong, equil_long_700, VLong700, inst700)
-    colnames(eDF) <- c("nc_VL", "NPP_VL", "nc_L_700", "NPP_L_700", 
+    cDF <- data.frame(nfseq, PC350, PC700, NCHUGH$NPP, NCVLONG$NPP, NCMEDIUM$NPP)
+    colnames(cDF) <- c("nc", "P350", "P700", "L", "VL", "M")
+    eDF <- cbind(VLong, equil_medium_700, equil_long_700, VLong700, inst700)
+    colnames(eDF) <- c("nc_VL", "NPP_VL", "nc_M_700", "NPP_M_700",
+                       "nc_L_700", "NPP_L_700", 
                        "nc_VL_700", "NPP_VL_700",
                        "nc_I", "NPP_I")
     
