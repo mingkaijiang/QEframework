@@ -65,7 +65,7 @@ Next, we run analytical run scripts to generate the pdf files and store the rest
 Now, I am plotting QE framework for each individual model assumption.
 
 ### Run 1: Baseline N model with variable wood NC ratio
-``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE, include=FALSE}
+``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE, results="hide"}
     ### split the data.list into two data frames
     cdf.r1 <- r1$cDF
     edf.r1 <- r1$eDF
@@ -125,7 +125,7 @@ Here, the QE framework indicates that, the VL and L line constraints are very mu
 <br/>
 
 ### Run 2: Baseline N model with fixed wood NC ratio
-```{r, echo=FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE}
+```{r, echo=FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE, results="hide"}
 
     ### split the data.list into two data frames
     cdf.r2 <- r2$cDF
@@ -217,7 +217,7 @@ Under fixed wood NC scenario, more N is stored in woody pool at the M term, leav
 <br/>  
 
 ### Run 3: Explicit mineral N pool, variable wood NC ratio
-``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE}
+``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE, results="hide"}
     ### split the data.list into two data frames
     cdf.r3 <- r3$cDF
     edf.r3 <- r3$eDF
@@ -278,7 +278,7 @@ Given that N uptake rate is assumed to be 1, here this QE framework should be ex
 <br/>
 
 ### Run 4: Explicit mineral N pool, fixed wood NC ratio
-``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE}
+``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE, results="hide"}
     ### split the data.list into two data frames
     cdf.r4 <- r4$cDF
     edf.r4 <- r4$eDF
@@ -341,7 +341,7 @@ Here (run 3 and 4), minral N pool is made explicit. By modifying mineral N uptak
 <br/>
 
 ### Run 5: N uptake as a saturating function of root biomass, variable wood NC (GDAY approach)
-``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE}
+``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE, results="hide"}
     ### split the data.list into two data frames
     cdf.r5 <- r5$cDF
     edf.r5 <- r5$eDF
@@ -402,7 +402,7 @@ Here, uptake rate of N is represented mathematically as a saturating function of
 <br/>
 
 ### Run 6: N uptake as a saturating function of mineral N, variable wood NC ratio (O-CN approach)
-``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE}
+``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE, results="hide"}
     ### split the data.list into two data frames
     cdf.r6 <- r6$cDF
     edf.r6 <- r6$eDF
@@ -484,7 +484,7 @@ There is no VL constraint curve because NPP cancels out for all possible leaf NC
 <br/>
 
 ### Run 7: Priming effect, fixed wood NC ratio
-``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE}
+``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE, results="hide"}
     ### split the data.list into two data frames
     cdf.r7 <- r7$cDF
     edf.r7 <- r7$eDF
@@ -545,7 +545,7 @@ Here we see that priming is not really doing a lot. The treatment for priming ef
 <br/>
 
 ### Run 8: Priming effect, variable wood NC ratio
-``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE}
+``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE, results="hide"}
     ### split the data.list into two data frames
     cdf.r8 <- r8$cDF
     edf.r8 <- r8$eDF
