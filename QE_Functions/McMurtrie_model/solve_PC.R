@@ -1,8 +1,6 @@
 
 ### This function implements photosynthetic constraint - solve by finding the root
-solvePC <- function(nf, af, co2=350,
-                    LUE0=1.4, I0=3, Nref=0.04, 
-                    kext=0.5, SLA=5, sf=0.5, w = 0.45) {
+solvePC <- function(nf, af, co2=350) {
     # parameters
     # nf is variable
     # making it pass af (fractional allocation to foliage) because this may also be variable

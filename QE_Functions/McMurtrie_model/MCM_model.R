@@ -1,10 +1,10 @@
 ##### MAIN PROGRAM
 mcm_model <- function() {
     
-    source("Parameters/Analytical_Run1_Parameters.R")
+    source("Parameters/Analytical_MCM_Parameters.R")
     
     # nc array
-    nfseq <- seq(0.005,0.05,by=0.001)
+    nfseq <- seq(0.01,0.05,by=0.001)
     
     # allocation
     a_vec <- alloc_mcm(nfseq)
@@ -31,11 +31,11 @@ mcm_model <- function() {
     NrelwoodVLong <- aequil$aw*aequil$nw*VLong$equilNPP*1000
     
     #now plot long-term constraint with this Cpassive
-    NCHUGH <- NConsLong(df = nfseq,a = a_vec, Cpass=CpassVLong, NinL = Nin)
+    NCHUGH <- NConsLong(df = nfseq,a = a_vec, Cpass=CpassVLong, NinL = 1.0)
     
     # Solve longterm equilibrium
-    equil_long_350 <- solveLong(co2=350, Cpass=CpassVLong, Nin = Nin)
-    equil_long_700 <- solveLong(co2=700, Cpass=CpassVLong, Nin = Nin)
+    equil_long_350 <- solveLong(co2=350, Cpass=CpassVLong, NinL = 1.0)
+    equil_long_700 <- solveLong(co2=700, Cpass=CpassVLong, NinL = 1.0)
     
     # get the point instantaneous NPP response to doubling of CO2
     df700 <- as.data.frame(cbind(round(nfseq,3), PC700))
@@ -44,10 +44,10 @@ mcm_model <- function() {
     CslowLong <- omegas*equil_long_350$equilNPP/pass$decomp_s/(1-pass$qsq)*1000.0
     
     # plot medium nutrient cycling constraint
-    NCMEDIUM <- NConsMedium(nfseq, a_vec, CpassVLong, CslowLong, Nin+NrelwoodVLong)
+    NCMEDIUM <- NConsMedium(nfseq, a_vec, CpassVLong, CslowLong, NinL=1.0+NrelwoodVLong)
     
     # solve medium term equilibrium at CO2 = 700 ppm
-    equil_medium_700 <- solveMedium(CO2_2,Cpass=CpassVLong,Cslow=CslowLong,Nin=Nin+NrelwoodVLong)
+    equil_medium_700 <- solveMedium(CO2=700,Cpass=CpassVLong,Cslow=CslowLong,NinL=1.0+NrelwoodVLong)
     
     ## locate the intersect between VL nutrient constraint and CO2 = 700
     VLong700 <- solveVLong(co2=700)
