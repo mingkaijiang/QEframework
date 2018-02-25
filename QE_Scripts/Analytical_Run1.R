@@ -120,16 +120,6 @@ Perform_Analytical_Run1 <- function(f.flag = 1) {
              width = 5, height = 5, units = "in", res = 300)
         par(mar=c(5.1,6.1,2.1,2.1))
         
-        ### nice plot
-        # require(plotly)
-        # plot_ly(data = out350DF, x = ~nc, y = ~NPP_photo,
-        #              name = "P350", type = "scatter", mode = "lines") %>%
-        #     add_trace(y = ~NPP_VL, name = "VL", mode = "lines") %>%
-        #     add_trace(y = ~NPP_L, name = "L", mode = "lines") %>%
-        #     add_trace(y = ~NPP_M, name = "M", mode = "lines") %>%
-        #     layout(xaxis = list(range = c(0.01, 0.05)),
-        #            yaxis = list(range = c(0, 3)))
-        
         ### shoot nc vs. NPP
         plot(out350DF$nc, out350DF$NPP_photo, xlim=c(0.001, 0.03),
               ylim=c(1.0, 2.0), 
