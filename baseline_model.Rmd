@@ -78,15 +78,12 @@ Now, I am plotting the graphic illustration of the QE framework, based on Comins
         geom_line(data=cdf, aes(x=nc, y=P350, col="C350"), size=0.5, linetype="dotted")+   
         geom_line(data=cdf, aes(x=nc, y=VL, col="VL"), size=0.5, linetype="dotted") + 
         geom_line(data=cdf, aes(x=nc, y=L, col="L"), size=0.5, linetype="dotted") +  
-        #geom_line(data=cdf1, aes(x=nc, y=NPP_M, col="M"), size=0.5, linetype="dotted") +            
         geom_line(data=cdf, aes(x=nc, y=P700, col="C700"), size=0.5, linetype="dotted") +     
         geom_point(data=edf, aes(x=nc_VL, y=NPP_VL, fill="A"), 
                 color="black", shape=21, size=3) + 
-        geom_point(data=edf, aes(x=nc_L_700, y=NPP_L_700, fill="D"), 
+        geom_point(data=edf, aes(x=nc_L_700, y=NPP_L_700, fill="C"), 
                    shape=21, color="black", size=3) +
-        #geom_point(data=edf, aes(x=nc_M, y=NPP_M, fill="C"), 
-        #           shape=21, color="black", size=3) +
-        geom_point(data=edf, aes(x=nc_VL_700, y=NPP_VL_700, fill="E"), 
+        geom_point(data=edf, aes(x=nc_VL_700, y=NPP_VL_700, fill="D"), 
                    shape=21, color="black", size=3) +
         geom_point(data=edf, aes(x=nc_I, y=NPP_I, fill="B"), 
                    shape=21, color="black", size=3) +
@@ -104,17 +101,20 @@ Now, I am plotting the graphic illustration of the QE framework, based on Comins
         scale_colour_manual(name="Constraint line", 
                             values = c("C350" = "darkblue", "C700" = cbbPalette[3], "VL" = "red",
                                        "L" = "orange", "M" = "purple")) +
-        scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
-                                                      "D" = "orange", "E" = "red")) 
-
-    plot(p)
-    if (save.plot) {
+        scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", 
+                                                      "C" = "orange", "D" = "red")) 
+        ### only save this to pdf and then add arrows and recall it
         pdf("Plots/QE_illustration.pdf", width=8, height=6)
         plot(p)
         dev.off()
-    } 
+
 ```
 
+<p align="center">
+<img src="Transient_behavior.png" width = "400" height = "400">
+</p>
+
+<br/><br/>
 
 Now, I am plotting QE framework for each individual model assumption.
 
