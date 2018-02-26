@@ -8,7 +8,7 @@
 ####
 ################################################################################
 #### Functions
-Perform_Analytical_Run19 <- function(f.flag = 1) {
+Perform_Analytical_Run10 <- function(f.flag = 1) {
     #### Function to perform analytical run 9 simulations
     #### eDF: stores equilibrium points
     #### cDF: stores constraint points (curves)
