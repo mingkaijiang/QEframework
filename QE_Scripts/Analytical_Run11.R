@@ -34,7 +34,7 @@ Perform_Analytical_Run11 <- function(f.flag = 1) {
     VL_pot_eq <- solve_VL_full(CO2=CO2_1)
 
     ### calculate nw and nr for VL equilibrated nf value
-    a_eq <- alloc(VL_eq$nf)
+    a_eq <- alloc(VL_pot_eq$nf)
     
     ### Calculate actual VL equilibrium points
     VL_act_eq <- VL_constraint_c_cost(nfdf=a_eq, VL_pot_eq$NPP)
