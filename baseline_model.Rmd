@@ -24,10 +24,10 @@ Here we are evaluating the alternative assumption for wood stoichiometric flexib
 # 2. Model structure
 
 <p align="center">
-<img src="Model_framework.png" width = "400" height = "400">
+<img src="Model_framework.png" width = "650" height = "650">
 </p>
 
-The entire QE framework is built based on the model structure of the Generic Decomposition And Yield (G'DAY) model, as shown in the figure above. 
+The entire QE framework is built based on the model structure of the Generic Decomposition And Yield (G'DAY) model, as shown in the figure above. Boxes with dotted boundaries are the M term pools, box filled with diamonds is the L term pool. 
 
 # 3. Procedures
 
