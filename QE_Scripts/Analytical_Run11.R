@@ -36,6 +36,9 @@ Perform_Analytical_Run11 <- function(f.flag = 1) {
     ### calculate nw and nr for VL equilibrated nf value
     a_eq <- alloc(VL_eq$nf)
     
+    ### Calculate actual VL equilibrium points
+    VL_act_eq <- VL_constraint_c_cost(nfdf=a_eq, VL_pot_eq$NPP)
+    
     ### calculate soil parameters, e.g. reburial coef.
     s_coef <- soil_coef(df=VL_eq$nf, a=a_eq)
     omega_ap <- a_eq$af*s_coef$omega_af_pass + a_eq$ar*s_coef$omega_ar_pass

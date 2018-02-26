@@ -1,14 +1,10 @@
-VL_constraint_c_cost <- function(nfdf, a) {
+VL_constraint_c_cost <- function(nfdf, potnpp) {
 
-    # equation for N constraint with just leaching
-    U0 <- Nin
-    nleach <- leachn/(1-leachn) * (nfdf$nfl*nfdf$af + nfdf$nr*nfdf$ar + nfdf$nw*nfdf$aw)
-    
-    # mineral N pool
-    Nmin <- U0 / leachn
+    # mineral N pool return in kg N m-2 yr-1
+    Nmin <- Nin / 1000 / leachn
     
     # cost of N fixation
-    cost_fix <- s1 * (exp(a1+b1*Tsoil*(1-0.5*(Tsoil/c1))) - 2)
+    cost_fix <- c_cost_fix()
     
     # croot
 
