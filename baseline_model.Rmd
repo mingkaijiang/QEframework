@@ -769,7 +769,7 @@ Visionally, with potential NPP and actual NPP, we have the QE framework looks li
                    shape=21, color="black", size=3) +
         geom_point(data=edf2.r9, aes(x=nc_act_VL, y=NPP_act_VL, fill="E"), 
                    shape=21, color="black", size=3) +
-        ylim(1.0, 2.0) + 
+        ylim(0.5, 2.0) + 
         xlim(0.001, 0.03) +
         labs(x="Shoot N:C Ratio", 
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
@@ -838,7 +838,7 @@ Here we can see that, at equilibrium, the actual NPP is not intersecting with th
                    shape=21, color="black", size=3) +
         geom_point(data=edf2.r10, aes(x=nc_act_VL, y=NPP_act_VL, fill="E"), 
                    shape=21, color="black", size=3) +
-        ylim(1.0, 2.0) + 
+        ylim(0.5, 2.0) + 
         xlim(0.001, 0.03) +
         labs(x="Shoot N:C Ratio", 
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
@@ -867,7 +867,9 @@ Here we can see that, at equilibrium, the actual NPP is not intersecting with th
 
 ### CLM N uptake 
 
+Based on equations from Ghimire et al. (2016), CLM representation of N uptake is the same as O-CN. So here I can ignore the testing of this function.
 
+<br/><br/>
 
 ### C cost of N uptake - CLM approach
 This treatment is based on Fisher et al. (2010) and Shi et al. (2015).
@@ -890,15 +892,14 @@ BNF is performed by bacteria living in symbiosis within root modules on certain 
 ## 4. To-do list:
 Below is a continuous update of the to-do list of this project:
 
-    - Test CLM N uptake function (essentially it's the same as O-CN, with some additional parameters)
     - Test CLM and Ellsworth representation of photosynthesis
     - Test CLM representation of C cost of N uptake
     - Check parameter sensitivity for priming effect.
-    - Consider different n uptake rate and graphically demonstrate its effect
+    - Check parameter sensitivity for f and ns in CLM baseline approach.
+    - Consider different n uptake rates (explict N approach), and graphically demonstrate its effect
     - Add equations for GDAY and O-CN representation of N uptake as function of mineral N and root biomass
-    - Add graphic introduction (i.e. a previous QE framework figure)
     - Summary table comparing all model assumptions and their CO2 effect (% change)
-    - Equation derivations
+    - Spell out all equations
     - Look at relationships beyond NPP and leaf NC
     - Add GDAY simulations (time series result)
 
