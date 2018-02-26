@@ -691,6 +691,180 @@ Comparing the CO2 effect across models (baseline vs. priming effect), we see tha
 <br/>
 
 
+### Run 9: CLM potential NPP, Fixed wood N:C ratio
+
+CLM has a potential NPP approach, with the following set of equations:
+$$P_{dem} = NPP_{pot}n_p $$
+
+where *P<sub>dem</sub>* is the plant N demand, and *n<sub>p</sub>* is the plant N:C ratio.
+
+The immobilization N demand is calculated as (*I<sub>dem</sub>*):
+$$ I_{dem} = fC_{lit}t_{lit}(n_s - n_p)$$
+
+where *f* is the fraction of litter C becomes soil C, *C<sub>lit</sub>* is the total litter C, *t<sub>lit</sub>* is the turnover time of the litter pool, and *<sub>ns</sub>* is the soil NC ratio. *C<sub>lit</sub>* can also be expressed as:
+$$C_{lit} = NPP_{pot}/t_{lit} $$
+
+
+Actual plant uptake is expressed as:
+$$P_{act} = min(N_{min}P_{dem}/(I_{dem} + P_{dem}), P_{dem}) $$
+
+and actually immobilisation is expressed as:
+$$I_{act} = min(N_{min}I_{dem}/(I_{dem} + P_{dem}), I_{dem}) $$
+
+Actual NPP is expressed as:
+$$NPP_{act} = NPP_{pot}P_{act}/P_{dem}$$
+
+Now, for VL-term constraint, we have
+$$N_{in} = N_{loss} = l_nN_{min}$$
+
+Under potential NPP, we can calculate NPP by re-arranging the equations, as:
+$$NPP = N_{in} / [l_n/(1-l_n)n_p] $$
+
+For an actual NPP, we need to consider immobilization demand, expressed as:
+$$N_{min} = l_nN_{min} + P_{act} + I_{act} = l_nN_{min} + NPP_{act}n_p + NPP_{act}f(n_s-n_p) $$
+
+Re-arrange, we get:
+
+$$NPP_{act} = N_{in}(1-l_n) / ln[n_p + f(n_s-n_p)] $$
+
+Similar equations can be derived for L and M term constraints. 
+
+Visionally, with potential NPP and actual NPP, we have the QE framework looks like this:
+
+``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE, results="hide"}
+    ### split the data.list into two data frames
+    cdf.r9 <- r9$cDF
+    edf.r9 <- r9$eDF
+
+    ### extract CO2 conc. from constraint DF
+    cdf1.r9 <- cdf.r9[cdf.r9$CO2 == 350, ]
+    cdf2.r9 <- cdf.r9[cdf.r9$CO2 == 700, ]
+
+    ### extract CO2 conc. from eq DF
+    edf1.r9 <- edf.r9[edf.r9$CO2 == 350, ]
+    edf2.r9 <- edf.r9[edf.r9$CO2 == 700, ]
+
+    ### plot
+    p<-ggplot() + 
+        geom_line(data=cdf1.r9, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
+        geom_line(data=cdf1.r9, aes(x=nc, y=NPP_VL, col="VL"), size=0.5, linetype="dotted") + 
+        geom_line(data=cdf1.r9, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
+        geom_line(data=cdf1.r9, aes(x=nc, y=NPP_M, col="M"), size=0.5, linetype="dotted") +            
+        geom_line(data=cdf2.r9, aes(x=nc, y=NPP_photo, col="C700"), size=0.5, linetype="dotted") +     
+        geom_point(data=edf1.r9, aes(x=nc_pot_VL, y=NPP_pot_VL), 
+                color="green", shape=21, size=3) + 
+        geom_point(data=edf2.r9, aes(x=nc_pot_L, y=NPP_pot_L), 
+                   shape=21, color="orange", size=3) +
+        geom_point(data=edf2.r9, aes(x=nc_pot_M, y=NPP_pot_M), 
+                   shape=21, color="purple", size=3) +
+        geom_point(data=edf2.r9, aes(x=nc_pot_VL, y=NPP_pot_VL), 
+                   shape=21, color="red", size=3) +
+        geom_point(data=edf1.r9, aes(x=nc_pot_VL, y=NPP_I, fill="B"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf1.r9, aes(x=nc_act_VL, y=NPP_act_VL, fill="A"), 
+                color="black", shape=21, size=3) + 
+        geom_point(data=edf2.r9, aes(x=nc_act_L, y=NPP_act_L, fill="D"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf2.r9, aes(x=nc_act_M, y=NPP_act_M, fill="C"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf2.r9, aes(x=nc_act_VL, y=NPP_act_VL, fill="E"), 
+                   shape=21, color="black", size=3) +
+        ylim(1.0, 2.0) + 
+        xlim(0.001, 0.03) +
+        labs(x="Shoot N:C Ratio", 
+             y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
+        theme_linedraw() +
+        theme(panel.grid.minor=element_blank(),
+              axis.text=element_text(size=12),
+              axis.title=element_text(size=14),
+              legend.text=element_text(size=12),
+              legend.title=element_text(size=14),
+              panel.grid.major=element_line(color="grey")) +
+        scale_colour_manual(name="Constraint line", 
+                            values = c("C350" = "darkblue", "C700" = cbbPalette[3], "VL" = "red",
+                                       "L" = "orange", "M" = "purple")) +
+        scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
+                                                      "D" = "orange", "E" = "red")) 
+
+    plot(p)
+    if (save.plot) {
+        pdf("Plots/Run09.pdf", width=8, height=6)
+        plot(p)
+        dev.off()
+    } 
+```
+
+The unfilled dots are the potential equilibrated NPP, whereas the filled dots are the actually equilibrated NPP at various timesteps. 
+
+Here we can see that, at equilibrium, the actual NPP is not intersecting with the photosynthetic constraint line, and is much lower than the potential NPP, due to the N immobilization demand. We have effectively removed actual NPP dependence on potential NPP. 
+
+
+### Run 10: CLM potential NPP, variable wood N:C ratio
+``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE, results="hide"}
+    ### split the data.list into two data frames
+    cdf.r10 <- r10$cDF
+    edf.r10 <- r10$eDF
+
+    ### extract CO2 conc. from constraint DF
+    cdf1.r10 <- cdf.r10[cdf.r10$CO2 == 350, ]
+    cdf2.r10 <- cdf.r10[cdf.r10$CO2 == 700, ]
+
+    ### extract CO2 conc. from eq DF
+    edf1.r10 <- edf.r10[edf.r10$CO2 == 350, ]
+    edf2.r10 <- edf.r10[edf.r10$CO2 == 700, ]
+
+    ### plot
+    p<-ggplot() + 
+        geom_line(data=cdf1.r10, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
+        geom_line(data=cdf1.r10, aes(x=nc, y=NPP_VL, col="VL"), size=0.5, linetype="dotted") + 
+        geom_line(data=cdf1.r10, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
+        geom_line(data=cdf1.r10, aes(x=nc, y=NPP_M, col="M"), size=0.5, linetype="dotted") +            
+        geom_line(data=cdf2.r10, aes(x=nc, y=NPP_photo, col="C700"), size=0.5, linetype="dotted") +     
+        geom_point(data=edf1.r10, aes(x=nc_pot_VL, y=NPP_pot_VL), 
+                color="green", shape=21, size=3) + 
+        geom_point(data=edf2.r10, aes(x=nc_pot_L, y=NPP_pot_L), 
+                   shape=21, color="orange", size=3) +
+        geom_point(data=edf2.r10, aes(x=nc_pot_M, y=NPP_pot_M), 
+                   shape=21, color="purple", size=3) +
+        geom_point(data=edf2.r10, aes(x=nc_pot_VL, y=NPP_pot_VL), 
+                   shape=21, color="red", size=3) +
+        geom_point(data=edf1.r10, aes(x=nc_pot_VL, y=NPP_I, fill="B"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf1.r10, aes(x=nc_act_VL, y=NPP_act_VL, fill="A"), 
+                color="black", shape=21, size=3) + 
+        geom_point(data=edf2.r10, aes(x=nc_act_L, y=NPP_act_L, fill="D"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf2.r10, aes(x=nc_act_M, y=NPP_act_M, fill="C"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf2.r10, aes(x=nc_act_VL, y=NPP_act_VL, fill="E"), 
+                   shape=21, color="black", size=3) +
+        ylim(1.0, 2.0) + 
+        xlim(0.001, 0.03) +
+        labs(x="Shoot N:C Ratio", 
+             y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
+        theme_linedraw() +
+        theme(panel.grid.minor=element_blank(),
+              axis.text=element_text(size=12),
+              axis.title=element_text(size=14),
+              legend.text=element_text(size=12),
+              legend.title=element_text(size=14),
+              panel.grid.major=element_line(color="grey")) +
+        scale_colour_manual(name="Constraint line", 
+                            values = c("C350" = "darkblue", "C700" = cbbPalette[3], "VL" = "red",
+                                       "L" = "orange", "M" = "purple")) +
+        scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
+                                                      "D" = "orange", "E" = "red")) 
+
+    plot(p)
+    if (save.plot) {
+        pdf("Plots/Run10.pdf", width=8, height=6)
+        plot(p)
+        dev.off()
+    } 
+```
+
+<br/><br/>
+
 ### CLM N uptake 
 
 

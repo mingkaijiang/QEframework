@@ -1,14 +1,14 @@
 
-#### Analytical script Run 9
+#### Analytical script Run 10
 ####
 #### Assumptions:
 #### 1. baseline CLM: potential NPP
-#### 2. Fixed wood NC
+#### 2. Variable wood NC
 #### 
 ####
 ################################################################################
 #### Functions
-Perform_Analytical_Run9 <- function(f.flag = 1) {
+Perform_Analytical_Run19 <- function(f.flag = 1) {
     #### Function to perform analytical run 9 simulations
     #### eDF: stores equilibrium points
     #### cDF: stores constraint points (curves)
@@ -16,7 +16,7 @@ Perform_Analytical_Run9 <- function(f.flag = 1) {
     #### f.flag: = 2 return a list consisting of two dataframes
 
     ######### Main program
-    source("Parameters/Analytical_Run9_Parameters.R")
+    source("Parameters/Analytical_Run10_Parameters.R")
     
     ### create a range of nc for shoot to initiate
     nfseq <- round(seq(0.001, 0.1, by = 0.001),5)
@@ -169,7 +169,7 @@ Perform_Analytical_Run9 <- function(f.flag = 1) {
     if (f.flag == 1) {
         
         ### plot 2-d plots of nf vs. npp and nf vs. pf
-        tiff("Plots/Analytical_Run9_2d.tiff",
+        tiff("Plots/Analytical_Run10_2d.tiff",
              width = 5, height = 5, units = "in", res = 300)
         par(mar=c(5.1,6.1,2.1,2.1))
         
