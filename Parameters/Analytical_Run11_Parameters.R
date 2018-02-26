@@ -50,8 +50,8 @@ ncs <- 0.01
 sd <- 1      # soil water depth, unit: m
 et <- 0.0016 / 24 / 3600
 kr <- 0.01    # unit kg C m-2
-kn2 <- 1     # kg C m-2
-kc2 <- 1     # kg C m-2
+kn2 <- 1     # kg C m-2   used in c_cost_of_active
+kc2 <- 1     # kg C m-2   used in c_cost_of_active
 a1 <- -3.62
 b1 <- 0.27
 c1 <- 25.15

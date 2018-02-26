@@ -4,6 +4,7 @@
 #### Assumptions:
 #### 1. CLM model C cost of N uptake
 #### 2. Variable wood NC
+#### 3. active N uptake
 ####
 ################################################################################
 #### Functions
@@ -30,7 +31,7 @@ Perform_Analytical_Run11 <- function(f.flag = 1) {
     VL <- VL_constraint(nf=nfseq, nfdf=a_nf)
     
     ### finding the equilibrium point between photosynthesis and very long term nutrient constraints
-    VL_eq <- solve_VL_full(CO2=CO2_1)
+    VL_pot_eq <- solve_VL_full(CO2=CO2_1)
 
     ### calculate nw and nr for VL equilibrated nf value
     a_eq <- alloc(VL_eq$nf)

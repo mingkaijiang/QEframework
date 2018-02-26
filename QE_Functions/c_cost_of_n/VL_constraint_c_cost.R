@@ -19,7 +19,7 @@ VL_constraint_c_cost <- function(nfdf, a) {
     cost_active <- 0 #(kn2 / Nmin) * (kc2 / croot)
     
     # cost of resorb
-    cost_resorb <- kr / ndfdf$nf
+    cost_resorb <- kr / nfdf$nf
     
     # Cost of acquiring (kg C kg N-1)
     # minimum of cost of resorption, active uptake or fixation
