@@ -28,6 +28,7 @@
 #Perform_Analytical_Run6(f.flag = 1)
 #Perform_Analytical_Run7(f.flag = 1)
 #Perform_Analytical_Run8(f.flag = 1)
+#Perform_Analytical_Run9(f.flag = 1)
 
 #### Step 2: return data list
 r1 <- Perform_Analytical_Run1(f.flag = 2)
@@ -38,6 +39,7 @@ r5 <- Perform_Analytical_Run5(f.flag = 2)
 r6 <- Perform_Analytical_Run6(f.flag = 2)
 r7 <- Perform_Analytical_Run7(f.flag = 2)
 r8 <- Perform_Analytical_Run8(f.flag = 2)
+r9 <- Perform_Analytical_Run9(f.flag = 2)
 
 ################################################################################
 #### End

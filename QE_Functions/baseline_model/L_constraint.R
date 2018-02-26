@@ -19,7 +19,7 @@ L_constraint <- function(df, a, C_pass, Nin_L) {
     U0 <- Nin_L + (1-pass$qq_pass) * pass$decomp_pass * C_pass * ncp   
     nwood <- 0 
     nburial <- omega_ap*ncp
-    nleach <- leachn/(1-leachn) * (a$nfl*a$af + a$nr*(a$ar) + a$nw*a$aw)
+    nleach <- leachn/(1-leachn) * (a$nfl*a$af + a$nr*a$ar + a$nw*a$aw)
     
     # in g C m-2 yr-1
     NPP_NC <- U0 / (nwood + nburial + nleach)   

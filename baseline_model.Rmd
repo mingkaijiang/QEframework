@@ -20,6 +20,7 @@ The baseline model in this study compares the effect of wood NC stoichiometric f
 
 Here we are evaluating the alternative assumption for wood stoichiometric flexiblity on plant's CO2 response. Time is also a factor considered here, with VL (very-long), L (long), and M (medium) terms considered as the final model equilibrium point, passive SOM pool equilibrated, passive and slow SOM pools equilibrated, respectively. 
 
+<br/><br/>
 
 # 2. Model structure
 
@@ -28,6 +29,8 @@ Here we are evaluating the alternative assumption for wood stoichiometric flexib
 </p>
 
 The entire QE framework is built based on the model structure of the Generic Decomposition And Yield (G'DAY) model, as shown in the figure above. Boxes with dotted boundaries are the M term pools, box filled with diamonds is the L term pool. 
+
+<br/><br/>
 
 # 3. Procedures
 
@@ -708,7 +711,7 @@ Active uptake is an ion-specific enzyme-catalyzed process analogous to Michaelis
 
 BNF is performed by bacteria living in symbiosis within root modules on certain types of plants. 
 
-<br/>
+<br/><br/>
 
 ## 4. To-do list:
 Below is a continuous update of the to-do list of this project:

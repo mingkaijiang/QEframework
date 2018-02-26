@@ -1,7 +1,6 @@
 
 M_constraint_baseline_CLM_actual <- function(df, a, C_pass, C_slow, Nin_L) {
  
-    
     # passive pool burial 
     s_coef <- soil_coef(df, a)
     omega_ap <- a$af*s_coef$omega_af_pass + a$ar*s_coef$omega_ar_pass 
@@ -16,10 +15,10 @@ M_constraint_baseline_CLM_actual <- function(df, a, C_pass, C_slow, Nin_L) {
     nwood <- a$aw*a$nw
     nburial <- omega_ap*ncp + omega_as*ncs
     nplant <- a$nfl*a$af + a$nr*a$ar + a$nw*a$aw
+    nleach <- (leachn/(1-leachn)) * (nplant + f * (nsoil - nplant))
     
     ### return g C m-2 yr-1
-    #NPP_NC <- U0 / (nwood + (1+leachn) * (nplant + (omega_ap + omega_as) * (nburial - nplant)))
-    NPP_NC <- U0 / (nwood + (1+leachn) * (nplant + nburial))
+    NPP_NC <- U0 / (nburial + nleach + nwood)
     
     ### return kg C m-2 yr-1
     NPP <- NPP_NC*10^-3 
