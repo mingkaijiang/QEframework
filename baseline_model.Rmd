@@ -892,7 +892,6 @@ BNF is performed by bacteria living in symbiosis within root modules on certain 
 ## 4. To-do list:
 Below is a continuous update of the to-do list of this project:
 
-    - Test CLM and Ellsworth representation of photosynthesis
     - Test CLM representation of C cost of N uptake
     - Check parameter sensitivity for priming effect.
     - Check parameter sensitivity for f and ns in CLM baseline approach.
