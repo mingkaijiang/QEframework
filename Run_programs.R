@@ -25,9 +25,9 @@ source("QE_Analyses/prepare_R.R")
 source("QE_Analyses/Run_analytical_solutions.R")
 
 
-
-
-
+#### ------------------------ Generate output tables ------------------------ #####
+source("QE_Analyses/make_summary_table.R")
+sumDF <- make_summary_table(destDir = "Tables")
 
 ##### ------------------------ Clear workspace ---------------------------- #####
 rm(list=ls(all=TRUE))
