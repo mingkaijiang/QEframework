@@ -927,7 +927,7 @@ Here, I am calculating C cost of N uptake based on retranslocation, active uptak
                    shape=21, color="black", size=3) +
         geom_point(data=edf2.r11, aes(x=nc_pot_VL, y=NPP_act_VL, fill="E"), 
                    shape=21, color="black", size=3) +
-        ylim(0.5, 2.0) + 
+        ylim(0.0, 2.0) + 
         xlim(0.001, 0.03) +
         labs(x="Shoot N:C Ratio", 
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
@@ -958,43 +958,43 @@ Here, I am calculating C cost of N uptake based on retranslocation, active uptak
 ### Run 12. CLM model C cost of N uptake, variable wood N:C ratio
 ``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE, results="hide"}
     ### split the data.list into two data frames
-    cdf.r11 <- r11$cDF
-    edf.r11 <- r11$eDF
+    cdf.r12 <- r12$cDF
+    edf.r12 <- r12$eDF
 
     ### extract CO2 conc. from constraint DF
-    cdf1.r11 <- cdf.r11[cdf.r11$CO2 == 350, ]
-    cdf2.r11 <- cdf.r11[cdf.r11$CO2 == 700, ]
+    cdf1.r12 <- cdf.r12[cdf.r12$CO2 == 350, ]
+    cdf2.r12 <- cdf.r12[cdf.r12$CO2 == 700, ]
 
     ### extract CO2 conc. from eq DF
-    edf1.r11 <- edf.r11[edf.r11$CO2 == 350, ]
-    edf2.r11 <- edf.r11[edf.r11$CO2 == 700, ]
+    edf1.r12 <- edf.r12[edf.r12$CO2 == 350, ]
+    edf2.r12 <- edf.r12[edf.r12$CO2 == 700, ]
 
     ### plot
     p<-ggplot() + 
-        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
-        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_VL, col="VL"), size=0.5, linetype="dotted") + 
-        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
-        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_M, col="M"), size=0.5, linetype="dotted") +            
-        geom_line(data=cdf2.r11, aes(x=nc, y=NPP_photo, col="C700"), size=0.5, linetype="dotted") +     
-        geom_point(data=edf1.r11, aes(x=nc_pot_VL, y=NPP_pot_VL), 
+        geom_line(data=cdf1.r12, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
+        geom_line(data=cdf1.r12, aes(x=nc, y=NPP_VL, col="VL"), size=0.5, linetype="dotted") + 
+        geom_line(data=cdf1.r12, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
+        geom_line(data=cdf1.r12, aes(x=nc, y=NPP_M, col="M"), size=0.5, linetype="dotted") +            
+        geom_line(data=cdf2.r12, aes(x=nc, y=NPP_photo, col="C700"), size=0.5, linetype="dotted") +     
+        geom_point(data=edf1.r12, aes(x=nc_pot_VL, y=NPP_pot_VL), 
                 color="green", shape=21, size=3) + 
-        geom_point(data=edf2.r11, aes(x=nc_pot_L, y=NPP_pot_L), 
+        geom_point(data=edf2.r12, aes(x=nc_pot_L, y=NPP_pot_L), 
                    shape=21, color="orange", size=3) +
-        geom_point(data=edf2.r11, aes(x=nc_pot_M, y=NPP_pot_M), 
+        geom_point(data=edf2.r12, aes(x=nc_pot_M, y=NPP_pot_M), 
                    shape=21, color="purple", size=3) +
-        geom_point(data=edf2.r11, aes(x=nc_pot_VL, y=NPP_pot_VL), 
+        geom_point(data=edf2.r12, aes(x=nc_pot_VL, y=NPP_pot_VL), 
                    shape=21, color="red", size=3) +
-        geom_point(data=edf1.r11, aes(x=nc_pot_VL, y=NPP_I, fill="B"), 
+        geom_point(data=edf1.r12, aes(x=nc_pot_VL, y=NPP_I, fill="B"), 
                    shape=21, color="black", size=3) +
-        geom_point(data=edf1.r11, aes(x=nc_pot_VL, y=NPP_act_VL, fill="A"), 
+        geom_point(data=edf1.r12, aes(x=nc_pot_VL, y=NPP_act_VL, fill="A"), 
                 color="black", shape=21, size=3) + 
-        geom_point(data=edf2.r11, aes(x=nc_pot_L, y=NPP_act_L, fill="D"), 
+        geom_point(data=edf2.r12, aes(x=nc_pot_L, y=NPP_act_L, fill="D"), 
                    shape=21, color="black", size=3) +
-        geom_point(data=edf2.r11, aes(x=nc_pot_M, y=NPP_act_M, fill="C"), 
+        geom_point(data=edf2.r12, aes(x=nc_pot_M, y=NPP_act_M, fill="C"), 
                    shape=21, color="black", size=3) +
-        geom_point(data=edf2.r11, aes(x=nc_pot_VL, y=NPP_act_VL, fill="E"), 
+        geom_point(data=edf2.r12, aes(x=nc_pot_VL, y=NPP_act_VL, fill="E"), 
                    shape=21, color="black", size=3) +
-        ylim(0.5, 2.0) + 
+        ylim(0.0, 2.0) + 
         xlim(0.001, 0.03) +
         labs(x="Shoot N:C Ratio", 
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
@@ -1013,7 +1013,7 @@ Here, I am calculating C cost of N uptake based on retranslocation, active uptak
 
     plot(p)
     if (save.plot) {
-        pdf("Plots/Run11.pdf", width=8, height=6)
+        pdf("Plots/Run12.pdf", width=8, height=6)
         plot(p)
         dev.off()
     } 
