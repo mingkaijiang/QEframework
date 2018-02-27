@@ -1,7 +1,7 @@
 ---
-title: "QE framework baseline model"
+title: "QE framework result summary"
 author: "Mingkai Jiang"
-date: "Feb 12, 2018"
+date: "Feb 27, 2018"
 output:
   html_document:
     toc: true

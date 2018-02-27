@@ -27,8 +27,6 @@ VL_constraint_c_cost <- function(nfdf, potnpp) {
     # NPP used for growth
     NPP_act <-  potnpp - cost_aq + c_pass
     
-    browser()
-    
     # out df
     out <- data.frame(NPP_act, cost_aq)
     colnames(out) <- c("NPPact", "NPPaqu")
