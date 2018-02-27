@@ -1034,12 +1034,9 @@ Here, I am calculating C cost of N uptake based on retranslocation, active uptak
 # 5. To-do list:
 Below is a continuous update of the to-do list of this project:
 
-    - Test CLM representation of C cost of N uptake
     - Check parameter sensitivity for priming effect.
     - Check parameter sensitivity for f and ns in CLM baseline approach.
-    - Consider different n uptake rates (explict N approach), and graphically demonstrate its effect
-    - Add equations for GDAY and O-CN representation of N uptake as function of mineral N and root biomass
-    - Summary table comparing all model assumptions and their CO2 effect (% change)
+    - Check parameter sensitivity for n uptake coefficient, and graphically demonstrate its effect
     - Spell out all equations
     - Look at relationships beyond NPP and leaf NC
     - Add GDAY simulations (time series result)
