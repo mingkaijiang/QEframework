@@ -871,7 +871,7 @@ Based on equations from Ghimire et al. (2016), CLM representation of N uptake is
 
 <br/><br/>
 
-### C cost of N uptake - CLM approach
+### Run 11. CLM model C cost of N uptake, fixed wood N:C ratio
 This treatment is based on Fisher et al. (2010) and Shi et al. (2015).
 
 There are 4 pathways through which N is absorbed:
@@ -885,9 +885,139 @@ Retranslocation or resorption requires C to synthesize the enzymes and regulator
 
 Active uptake is an ion-specific enzyme-catalyzed process analogous to Michaelis-Menten kinetics. Energy demand for ion uptake can consume a substantial amount of total respiratory C to move N against concentration gradients. 
 
-BNF is performed by bacteria living in symbiosis within root modules on certain types of plants. 
+BNF is performed by bacteria living in symbiosis within root modules on certain types of plants.
+
+Here, I am calculating C cost of N uptake based on retranslocation, active uptake and fixation. 
+
+``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE, results="hide"}
+    ### split the data.list into two data frames
+    cdf.r11 <- r11$cDF
+    edf.r11 <- r11$eDF
+
+    ### extract CO2 conc. from constraint DF
+    cdf1.r11 <- cdf.r11[cdf.r11$CO2 == 350, ]
+    cdf2.r11 <- cdf.r11[cdf.r11$CO2 == 700, ]
+
+    ### extract CO2 conc. from eq DF
+    edf1.r11 <- edf.r11[edf.r11$CO2 == 350, ]
+    edf2.r11 <- edf.r11[edf.r11$CO2 == 700, ]
+
+    ### plot
+    p<-ggplot() + 
+        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
+        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_VL, col="VL"), size=0.5, linetype="dotted") + 
+        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
+        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_M, col="M"), size=0.5, linetype="dotted") +            
+        geom_line(data=cdf2.r11, aes(x=nc, y=NPP_photo, col="C700"), size=0.5, linetype="dotted") +     
+        geom_point(data=edf1.r11, aes(x=nc_pot_VL, y=NPP_pot_VL), 
+                color="green", shape=21, size=3) + 
+        geom_point(data=edf2.r11, aes(x=nc_pot_L, y=NPP_pot_L), 
+                   shape=21, color="orange", size=3) +
+        geom_point(data=edf2.r11, aes(x=nc_pot_M, y=NPP_pot_M), 
+                   shape=21, color="purple", size=3) +
+        geom_point(data=edf2.r11, aes(x=nc_pot_VL, y=NPP_pot_VL), 
+                   shape=21, color="red", size=3) +
+        geom_point(data=edf1.r11, aes(x=nc_pot_VL, y=NPP_I, fill="B"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf1.r11, aes(x=nc_pot_VL, y=NPP_act_VL, fill="A"), 
+                color="black", shape=21, size=3) + 
+        geom_point(data=edf2.r11, aes(x=nc_pot_L, y=NPP_act_L, fill="D"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf2.r11, aes(x=nc_pot_M, y=NPP_act_M, fill="C"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf2.r11, aes(x=nc_pot_VL, y=NPP_act_VL, fill="E"), 
+                   shape=21, color="black", size=3) +
+        ylim(0.5, 2.0) + 
+        xlim(0.001, 0.03) +
+        labs(x="Shoot N:C Ratio", 
+             y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
+        theme_linedraw() +
+        theme(panel.grid.minor=element_blank(),
+              axis.text=element_text(size=12),
+              axis.title=element_text(size=14),
+              legend.text=element_text(size=12),
+              legend.title=element_text(size=14),
+              panel.grid.major=element_line(color="grey")) +
+        scale_colour_manual(name="Constraint line", 
+                            values = c("C350" = "darkblue", "C700" = cbbPalette[3], "VL" = "red",
+                                       "L" = "orange", "M" = "purple")) +
+        scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
+                                                      "D" = "orange", "E" = "red")) 
+
+    plot(p)
+    if (save.plot) {
+        pdf("Plots/Run11.pdf", width=8, height=6)
+        plot(p)
+        dev.off()
+    } 
+```
+
 
 <br/><br/>
+
+### Run 12. CLM model C cost of N uptake, variable wood N:C ratio
+``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE, results="hide"}
+    ### split the data.list into two data frames
+    cdf.r11 <- r11$cDF
+    edf.r11 <- r11$eDF
+
+    ### extract CO2 conc. from constraint DF
+    cdf1.r11 <- cdf.r11[cdf.r11$CO2 == 350, ]
+    cdf2.r11 <- cdf.r11[cdf.r11$CO2 == 700, ]
+
+    ### extract CO2 conc. from eq DF
+    edf1.r11 <- edf.r11[edf.r11$CO2 == 350, ]
+    edf2.r11 <- edf.r11[edf.r11$CO2 == 700, ]
+
+    ### plot
+    p<-ggplot() + 
+        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
+        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_VL, col="VL"), size=0.5, linetype="dotted") + 
+        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
+        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_M, col="M"), size=0.5, linetype="dotted") +            
+        geom_line(data=cdf2.r11, aes(x=nc, y=NPP_photo, col="C700"), size=0.5, linetype="dotted") +     
+        geom_point(data=edf1.r11, aes(x=nc_pot_VL, y=NPP_pot_VL), 
+                color="green", shape=21, size=3) + 
+        geom_point(data=edf2.r11, aes(x=nc_pot_L, y=NPP_pot_L), 
+                   shape=21, color="orange", size=3) +
+        geom_point(data=edf2.r11, aes(x=nc_pot_M, y=NPP_pot_M), 
+                   shape=21, color="purple", size=3) +
+        geom_point(data=edf2.r11, aes(x=nc_pot_VL, y=NPP_pot_VL), 
+                   shape=21, color="red", size=3) +
+        geom_point(data=edf1.r11, aes(x=nc_pot_VL, y=NPP_I, fill="B"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf1.r11, aes(x=nc_pot_VL, y=NPP_act_VL, fill="A"), 
+                color="black", shape=21, size=3) + 
+        geom_point(data=edf2.r11, aes(x=nc_pot_L, y=NPP_act_L, fill="D"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf2.r11, aes(x=nc_pot_M, y=NPP_act_M, fill="C"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf2.r11, aes(x=nc_pot_VL, y=NPP_act_VL, fill="E"), 
+                   shape=21, color="black", size=3) +
+        ylim(0.5, 2.0) + 
+        xlim(0.001, 0.03) +
+        labs(x="Shoot N:C Ratio", 
+             y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
+        theme_linedraw() +
+        theme(panel.grid.minor=element_blank(),
+              axis.text=element_text(size=12),
+              axis.title=element_text(size=14),
+              legend.text=element_text(size=12),
+              legend.title=element_text(size=14),
+              panel.grid.major=element_line(color="grey")) +
+        scale_colour_manual(name="Constraint line", 
+                            values = c("C350" = "darkblue", "C700" = cbbPalette[3], "VL" = "red",
+                                       "L" = "orange", "M" = "purple")) +
+        scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
+                                                      "D" = "orange", "E" = "red")) 
+
+    plot(p)
+    if (save.plot) {
+        pdf("Plots/Run11.pdf", width=8, height=6)
+        plot(p)
+        dev.off()
+    } 
+```
 
 ## 4. To-do list:
 Below is a continuous update of the to-do list of this project:

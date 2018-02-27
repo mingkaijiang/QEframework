@@ -1,14 +1,14 @@
 
-#### Analytical script Run 11
+#### Analytical script Run 12
 ####
 #### Assumptions:
 #### 1. CLM model C cost of N uptake
-#### 2. fixed wood NC
+#### 2. Variable wood NC
 #### 3. active N uptake
 ####
 ################################################################################
 #### Functions
-Perform_Analytical_Run11 <- function(f.flag = 1) {
+Perform_Analytical_Run12 <- function(f.flag = 1) {
     #### Function to perform analytical run 1 simulations
     #### eDF: stores equilibrium points
     #### cDF: stores constraint points (curves)
@@ -16,7 +16,7 @@ Perform_Analytical_Run11 <- function(f.flag = 1) {
     #### f.flag: = 2 return a list consisting of two dataframes
 
     ######### Main program
-    source("Parameters/Analytical_Run11_Parameters.R")
+    source("Parameters/Analytical_Run12_Parameters.R")
     
     ### create a range of nc for shoot to initiate
     nfseq <- round(seq(0.001, 0.1, by = 0.001),5)
@@ -160,7 +160,7 @@ Perform_Analytical_Run11 <- function(f.flag = 1) {
     if (f.flag == 1) {
         
         ### plot 2-d plots of nf vs. npp and nf vs. pf
-        tiff("Plots/Analytical_Run11_2d.tiff",
+        tiff("Plots/Analytical_Run12_2d.tiff",
              width = 5, height = 5, units = "in", res = 300)
         par(mar=c(5.1,6.1,2.1,2.1))
         

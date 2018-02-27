@@ -13,6 +13,8 @@
 #### Run 8: Priming effect (i.e. exudation and faster turnover of slow SOM pool, variable wood)
 #### Run 9: CLM baseline potential NPP, fixed wood NC
 #### Run 10: CLM baseline potential NPP, variable wood NC
+#### Run 11: CLM C cost of N uptake approach, fixed wood NC
+#### Run 12: CLM C cost of N uptake approach, variable wood NC
 
 
 ################################################################################
@@ -30,6 +32,8 @@
 #Perform_Analytical_Run8(f.flag = 1)
 #Perform_Analytical_Run9(f.flag = 1)
 #Perform_Analytical_Run10(f.flag = 1)
+#Perform_Analytical_Run11(f.flag = 1)
+#Perform_Analytical_Run12(f.flag = 1)
 
 #### Step 2: return data list
 r1 <- Perform_Analytical_Run1(f.flag = 2)
@@ -42,6 +46,8 @@ r7 <- Perform_Analytical_Run7(f.flag = 2)
 r8 <- Perform_Analytical_Run8(f.flag = 2)
 r9 <- Perform_Analytical_Run9(f.flag = 2)
 r10 <- Perform_Analytical_Run10(f.flag = 2)
+r11 <- Perform_Analytical_Run11(f.flag = 2)
+r12 <- Perform_Analytical_Run12(f.flag = 2)
 
 ################################################################################
 #### End

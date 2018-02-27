@@ -6,7 +6,7 @@ CO2_2 <- 700.0  # 700
 nwood = 0.005      # 0.005 
 nrho = 0.7
 nretrans = 0.5
-nwvar = FALSE
+nwvar = TRUE     # TRUE
 kext=0.5
 SLA=5
 sf=0.5
