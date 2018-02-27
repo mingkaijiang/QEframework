@@ -888,7 +888,7 @@ Active uptake is an ion-specific enzyme-catalyzed process analogous to Michaelis
 
 BNF is performed by bacteria living in symbiosis within root modules on certain types of plants.
 
-Here, I am calculating C cost of N uptake based on retranslocation, active uptake and fixation. 
+Here, I am calculating C cost of N uptake based on passive uptake, retranslocation, active uptake and fixation. 
 
 ``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE, results="hide"}
     ### split the data.list into two data frames

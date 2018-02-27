@@ -3,6 +3,14 @@ M_constraint_c_cost <- function(nfdf, potnpp) {
     # mineral N pool return in kg N m-2 yr-1
     Nmin <- Nin / 1000 / leachn
     
+    # calculate passive N uptake kg N m-2 yr-1
+    Npass <- Nmin * (et/sd)
+    Ndem <- potnpp * (nfdf$nf * nfdf$af + nfdf$nw * nfdf$aw + nfdf$nr + nfdf$ar)
+    Npass2 <- min(Npass, Ndem)
+    
+    # calculate c acqured due to passive N uptake
+    c_pass <- Npass2 / (nfdf$nf * nfdf$af + nfdf$nw * nfdf$aw + nfdf$nr + nfdf$ar)
+    
     # cost of N fixation
     cost_fix <- c_cost_fix()
     
@@ -17,7 +25,7 @@ M_constraint_c_cost <- function(nfdf, potnpp) {
     cost_aq <- min(cost_fix, min(cost_active, cost_resorb))
     
     # NPP used for growth
-    NPP_act <-  potnpp - cost_aq
+    NPP_act <-  potnpp - cost_aq + c_pass
     
     # out df
     out <- data.frame(NPP_act, cost_aq)
