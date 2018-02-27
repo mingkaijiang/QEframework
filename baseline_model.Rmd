@@ -5,7 +5,7 @@ date: "Feb 12, 2018"
 output:
   html_document:
     toc: true
-    toc_flat: true
+    toc_float: true
     theme: united
 ---
 
@@ -1020,7 +1020,7 @@ Here, I am calculating C cost of N uptake based on retranslocation, active uptak
     } 
 ```
 
-## 4. Summary table:
+# 4. Summary table:
 ``` {r, echo=FALSE}
     source("QE_Analyses/make_summary_table.R")
     sumDF <- make_summary_table(destDir = "Tables")
@@ -1031,7 +1031,7 @@ Here, I am calculating C cost of N uptake based on retranslocation, active uptak
 ```
 
 
-## 5. To-do list:
+# 5. To-do list:
 Below is a continuous update of the to-do list of this project:
 
     - Test CLM representation of C cost of N uptake
