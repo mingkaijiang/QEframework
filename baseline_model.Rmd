@@ -753,13 +753,13 @@ Visionally, with potential NPP and actual NPP, we have the QE framework looks li
         geom_line(data=cdf1.r9, aes(x=nc, y=NPP_M, col="M"), size=0.5, linetype="dotted") +            
         geom_line(data=cdf2.r9, aes(x=nc, y=NPP_photo, col="C700"), size=0.5, linetype="dotted") +     
         geom_point(data=edf1.r9, aes(x=nc_pot_VL, y=NPP_pot_VL), 
-                color="green", shape=21, size=3) + 
+                color=cbPalette[1], shape=21, size=3) + 
         geom_point(data=edf2.r9, aes(x=nc_pot_L, y=NPP_pot_L), 
-                   shape=21, color="orange", size=3) +
+                   shape=21, color=cbPalette[4], size=3) +
         geom_point(data=edf2.r9, aes(x=nc_pot_M, y=NPP_pot_M), 
-                   shape=21, color="purple", size=3) +
+                   shape=21, color=cbPalette[3], size=3) +
         geom_point(data=edf2.r9, aes(x=nc_pot_VL, y=NPP_pot_VL), 
-                   shape=21, color="red", size=3) +
+                   shape=21, color=cbPalette[7], size=3) +
         geom_point(data=edf1.r9, aes(x=nc_pot_VL, y=NPP_I, fill="B"), 
                    shape=21, color="black", size=3) +
         geom_point(data=edf1.r9, aes(x=nc_act_VL, y=NPP_act_VL, fill="A"), 
@@ -822,13 +822,13 @@ Here we can see that, at equilibrium, the actual NPP is not intersecting with th
         geom_line(data=cdf1.r10, aes(x=nc, y=NPP_M, col="M"), size=0.5, linetype="dotted") +            
         geom_line(data=cdf2.r10, aes(x=nc, y=NPP_photo, col="C700"), size=0.5, linetype="dotted") +     
         geom_point(data=edf1.r10, aes(x=nc_pot_VL, y=NPP_pot_VL), 
-                color="green", shape=21, size=3) + 
+                color=cbPalette[1], shape=21, size=3) + 
         geom_point(data=edf2.r10, aes(x=nc_pot_L, y=NPP_pot_L), 
-                   shape=21, color="orange", size=3) +
+                   shape=21, color=cbPalette[4], size=3) +
         geom_point(data=edf2.r10, aes(x=nc_pot_M, y=NPP_pot_M), 
-                   shape=21, color="purple", size=3) +
+                   shape=21, color=cbPalette[3], size=3) +
         geom_point(data=edf2.r10, aes(x=nc_pot_VL, y=NPP_pot_VL), 
-                   shape=21, color="red", size=3) +
+                   shape=21, color=cbPalette[7], size=3) +
         geom_point(data=edf1.r10, aes(x=nc_pot_VL, y=NPP_I, fill="B"), 
                    shape=21, color="black", size=3) +
         geom_point(data=edf1.r10, aes(x=nc_act_VL, y=NPP_act_VL, fill="A"), 
@@ -911,13 +911,13 @@ Here, I am calculating C cost of N uptake based on passive uptake, retranslocati
         geom_line(data=cdf1.r11, aes(x=nc, y=NPP_M, col="M"), size=0.5, linetype="dotted") +            
         geom_line(data=cdf2.r11, aes(x=nc, y=NPP_photo, col="C700"), size=0.5, linetype="dotted") +     
         geom_point(data=edf1.r11, aes(x=nc_pot_VL, y=NPP_pot_VL), 
-                color="green", shape=21, size=3) + 
+                color=cbPalette[1], shape=21, size=3) + 
         geom_point(data=edf2.r11, aes(x=nc_pot_L, y=NPP_pot_L), 
-                   shape=21, color="orange", size=3) +
+                   shape=21, color=cbPalette[4], size=3) +
         geom_point(data=edf2.r11, aes(x=nc_pot_M, y=NPP_pot_M), 
-                   shape=21, color="purple", size=3) +
+                   shape=21, color=cbPalette[3], size=3) +
         geom_point(data=edf2.r11, aes(x=nc_pot_VL, y=NPP_pot_VL), 
-                   shape=21, color="red", size=3) +
+                   shape=21, color=cbPalette[7], size=3) +
         geom_point(data=edf1.r11, aes(x=nc_pot_VL, y=NPP_I, fill="B"), 
                    shape=21, color="black", size=3) +
         geom_point(data=edf1.r11, aes(x=nc_pot_VL, y=NPP_act_VL, fill="A"), 
@@ -978,13 +978,13 @@ Here, I am calculating C cost of N uptake based on passive uptake, retranslocati
         geom_line(data=cdf1.r12, aes(x=nc, y=NPP_M, col="M"), size=0.5, linetype="dotted") +            
         geom_line(data=cdf2.r12, aes(x=nc, y=NPP_photo, col="C700"), size=0.5, linetype="dotted") +     
         geom_point(data=edf1.r12, aes(x=nc_pot_VL, y=NPP_pot_VL), 
-                color="green", shape=21, size=3) + 
+                color=cbPalette[1], shape=21, size=3) + 
         geom_point(data=edf2.r12, aes(x=nc_pot_L, y=NPP_pot_L), 
-                   shape=21, color="orange", size=3) +
+                   shape=21, color=cbPalette[4], size=3) +
         geom_point(data=edf2.r12, aes(x=nc_pot_M, y=NPP_pot_M), 
-                   shape=21, color="purple", size=3) +
+                   shape=21, color=cbPalette[3], size=3) +
         geom_point(data=edf2.r12, aes(x=nc_pot_VL, y=NPP_pot_VL), 
-                   shape=21, color="red", size=3) +
+                   shape=21, color=cbPalette[7], size=3) +
         geom_point(data=edf1.r12, aes(x=nc_pot_VL, y=NPP_I, fill="B"), 
                    shape=21, color="black", size=3) +
         geom_point(data=edf1.r12, aes(x=nc_pot_VL, y=NPP_act_VL, fill="A"), 
