@@ -106,10 +106,10 @@ Now, I am plotting the graphic illustration of the QE framework, based on Comins
               legend.title=element_text(size=14),
               panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
-                            values = c("C350" = "darkblue", "C700" = cbbPalette[3], "VL" = "red",
-                                       "L" = "orange", "M" = "purple")) +
-        scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
-                                                      "D" = "orange", "E" = "red")) 
+                            values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
+                                       "L" = cbbPalette[4], "M" = cbbPalette[3])) +
+        scale_fill_manual(name="QE point", values = c("A" = cbPalette[1], "B" = cbPalette[2], "C" = cbPalette[3],
+                                                      "D" = cbPalette[4], "E" = cbPalette[7])) 
         ### only save this to pdf and then add arrows and recall it
         pdf("Plots/QE_illustration.pdf", width=8, height=6)
         plot(p)
@@ -168,10 +168,10 @@ Now, I am plotting QE framework for each individual model assumption.
               legend.title=element_text(size=14),
               panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
-                            values = c("C350" = "darkblue", "C700" = cbbPalette[3], "VL" = "red",
-                                       "L" = "orange", "M" = "purple")) +
-        scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
-                                                      "D" = "orange", "E" = "red")) 
+                            values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
+                                       "L" = cbbPalette[4], "M" = cbbPalette[3])) +
+        scale_fill_manual(name="QE point", values = c("A" = cbPalette[1], "B" = cbPalette[2], "C" = cbPalette[3],
+                                                      "D" = cbPalette[4], "E" = cbPalette[7])) 
 
     plot(p)
     if (save.plot) {
@@ -230,10 +230,10 @@ Here, the QE framework indicates that, the VL and L line constraints are very mu
               legend.title=element_text(size=14),
               panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
-                            values = c("C350" = "darkblue", "C700" = cbbPalette[3], "VL" = "red",
-                                       "L" = "orange", "M" = "purple")) +
-        scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
-                                                      "D" = "orange", "E" = "red")) 
+                            values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
+                                       "L" = cbbPalette[4], "M" = cbbPalette[3])) +
+        scale_fill_manual(name="QE point", values = c("A" = cbPalette[1], "B" = cbPalette[2], "C" = cbPalette[3],
+                                                      "D" = cbPalette[4], "E" = cbPalette[7])) 
     plot(p)
     if (save.plot) {
         pdf("Plots/Run02.pdf", width=8, height=6)
@@ -321,10 +321,10 @@ Under fixed wood NC scenario, more N is stored in woody pool at the M term, leav
               legend.title=element_text(size=14),
               panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
-                            values = c("C350" = "darkblue", "C700" = cbbPalette[3], "VL" = "red",
-                                       "L" = "orange", "M" = "purple")) +
-        scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
-                                                      "D" = "orange", "E" = "red")) 
+                            values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
+                                       "L" = cbbPalette[4], "M" = cbbPalette[3])) +
+        scale_fill_manual(name="QE point", values = c("A" = cbPalette[1], "B" = cbPalette[2], "C" = cbPalette[3],
+                                                      "D" = cbPalette[4], "E" = cbPalette[7])) 
 
     plot(p)
     if (save.plot) {
@@ -382,10 +382,10 @@ Given that N uptake rate is assumed to be 1, here this QE framework should be ex
               legend.title=element_text(size=14),
               panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
-                            values = c("C350" = "darkblue", "C700" = cbbPalette[3], "VL" = "red",
-                                       "L" = "orange", "M" = "purple")) +
-        scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
-                                                      "D" = "orange", "E" = "red")) 
+                            values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
+                                       "L" = cbbPalette[4], "M" = cbbPalette[3])) +
+        scale_fill_manual(name="QE point", values = c("A" = cbPalette[1], "B" = cbPalette[2], "C" = cbPalette[3],
+                                                      "D" = cbPalette[4], "E" = cbPalette[7])) 
 
     plot(p)
     if (save.plot) {
@@ -445,10 +445,10 @@ Here (run 3 and 4), minral N pool is made explicit. By modifying mineral N uptak
               legend.title=element_text(size=14),
               panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
-                            values = c("C350" = "darkblue", "C700" = cbbPalette[3], "VL" = "red",
-                                       "L" = "orange", "M" = "purple")) +
-        scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
-                                                      "D" = "orange", "E" = "red")) 
+                            values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
+                                       "L" = cbbPalette[4], "M" = cbbPalette[3])) +
+        scale_fill_manual(name="QE point", values = c("A" = cbPalette[1], "B" = cbPalette[2], "C" = cbPalette[3],
+                                                      "D" = cbPalette[4], "E" = cbPalette[7])) 
 
     plot(p)
     if (save.plot) {
@@ -505,10 +505,10 @@ Here, uptake rate of N is represented mathematically as a saturating function of
               legend.title=element_text(size=14),
               panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
-                            values = c("C350" = "darkblue", "C700" = cbbPalette[3], 
-                                       "L" = "orange", "M" = "purple")) +
-        scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
-                                                      "D" = "orange", "E" = "red")) 
+                            values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], 
+                                       "L" = cbbPalette[4], "M" = cbbPalette[3])) +
+        scale_fill_manual(name="QE point", values = c("A" = cbPalette[1], "B" = cbPalette[2], "C" = cbPalette[3],
+                                                      "D" = cbPalette[4], "E" = cbPalette[7])) 
 
     plot(p)
     if (save.plot) {
@@ -588,10 +588,10 @@ There is no VL constraint curve because NPP cancels out for all possible leaf NC
               legend.title=element_text(size=14),
               panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
-                            values = c("C350" = "darkblue", "C700" = cbbPalette[3], "VL" = "red",
-                                       "L" = "orange", "M" = "purple")) +
-        scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
-                                                      "D" = "orange", "E" = "red")) 
+                            values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
+                                       "L" = cbbPalette[4], "M" = cbbPalette[3])) +
+        scale_fill_manual(name="QE point", values = c("A" = cbPalette[1], "B" = cbPalette[2], "C" = cbPalette[3],
+                                                      "D" = cbPalette[4], "E" = cbPalette[7])) 
     plot(p)
     if (save.plot) {
         pdf("Plots/Run07.pdf", width=8, height=6)
@@ -649,10 +649,10 @@ Here we see that priming is not really doing a lot. The treatment for priming ef
               legend.title=element_text(size=14),
               panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
-                            values = c("C350" = "darkblue", "C700" = cbbPalette[3], "VL" = "red",
-                                       "L" = "orange", "M" = "purple")) +
-        scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
-                                                      "D" = "orange", "E" = "red")) 
+                            values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
+                                       "L" = cbbPalette[4], "M" = cbbPalette[3])) +
+        scale_fill_manual(name="QE point", values = c("A" = cbPalette[1], "B" = cbPalette[2], "C" = cbPalette[3],
+                                                      "D" = cbPalette[4], "E" = cbPalette[7])) 
 
     plot(p)
     if (save.plot) {
@@ -782,10 +782,10 @@ Visionally, with potential NPP and actual NPP, we have the QE framework looks li
               legend.title=element_text(size=14),
               panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
-                            values = c("C350" = "darkblue", "C700" = cbbPalette[3], "VL" = "red",
-                                       "L" = "orange", "M" = "purple")) +
-        scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
-                                                      "D" = "orange", "E" = "red")) 
+                            values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
+                                       "L" = cbbPalette[4], "M" = cbbPalette[3])) +
+        scale_fill_manual(name="QE point", values = c("A" = cbPalette[1], "B" = cbPalette[2], "C" = cbPalette[3],
+                                                      "D" = cbPalette[4], "E" = cbPalette[7])) 
 
     plot(p)
     if (save.plot) {
@@ -851,10 +851,10 @@ Here we can see that, at equilibrium, the actual NPP is not intersecting with th
               legend.title=element_text(size=14),
               panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
-                            values = c("C350" = "darkblue", "C700" = cbbPalette[3], "VL" = "red",
-                                       "L" = "orange", "M" = "purple")) +
-        scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
-                                                      "D" = "orange", "E" = "red")) 
+                            values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
+                                       "L" = cbbPalette[4], "M" = cbbPalette[3])) +
+        scale_fill_manual(name="QE point", values = c("A" = cbPalette[1], "B" = cbPalette[2], "C" = cbPalette[3],
+                                                      "D" = cbPalette[4], "E" = cbPalette[7])) 
 
     plot(p)
     if (save.plot) {
@@ -940,10 +940,10 @@ Here, I am calculating C cost of N uptake based on passive uptake, retranslocati
               legend.title=element_text(size=14),
               panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
-                            values = c("C350" = "darkblue", "C700" = cbbPalette[3], "VL" = "red",
-                                       "L" = "orange", "M" = "purple")) +
-        scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
-                                                      "D" = "orange", "E" = "red")) 
+                            values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
+                                       "L" = cbbPalette[4], "M" = cbbPalette[3])) +
+        scale_fill_manual(name="QE point", values = c("A" = cbPalette[1], "B" = cbPalette[2], "C" = cbPalette[3],
+                                                      "D" = cbPalette[4], "E" = cbPalette[7])) 
 
     plot(p)
     if (save.plot) {
@@ -1007,10 +1007,10 @@ Here, I am calculating C cost of N uptake based on passive uptake, retranslocati
               legend.title=element_text(size=14),
               panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
-                            values = c("C350" = "darkblue", "C700" = cbbPalette[3], "VL" = "red",
-                                       "L" = "orange", "M" = "purple")) +
-        scale_fill_manual(name="QE point", values = c("A" = "green", "B" = "lightgreen", "C" = "purple",
-                                                      "D" = "orange", "E" = "red")) 
+                            values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
+                                       "L" = cbbPalette[4], "M" = cbbPalette[3])) +
+        scale_fill_manual(name="QE point", values = c("A" = cbPalette[1], "B" = cbPalette[2], "C" = cbPalette[3],
+                                                      "D" = cbPalette[4], "E" = cbPalette[7])) 
 
     plot(p)
     if (save.plot) {
