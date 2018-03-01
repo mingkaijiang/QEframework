@@ -63,7 +63,7 @@ Here I am preparing the necessary color and plot configurations.
     # The palette with black:
     cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
     
-    save.plot <- F
+    save.plot <- T
 
 ```
 
@@ -726,7 +726,7 @@ $$N_{min} = l_nN_{min} + P_{act} + I_{act} = l_nN_{min} + NPP_{act}n_p + NPP_{ac
 
 Re-arrange, we get:
 
-$$NPP_{act} = N_{in}(1-l_n) / ln[n_p + f(n_s-n_p)] $$
+$$NPP_{act} = N_{in}(1-l_n) / l_n[n_p + f(n_s-n_p)] $$
 
 Similar equations can be derived for L and M term constraints. 
 
@@ -1032,7 +1032,7 @@ Here, I am calculating C cost of N uptake based on passive uptake, retranslocati
 
 The table above summarizes scenarios tested in this study. Next, I am going to make a barplot to visually compare the results. 
 
-``` {r, echo=FALSE, warning=F, message=F, include=F}
+``` {r, echo=FALSE, warning=F, message=F}
     ### Firstly, remove unwanted scenarios
     sumDF2 <- sumDF[grepl("variable wood", sumDF$model),]
     sumDF3 <-  rbind(sumDF2, sumDF[sumDF$model == "Baseline fixed wood", ])     
@@ -1064,7 +1064,7 @@ The table above summarizes scenarios tested in this study. Next, I am going to m
         coord_flip()
     plot(p)
     if (save.plot) {
-        pdf("Plots/summary_plot.pdf", width=8, height=6)
+        pdf("Plots/summary_plot.pdf", width=10, height=6)
         plot(p)
         dev.off()
     } 
