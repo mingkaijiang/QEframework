@@ -1079,9 +1079,14 @@ Below is a continuous update of the to-do list of this project:
     - Check parameter sensitivity for priming effect.
     - Check parameter sensitivity for f and ns in CLM baseline approach.
     - Check parameter sensitivity for n uptake coefficient, and graphically demonstrate its effect
-    - Spell out all equations
+    - Spell out all equations and derivations
     - Look at relationships beyond NPP and leaf NC
     - Add GDAY simulations (time series result)
+    - Look at CLM 4.0 and 4.5, for important N uptake processes
+    - Look at Leuning 1991 papers
+    - Possibly submit to Biogeosciences or JGR: biogeosciences
+    - Check N fixation (McMurtrie 2000)
+    - Implement C cost of N uptake properly
 
 <br/>
 <br/>
