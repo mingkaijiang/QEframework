@@ -143,8 +143,8 @@ Perform_Analytical_Run34 <- function(f.flag = 1) {
                    shape=21, color="black", size=3) +
         geom_point(data=equil350DF, aes(x=nc_VL, y=NPP_I, fill="B"), 
                    shape=21, color="black", size=3) +
-        ylim(1.0, 2.0) + 
-        xlim(0.001, 0.03) +
+        ylim(1.0, 3.0) + 
+        xlim(0.001, 0.1) +
         labs(x="Leaf N:C Ratio", 
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
         theme_linedraw() +
