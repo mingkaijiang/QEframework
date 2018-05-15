@@ -1,14 +1,14 @@
 
-#### Analytical script Run 3.1
+#### Analytical script Run 3.2
 ####
 #### Assumptions:
 #### 1. Variable wood NC
 #### 2. baseline N cycle
 #### 3. Explicit mineral N pool
-#### 4. N uptake = 0.5
+#### 4. N uptake = 0.2
 ################################################################################
 #### Functions
-Perform_Analytical_Run31 <- function(f.flag = 1) {
+Perform_Analytical_Run32 <- function(f.flag = 1) {
     #### Function to perform analytical run 3 simulations
     #### eDF: stores equilibrium points
     #### cDF: stores constraint points (curves)
@@ -16,7 +16,7 @@ Perform_Analytical_Run31 <- function(f.flag = 1) {
     #### f.flag: = 2 return a list consisting of two dataframes
 
     ######### Main program
-    source("Parameters/Analytical_Run31_Parameters.R")
+    source("Parameters/Analytical_Run32_Parameters.R")
     
     require(ggplot2)
     require(knitr)
@@ -162,7 +162,7 @@ Perform_Analytical_Run31 <- function(f.flag = 1) {
     
 
     if (f.flag == 1) {
-        pdf("Plots/Run031.pdf", width=8, height=6)
+        pdf("Plots/Run032.pdf", width=8, height=6)
         plot(p)
         dev.off()
     } else {
