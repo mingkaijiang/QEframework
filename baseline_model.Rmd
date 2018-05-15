@@ -96,7 +96,7 @@ Now, I am plotting the graphic illustration of the QE framework, based on Comins
                    shape=21, color="black", size=3) +
         ylim(1.0, 4.0) + 
         xlim(0.001, 0.04) +
-        labs(x="Shoot N:C Ratio", 
+        labs(x="Leaf N:C Ratio", 
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
@@ -158,7 +158,7 @@ Now, I am plotting QE framework for each individual model assumption.
                    shape=21, color="black", size=3) +
         ylim(1.0, 2.0) + 
         xlim(0.001, 0.03) +
-        labs(x="Shoot N:C Ratio", 
+        labs(x="Leaf N:C Ratio", 
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
@@ -220,7 +220,7 @@ Here, the QE framework indicates that, the VL and L line constraints are very mu
                    shape=21, color="black", size=3) +
         ylim(1.0, 2.0) + 
         xlim(0.001, 0.03) +
-        labs(x="Shoot N:C Ratio", 
+        labs(x="Leaf N:C Ratio", 
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
@@ -311,7 +311,7 @@ Under fixed wood NC scenario, more N is stored in woody pool at the M term, leav
                    shape=21, color="black", size=3) +
         ylim(1.0, 2.0) + 
         xlim(0.001, 0.03) +
-        labs(x="Shoot N:C Ratio", 
+        labs(x="Leaf N:C Ratio", 
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
@@ -372,7 +372,7 @@ Given that N uptake rate is assumed to be 1, here this QE framework should be ex
                    shape=21, color="black", size=3) +
         ylim(1.0, 2.0) + 
         xlim(0.001, 0.03) +
-        labs(x="Shoot N:C Ratio", 
+        labs(x="Leaf N:C Ratio", 
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
@@ -435,7 +435,7 @@ Here (run 3 and 4), minral N pool is made explicit. By modifying mineral N uptak
                    shape=21, color="black", size=3) +
         ylim(1.0, 2.2) + 
         xlim(0.001, 0.03) +
-        labs(x="Shoot N:C Ratio", 
+        labs(x="Leaf N:C Ratio", 
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
@@ -495,7 +495,7 @@ Here, uptake rate of N is represented mathematically as a saturating function of
                    shape=21, color="black", size=1) +
         ylim(1.0, 2.2) + 
         xlim(0.001, 0.03) +
-        labs(x="Shoot N:C Ratio", 
+        labs(x="Leaf N:C Ratio", 
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
@@ -578,7 +578,7 @@ There is no VL constraint curve because NPP cancels out for all possible leaf NC
                    shape=21, color="black", size=3) +
         ylim(1.0, 2.0) + 
         xlim(0.001, 0.03) +
-        labs(x="Shoot N:C Ratio", 
+        labs(x="Leaf N:C Ratio", 
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
@@ -639,7 +639,7 @@ Here we see that priming is not really doing a lot. The treatment for priming ef
                    shape=21, color="black", size=3) +
         ylim(1.0, 2.0) + 
         xlim(0.001, 0.03) +
-        labs(x="Shoot N:C Ratio", 
+        labs(x="Leaf N:C Ratio", 
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
@@ -772,7 +772,7 @@ Visionally, with potential NPP and actual NPP, we have the QE framework looks li
                    shape=21, color="black", size=3) +
         ylim(0.5, 2.0) + 
         xlim(0.001, 0.03) +
-        labs(x="Shoot N:C Ratio", 
+        labs(x="Leaf N:C Ratio", 
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
@@ -841,7 +841,7 @@ Here we can see that, at equilibrium, the actual NPP is not intersecting with th
                    shape=21, color="black", size=3) +
         ylim(0.5, 2.0) + 
         xlim(0.001, 0.03) +
-        labs(x="Shoot N:C Ratio", 
+        labs(x="Leaf N:C Ratio", 
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
@@ -930,7 +930,7 @@ Here, I am calculating C cost of N uptake based on passive uptake, retranslocati
                    shape=21, color="black", size=3) +
         ylim(0.0, 2.0) + 
         xlim(0.001, 0.03) +
-        labs(x="Shoot N:C Ratio", 
+        labs(x="Leaf N:C Ratio", 
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
@@ -997,7 +997,7 @@ Here, I am calculating C cost of N uptake based on passive uptake, retranslocati
                    shape=21, color="black", size=3) +
         ylim(0.0, 2.0) + 
         xlim(0.001, 0.03) +
-        labs(x="Shoot N:C Ratio", 
+        labs(x="Leaf N:C Ratio", 
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
