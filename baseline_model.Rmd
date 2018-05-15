@@ -1073,7 +1073,71 @@ The table above summarizes scenarios tested in this study. Next, I am going to m
 ```
 
 
-# 5. To-do list:
+# 5. Sensitivity analyses:
+
+### 5.1 N uptake coefficient
+``` {r, echo=FALSE, warning=F, message=F}
+
+    sensDF <- matrix(nrow=5*4, ncol=3)
+    colnames(sensDF) <- c("u", "value", "Time")
+    sensDF <- as.data.frame(sensDF)
+    sensDF$u <- rep(c(0.2, 0.5, 1, 2, 5), each = 4)
+    sensDF$Time <- rep(c("I", "M", "L", "VL"), by = 5)
+
+    sensDF[sensDF$u == 0.2 & sensDF$Time == "I", "value"] <- (r32$eDF$NPP_I[2] - r32$eDF$NPP_VL[1])/r32$eDF$NPP_VL[1]
+    sensDF[sensDF$u == 0.2 & sensDF$Time == "M", "value"] <- (r32$eDF$NPP_M[2] - r32$eDF$NPP_VL[1])/r32$eDF$NPP_VL[1]
+    sensDF[sensDF$u == 0.2 & sensDF$Time == "L", "value"] <- (r32$eDF$NPP_L[2] - r32$eDF$NPP_VL[1])/r32$eDF$NPP_VL[1]
+    sensDF[sensDF$u == 0.2 & sensDF$Time == "VL", "value"] <- (r32$eDF$NPP_VL[2] - r32$eDF$NPP_VL[1])/r32$eDF$NPP_VL[1]
+
+    sensDF[sensDF$u == 0.5 & sensDF$Time == "I", "value"] <- (r31$eDF$NPP_I[2] - r31$eDF$NPP_VL[1])/r31$eDF$NPP_VL[1]
+    sensDF[sensDF$u == 0.5 & sensDF$Time == "M", "value"] <- (r31$eDF$NPP_M[2] - r31$eDF$NPP_VL[1])/r31$eDF$NPP_VL[1]
+    sensDF[sensDF$u == 0.5 & sensDF$Time == "L", "value"] <- (r31$eDF$NPP_L[2] - r31$eDF$NPP_VL[1])/r31$eDF$NPP_VL[1]
+    sensDF[sensDF$u == 0.5 & sensDF$Time == "VL", "value"] <- (r31$eDF$NPP_VL[2] - r31$eDF$NPP_VL[1])/r31$eDF$NPP_VL[1]
+    
+    sensDF[sensDF$u == 1.0 & sensDF$Time == "I", "value"] <- (r3$eDF$NPP_I[2] - r3$eDF$NPP_VL[1])/r3$eDF$NPP_VL[1]
+    sensDF[sensDF$u == 1.0 & sensDF$Time == "M", "value"] <- (r3$eDF$NPP_M[2] - r3$eDF$NPP_VL[1])/r3$eDF$NPP_VL[1]
+    sensDF[sensDF$u == 1.0 & sensDF$Time == "L", "value"] <- (r3$eDF$NPP_L[2] - r3$eDF$NPP_VL[1])/r3$eDF$NPP_VL[1]
+    sensDF[sensDF$u == 1.0 & sensDF$Time == "VL", "value"] <- (r3$eDF$NPP_VL[2] - r3$eDF$NPP_VL[1])/r3$eDF$NPP_VL[1]
+    
+    sensDF[sensDF$u == 2 & sensDF$Time == "I", "value"] <- (r33$eDF$NPP_I[2] - r33$eDF$NPP_VL[1])/r33$eDF$NPP_VL[1]
+    sensDF[sensDF$u == 2 & sensDF$Time == "M", "value"] <- (r33$eDF$NPP_M[2] - r33$eDF$NPP_VL[1])/r33$eDF$NPP_VL[1]
+    sensDF[sensDF$u == 2 & sensDF$Time == "L", "value"] <- (r33$eDF$NPP_L[2] - r33$eDF$NPP_VL[1])/r33$eDF$NPP_VL[1]
+    sensDF[sensDF$u == 2 & sensDF$Time == "VL", "value"] <- (r33$eDF$NPP_VL[2] - r33$eDF$NPP_VL[1])/r33$eDF$NPP_VL[1]
+    
+    sensDF[sensDF$u == 5 & sensDF$Time == "I", "value"] <- (r34$eDF$NPP_I[2] - r34$eDF$NPP_VL[1])/r34$eDF$NPP_VL[1]
+    sensDF[sensDF$u == 5 & sensDF$Time == "M", "value"] <- (r34$eDF$NPP_M[2] - r34$eDF$NPP_VL[1])/r34$eDF$NPP_VL[1]
+    sensDF[sensDF$u == 5 & sensDF$Time == "L", "value"] <- (r34$eDF$NPP_L[2] - r34$eDF$NPP_VL[1])/r34$eDF$NPP_VL[1]
+    sensDF[sensDF$u == 5 & sensDF$Time == "VL", "value"] <- (r34$eDF$NPP_VL[2] - r34$eDF$NPP_VL[1])/r34$eDF$NPP_VL[1]
+    
+    sensDF$u <- as.character(sensDF$u)
+    sensDF$value <- sensDF$value * 100
+    
+    ### plot
+    p<-ggplot() + 
+        geom_bar(data=sensDF, aes(x=u, y=value, fill=Time), 
+                 stat="identity", position=position_dodge()) +
+        theme_linedraw() +
+        theme(panel.grid.minor=element_blank(),
+              axis.text=element_text(size=12),
+              axis.title=element_text(size=14),
+              legend.text=element_text(size=12),
+              legend.title=element_text(size=14),
+              axis.text.x = element_text(angle = 90, hjust=1),
+              panel.grid.major=element_line(color="grey")) + 
+        ylab("% change") + xlab("") + 
+        scale_fill_manual(name="Timescale", values = c("I" = cbPalette[2], "M" = cbPalette[3],
+                                                      "L" = cbPalette[4], "VL" = cbPalette[7])) 
+    plot(p)
+    if (save.plot) {
+        pdf("Plots/sensitivity_n_uptake_coefficient.pdf", width=10, height=6)
+        plot(p)
+        dev.off()
+    } 
+    
+
+```
+
+# 6. To-do list:
 Below is a continuous update of the to-do list of this project:
 
     - Check parameter sensitivity for priming effect.
