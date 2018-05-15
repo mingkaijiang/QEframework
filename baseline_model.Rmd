@@ -44,7 +44,7 @@ Below I use step-by-step guidance to generate the results.
 
 Next, we run analytical run scripts to generate the pdf files and store the rest dataframes into data list:
 
-``` {r, message = FALSE}
+``` {r, message = FALSE,warning=F}
     source("QE_Analyses/Run_analytical_solutions.R")
 
 ```
