@@ -1137,6 +1137,57 @@ The table above summarizes scenarios tested in this study. Next, I am going to m
 
 ```
 
+
+### 5.2 Priming effect coefficients
+``` {r, echo=FALSE, warning=F, message=F}
+
+    sensDF <- matrix(nrow=9, ncol=3)
+    colnames(sensDF) <- c("variable", "variable_value", "M")
+    sensDF <- as.data.frame(sensDF)
+    sensDF$variable <- c("a1", "a1", "a1", "a0", "a0", "a0",
+                         "fcue", "fcue", "fcue")
+    sensDF$variable_value <- c(0.2, 0.5, 1, 0.01, 0.05, 0.1, 0.3, 0.5, 0.7)
+    
+    sensDF[sensDF$variable == "a1" & sensDF$variable_value == 0.2, "M"] <- (r81$eDF$NPP_M[2] - r81$eDF$NPP_VL[1])/r81$eDF$NPP_VL[1]
+    sensDF[sensDF$variable == "a1" & sensDF$variable_value == 0.5, "M"] <- (r82$eDF$NPP_M[2] - r82$eDF$NPP_VL[1])/r82$eDF$NPP_VL[1]
+    sensDF[sensDF$variable == "a1" & sensDF$variable_value == 1.0, "M"] <- (r8$eDF$NPP_M[2] - r8$eDF$NPP_VL[1])/r8$eDF$NPP_VL[1]
+
+    sensDF[sensDF$variable == "a0" & sensDF$variable_value == 0.01, "M"] <- (r8$eDF$NPP_M[2] - r8$eDF$NPP_VL[1])/r8$eDF$NPP_VL[1]
+    sensDF[sensDF$variable == "a0" & sensDF$variable_value == 0.05, "M"] <- (r83$eDF$NPP_M[2] - r83$eDF$NPP_VL[1])/r83$eDF$NPP_VL[1]
+    sensDF[sensDF$variable == "a0" & sensDF$variable_value == 0.1, "M"] <- (r84$eDF$NPP_M[2] - r84$eDF$NPP_VL[1])/r4$eDF$NPP_VL[1]
+    
+    sensDF[sensDF$variable == "fcue" & sensDF$variable_value == 0.3, "M"] <- (r8$eDF$NPP_M[2] - r8$eDF$NPP_VL[1])/r8$eDF$NPP_VL[1]
+    sensDF[sensDF$variable == "fcue" & sensDF$variable_value == 0.5, "M"] <- (r85$eDF$NPP_M[2] - r85$eDF$NPP_VL[1])/r85$eDF$NPP_VL[1]
+    sensDF[sensDF$variable == "fcue" & sensDF$variable_value == 0.7, "M"] <- (r86$eDF$NPP_M[2] - r86$eDF$NPP_VL[1])/r86$eDF$NPP_VL[1]
+    
+    
+    sensDF$variable_value <- as.character(sensDF$variable_value)
+    sensDF$M <- sensDF$M * 100
+    
+    ### plot
+    p<-ggplot() + 
+        geom_bar(data=sensDF, aes(x=variable, y=M, fill=variable_value), 
+                 stat="identity", position=position_dodge()) +
+        theme_linedraw() +
+        theme(panel.grid.minor=element_blank(),
+              axis.text=element_text(size=12),
+              axis.title=element_text(size=14),
+              legend.text=element_text(size=12),
+              legend.title=element_text(size=14),
+              axis.text.x = element_text(angle = 90, hjust=1),
+              panel.grid.major=element_line(color="grey")) + 
+        ylab("% change") + xlab("") + 
+        scale_fill_manual(name="coefficient values", values = c(cbPalette)) 
+    plot(p)
+    if (save.plot) {
+        pdf("Plots/sensitivity_priming_effect_coefficient.pdf", width=10, height=6)
+        plot(p)
+        dev.off()
+    } 
+    
+
+```
+
 # 6. To-do list:
 Below is a continuous update of the to-do list of this project:
 
