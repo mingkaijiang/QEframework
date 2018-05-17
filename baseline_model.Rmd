@@ -1188,6 +1188,141 @@ The table above summarizes scenarios tested in this study. Next, I am going to m
 
 ```
 
+### 5.3 Priming effect on NUE
+
+Here NUE is defined as: 
+$$NUE = 1 / (n_fa_f + n_wa_w + n_ra_r) $$
+
+#### 5.3.1 Fixed wood NC assumption
+
+``` {r, echo=FALSE, warning=F, message=F}
+
+    af <- 0.2
+    ar <- 0.2
+    aw <- 0.6
+    nwood <- 0.005
+    
+    ### split the data.list into two data frames
+    cdf.r7 <- r7$cDF
+    edf.r7 <- r7$eDF
+    
+    cdf.r7$NUE <- 1 / (cdf.r7$nc * af + cdf.r7$nc * 0.7 * ar + nwood * aw)
+
+    edf.r7$NUE_VL <- 1 / (edf.r7$nc_VL * af + edf.r7$nc_VL * 0.7 * ar + nwood * aw)
+    edf.r7$NUE_L <- 1 / (edf.r7$nc_L * af + edf.r7$nc_L * 0.7 * ar + nwood * aw)
+    edf.r7$NUE_M <- 1 / (edf.r7$nc_M* af + edf.r7$nc_M * 0.7 * ar + nwood * aw) 
+
+    ### extract CO2 conc. from constraint DF
+    cdf1.r7 <- cdf.r7[cdf.r7$CO2 == 350, ]
+    cdf2.r7 <- cdf.r7[cdf.r7$CO2 == 700, ]
+
+    ### extract CO2 conc. from eq DF
+    edf1.r7 <- edf.r7[edf.r7$CO2 == 350, ]
+    edf2.r7 <- edf.r7[edf.r7$CO2 == 700, ]
+    
+    ### plot
+    p<-ggplot() + 
+        geom_line(data=cdf1.r7, aes(x=nc, y=NUE, col="NUE trajectory"), size=0.5, linetype="dotted") +   
+        geom_point(data=edf1.r7, aes(x=nc_VL, y=NUE_VL, fill="A"), 
+                color="black", shape=21, size=3) + 
+        geom_point(data=edf2.r7, aes(x=nc_L, y=NUE_L, fill="D"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf2.r7, aes(x=nc_M, y=NUE_M, fill="C"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf2.r7, aes(x=nc_VL, y=NUE_VL, fill="E"), 
+                   shape=21, color="black", size=3) +
+        ylim(100, 250) + 
+        xlim(0.001, 0.03) +
+        labs(x="Leaf N:C Ratio", 
+             y="NUE") +
+        theme_linedraw() +
+        theme(panel.grid.minor=element_blank(),
+              axis.text=element_text(size=12),
+              axis.title=element_text(size=14),
+              legend.text=element_text(size=12),
+              legend.title=element_text(size=14),
+              panel.grid.major=element_line(color="grey")) +
+        scale_colour_manual(name="Constraint line", 
+                            values = c("NUE trajectory" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
+                                       "L" = cbbPalette[4], "M" = cbbPalette[3])) +
+        scale_fill_manual(name="QE point", values = c("A" = cbPalette[1], "B" = cbPalette[2], "C" = cbPalette[3],
+                                                      "D" = cbPalette[4], "E" = cbPalette[7])) 
+
+    plot(p)
+    if (save.plot) {
+        pdf("Plots/sensitivity_priming_NUE_fixed_wood.pdf", width=10, height=6)
+        plot(p)
+        dev.off()
+    } 
+    
+
+```
+
+#### 5.3.2 Fixed wood NC assumption
+
+``` {r, echo=FALSE, warning=F, message=F}
+
+    af <- 0.2
+    ar <- 0.2
+    aw <- 0.6
+    nwood <- 0.005
+    
+    ### split the data.list into two data frames
+    cdf.r8 <- r8$cDF
+    edf.r8 <- r8$eDF
+    
+    cdf.r8$NUE <- 1 / (cdf.r8$nc * af + cdf.r8$nc * 0.7 * ar + cdf.r8$nc * nwood * aw)
+    
+    edf.r8$NUE_VL <- 1 / (edf.r8$nc_VL * af + edf.r8$nc_VL * 0.7 * ar + edf.r8$nc_M * nwood * aw)
+    edf.r8$NUE_L <- 1 / (edf.r8$nc_L * af + edf.r8$nc_L * 0.7 * ar + edf.r8$nc_M * nwood * aw)
+    edf.r8$NUE_M <- 1 / (edf.r8$nc_M* af + edf.r8$nc_M * 0.7 * ar + edf.r8$nc_M * nwood * aw) 
+
+    ### extract CO2 conc. from constraint DF
+    cdf1.r8 <- cdf.r8[cdf.r8$CO2 == 350, ]
+    cdf2.r8 <- cdf.r8[cdf.r8$CO2 == 700, ]
+
+    ### extract CO2 conc. from eq DF
+    edf1.r8 <- edf.r8[edf.r8$CO2 == 350, ]
+    edf2.r8 <- edf.r8[edf.r8$CO2 == 700, ]
+    
+    ### plot
+    p<-ggplot() + 
+        geom_line(data=cdf1.r8, aes(x=nc, y=NUE, col="NUE trajectory"), size=0.5, linetype="dotted") +   
+        geom_point(data=edf1.r8, aes(x=nc_VL, y=NUE_VL, fill="A"), 
+                color="black", shape=21, size=3) + 
+        geom_point(data=edf2.r8, aes(x=nc_L, y=NUE_L, fill="D"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf2.r8, aes(x=nc_M, y=NUE_M, fill="C"), 
+                   shape=21, color="black", size=3) +
+        geom_point(data=edf2.r8, aes(x=nc_VL, y=NUE_VL, fill="E"), 
+                   shape=21, color="black", size=3) +
+        ylim(100, 250) + 
+        xlim(0.001, 0.03) +
+        labs(x="Leaf N:C Ratio", 
+             y="NUE") +
+        theme_linedraw() +
+        theme(panel.grid.minor=element_blank(),
+              axis.text=element_text(size=12),
+              axis.title=element_text(size=14),
+              legend.text=element_text(size=12),
+              legend.title=element_text(size=14),
+              panel.grid.major=element_line(color="grey")) +
+        scale_colour_manual(name="Constraint line", 
+                            values = c("NUE trajectory" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
+                                       "L" = cbbPalette[4], "M" = cbbPalette[3])) +
+        scale_fill_manual(name="QE point", values = c("A" = cbPalette[1], "B" = cbPalette[2], "C" = cbPalette[3],
+                                                      "D" = cbPalette[4], "E" = cbPalette[7])) 
+
+    plot(p)
+    if (save.plot) {
+        pdf("Plots/sensitivity_priming_NUE_variable_wood.pdf", width=10, height=6)
+        plot(p)
+        dev.off()
+    } 
+    
+
+```
+
 # 6. To-do list:
 Below is a continuous update of the to-do list of this project:
 
