@@ -141,11 +141,11 @@ Now, I am plotting QE framework for each individual model assumption.
     edf2.r1 <- edf.r1[edf.r1$CO2 == 700, ]
     ### plot
     p<-ggplot() + 
-        geom_line(data=cdf1.r1, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
-        geom_line(data=cdf1.r1, aes(x=nc, y=NPP_VL, col="VL"), size=0.5, linetype="dotted") + 
-        geom_line(data=cdf1.r1, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
-        geom_line(data=cdf1.r1, aes(x=nc, y=NPP_M, col="M"), size=0.5, linetype="dotted") +            
-        geom_line(data=cdf2.r1, aes(x=nc, y=NPP_photo, col="C700"), size=0.5, linetype="dotted") +     
+        geom_line(data=cdf1.r1, aes(x=nc, y=NPP_photo, col="C350")) +   
+        geom_line(data=cdf1.r1, aes(x=nc, y=NPP_VL, col="VL")) + 
+        geom_line(data=cdf1.r1, aes(x=nc, y=NPP_L, col="L")) +  
+        geom_line(data=cdf1.r1, aes(x=nc, y=NPP_M, col="M")) +            
+        geom_line(data=cdf2.r1, aes(x=nc, y=NPP_photo, col="C700")) +     
         geom_point(data=edf1.r1, aes(x=nc_VL, y=NPP_VL, fill="A"), 
                 color="black", shape=21, size=3) + 
         geom_point(data=edf2.r1, aes(x=nc_L, y=NPP_L, fill="D"), 
@@ -162,10 +162,10 @@ Now, I am plotting QE framework for each individual model assumption.
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
-              axis.text=element_text(size=12),
-              axis.title=element_text(size=14),
-              legend.text=element_text(size=12),
-              legend.title=element_text(size=14),
+              axis.text=element_text(size=14),
+              axis.title=element_text(size=16),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
               panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
                             values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
@@ -203,11 +203,11 @@ Here, the QE framework indicates that, the VL and L line constraints are very mu
     
     ### plot
     p<-ggplot() + 
-        geom_line(data=cdf1.r2, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
-        geom_line(data=cdf1.r2, aes(x=nc, y=NPP_VL, col="VL"), size=0.5, linetype="dotted") + 
-        geom_line(data=cdf1.r2, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
-        geom_line(data=cdf1.r2, aes(x=nc, y=NPP_M, col="M"), size=0.5, linetype="dotted") +            
-        geom_line(data=cdf2.r2, aes(x=nc, y=NPP_photo, col="C700"), size=0.5, linetype="dotted") +     
+        geom_line(data=cdf1.r2, aes(x=nc, y=NPP_photo, col="C350")) +   
+        geom_line(data=cdf1.r2, aes(x=nc, y=NPP_VL, col="VL")) + 
+        geom_line(data=cdf1.r2, aes(x=nc, y=NPP_L, col="L")) +  
+        geom_line(data=cdf1.r2, aes(x=nc, y=NPP_M, col="M")) +            
+        geom_line(data=cdf2.r2, aes(x=nc, y=NPP_photo, col="C700")) +     
         geom_point(data=edf1.r2, aes(x=nc_VL, y=NPP_VL, fill="A"), 
                 color="black", shape=21, size=3) + 
         geom_point(data=edf2.r2, aes(x=nc_L, y=NPP_L, fill="D"), 
@@ -224,10 +224,10 @@ Here, the QE framework indicates that, the VL and L line constraints are very mu
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
-              axis.text=element_text(size=12),
-              axis.title=element_text(size=14),
-              legend.text=element_text(size=12),
-              legend.title=element_text(size=14),
+              axis.text=element_text(size=14),
+              axis.title=element_text(size=16),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
               panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
                             values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
@@ -294,11 +294,11 @@ Under fixed wood NC scenario, more N is stored in woody pool at the M term, leav
 
     ### plot
     p<-ggplot() + 
-        geom_line(data=cdf1.r3, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
-        geom_line(data=cdf1.r3, aes(x=nc, y=NPP_VL, col="VL"), size=0.5, linetype="dotted") + 
-        geom_line(data=cdf1.r3, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
-        geom_line(data=cdf1.r3, aes(x=nc, y=NPP_M, col="M"), size=0.5, linetype="dotted") +            
-        geom_line(data=cdf2.r3, aes(x=nc, y=NPP_photo, col="C700"), size=0.5, linetype="dotted") +     
+        geom_line(data=cdf1.r3, aes(x=nc, y=NPP_photo, col="C350")) +   
+        geom_line(data=cdf1.r3, aes(x=nc, y=NPP_VL, col="VL")) + 
+        geom_line(data=cdf1.r3, aes(x=nc, y=NPP_L, col="L")) +  
+        geom_line(data=cdf1.r3, aes(x=nc, y=NPP_M, col="M")) +            
+        geom_line(data=cdf2.r3, aes(x=nc, y=NPP_photo, col="C700")) +     
         geom_point(data=edf1.r3, aes(x=nc_VL, y=NPP_VL, fill="A"), 
                 color="black", shape=21, size=3) + 
         geom_point(data=edf2.r3, aes(x=nc_L, y=NPP_L, fill="D"), 
@@ -315,10 +315,10 @@ Under fixed wood NC scenario, more N is stored in woody pool at the M term, leav
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
-              axis.text=element_text(size=12),
-              axis.title=element_text(size=14),
-              legend.text=element_text(size=12),
-              legend.title=element_text(size=14),
+              axis.text=element_text(size=14),
+              axis.title=element_text(size=16),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
               panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
                             values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
@@ -355,11 +355,11 @@ Given that N uptake rate is assumed to be 1, here this QE framework should be ex
 
     ### plot
     p<-ggplot() + 
-        geom_line(data=cdf1.r4, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
-        geom_line(data=cdf1.r4, aes(x=nc, y=NPP_VL, col="VL"), size=0.5, linetype="dotted") + 
-        geom_line(data=cdf1.r4, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
-        geom_line(data=cdf1.r4, aes(x=nc, y=NPP_M, col="M"), size=0.5, linetype="dotted") +            
-        geom_line(data=cdf2.r4, aes(x=nc, y=NPP_photo, col="C700"), size=0.5, linetype="dotted") +     
+        geom_line(data=cdf1.r4, aes(x=nc, y=NPP_photo, col="C350")) +   
+        geom_line(data=cdf1.r4, aes(x=nc, y=NPP_VL, col="VL")) + 
+        geom_line(data=cdf1.r4, aes(x=nc, y=NPP_L, col="L")) +  
+        geom_line(data=cdf1.r4, aes(x=nc, y=NPP_M, col="M")) +            
+        geom_line(data=cdf2.r4, aes(x=nc, y=NPP_photo, col="C700")) +     
         geom_point(data=edf1.r4, aes(x=nc_VL, y=NPP_VL, fill="A"), 
                 color="black", shape=21, size=3) + 
         geom_point(data=edf2.r4, aes(x=nc_L, y=NPP_L, fill="D"), 
@@ -376,10 +376,10 @@ Given that N uptake rate is assumed to be 1, here this QE framework should be ex
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
-              axis.text=element_text(size=12),
-              axis.title=element_text(size=14),
-              legend.text=element_text(size=12),
-              legend.title=element_text(size=14),
+              axis.text=element_text(size=14),
+              axis.title=element_text(size=16),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
               panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
                             values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
@@ -418,11 +418,11 @@ Here (run 3 and 4), minral N pool is made explicit. By modifying mineral N uptak
 
     ### plot
     p<-ggplot() + 
-        geom_line(data=cdf1.r5, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
-        geom_line(data=cdf1.r5, aes(x=nc, y=NPP_VL, col="VL"), size=0.5, linetype="dotted") + 
-        geom_line(data=cdf1.r5, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
-        geom_line(data=cdf1.r5, aes(x=nc, y=NPP_M, col="M"), size=0.5, linetype="dotted") +            
-        geom_line(data=cdf2.r5, aes(x=nc, y=NPP_photo, col="C700"), size=0.5, linetype="dotted") +     
+        geom_line(data=cdf1.r5, aes(x=nc, y=NPP_photo, col="C350")) +   
+        geom_line(data=cdf1.r5, aes(x=nc, y=NPP_VL, col="VL")) + 
+        geom_line(data=cdf1.r5, aes(x=nc, y=NPP_L, col="L")) +  
+        geom_line(data=cdf1.r5, aes(x=nc, y=NPP_M, col="M")) +            
+        geom_line(data=cdf2.r5, aes(x=nc, y=NPP_photo, col="C700")) +     
         geom_point(data=edf1.r5, aes(x=nc_VL, y=NPP_VL, fill="A"), 
                 color="black", shape=21, size=3) + 
         geom_point(data=edf2.r5, aes(x=nc_L, y=NPP_L, fill="D"), 
@@ -439,10 +439,10 @@ Here (run 3 and 4), minral N pool is made explicit. By modifying mineral N uptak
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
-              axis.text=element_text(size=12),
-              axis.title=element_text(size=14),
-              legend.text=element_text(size=12),
-              legend.title=element_text(size=14),
+              axis.text=element_text(size=14),
+              axis.title=element_text(size=16),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
               panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
                             values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
@@ -479,10 +479,10 @@ Here, uptake rate of N is represented mathematically as a saturating function of
 
     ### plot
     p<-ggplot() + 
-        geom_line(data=cdf1.r6, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
-        geom_line(data=cdf1.r6, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
-        geom_line(data=cdf1.r6, aes(x=nc, y=NPP_M, col="M"), size=0.5, linetype="dotted") +            
-        geom_line(data=cdf2.r6, aes(x=nc, y=NPP_photo, col="C700"), size=0.5, linetype="dotted") +     
+        geom_line(data=cdf1.r6, aes(x=nc, y=NPP_photo, col="C350")) +   
+        geom_line(data=cdf1.r6, aes(x=nc, y=NPP_L, col="L")) +  
+        geom_line(data=cdf1.r6, aes(x=nc, y=NPP_M, col="M")) +            
+        geom_line(data=cdf2.r6, aes(x=nc, y=NPP_photo, col="C700")) +     
         geom_point(data=edf1.r6, aes(x=nc_VL, y=NPP_VL, fill="A"), 
                    color="black", shape=21, size=3) + 
         geom_point(data=edf2.r6, aes(x=nc_L, y=NPP_L, fill="D"), 
@@ -499,10 +499,10 @@ Here, uptake rate of N is represented mathematically as a saturating function of
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
-              axis.text=element_text(size=12),
-              axis.title=element_text(size=14),
-              legend.text=element_text(size=12),
-              legend.title=element_text(size=14),
+              axis.text=element_text(size=14),
+              axis.title=element_text(size=16),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
               panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
                             values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], 
@@ -561,11 +561,11 @@ There is no VL constraint curve because NPP cancels out for all possible leaf NC
 
     ### plot
     p<-ggplot() + 
-        geom_line(data=cdf1.r7, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
-        geom_line(data=cdf1.r7, aes(x=nc, y=NPP_VL, col="VL"), size=0.5, linetype="dotted") + 
-        geom_line(data=cdf1.r7, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
-        geom_line(data=cdf1.r7, aes(x=nc, y=NPP_M, col="M"), size=0.5, linetype="dotted") +            
-        geom_line(data=cdf2.r7, aes(x=nc, y=NPP_photo, col="C700"), size=0.5, linetype="dotted") +     
+        geom_line(data=cdf1.r7, aes(x=nc, y=NPP_photo, col="C350")) +   
+        geom_line(data=cdf1.r7, aes(x=nc, y=NPP_VL, col="VL")) + 
+        geom_line(data=cdf1.r7, aes(x=nc, y=NPP_L, col="L")) +  
+        geom_line(data=cdf1.r7, aes(x=nc, y=NPP_M, col="M")) +            
+        geom_line(data=cdf2.r7, aes(x=nc, y=NPP_photo, col="C700")) +     
         geom_point(data=edf1.r7, aes(x=nc_VL, y=NPP_VL, fill="A"), 
                 color="black", shape=21, size=3) + 
         geom_point(data=edf2.r7, aes(x=nc_L, y=NPP_L, fill="D"), 
@@ -582,10 +582,10 @@ There is no VL constraint curve because NPP cancels out for all possible leaf NC
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
-              axis.text=element_text(size=12),
-              axis.title=element_text(size=14),
-              legend.text=element_text(size=12),
-              legend.title=element_text(size=14),
+              axis.text=element_text(size=14),
+              axis.title=element_text(size=16),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
               panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
                             values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
@@ -622,11 +622,11 @@ Here we see that priming is not really doing a lot. The treatment for priming ef
 
     ### plot
     p<-ggplot() + 
-        geom_line(data=cdf1.r8, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
-        geom_line(data=cdf1.r8, aes(x=nc, y=NPP_VL, col="VL"), size=0.5, linetype="dotted") + 
-        geom_line(data=cdf1.r8, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
-        geom_line(data=cdf1.r8, aes(x=nc, y=NPP_M, col="M"), size=0.5, linetype="dotted") +            
-        geom_line(data=cdf2.r8, aes(x=nc, y=NPP_photo, col="C700"), size=0.5, linetype="dotted") +     
+        geom_line(data=cdf1.r8, aes(x=nc, y=NPP_photo, col="C350")) +   
+        geom_line(data=cdf1.r8, aes(x=nc, y=NPP_VL, col="VL")) + 
+        geom_line(data=cdf1.r8, aes(x=nc, y=NPP_L, col="L")) +  
+        geom_line(data=cdf1.r8, aes(x=nc, y=NPP_M, col="M")) +            
+        geom_line(data=cdf2.r8, aes(x=nc, y=NPP_photo, col="C700")) +     
         geom_point(data=edf1.r8, aes(x=nc_VL, y=NPP_VL, fill="A"), 
                 color="black", shape=21, size=3) + 
         geom_point(data=edf2.r8, aes(x=nc_L, y=NPP_L, fill="D"), 
@@ -643,10 +643,10 @@ Here we see that priming is not really doing a lot. The treatment for priming ef
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
-              axis.text=element_text(size=12),
-              axis.title=element_text(size=14),
-              legend.text=element_text(size=12),
-              legend.title=element_text(size=14),
+              axis.text=element_text(size=14),
+              axis.title=element_text(size=16),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
               panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
                             values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
@@ -747,11 +747,11 @@ Visionally, with potential NPP and actual NPP, we have the QE framework looks li
 
     ### plot
     p<-ggplot() + 
-        geom_line(data=cdf1.r9, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
-        geom_line(data=cdf1.r9, aes(x=nc, y=NPP_VL, col="VL"), size=0.5, linetype="dotted") + 
-        geom_line(data=cdf1.r9, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
-        geom_line(data=cdf1.r9, aes(x=nc, y=NPP_M, col="M"), size=0.5, linetype="dotted") +            
-        geom_line(data=cdf2.r9, aes(x=nc, y=NPP_photo, col="C700"), size=0.5, linetype="dotted") +     
+        geom_line(data=cdf1.r9, aes(x=nc, y=NPP_photo, col="C350")) +   
+        geom_line(data=cdf1.r9, aes(x=nc, y=NPP_VL, col="VL")) + 
+        geom_line(data=cdf1.r9, aes(x=nc, y=NPP_L, col="L")) +  
+        geom_line(data=cdf1.r9, aes(x=nc, y=NPP_M, col="M")) +            
+        geom_line(data=cdf2.r9, aes(x=nc, y=NPP_photo, col="C700")) +     
         geom_point(data=edf1.r9, aes(x=nc_pot_VL, y=NPP_pot_VL), 
                 color=cbPalette[1], shape=21, size=3) + 
         geom_point(data=edf2.r9, aes(x=nc_pot_L, y=NPP_pot_L), 
@@ -776,10 +776,10 @@ Visionally, with potential NPP and actual NPP, we have the QE framework looks li
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
-              axis.text=element_text(size=12),
-              axis.title=element_text(size=14),
-              legend.text=element_text(size=12),
-              legend.title=element_text(size=14),
+              axis.text=element_text(size=14),
+              axis.title=element_text(size=16),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
               panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
                             values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
@@ -816,11 +816,11 @@ Here we can see that, at equilibrium, the actual NPP is not intersecting with th
 
     ### plot
     p<-ggplot() + 
-        geom_line(data=cdf1.r10, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
-        geom_line(data=cdf1.r10, aes(x=nc, y=NPP_VL, col="VL"), size=0.5, linetype="dotted") + 
-        geom_line(data=cdf1.r10, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
-        geom_line(data=cdf1.r10, aes(x=nc, y=NPP_M, col="M"), size=0.5, linetype="dotted") +            
-        geom_line(data=cdf2.r10, aes(x=nc, y=NPP_photo, col="C700"), size=0.5, linetype="dotted") +     
+        geom_line(data=cdf1.r10, aes(x=nc, y=NPP_photo, col="C350")) +   
+        geom_line(data=cdf1.r10, aes(x=nc, y=NPP_VL, col="VL")) + 
+        geom_line(data=cdf1.r10, aes(x=nc, y=NPP_L, col="L")) +  
+        geom_line(data=cdf1.r10, aes(x=nc, y=NPP_M, col="M")) +            
+        geom_line(data=cdf2.r10, aes(x=nc, y=NPP_photo, col="C700")) +     
         geom_point(data=edf1.r10, aes(x=nc_pot_VL, y=NPP_pot_VL), 
                 color=cbPalette[1], shape=21, size=3) + 
         geom_point(data=edf2.r10, aes(x=nc_pot_L, y=NPP_pot_L), 
@@ -845,10 +845,10 @@ Here we can see that, at equilibrium, the actual NPP is not intersecting with th
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
-              axis.text=element_text(size=12),
-              axis.title=element_text(size=14),
-              legend.text=element_text(size=12),
-              legend.title=element_text(size=14),
+              axis.text=element_text(size=14),
+              axis.title=element_text(size=16),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
               panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
                             values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
@@ -905,11 +905,11 @@ Here, I am calculating C cost of N uptake based on passive uptake, retranslocati
 
     ### plot
     p<-ggplot() + 
-        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
-        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_VL, col="VL"), size=0.5, linetype="dotted") + 
-        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
-        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_M, col="M"), size=0.5, linetype="dotted") +            
-        geom_line(data=cdf2.r11, aes(x=nc, y=NPP_photo, col="C700"), size=0.5, linetype="dotted") +     
+        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_photo, col="C350")) +   
+        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_VL, col="VL")) + 
+        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_L, col="L")) +  
+        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_M, col="M")) +            
+        geom_line(data=cdf2.r11, aes(x=nc, y=NPP_photo, col="C700")) +     
         geom_point(data=edf1.r11, aes(x=nc_pot_VL, y=NPP_pot_VL), 
                 color=cbPalette[1], shape=21, size=3) + 
         geom_point(data=edf2.r11, aes(x=nc_pot_L, y=NPP_pot_L), 
@@ -934,10 +934,10 @@ Here, I am calculating C cost of N uptake based on passive uptake, retranslocati
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
-              axis.text=element_text(size=12),
-              axis.title=element_text(size=14),
-              legend.text=element_text(size=12),
-              legend.title=element_text(size=14),
+              axis.text=element_text(size=14),
+              axis.title=element_text(size=16),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
               panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
                             values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
@@ -972,11 +972,11 @@ Here, I am calculating C cost of N uptake based on passive uptake, retranslocati
 
     ### plot
     p<-ggplot() + 
-        geom_line(data=cdf1.r12, aes(x=nc, y=NPP_photo, col="C350"), size=0.5, linetype="dotted") +   
-        geom_line(data=cdf1.r12, aes(x=nc, y=NPP_VL, col="VL"), size=0.5, linetype="dotted") + 
-        geom_line(data=cdf1.r12, aes(x=nc, y=NPP_L, col="L"), size=0.5, linetype="dotted") +  
-        geom_line(data=cdf1.r12, aes(x=nc, y=NPP_M, col="M"), size=0.5, linetype="dotted") +            
-        geom_line(data=cdf2.r12, aes(x=nc, y=NPP_photo, col="C700"), size=0.5, linetype="dotted") +     
+        geom_line(data=cdf1.r12, aes(x=nc, y=NPP_photo, col="C350")) +   
+        geom_line(data=cdf1.r12, aes(x=nc, y=NPP_VL, col="VL")) + 
+        geom_line(data=cdf1.r12, aes(x=nc, y=NPP_L, col="L")) +  
+        geom_line(data=cdf1.r12, aes(x=nc, y=NPP_M, col="M")) +            
+        geom_line(data=cdf2.r12, aes(x=nc, y=NPP_photo, col="C700")) +     
         geom_point(data=edf1.r12, aes(x=nc_pot_VL, y=NPP_pot_VL), 
                 color=cbPalette[1], shape=21, size=3) + 
         geom_point(data=edf2.r12, aes(x=nc_pot_L, y=NPP_pot_L), 
@@ -1001,10 +1001,10 @@ Here, I am calculating C cost of N uptake based on passive uptake, retranslocati
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
-              axis.text=element_text(size=12),
-              axis.title=element_text(size=14),
-              legend.text=element_text(size=12),
-              legend.title=element_text(size=14),
+              axis.text=element_text(size=14),
+              axis.title=element_text(size=16),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
               panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
                             values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
@@ -1051,10 +1051,10 @@ The table above summarizes scenarios tested in this study. Next, I am going to m
                  stat="identity", position=position_dodge()) +
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
-              axis.text=element_text(size=12),
-              axis.title=element_text(size=14),
-              legend.text=element_text(size=12),
-              legend.title=element_text(size=14),
+              axis.text=element_text(size=14),
+              axis.title=element_text(size=16),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
               axis.text.x = element_text(angle = 90, hjust=1),
               panel.grid.major=element_line(color="grey")) + 
         ylab("% change") + xlab("") + 
@@ -1118,10 +1118,10 @@ The table above summarizes scenarios tested in this study. Next, I am going to m
                  stat="identity", position=position_dodge()) +
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
-              axis.text=element_text(size=12),
-              axis.title=element_text(size=14),
-              legend.text=element_text(size=12),
-              legend.title=element_text(size=14),
+              axis.text=element_text(size=14),
+              axis.title=element_text(size=16),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
               axis.text.x = element_text(angle = 90, hjust=1),
               panel.grid.major=element_line(color="grey")) + 
         ylab("% change") + xlab("") + 
@@ -1170,10 +1170,10 @@ The table above summarizes scenarios tested in this study. Next, I am going to m
                  stat="identity", position=position_dodge()) +
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
-              axis.text=element_text(size=12),
-              axis.title=element_text(size=14),
-              legend.text=element_text(size=12),
-              legend.title=element_text(size=14),
+              axis.text=element_text(size=14),
+              axis.title=element_text(size=16),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
               axis.text.x = element_text(angle = 90, hjust=1),
               panel.grid.major=element_line(color="grey")) + 
         ylab("% change") + xlab("") + 
@@ -1222,7 +1222,7 @@ $$NUE = 1 / (n_fa_f + n_wa_w + n_ra_r) $$
     
     ### plot
     p<-ggplot() + 
-        geom_line(data=cdf1.r7, aes(x=nc, y=NUE, col="NUE trajectory"), size=0.5, linetype="dotted") +   
+        geom_line(data=cdf1.r7, aes(x=nc, y=NUE, col="NUE trajectory")) +   
         geom_point(data=edf1.r7, aes(x=nc_VL, y=NUE_VL, fill="A"), 
                 color="black", shape=21, size=3) + 
         geom_point(data=edf2.r7, aes(x=nc_L, y=NUE_L, fill="D"), 
@@ -1237,10 +1237,10 @@ $$NUE = 1 / (n_fa_f + n_wa_w + n_ra_r) $$
              y="NUE") +
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
-              axis.text=element_text(size=12),
-              axis.title=element_text(size=14),
-              legend.text=element_text(size=12),
-              legend.title=element_text(size=14),
+              axis.text=element_text(size=16),
+              axis.title=element_text(size=18),
+              legend.text=element_text(size=16),
+              legend.title=element_text(size=18),
               panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
                             values = c("NUE trajectory" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
@@ -1287,7 +1287,7 @@ $$NUE = 1 / (n_fa_f + n_wa_w + n_ra_r) $$
     
     ### plot
     p<-ggplot() + 
-        geom_line(data=cdf1.r8, aes(x=nc, y=NUE, col="NUE trajectory"), size=0.5, linetype="dotted") +   
+        geom_line(data=cdf1.r8, aes(x=nc, y=NUE, col="NUE trajectory")) +   
         geom_point(data=edf1.r8, aes(x=nc_VL, y=NUE_VL, fill="A"), 
                 color="black", shape=21, size=3) + 
         geom_point(data=edf2.r8, aes(x=nc_L, y=NUE_L, fill="D"), 
@@ -1302,10 +1302,10 @@ $$NUE = 1 / (n_fa_f + n_wa_w + n_ra_r) $$
              y="NUE") +
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
-              axis.text=element_text(size=12),
-              axis.title=element_text(size=14),
-              legend.text=element_text(size=12),
-              legend.title=element_text(size=14),
+              axis.text=element_text(size=16),
+              axis.title=element_text(size=18),
+              legend.text=element_text(size=16),
+              legend.title=element_text(size=18),
               panel.grid.major=element_line(color="grey")) +
         scale_colour_manual(name="Constraint line", 
                             values = c("NUE trajectory" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
@@ -1326,15 +1326,9 @@ $$NUE = 1 / (n_fa_f + n_wa_w + n_ra_r) $$
 # 6. To-do list:
 Below is a continuous update of the to-do list of this project:
 
-    - Check parameter sensitivity for priming effect.
-    - Check parameter sensitivity for f and ns in CLM baseline approach.
-    - Check parameter sensitivity for n uptake coefficient, and graphically demonstrate its effect
-    - Spell out all equations and derivations
-    - Look at relationships beyond NPP and leaf NC
     - Add GDAY simulations (time series result)
     - Look at CLM 4.0 and 4.5, for important N uptake processes
     - Look at Leuning 1991 papers
-    - Possibly submit to Biogeosciences or JGR: biogeosciences
     - Check N fixation (McMurtrie 2000)
     - Implement C cost of N uptake properly
 
