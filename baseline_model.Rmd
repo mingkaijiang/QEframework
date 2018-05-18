@@ -85,15 +85,15 @@ Now, I am plotting the graphic illustration of the QE framework, based on Comins
         geom_line(data=cdf, aes(x=nc, y=M, col="M"), size=0.5, linetype="dotted") +            
         geom_line(data=cdf, aes(x=nc, y=P700, col="C700"), size=0.5, linetype="dotted") +     
         geom_point(data=edf, aes(x=nc_VL, y=NPP_VL, fill="A"), 
-                color="black", shape=21, size=3) + 
+                color="black", shape=21, size=5) + 
         geom_point(data=edf, aes(x=nc_L_700, y=NPP_L_700, fill="D"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf, aes(x=nc_VL_700, y=NPP_VL_700, fill="E"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf, aes(x=nc_M_700, y=NPP_M_700, fill="C"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf, aes(x=nc_I, y=NPP_I, fill="B"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         ylim(1.0, 4.0) + 
         xlim(0.001, 0.04) +
         labs(x="Leaf N:C Ratio", 
@@ -147,15 +147,15 @@ Now, I am plotting QE framework for each individual model assumption.
         geom_line(data=cdf1.r1, aes(x=nc, y=NPP_M, col="M")) +            
         geom_line(data=cdf2.r1, aes(x=nc, y=NPP_photo, col="C700")) +     
         geom_point(data=edf1.r1, aes(x=nc_VL, y=NPP_VL, fill="A"), 
-                color="black", shape=21, size=3) + 
+                color="black", shape=21, size=5) + 
         geom_point(data=edf2.r1, aes(x=nc_L, y=NPP_L, fill="D"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf2.r1, aes(x=nc_M, y=NPP_M, fill="C"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf2.r1, aes(x=nc_VL, y=NPP_VL, fill="E"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf1.r1, aes(x=nc_VL, y=NPP_I, fill="B"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         ylim(1.0, 2.0) + 
         xlim(0.001, 0.03) +
         labs(x="Leaf N:C Ratio", 
@@ -209,15 +209,15 @@ Here, the QE framework indicates that, the VL and L line constraints are very mu
         geom_line(data=cdf1.r2, aes(x=nc, y=NPP_M, col="M")) +            
         geom_line(data=cdf2.r2, aes(x=nc, y=NPP_photo, col="C700")) +     
         geom_point(data=edf1.r2, aes(x=nc_VL, y=NPP_VL, fill="A"), 
-                color="black", shape=21, size=3) + 
+                color="black", shape=21, size=5) + 
         geom_point(data=edf2.r2, aes(x=nc_L, y=NPP_L, fill="D"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf2.r2, aes(x=nc_M, y=NPP_M, fill="C"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf2.r2, aes(x=nc_VL, y=NPP_VL, fill="E"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf1.r2, aes(x=nc_VL, y=NPP_I, fill="B"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         ylim(1.0, 2.0) + 
         xlim(0.001, 0.03) +
         labs(x="Leaf N:C Ratio", 
@@ -300,15 +300,15 @@ Under fixed wood NC scenario, more N is stored in woody pool at the M term, leav
         geom_line(data=cdf1.r3, aes(x=nc, y=NPP_M, col="M")) +            
         geom_line(data=cdf2.r3, aes(x=nc, y=NPP_photo, col="C700")) +     
         geom_point(data=edf1.r3, aes(x=nc_VL, y=NPP_VL, fill="A"), 
-                color="black", shape=21, size=3) + 
+                color="black", shape=21, size=5) + 
         geom_point(data=edf2.r3, aes(x=nc_L, y=NPP_L, fill="D"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf2.r3, aes(x=nc_M, y=NPP_M, fill="C"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf2.r3, aes(x=nc_VL, y=NPP_VL, fill="E"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf1.r3, aes(x=nc_VL, y=NPP_I, fill="B"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         ylim(1.0, 2.0) + 
         xlim(0.001, 0.03) +
         labs(x="Leaf N:C Ratio", 
@@ -361,15 +361,15 @@ Given that N uptake rate is assumed to be 1, here this QE framework should be ex
         geom_line(data=cdf1.r4, aes(x=nc, y=NPP_M, col="M")) +            
         geom_line(data=cdf2.r4, aes(x=nc, y=NPP_photo, col="C700")) +     
         geom_point(data=edf1.r4, aes(x=nc_VL, y=NPP_VL, fill="A"), 
-                color="black", shape=21, size=3) + 
+                color="black", shape=21, size=5) + 
         geom_point(data=edf2.r4, aes(x=nc_L, y=NPP_L, fill="D"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf2.r4, aes(x=nc_M, y=NPP_M, fill="C"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf2.r4, aes(x=nc_VL, y=NPP_VL, fill="E"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf1.r4, aes(x=nc_VL, y=NPP_I, fill="B"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         ylim(1.0, 2.0) + 
         xlim(0.001, 0.03) +
         labs(x="Leaf N:C Ratio", 
@@ -424,15 +424,15 @@ Here (run 3 and 4), minral N pool is made explicit. By modifying mineral N uptak
         geom_line(data=cdf1.r5, aes(x=nc, y=NPP_M, col="M")) +            
         geom_line(data=cdf2.r5, aes(x=nc, y=NPP_photo, col="C700")) +     
         geom_point(data=edf1.r5, aes(x=nc_VL, y=NPP_VL, fill="A"), 
-                color="black", shape=21, size=3) + 
+                color="black", shape=21, size=5) + 
         geom_point(data=edf2.r5, aes(x=nc_L, y=NPP_L, fill="D"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf2.r5, aes(x=nc_M, y=NPP_M, fill="C"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf2.r5, aes(x=nc_VL, y=NPP_VL, fill="E"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf1.r5, aes(x=nc_VL, y=NPP_I, fill="B"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         ylim(1.0, 2.2) + 
         xlim(0.001, 0.03) +
         labs(x="Leaf N:C Ratio", 
@@ -484,13 +484,13 @@ Here, uptake rate of N is represented mathematically as a saturating function of
         geom_line(data=cdf1.r6, aes(x=nc, y=NPP_M, col="M")) +            
         geom_line(data=cdf2.r6, aes(x=nc, y=NPP_photo, col="C700")) +     
         geom_point(data=edf1.r6, aes(x=nc_VL, y=NPP_VL, fill="A"), 
-                   color="black", shape=21, size=3) + 
+                   color="black", shape=21, size=5) + 
         geom_point(data=edf2.r6, aes(x=nc_L, y=NPP_L, fill="D"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf2.r6, aes(x=nc_M, y=NPP_M, fill="C"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf2.r6, aes(x=nc_VL, y=NPP_VL, fill="E"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf1.r6, aes(x=nc_VL, y=NPP_I, fill="B"), 
                    shape=21, color="black", size=1) +
         ylim(1.0, 2.2) + 
@@ -567,15 +567,15 @@ There is no VL constraint curve because NPP cancels out for all possible leaf NC
         geom_line(data=cdf1.r7, aes(x=nc, y=NPP_M, col="M")) +            
         geom_line(data=cdf2.r7, aes(x=nc, y=NPP_photo, col="C700")) +     
         geom_point(data=edf1.r7, aes(x=nc_VL, y=NPP_VL, fill="A"), 
-                color="black", shape=21, size=3) + 
+                color="black", shape=21, size=5) + 
         geom_point(data=edf2.r7, aes(x=nc_L, y=NPP_L, fill="D"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf2.r7, aes(x=nc_M, y=NPP_M, fill="C"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf2.r7, aes(x=nc_VL, y=NPP_VL, fill="E"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf1.r7, aes(x=nc_VL, y=NPP_I, fill="B"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         ylim(1.0, 2.0) + 
         xlim(0.001, 0.03) +
         labs(x="Leaf N:C Ratio", 
@@ -628,15 +628,15 @@ Here we see that priming is not really doing a lot. The treatment for priming ef
         geom_line(data=cdf1.r8, aes(x=nc, y=NPP_M, col="M")) +            
         geom_line(data=cdf2.r8, aes(x=nc, y=NPP_photo, col="C700")) +     
         geom_point(data=edf1.r8, aes(x=nc_VL, y=NPP_VL, fill="A"), 
-                color="black", shape=21, size=3) + 
+                color="black", shape=21, size=5) + 
         geom_point(data=edf2.r8, aes(x=nc_L, y=NPP_L, fill="D"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf2.r8, aes(x=nc_M, y=NPP_M, fill="C"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf2.r8, aes(x=nc_VL, y=NPP_VL, fill="E"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf1.r8, aes(x=nc_VL, y=NPP_I, fill="B"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         ylim(1.0, 2.0) + 
         xlim(0.001, 0.03) +
         labs(x="Leaf N:C Ratio", 
@@ -753,15 +753,15 @@ Visionally, with potential NPP and actual NPP, we have the QE framework looks li
         geom_line(data=cdf1.r9, aes(x=nc, y=NPP_M, col="M")) +            
         geom_line(data=cdf2.r9, aes(x=nc, y=NPP_photo, col="C700")) +     
         geom_point(data=edf1.r9, aes(x=nc_act_VL, y=NPP_I, fill="B"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf1.r9, aes(x=nc_act_VL, y=NPP_act_VL, fill="A"), 
-                color="black", shape=21, size=3) + 
+                color="black", shape=21, size=5) + 
         geom_point(data=edf2.r9, aes(x=nc_act_L, y=NPP_act_L, fill="D"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf2.r9, aes(x=nc_act_M, y=NPP_act_M, fill="C"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf2.r9, aes(x=nc_act_VL, y=NPP_act_VL, fill="E"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         ylim(0.5, 2.0) + 
         xlim(0.001, 0.01) +
         labs(x="Leaf N:C Ratio", 
@@ -814,15 +814,15 @@ Here we can see that, at equilibrium, the actual NPP is not intersecting with th
         geom_line(data=cdf1.r10, aes(x=nc, y=NPP_M, col="M")) +            
         geom_line(data=cdf2.r10, aes(x=nc, y=NPP_photo, col="C700")) +     
         geom_point(data=edf1.r10, aes(x=nc_act_VL, y=NPP_I, fill="B"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf1.r10, aes(x=nc_act_VL, y=NPP_act_VL, fill="A"), 
-                color="black", shape=21, size=3) + 
+                color="black", shape=21, size=5) + 
         geom_point(data=edf2.r10, aes(x=nc_act_L, y=NPP_act_L, fill="D"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf2.r10, aes(x=nc_act_M, y=NPP_act_M, fill="C"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf2.r10, aes(x=nc_act_VL, y=NPP_act_VL, fill="E"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         ylim(0.5, 2.0) + 
         xlim(0.001, 0.01) +
         labs(x="Leaf N:C Ratio", 
@@ -895,23 +895,23 @@ Here, I am calculating C cost of N uptake based on passive uptake, retranslocati
         geom_line(data=cdf1.r11, aes(x=nc, y=NPP_M, col="M")) +            
         geom_line(data=cdf2.r11, aes(x=nc, y=NPP_photo, col="C700")) +     
         geom_point(data=edf1.r11, aes(x=nc_pot_VL, y=NPP_pot_VL), 
-                color=cbPalette[1], shape=21, size=3) + 
+                color=cbPalette[1], shape=21, size=5) + 
         geom_point(data=edf2.r11, aes(x=nc_pot_L, y=NPP_pot_L), 
-                   shape=21, color=cbPalette[4], size=3) +
+                   shape=21, color=cbPalette[4], size=5) +
         geom_point(data=edf2.r11, aes(x=nc_pot_M, y=NPP_pot_M), 
-                   shape=21, color=cbPalette[3], size=3) +
+                   shape=21, color=cbPalette[3], size=5) +
         geom_point(data=edf2.r11, aes(x=nc_pot_VL, y=NPP_pot_VL), 
-                   shape=21, color=cbPalette[7], size=3) +
+                   shape=21, color=cbPalette[7], size=5) +
         geom_point(data=edf1.r11, aes(x=nc_pot_VL, y=NPP_I, fill="B"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf1.r11, aes(x=nc_pot_VL, y=NPP_act_VL, fill="A"), 
-                color="black", shape=21, size=3) + 
+                color="black", shape=21, size=5) + 
         geom_point(data=edf2.r11, aes(x=nc_pot_L, y=NPP_act_L, fill="D"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf2.r11, aes(x=nc_pot_M, y=NPP_act_M, fill="C"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf2.r11, aes(x=nc_pot_VL, y=NPP_act_VL, fill="E"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         ylim(0.0, 2.0) + 
         xlim(0.001, 0.03) +
         labs(x="Leaf N:C Ratio", 
@@ -962,23 +962,23 @@ Here, I am calculating C cost of N uptake based on passive uptake, retranslocati
         geom_line(data=cdf1.r12, aes(x=nc, y=NPP_M, col="M")) +            
         geom_line(data=cdf2.r12, aes(x=nc, y=NPP_photo, col="C700")) +     
         geom_point(data=edf1.r12, aes(x=nc_pot_VL, y=NPP_pot_VL), 
-                color=cbPalette[1], shape=21, size=3) + 
+                color=cbPalette[1], shape=21, size=5) + 
         geom_point(data=edf2.r12, aes(x=nc_pot_L, y=NPP_pot_L), 
-                   shape=21, color=cbPalette[4], size=3) +
+                   shape=21, color=cbPalette[4], size=5) +
         geom_point(data=edf2.r12, aes(x=nc_pot_M, y=NPP_pot_M), 
-                   shape=21, color=cbPalette[3], size=3) +
+                   shape=21, color=cbPalette[3], size=5) +
         geom_point(data=edf2.r12, aes(x=nc_pot_VL, y=NPP_pot_VL), 
-                   shape=21, color=cbPalette[7], size=3) +
+                   shape=21, color=cbPalette[7], size=5) +
         geom_point(data=edf1.r12, aes(x=nc_pot_VL, y=NPP_I, fill="B"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf1.r12, aes(x=nc_pot_VL, y=NPP_act_VL, fill="A"), 
-                color="black", shape=21, size=3) + 
+                color="black", shape=21, size=5) + 
         geom_point(data=edf2.r12, aes(x=nc_pot_L, y=NPP_act_L, fill="D"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf2.r12, aes(x=nc_pot_M, y=NPP_act_M, fill="C"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf2.r12, aes(x=nc_pot_VL, y=NPP_act_VL, fill="E"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         ylim(0.0, 2.0) + 
         xlim(0.001, 0.03) +
         labs(x="Leaf N:C Ratio", 
@@ -1208,13 +1208,13 @@ $$NUE = 1 / (n_fa_f + n_wa_w + n_ra_r) $$
     p<-ggplot() + 
         geom_line(data=cdf1.r7, aes(x=nc, y=NUE, col="NUE trajectory")) +   
         geom_point(data=edf1.r7, aes(x=nc_VL, y=NUE_VL, fill="A"), 
-                color="black", shape=21, size=3) + 
+                color="black", shape=21, size=5) + 
         geom_point(data=edf2.r7, aes(x=nc_L, y=NUE_L, fill="D"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf2.r7, aes(x=nc_M, y=NUE_M, fill="C"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf2.r7, aes(x=nc_VL, y=NUE_VL, fill="E"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         ylim(100, 250) + 
         xlim(0.001, 0.03) +
         labs(x="Leaf N:C Ratio", 
@@ -1273,13 +1273,13 @@ $$NUE = 1 / (n_fa_f + n_wa_w + n_ra_r) $$
     p<-ggplot() + 
         geom_line(data=cdf1.r8, aes(x=nc, y=NUE, col="NUE trajectory")) +   
         geom_point(data=edf1.r8, aes(x=nc_VL, y=NUE_VL, fill="A"), 
-                color="black", shape=21, size=3) + 
+                color="black", shape=21, size=5) + 
         geom_point(data=edf2.r8, aes(x=nc_L, y=NUE_L, fill="D"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf2.r8, aes(x=nc_M, y=NUE_M, fill="C"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         geom_point(data=edf2.r8, aes(x=nc_VL, y=NUE_VL, fill="E"), 
-                   shape=21, color="black", size=3) +
+                   shape=21, color="black", size=5) +
         ylim(100, 250) + 
         xlim(0.001, 0.03) +
         labs(x="Leaf N:C Ratio", 
