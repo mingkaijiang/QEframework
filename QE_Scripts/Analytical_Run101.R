@@ -3,20 +3,20 @@
 ####
 #### Assumptions:
 #### 1. baseline CLM: potential NPP
-#### 2. Fixed wood NC
+#### 2. Variable wood NC
 #### 3. Even simplier version (assuming 1 soil pool)
 ####
 ################################################################################
 #### Functions
-Perform_Analytical_Run91 <- function(f.flag = 1) {
-    #### Function to perform analytical run 91 simulations
+Perform_Analytical_Run101 <- function(f.flag = 1) {
+    #### Function to perform analytical run 10.1 simulations
     #### eDF: stores equilibrium points
     #### cDF: stores constraint points (curves)
     #### f.flag: = 1 simply plot analytical solution and create individual pdf file
     #### f.flag: = 2 return a list consisting of two dataframes
 
     ######### Main program
-    source("Parameters/Analytical_Run91_Parameters.R")
+    source("Parameters/Analytical_Run101_Parameters.R")
     
     ### create a range of nc for shoot to initiate
     nfseq <- round(seq(0.001, 0.1, by = 0.001),5)
@@ -125,7 +125,7 @@ Perform_Analytical_Run91 <- function(f.flag = 1) {
     if (f.flag == 1) {
         
         ### plot 2-d plots of nf vs. npp and nf vs. pf
-        tiff("Plots/Analytical_Run91_2d.tiff",
+        tiff("Plots/Analytical_Run101_2d.tiff",
              width = 5, height = 5, units = "in", res = 300)
         par(mar=c(5.1,6.1,2.1,2.1))
         

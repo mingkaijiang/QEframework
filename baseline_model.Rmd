@@ -752,14 +752,6 @@ Visionally, with potential NPP and actual NPP, we have the QE framework looks li
         geom_line(data=cdf1.r9, aes(x=nc, y=NPP_L, col="L")) +  
         geom_line(data=cdf1.r9, aes(x=nc, y=NPP_M, col="M")) +            
         geom_line(data=cdf2.r9, aes(x=nc, y=NPP_photo, col="C700")) +     
-        geom_point(data=edf1.r9, aes(x=nc_pot_VL, y=NPP_pot_VL), 
-                color=cbPalette[1], shape=21, size=3) + 
-        geom_point(data=edf2.r9, aes(x=nc_pot_L, y=NPP_pot_L), 
-                   shape=21, color=cbPalette[4], size=3) +
-        geom_point(data=edf2.r9, aes(x=nc_pot_M, y=NPP_pot_M), 
-                   shape=21, color=cbPalette[3], size=3) +
-        geom_point(data=edf2.r9, aes(x=nc_pot_VL, y=NPP_pot_VL), 
-                   shape=21, color=cbPalette[7], size=3) +
         geom_point(data=edf1.r9, aes(x=nc_pot_VL, y=NPP_I, fill="B"), 
                    shape=21, color="black", size=3) +
         geom_point(data=edf1.r9, aes(x=nc_act_VL, y=NPP_act_VL, fill="A"), 
@@ -771,7 +763,7 @@ Visionally, with potential NPP and actual NPP, we have the QE framework looks li
         geom_point(data=edf2.r9, aes(x=nc_act_VL, y=NPP_act_VL, fill="E"), 
                    shape=21, color="black", size=3) +
         ylim(0.5, 2.0) + 
-        xlim(0.001, 0.03) +
+        xlim(0.001, 0.01) +
         labs(x="Leaf N:C Ratio", 
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
         theme_linedraw() +
@@ -821,14 +813,6 @@ Here we can see that, at equilibrium, the actual NPP is not intersecting with th
         geom_line(data=cdf1.r10, aes(x=nc, y=NPP_L, col="L")) +  
         geom_line(data=cdf1.r10, aes(x=nc, y=NPP_M, col="M")) +            
         geom_line(data=cdf2.r10, aes(x=nc, y=NPP_photo, col="C700")) +     
-        geom_point(data=edf1.r10, aes(x=nc_pot_VL, y=NPP_pot_VL), 
-                color=cbPalette[1], shape=21, size=3) + 
-        geom_point(data=edf2.r10, aes(x=nc_pot_L, y=NPP_pot_L), 
-                   shape=21, color=cbPalette[4], size=3) +
-        geom_point(data=edf2.r10, aes(x=nc_pot_M, y=NPP_pot_M), 
-                   shape=21, color=cbPalette[3], size=3) +
-        geom_point(data=edf2.r10, aes(x=nc_pot_VL, y=NPP_pot_VL), 
-                   shape=21, color=cbPalette[7], size=3) +
         geom_point(data=edf1.r10, aes(x=nc_pot_VL, y=NPP_I, fill="B"), 
                    shape=21, color="black", size=3) +
         geom_point(data=edf1.r10, aes(x=nc_act_VL, y=NPP_act_VL, fill="A"), 
@@ -840,7 +824,7 @@ Here we can see that, at equilibrium, the actual NPP is not intersecting with th
         geom_point(data=edf2.r10, aes(x=nc_act_VL, y=NPP_act_VL, fill="E"), 
                    shape=21, color="black", size=3) +
         ylim(0.5, 2.0) + 
-        xlim(0.001, 0.03) +
+        xlim(0.001, 0.01) +
         labs(x="Leaf N:C Ratio", 
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
         theme_linedraw() +
