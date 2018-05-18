@@ -752,7 +752,7 @@ Visionally, with potential NPP and actual NPP, we have the QE framework looks li
         geom_line(data=cdf1.r9, aes(x=nc, y=NPP_L, col="L")) +  
         geom_line(data=cdf1.r9, aes(x=nc, y=NPP_M, col="M")) +            
         geom_line(data=cdf2.r9, aes(x=nc, y=NPP_photo, col="C700")) +     
-        geom_point(data=edf1.r9, aes(x=nc_pot_VL, y=NPP_I, fill="B"), 
+        geom_point(data=edf1.r9, aes(x=nc_act_VL, y=NPP_I, fill="B"), 
                    shape=21, color="black", size=3) +
         geom_point(data=edf1.r9, aes(x=nc_act_VL, y=NPP_act_VL, fill="A"), 
                 color="black", shape=21, size=3) + 
@@ -813,7 +813,7 @@ Here we can see that, at equilibrium, the actual NPP is not intersecting with th
         geom_line(data=cdf1.r10, aes(x=nc, y=NPP_L, col="L")) +  
         geom_line(data=cdf1.r10, aes(x=nc, y=NPP_M, col="M")) +            
         geom_line(data=cdf2.r10, aes(x=nc, y=NPP_photo, col="C700")) +     
-        geom_point(data=edf1.r10, aes(x=nc_pot_VL, y=NPP_I, fill="B"), 
+        geom_point(data=edf1.r10, aes(x=nc_act_VL, y=NPP_I, fill="B"), 
                    shape=21, color="black", size=3) +
         geom_point(data=edf1.r10, aes(x=nc_act_VL, y=NPP_act_VL, fill="A"), 
                 color="black", shape=21, size=3) + 
@@ -1310,11 +1310,8 @@ $$NUE = 1 / (n_fa_f + n_wa_w + n_ra_r) $$
 # 6. To-do list:
 Below is a continuous update of the to-do list of this project:
 
-    - Add GDAY simulations (time series result)
-    - Look at CLM 4.0 and 4.5, for important N uptake processes
-    - Look at Leuning 1991 papers
     - Check N fixation (McMurtrie 2000)
-    - Implement C cost of N uptake properly
+    - Implement C cost of N uptake properly (FUN model)
 
 <br/>
 <br/>
