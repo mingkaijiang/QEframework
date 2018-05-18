@@ -1,7 +1,9 @@
-c_cost_resorb <- function(df) {
+c_cost_resorb <- function(potnpp, df) {
     ### Unit of kr: kg C m-2
     
-    c_cost_resorb <- kr / df$nf
+    leafC <- potnpp / sf
+    
+    c_cost_resorb <- kr / (leafC * df$nf)
     
     return(c_cost_resorb)
 }

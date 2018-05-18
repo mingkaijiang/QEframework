@@ -27,17 +27,14 @@ Perform_Analytical_Run11 <- function(f.flag = 1) {
     ### calculate photosynthetic constraint at CO2 = 350
     P350 <- photo_constraint_full(nf=nfseq, nfdf=a_nf, CO2=CO2_1)
 
-    ### calculate very long term NC constraint on NPP, respectively
-    VL <- VL_constraint(nf=nfseq, nfdf=a_nf)
+    ### Calculate potential NPP based on VL nutrient recycling constraint
+    VL <- VL_constraint_c_cost(nfdf=a_nf, P350)
     
-    ### finding the equilibrium point between photosynthesis and very long term nutrient constraints
-    VL_pot_eq <- solve_VL_full(CO2=CO2_1)
-
+    ### calculate VL equil potential NPP
+    VL_act_eq <- solve_VL_CLM_simplified(CO2=CO2_1)
+    
     ### calculate nw and nr for VL equilibrated nf value
-    a_pot_eq <- alloc(VL_pot_eq$nf)
-    
-    ### Calculate actual VL equilibrium points
-    VL_act_eq <- VL_constraint_c_cost(nfdf=a_pot_eq, VL_pot_eq$NPP)
+    a_act_eq <- alloc(VL_act_eq$nf)
     
     ### calculate soil parameters, e.g. reburial coef.
     s_coef <- soil_coef(df=VL_act_eq$nf, a=a_pot_eq)
