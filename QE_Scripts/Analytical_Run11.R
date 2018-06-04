@@ -31,7 +31,7 @@ Perform_Analytical_Run11 <- function(f.flag = 1) {
     VL <- VL_constraint_c_cost(nfdf=a_nf, P350)
     
     ### calculate VL equil potential NPP
-    VL_act_eq <- solve_VL_CLM_simplified(CO2=CO2_1)
+    VL_act_eq <- solve_VL_CLM_FUN(CO2=CO2_1)
     
     ### calculate nw and nr for VL equilibrated nf value
     a_act_eq <- alloc(VL_act_eq$nf)

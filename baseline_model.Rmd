@@ -1312,6 +1312,10 @@ Below is a continuous update of the to-do list of this project:
 
     - Check N fixation (McMurtrie 2000)
     - Implement C cost of N uptake properly (FUN model)
+    - NUE plotting
+    - Revise manuscript (introduction, methods and results)
+    - Discussion writing
+    - 
 
 <br/>
 <br/>
