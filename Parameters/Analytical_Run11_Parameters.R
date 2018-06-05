@@ -48,7 +48,7 @@ ncs <- 0.01
 
 # C cost of N upatake specific parameters
 sd <- 10      # soil water depth, unit: m
-et <- 0.5     # m yr-1
+et <- 0.1     # m yr-1
 kr <- 0.01    # unit kg C m-2
 kn2 <- 1     # kg C m-2   used in c_cost_of_active
 kc2 <- 1     # kg C m-2   used in c_cost_of_active

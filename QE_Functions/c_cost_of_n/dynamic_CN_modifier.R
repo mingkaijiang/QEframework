@@ -4,7 +4,7 @@ dynamic_CN_modifier <- function(cn_plant, N_cost) {
     ### Define constants
     ### Parameters fitted to give flexible CN ranges over the perating range of N costs of the model
     acn_flex <- 0.0 # operates as the Ncost above which there is a modification in the C expenditure (to allow higher CN ratio)
-    bcn_flex <- 1 # scalar that determines how much the C expenditure is modified for a given discrepancy between acn and the actual cost of uptake
+    bcn_flex <- 1   # scalar that determines how much the C expenditure is modified for a given discrepancy between acn and the actual cost of uptake
     ccn_flex <- 150.0
     target_cn <- 20
     

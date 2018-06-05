@@ -1,4 +1,4 @@
-VL_constraint_c_cost <- function(nfdf, potnpp) {
+FUN_model <- function(nfdf, potnpp) {
 
     ### plant C:N ratio
     rcn <- 1/(nfdf$nf * nfdf$af + nfdf$nw * nfdf$aw + nfdf$nr * nfdf$ar)
@@ -34,10 +34,10 @@ VL_constraint_c_cost <- function(nfdf, potnpp) {
     
     ## NPP allocated to growth
     Cgrow <- potnpp - Cacq_real
-  points(nfseq, Cgrow, col="green")
+
     ### out df
-    out <- data.frame(Cgrow, Cacq_real, potnpp, cost)
-    colnames(out) <- c("NPP_grow", "NPP_acq", "NPP_pot", "cost")
+    out <- data.frame(nfdf$nf, Cgrow, Cacq_real, potnpp, cost)
+    colnames(out) <- c("nf", "NPP_grow", "NPP_acq", "NPP_pot", "cost")
     
     return(out)   
 }

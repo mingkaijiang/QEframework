@@ -28,13 +28,16 @@ Perform_Analytical_Run11 <- function(f.flag = 1) {
     P350 <- photo_constraint_full(nf=nfseq, nfdf=a_nf, CO2=CO2_1)
 
     ### Calculate potential NPP based on VL nutrient recycling constraint
-    VL <- VL_constraint_c_cost(nfdf=a_nf, P350)
+    VL <- VL_constraint(nf=nfseq, nfdf=a_nf)
     
     ### calculate VL equil potential NPP
-    VL_act_eq <- solve_VL_CLM_FUN(CO2=CO2_1)
+    VL_pot_eq <- solve_VL_full(CO2=CO2_1)
     
     ### calculate nw and nr for VL equilibrated nf value
-    a_act_eq <- alloc(VL_act_eq$nf)
+    a_pot_eq <- alloc(VL_pot_eq$nf)
+    
+    ### Calculate actual NPP for VL term
+    VL_act_eq <- FUN_model(nfdf=a_pot_eq, VL_pot_eq$NPP)
     
     ### calculate soil parameters, e.g. reburial coef.
     s_coef <- soil_coef(df=VL_act_eq$nf, a=a_pot_eq)
@@ -46,7 +49,7 @@ Perform_Analytical_Run11 <- function(f.flag = 1) {
     ### Get C from very-long term nutrient cycling solution
     ### return in g C m-2 
     C_pass_VL_pot <- omega_ap*VL_pot_eq$NPP/s_coef$decomp_pass/(1-s_coef$qq_pass)*1000.0
-    C_pass_VL_act <- omega_ap*VL_act_eq$NPP/s_coef$decomp_pass/(1-s_coef$qq_pass)*1000.0
+    C_pass_VL_act <- omega_ap*VL_act_eq$NPP_grow/s_coef$decomp_pass/(1-s_coef$qq_pass)*1000.0
     
     ### Calculate long term nutrient constraint
     L <- L_constraint(df=nfseq, a=a_nf, 
@@ -60,17 +63,17 @@ Perform_Analytical_Run11 <- function(f.flag = 1) {
     a_pot_eq <- alloc(L_pot_eq$nf)
     
     ### Find actual L term equilibrium point
-    L_act_eq <- L_constraint_c_cost(a_pot_eq, L_pot_eq$NPP)
+    L_act_eq <- FUN_model(nfdf=a_pot_eq, L_pot_eq$NPP)
     
     ### Get Cslow from long nutrient cycling solution
     ### return in g C m-2
     C_slow_L_pot <- omega_as*L_pot_eq$NPP/s_coef$decomp_slow/(1-s_coef$qq_slow)*1000.0
-    C_slow_L_act <- omega_as*L_act_eq$NPP/s_coef$decomp_slow/(1-s_coef$qq_slow)*1000.0
+    C_slow_L_act <- omega_as*L_act_eq$NPP_grow/s_coef$decomp_slow/(1-s_coef$qq_slow)*1000.0
     
     ### Calculate nutrient release from slow woody pool
     ### return in g N m-2 yr-1
     N_wood_L_pot <- a_pot_eq$aw*a_pot_eq$nw*VL_pot_eq$NPP*1000.0
-    N_wood_L_act <- a_pot_eq$aw*a_pot_eq$nw*VL_act_eq$NPP*1000.0
+    N_wood_L_act <- a_pot_eq$aw*a_pot_eq$nw*VL_act_eq$NPP_grow*1000.0
     
     ### Calculate medium term nutrient constraint
     M <- M_constraint(df=nfseq,a=a_nf, 
@@ -88,18 +91,17 @@ Perform_Analytical_Run11 <- function(f.flag = 1) {
     a_pot_eq <- alloc(M_pot_eq$nf)
     
     ### actual M NPP equilibrium point
-    M_act_eq <- M_constraint_c_cost(a_pot_eq, M_pot_eq$NPP)
+    M_act_eq <- FUN_model(nfdf=a_pot_eq, M_pot_eq$NPP)
     
     out350DF <- data.frame(CO2_1, nfseq, P350, VL$NPP, 
                            L$NPP, M$NPP)
     colnames(out350DF) <- c("CO2", "nc", "NPP_photo", "NPP_VL",
                             "NPP_L", "NPP_M")
     equil350DF <- data.frame(CO2_1, VL_pot_eq, L_pot_eq, M_pot_eq, 
-                             VL_act_eq, L_act_eq, M_act_eq)
+                             VL_act_eq$NPP_grow, L_act_eq$NPP_grow, M_act_eq$NPP_grow)
     colnames(equil350DF) <- c("CO2", "nc_pot_VL", "NPP_pot_VL", 
                               "nc_pot_L", "NPP_pot_L", "nc_pot_M", "NPP_pot_M",
-                              "NPP_act_VL","NPP_acq_VL","NPP_act_L", "NPP_acq_L",
-                              "NPP_act_M", "NPP_acq_M")
+                              "NPP_act_VL", "NPP_act_L", "NPP_act_M")
     
     ##### CO2 = 700
     ### photo constraint
@@ -112,7 +114,7 @@ Perform_Analytical_Run11 <- function(f.flag = 1) {
     a_pot_eq <- alloc(VL_pot_eq$nf)
     
     ### Calculate actual NPP for VL term
-    VL_act_eq <- VL_constraint_c_cost(nfdf=a_pot_eq, VL_pot_eq$NPP)
+    VL_act_eq <- FUN_model(nfdf=a_pot_eq, VL_pot_eq$NPP)
     
     ### Find long term equilibrium point
     L_pot_eq <- solve_L_full(CO2=CO2_2, C_pass=C_pass_VL_pot, Nin_L = Nin)
@@ -121,7 +123,7 @@ Perform_Analytical_Run11 <- function(f.flag = 1) {
     a_pot_eq <- alloc(L_pot_eq$nf)
     
     ### Find actual L term equilibrium point
-    L_act_eq <- L_constraint_c_cost(a_pot_eq, L_pot_eq$NPP)
+    L_act_eq <- FUN_model(nfdf=a_pot_eq, L_pot_eq$NPP)
     
     ### M pot allocation
     a_pot_eq <- alloc(M_pot_eq$nf)
@@ -133,8 +135,7 @@ Perform_Analytical_Run11 <- function(f.flag = 1) {
                              Nin_L = Nin+N_wood_L_pot)
     
     ### Find actual M term point
-    M_act_eq <- M_constraint_c_cost(a_pot_eq, M_pot_eq$NPP)
-    
+    M_act_eq <- FUN_model(nfdf=a_pot_eq, M_pot_eq$NPP)
     
     out700DF <- data.frame(CO2_2, nfseq, P700, 
                            VL$NPP, L$NPP, M$NPP)
@@ -142,11 +143,10 @@ Perform_Analytical_Run11 <- function(f.flag = 1) {
                             "NPP_L", "NPP_M")
     
     equil700DF <- data.frame(CO2_2, VL_pot_eq, L_pot_eq, M_pot_eq, 
-                             VL_act_eq, L_act_eq, M_act_eq)
+                             VL_act_eq$NPP_grow, L_act_eq$NPP_grow, M_act_eq$NPP_grow)
     colnames(equil700DF) <- c("CO2", "nc_pot_VL", "NPP_pot_VL", 
                               "nc_pot_L", "NPP_pot_L", "nc_pot_M", "NPP_pot_M",
-                              "NPP_act_VL","NPP_acq_VL","NPP_act_L", "NPP_acq_L",
-                              "NPP_act_M", "NPP_acq_M")
+                              "NPP_act_VL", "NPP_act_L", "NPP_act_M")
     
     ### get the point instantaneous NPP response to doubling of CO2
     df700 <- as.data.frame(cbind(round(nfseq,3), P700))
