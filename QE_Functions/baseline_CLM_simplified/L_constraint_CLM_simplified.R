@@ -16,8 +16,8 @@ L_constraint_CLM_simplified <- function(df, a, C_pass, Nin_L) {
     omega_ap <- a$af*pass$omega_af_pass + a$ar*pass$omega_ar_pass 
     
     # equation for N constraint with passive, wood, and leaching
-    U0 <- Nin_L + (1-pass$qq_pass) * pass$decomp_pass * C_pass * nsoil  
-    nburial <- omega_ap*nsoil
+    U0 <- Nin_L + (1-pass$qq_pass) * pass$decomp_pass * C_pass * ncp  
+    nburial <- omega_ap*ncp
     
     nplant <- a$nfl*a$af + a$nr*a$ar + a$nw*a$aw
     nleach <- (leachn/(1-leachn)) * (nplant + f * (nsoil - nplant))

@@ -19,7 +19,7 @@ Perform_Analytical_Run12 <- function(f.flag = 1) {
     source("Parameters/Analytical_Run12_Parameters.R")
     
     ### create a range of nc for shoot to initiate
-    nfseq <- round(seq(0.001, 0.1, by = 0.001),5)
+    nfseq <- round(seq(0.0001, 0.01, by = 0.0001),5)
     
     ### create nc ratio for wood, root, and allocation coefficients
     a_nf <- as.data.frame(alloc(nfseq))
@@ -119,7 +119,7 @@ Perform_Analytical_Run12 <- function(f.flag = 1) {
                               "nc_L", "NPP_L", "nc_M", "NPP_M")
     
     ### get the point instantaneous NPP response to doubling of CO2
-    df700 <- as.data.frame(cbind(round(nfseq,3), P700))
+    df700 <- as.data.frame(cbind(round(nfseq,4), P700))
     inst700 <- inst_NPP(equil350DF$nc_VL, df700)
     equil350DF$NPP_I <- inst700$equilNPP
     equil700DF$NPP_I <- inst700$equilNPP
@@ -133,7 +133,7 @@ Perform_Analytical_Run12 <- function(f.flag = 1) {
         par(mar=c(5.1,6.1,2.1,2.1))
         
         ### shoot nc vs. NPP
-        plot(out350DF$nc, out350DF$NPP_photo, xlim=c(0.001, 0.01),
+        plot(out350DF$nc, out350DF$NPP_photo, xlim=c(0.0001, 0.01),
              ylim=c(0.5, 2.0), 
              type = "l", xlab = "Leaf N:C ratio", 
              ylab = expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]")),

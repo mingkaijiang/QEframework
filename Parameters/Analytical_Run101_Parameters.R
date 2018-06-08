@@ -18,7 +18,7 @@ Tsoil = 15
 Texture = 0.5
 ligfl = 0.2
 ligrl = 0.16
-#ncp = 0.1
+ncp = 0.1
 PAR_MJ <- 4.0
 J_2_UMOL <- 4.57
 MJ_TO_J <- 1000000.0
@@ -44,7 +44,7 @@ daylen <- 8.0
 kn <- 0.3
 aroot <- 0.2
 aleaf <- 0.2
-#ncs <- 0.01   
+ncs <- 0.01   
 
 # baseline CLM
 nsoil <- 0.01

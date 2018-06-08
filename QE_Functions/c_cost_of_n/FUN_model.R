@@ -4,7 +4,7 @@ FUN_model <- function(nfdf, potnpp) {
     rcn <- 1/(nfdf$nf * nfdf$af + nfdf$nw * nfdf$aw + nfdf$nr * nfdf$ar)
 
     ### mineral N pool return in kg N m-2 
-    Nmin <- Nin # / leachn
+    Nmin <- Nin / (leachn / (1 - leachn)) *10^-3   
 
     ### calculate passive N uptake kg N m-2 yr-1
     Npass <- Nmin * (et/sd)
@@ -30,10 +30,10 @@ FUN_model <- function(nfdf, potnpp) {
     ### Calculate real C spent on uptake
     ### incorporating variable CN cost
     modifier <- dynamic_CN_modifier(rcn, cost)
-    Cacq_real <- Cacq * modifier
+    Cacq_real <- round(Cacq * modifier, 4)
     
     ## NPP allocated to growth
-    Cgrow <- potnpp - Cacq_real
+    Cgrow <- round(potnpp,4) - Cacq_real
 
     ### out df
     out <- data.frame(nfdf$nf, Cgrow, Cacq_real, potnpp, cost)

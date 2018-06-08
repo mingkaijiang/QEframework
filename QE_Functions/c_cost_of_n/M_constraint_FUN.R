@@ -14,7 +14,7 @@ M_constraint_FUN <- function(df, a, C_pass, C_slow, Nin_L) {
     U0 <- Nin_L + Npass + Nslow   
     nwood <- a$aw*a$nw
     nburial <- omega_ap*ncp + omega_as*ncs
-    nplant <- a$nfl*a$af + a$nr*a$ar + a$nw*a$aw
+    nplant <- a$nf*a$af + a$nr*a$ar + a$nw*a$aw
     nleach <- (leachn/(1-leachn)) * (nplant + f * (nsoil - nplant))
     
     ### return g C m-2 yr-1

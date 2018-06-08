@@ -6,7 +6,7 @@ solve_VL_FUN <- function(CO2) {
     fn <- function(nf) {
         photo_constraint_full(nf, alloc(nf),CO2) - VL_constraint_FUN(alloc(nf))$NPP_grow
     }
-    equil_nf <- uniroot(fn,interval=c(0.001,0.1))$root
+    equil_nf <- uniroot(fn,interval=c(0.0001,0.01))$root
     
     ### calculate equilibrium NPP based on equil nf ratio
     equil_NPP <- photo_constraint_full(equil_nf, alloc(equil_nf), CO2)

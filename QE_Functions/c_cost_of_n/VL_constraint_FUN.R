@@ -11,7 +11,7 @@ VL_constraint_FUN <- function(a) {
     Nmin <- Nin / (leachn / (1 - leachn))
     # Nmin <- Nin / leachn
     
-    nplant <- a$nfl*a$af + a$nr*a$ar + a$nw*a$aw
+    nplant <- a$nf*a$af + a$nr*a$ar + a$nw*a$aw
     
     # Calculate NPP
     NPP_act <- Nmin / (nplant + f * (nsoil - nplant))
