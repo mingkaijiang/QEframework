@@ -905,7 +905,7 @@ Here, I am calculating C cost of N uptake based on passive uptake, retranslocati
         geom_point(data=edf2.r11, aes(x=nc_VL, y=NPP_VL, fill="E"), 
                    shape=21, color="black", size=5) +
         ylim(0.0, 2.0) + 
-        xlim(0.001, 0.03) +
+        xlim(0.001, 0.01) +
         labs(x="Leaf N:C Ratio", 
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
         theme_linedraw() +
@@ -961,7 +961,7 @@ Here, I am calculating C cost of N uptake based on passive uptake, retranslocati
         geom_point(data=edf2.r12, aes(x=nc_VL, y=NPP_VL, fill="E"), 
                    shape=21, color="black", size=5) +
         ylim(0.0, 2.0) + 
-        xlim(0.001, 0.03) +
+        xlim(0.001, 0.01) +
         labs(x="Leaf N:C Ratio", 
              y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
         theme_linedraw() +
@@ -1354,7 +1354,7 @@ $$NUE = 1 / (n_fa_f + n_wa_w + n_ra_r) $$
 
 #### 5.4.2 Fixed wood NC assumption
 
-``` {r, echo=FALSE, warning=F, message=F}
+``` {r, echo=FALSE, warning=F, message=F, results="hide"}
 
     af <- 0.2
     ar <- 0.2
