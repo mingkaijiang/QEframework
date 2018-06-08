@@ -46,6 +46,10 @@ aroot <- 0.2
 aleaf <- 0.2
 ncs <- 0.01   
 
+# baseline potential NPP parameters
+nsoil <- 0.01
+f <- 0.5
+
 # C cost of N upatake specific parameters
 sd <- 10      # soil water depth, unit: m
 et <- 0.1     # m yr-1
