@@ -51,3 +51,6 @@ vignettes/*.pdf
 
 # pdf
 *.pdf
+
+# jpg
+*.jpeg

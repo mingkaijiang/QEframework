@@ -30,6 +30,14 @@ Perform_Analytical_Run11 <- function(f.flag = 1) {
     ### Calculate potential NPP based on VL nutrient recycling constraint
     VL <- VL_constraint(nf=nfseq, nfdf=a_nf)
     
+    VL_test <- FUN_model(nfdf=a_nf, P350)
+    
+    plot(nfseq, P350, col="black", pch = 19, type="b", ylim=c(0, 2))
+    points(nfseq, VL_test$NPP_grow, col="blue", type="b")
+    
+    
+    
+    
     ### calculate VL equil potential NPP
     VL_pot_eq <- solve_VL_full(CO2=CO2_1)
     
