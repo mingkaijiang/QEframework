@@ -128,7 +128,7 @@ Perform_Analytical_Run12 <- function(f.flag = 1) {
     if (f.flag == 1) {
         
         ### plot 2-d plots of nf vs. npp and nf vs. pf
-        tiff("Plots/Analytical_Run11_2d.tiff",
+        tiff("Plots/Analytical_Run12_2d.tiff",
              width = 5, height = 5, units = "in", res = 300)
         par(mar=c(5.1,6.1,2.1,2.1))
         

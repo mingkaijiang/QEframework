@@ -88,20 +88,20 @@ make_summary_table <- function(destDir) {
     out.tab[7,"VL"] <- round((r8$eDF$NPP_VL[2] - r8$eDF$NPP_VL[1]) / r8$eDF$NPP_VL[1] * 100,2)
     
     ### Run 9 Potential NPP, fixed wood
-    out.tab[10,"NPP_350"] <- round(r9$eDF$NPP_act_VL[1],2)
-    out.tab[10,"NPP_700"] <-  round(r9$eDF$NPP_act_VL[2],2)
-    out.tab[10,"I"] <- round((r9$eDF$NPP_I[2] - r9$eDF$NPP_act_VL[1]) / r9$eDF$NPP_act_VL[1] * 100,2)
-    out.tab[10,"M"] <- round((r9$eDF$NPP_act_M[2] - r9$eDF$NPP_act_VL[1]) / r9$eDF$NPP_act_VL[1] * 100,2)
-    out.tab[10,"L"] <- round((r9$eDF$NPP_act_L[2] - r9$eDF$NPP_act_VL[1]) / r9$eDF$NPP_act_VL[1] * 100,2)
-    out.tab[10,"VL"] <- round((r9$eDF$NPP_act_VL[2] - r9$eDF$NPP_act_VL[1]) / r9$eDF$NPP_act_VL[1] * 100,2)
+    out.tab[10,"NPP_350"] <- round(r91$eDF$NPP_act_VL[1],2)
+    out.tab[10,"NPP_700"] <-  round(r91$eDF$NPP_act_VL[2],2)
+    out.tab[10,"I"] <- round((r91$eDF$NPP_I[2] - r91$eDF$NPP_act_VL[1]) / r91$eDF$NPP_act_VL[1] * 100,2)
+    out.tab[10,"M"] <- round((r91$eDF$NPP_act_M[2] - r91$eDF$NPP_act_VL[1]) / r91$eDF$NPP_act_VL[1] * 100,2)
+    out.tab[10,"L"] <- round((r91$eDF$NPP_act_L[2] - r91$eDF$NPP_act_VL[1]) / r91$eDF$NPP_act_VL[1] * 100,2)
+    out.tab[10,"VL"] <- round((r91$eDF$NPP_act_VL[2] - r91$eDF$NPP_act_VL[1]) / r91$eDF$NPP_act_VL[1] * 100,2)
     
     ### Run 10 Potential NPP, variable wood
-    out.tab[9,"NPP_350"] <- round(r10$eDF$NPP_act_VL[1],2)
-    out.tab[9,"NPP_700"] <-  round(r10$eDF$NPP_act_VL[2],2)
-    out.tab[9,"I"] <- round((r10$eDF$NPP_I[2] - r10$eDF$NPP_act_VL[1]) / r10$eDF$NPP_act_VL[1] * 100,2)
-    out.tab[9,"M"] <- round((r10$eDF$NPP_act_M[2] - r10$eDF$NPP_act_VL[1]) / r10$eDF$NPP_act_VL[1] * 100,2)
-    out.tab[9,"L"] <- round((r10$eDF$NPP_act_L[2] - r10$eDF$NPP_act_VL[1]) / r10$eDF$NPP_act_VL[1] * 100,2)
-    out.tab[9,"VL"] <- round((r10$eDF$NPP_act_VL[2] - r10$eDF$NPP_act_VL[1]) / r10$eDF$NPP_act_VL[1] * 100,2)
+    out.tab[9,"NPP_350"] <- round(r101$eDF$NPP_act_VL[1],2)
+    out.tab[9,"NPP_700"] <-  round(r101$eDF$NPP_act_VL[2],2)
+    out.tab[9,"I"] <- round((r101$eDF$NPP_I[2] - r101$eDF$NPP_act_VL[1]) / r101$eDF$NPP_act_VL[1] * 100,2)
+    out.tab[9,"M"] <- round((r101$eDF$NPP_act_M[2] - r101$eDF$NPP_act_VL[1]) / r101$eDF$NPP_act_VL[1] * 100,2)
+    out.tab[9,"L"] <- round((r101$eDF$NPP_act_L[2] - r101$eDF$NPP_act_VL[1]) / r101$eDF$NPP_act_VL[1] * 100,2)
+    out.tab[9,"VL"] <- round((r101$eDF$NPP_act_VL[2] - r101$eDF$NPP_act_VL[1]) / r101$eDF$NPP_act_VL[1] * 100,2)
     
     ### Run 11 C cost of N uptake, fixed wood
     out.tab[12,"NPP_350"] <- round(r11$eDF$NPP_VL[1],2)
