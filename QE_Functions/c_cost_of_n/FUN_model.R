@@ -4,7 +4,7 @@ FUN_model <- function(nfdf, potnpp) {
     rcn <- 1/(nfdf$nf * nfdf$af + nfdf$nw * nfdf$aw + nfdf$nr * nfdf$ar)
 
     ### mineral N pool return in kg N m-2 
-    Nmin <- Nin / (leachn / (1 - leachn)) *10^-3   
+    Nmin <- Nin # / (leachn / (1 - leachn)) *10^-3   
 
     ### calculate passive N uptake kg N m-2 yr-1
     Npass <- Nmin * (et/sd)

@@ -4,7 +4,7 @@ c_cost_active <- function(cr) {
     ### kn2 and kc2 are both 1 kg C m-2, derivations available in Fisher et al. 2010
     ### c_cost_active: kg C kg N-1
     
-    Nmin <- Nin / leachn
+    Nmin <- Nin # / (leachn / (1 - leachn)) *10^-3 
 
     c_cost_active <- (kn2 / Nmin) * (kc2 / cr)
     
