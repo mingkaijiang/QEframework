@@ -3,7 +3,7 @@
 ####
 #### Assumptions:
 #### 1. turn root exudation on
-#### 2. turn priming effect on (effect on passive SOM pool)
+#### 2. turn priming effect on (effect on slow SOM pool)
 #### 3. N only model with explicit mineral N considered
 #### 4. Fix wood stoichiometry 
 ####
