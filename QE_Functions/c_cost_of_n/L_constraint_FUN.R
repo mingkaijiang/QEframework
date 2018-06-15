@@ -13,12 +13,11 @@ L_constraint_FUN <- function(df, a, C_pass, Nin_L) {
     nplant <- a$nf*a$af + a$nr*a$ar + a$nw*a$aw
     nleach <- (leachn/(1-leachn)) * (nplant + f * (nsoil - nplant))
         
-    # in g C m-2 yr-1 
-    # NPP_NC <- U0 / ((leachn + 1) * (nplant + f * (nsoil - nplant)))
-    NPP_NC <- U0 / (nburial + nleach)
+    # in kg C m-2 yr-1 
+    NPP_NC <- U0 * 10^-3 / (nburial + nleach)
 
     # return in kg C m-2 yr-1
-    NPP <- NPP_NC*10^-3 
+    NPP <- NPP_NC#*10^-3 
     
     # add FUN modifier
     NPP_out <- FUN_model(nfdf=a, NPP)

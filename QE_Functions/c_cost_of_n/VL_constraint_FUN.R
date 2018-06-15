@@ -7,9 +7,8 @@ VL_constraint_FUN <- function(a) {
     # equation for N constraint with just leaching
     U0 <- Nin
     
-    # Calculate Nmin
-    Nmin <- Nin / (leachn / (1 - leachn))
-    # Nmin <- Nin / leachn
+    # Calculate Nmin, g m-2 yr-1
+    Nmin <- Nin * 10^-3 / (leachn / (1 - leachn)) 
     
     nplant <- a$nf*a$af + a$nr*a$ar + a$nw*a$aw
     
@@ -17,7 +16,7 @@ VL_constraint_FUN <- function(a) {
     NPP_act <- Nmin / (nplant + f * (nsoil - nplant))
     
     # return in kg C m-2 yr-1
-    NPP <- NPP_act *10^-3   
+    NPP <- NPP_act #*10^-3   
     
     ### FUN model
     NPP_out <- FUN_model(nfdf=a, NPP)

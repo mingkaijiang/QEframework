@@ -133,8 +133,8 @@ Perform_Analytical_Run11 <- function(f.flag = 1) {
         par(mar=c(5.1,6.1,2.1,2.1))
         
         ### shoot nc vs. NPP
-        plot(out350DF$nc, out350DF$NPP_photo, xlim=c(0.001, 0.005),
-             ylim=c(0.5, 2.0), 
+        plot(out350DF$nc, out350DF$NPP_photo, xlim=c(0.001, 0.003),
+             ylim=c(0.8, 1.5), 
              type = "l", xlab = "Leaf N:C ratio", 
              ylab = expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]")),
              col="cyan", lwd = 3, cex.lab=1.5)

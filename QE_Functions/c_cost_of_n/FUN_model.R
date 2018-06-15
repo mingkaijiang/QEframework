@@ -4,7 +4,7 @@ FUN_model <- function(nfdf, potnpp) {
     rcn <- 1/(nfdf$nf * nfdf$af + nfdf$nw * nfdf$aw + nfdf$nr * nfdf$ar)
 
     ### mineral N pool return in kg N m-2 
-    Nmin <- Nin # / (leachn / (1 - leachn)) *10^-3   
+    Nmin <- Nin *10^-3 / (leachn / (1 - leachn)) 
 
     ### calculate passive N uptake kg N m-2 yr-1
     Npass <- Nmin * (et/sd)
@@ -25,8 +25,6 @@ FUN_model <- function(nfdf, potnpp) {
     cost <- pmin(cost_active, cost_resorb)
     
     ### Calculate C spent on uptake N
-    # Cacq <- (rcn - potnpp / Npass2) / (1 / cost - 1 / Npass2)
-    
     Cacq <- (potnpp - rcn * Npass2) / (rcn / cost + 1.0)
     
     ### Calculate real C spent on uptake
