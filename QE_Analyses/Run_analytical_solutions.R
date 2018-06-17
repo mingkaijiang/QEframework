@@ -43,6 +43,10 @@
 #Perform_Analytical_Run101(f.flag = 1)
 #Perform_Analytical_Run11(f.flag = 1)
 #Perform_Analytical_Run12(f.flag = 1)
+Perform_Analytical_Run13(f.flag = 1)
+Perform_Analytical_Run15(f.flag = 1)
+Perform_Analytical_Run17(f.flag = 1)
+Perform_Analytical_Run19(f.flag = 1)
 
 #### Step 2: return data list
 r1 <- Perform_Analytical_Run1(f.flag = 2)

@@ -1,8 +1,9 @@
 FUN_model_5 <- function(nfdf, potnpp) {
 
     ### plant C:N ratio
-    rcn <- 1/(nfdf$nf * nfdf$af + nfdf$nw * nfdf$aw + nfdf$nr * nfdf$ar)
-
+    # rcn <- 1/(nfdf$nf * nfdf$af + nfdf$nw * nfdf$aw + nfdf$nr * nfdf$ar)
+    rcn <- 1/nfdf$nf
+    
     ### mineral N pool return in kg N m-2 
     Nmin <- Nin *10^-3 / (leachn / (1 - leachn)) 
 

@@ -30,11 +30,10 @@ Perform_Analytical_Run11 <- function(f.flag = 1) {
     ### Calculate potential NPP based on VL nutrient recycling constraint
     VL <- VL_constraint_FUN_1(a=a_nf)
     
+    ## very small growth NPP
+    
     ### calculate VL equil potential NPP
     VL_eq <- solve_VL_FUN_1(CO2=CO2_1)
-    
-    plot(nfseq, P350, ylim=c(0,2), type="l")
-    points(nfseq, VL$NPP_grow, col="red", type="l")
     
     ### calculate nw and nr for VL equilibrated nf value
     a_eq <- alloc(VL_eq$nf)
@@ -52,8 +51,8 @@ Perform_Analytical_Run11 <- function(f.flag = 1) {
 
     ### Calculate long term nutrient constraint
     L <- L_constraint_FUN_1(df=nfseq, a=a_nf, 
-                          C_pass=C_pass_VL,
-                          Nin_L = Nin)
+                            C_pass=C_pass_VL,
+                            Nin_L = Nin)
     
     ### Find long term equilibrium point
     L_eq <- solve_L_FUN_1(CO2=CO2_1, C_pass=C_pass_VL, Nin_L = Nin)
@@ -136,8 +135,8 @@ Perform_Analytical_Run11 <- function(f.flag = 1) {
         par(mar=c(5.1,6.1,2.1,2.1))
         
         ### shoot nc vs. NPP
-        plot(out350DF$nc, out350DF$NPP_photo, xlim=c(0.001, 0.003),
-             ylim=c(0.8, 1.5), 
+        plot(out350DF$nc, out350DF$NPP_photo, xlim=c(0.001, 0.01),
+             ylim=c(0.8, 2.0), 
              type = "l", xlab = "Leaf N:C ratio", 
              ylab = expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]")),
              col="cyan", lwd = 3, cex.lab=1.5)

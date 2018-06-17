@@ -1,8 +1,9 @@
 FUN_model_1 <- function(nfdf, potnpp) {
 
     ### plant C:N ratio
-    rcn <- 1/(nfdf$nf * nfdf$af + nfdf$nw * nfdf$aw + nfdf$nr * nfdf$ar)
-
+    #rcn <- 1/(nfdf$nf * nfdf$af + nfdf$nw * nfdf$aw + nfdf$nr * nfdf$ar)
+    rcn <- 1/nfdf$nf
+    
     ### mineral N pool return in kg N m-2 
     Nmin <- Nin *10^-3 / (leachn / (1 - leachn)) 
 
@@ -27,7 +28,7 @@ FUN_model_1 <- function(nfdf, potnpp) {
     
     ### Calculate C spent on uptake N
     # Cacq <- (potnpp - rcn * Npass2) / (rcn / cost + 1.0)
-    Cacq <- 0.0
+    Cacq <- 0
     
     ### Calculate real C spent on uptake
     ### incorporating variable CN cost
@@ -35,7 +36,7 @@ FUN_model_1 <- function(nfdf, potnpp) {
     # Cacq_real <- round(Cacq * modifier, 4)
     
     ## NPP allocated to growth
-    Cgrow <- round(potnpp,4) - Cacq
+    Cgrow <- rcn * Npass2
 
     ### out df
     out <- data.frame(nfdf$nf, Cgrow, Cacq, potnpp, cost)
