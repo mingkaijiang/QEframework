@@ -1,4 +1,4 @@
-FUN_model_5 <- function(nfdf, potnpp) {
+FUN_model_6 <- function(nfdf, potnpp) {
 
     ### plant C:N ratio
     rcn <- 1/(nfdf$nf * nfdf$af + nfdf$nw * nfdf$aw + nfdf$nr * nfdf$ar)

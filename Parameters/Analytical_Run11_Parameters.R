@@ -3,7 +3,7 @@ CO2_1 <- 350.0  # 350
 CO2_2 <- 700.0  # 700
 
 #### define parameters
-nwood = 0.005      # 0.005 
+nwood = 0.0005      
 nrho = 0.7
 nretrans = 0.5
 nwvar = FALSE
@@ -13,7 +13,7 @@ sf=0.5
 cfrac = 0.45
 cue = 0.5
 leachn = 0.05
-Nin = 0.4        # 0.4
+Nin = 0.5        
 Tsoil = 15
 Texture = 0.5
 ligfl = 0.2
@@ -51,7 +51,7 @@ nsoil <- 0.01
 f <- 0.5
 
 # C cost of N upatake specific parameters
-sd <- 1      # soil water depth, unit: m
+sd <- 100      # soil water depth, unit: m
 et <- 0.5     # m yr-1
 kr <- 0.1    # unit kg C m-2
 kn2 <- 1     # kg C m-2   used in c_cost_of_active

@@ -1,15 +1,17 @@
 
-#### Analytical script Run 19
+#### Analytical script Run 21
 ####
 #### Assumptions:
 #### 1. CLM model C cost of N uptake
 #### 2. fixed wood NC
 #### 3. N uptake satisfied by N passive, N retrans, N active, and N fixation together
+#### 4. Effect of FUN on photosynthetic constraint line rather than soil constraint line
+#### 5. meaning I am reading potnpp from photosynthetic NPP
 ####
 ################################################################################
 #### Functions
-Perform_Analytical_Run19 <- function(f.flag = 1) {
-    #### Function to perform analytical run 19 simulations
+Perform_Analytical_Run21 <- function(f.flag = 1) {
+    #### Function to perform analytical run 21 simulations
     #### eDF: stores equilibrium points
     #### cDF: stores constraint points (curves)
     #### f.flag: = 1 simply plot analytical solution and create individual pdf file
@@ -24,14 +26,14 @@ Perform_Analytical_Run19 <- function(f.flag = 1) {
     ### create nc ratio for wood, root, and allocation coefficients
     a_nf <- as.data.frame(alloc(nfseq))
     
-    ### calculate photosynthetic constraint at CO2 = 350
-    P350 <- photo_constraint_full(nf=nfseq, nfdf=a_nf, CO2=CO2_1)
-
+    ### calculate downregulated photosynthetic constraint at CO2 = 350 based on FUN
+    P350 <- photo_constraint_FUN(nf=nfseq, nfdf=a_nf, CO2=CO2_1)
+    
     ### Calculate potential NPP based on VL nutrient recycling constraint
-    VL <- VL_constraint_FUN_5(a=a_nf)
+    VL <- VL_constraint_FUN_6(a=a_nf)
     
     ### calculate VL equil potential NPP
-    VL_eq <- solve_VL_FUN_5(CO2=CO2_1)
+    VL_eq <- solve_VL_FUN_6(CO2=CO2_1)
     
     ### calculate nw and nr for VL equilibrated nf value
     a_eq <- alloc(VL_eq$nf)
@@ -48,12 +50,12 @@ Perform_Analytical_Run19 <- function(f.flag = 1) {
     C_pass_VL <- omega_ap*VL_eq$NPP/s_coef$decomp_pass/(1-s_coef$qq_pass)*1000.0
 
     ### Calculate long term nutrient constraint
-    L <- L_constraint_FUN_5(df=nfseq, a=a_nf, 
+    L <- L_constraint_FUN_6(df=nfseq, a=a_nf, 
                           C_pass=C_pass_VL,
                           Nin_L = Nin)
     
     ### Find long term equilibrium point
-    L_eq <- solve_L_FUN_5(CO2=CO2_1, C_pass=C_pass_VL, Nin_L = Nin)
+    L_eq <- solve_L_FUN_6(CO2=CO2_1, C_pass=C_pass_VL, Nin_L = Nin)
     
     ### allocation stuffs
     a_eq <- alloc(L_eq$nf)
@@ -67,20 +69,20 @@ Perform_Analytical_Run19 <- function(f.flag = 1) {
     N_wood_L <- a_eq$aw*a_eq$nw*VL_eq$NPP*1000.0
 
     ### Calculate medium term nutrient constraint
-    M <- M_constraint_FUN_5(df=nfseq,a=a_nf, 
+    M <- M_constraint_FUN_6(df=nfseq,a=a_nf, 
                           C_pass=C_pass_VL, 
                           C_slow=C_slow_L, 
                           Nin_L = Nin+N_wood_L)
     
     ### calculate M equilibrium point
-    M_eq <- solve_M_FUN_5(CO2=CO2_1, 
+    M_eq <- solve_M_FUN_6(CO2=CO2_1, 
                         C_pass=C_pass_VL, 
                         C_slow=C_slow_L, 
                         Nin_L = Nin+N_wood_L)
     
     
-    out350DF <- data.frame(CO2_1, nfseq, P350, VL$NPP_grow, 
-                           L$NPP_grow, M$NPP_grow)
+    out350DF <- data.frame(CO2_1, nfseq, P350$NPP_grow, VL$NPP, 
+                           L$NPP, M$NPP)
     colnames(out350DF) <- c("CO2", "nc", "NPP_photo", "NPP_VL",
                             "NPP_L", "NPP_M")
     equil350DF <- data.frame(CO2_1, VL_eq, L_eq, M_eq)
@@ -89,28 +91,28 @@ Perform_Analytical_Run19 <- function(f.flag = 1) {
     
     ##### CO2 = 700
     ### photo constraint
-    P700 <- photo_constraint_full(nf=nfseq, nfdf=a_nf, CO2=CO2_2)
+    P700 <- photo_constraint_FUN(nf=nfseq, nfdf=a_nf, CO2=CO2_2)
     
     ### VL equilibrated point with eCO2
-    VL_eq <- solve_VL_FUN_5(CO2=CO2_2)
+    VL_eq <- solve_VL_FUN_6(CO2=CO2_2)
     
     ### calculate nw and nr for VL equilibrated nf value
     a_eq <- alloc(VL_eq$nf)
     
     ### Find long term equilibrium point
-    L_eq <- solve_L_FUN_5(CO2=CO2_2, C_pass=C_pass_VL, Nin_L = Nin)
+    L_eq <- solve_L_FUN_6(CO2=CO2_2, C_pass=C_pass_VL, Nin_L = Nin)
     
     ### L pot allocation
     a_eq <- alloc(L_eq$nf)
     
     ### Find medium term equilibrium point
-    M_eq <- solve_M_FUN_5(CO2=CO2_2, 
+    M_eq <- solve_M_FUN_6(CO2=CO2_2, 
                         C_pass=C_pass_VL, 
                         C_slow=C_slow_L, 
                         Nin_L = Nin+N_wood_L)
     
-    out700DF <- data.frame(CO2_2, nfseq, P700, 
-                           VL$NPP_grow, L$NPP_grow, M$NPP_grow)
+    out700DF <- data.frame(CO2_2, nfseq, P700$NPP_grow, 
+                           VL$NPP, L$NPP, M$NPP)
     colnames(out700DF) <- c("CO2", "nc", "NPP_photo", "NPP_VL",
                             "NPP_L", "NPP_M")
     
@@ -128,7 +130,7 @@ Perform_Analytical_Run19 <- function(f.flag = 1) {
     #if (f.flag == 1) {
         
         ### plot 2-d plots of nf vs. npp and nf vs. pf
-    #    tiff("Plots/Analytical_Run19_2d.tiff",
+    #    tiff("Plots/Analytical_Run21_2d.tiff",
     #         width = 5, height = 5, units = "in", res = 300)
     #    par(mar=c(5.1,6.1,2.1,2.1))
         

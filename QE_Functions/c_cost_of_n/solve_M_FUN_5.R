@@ -5,7 +5,7 @@ solve_M_FUN_5 <- function(CO2,C_pass,C_slow,Nin_L) {
                               CO2) - M_constraint_FUN_5(nf,alloc(nf), C_pass, C_slow, Nin_L)$NPP_grow
         
     }
-    equilnf <- uniroot(fn,interval=c(0.001,0.01))$root
+    equilnf <- uniroot(fn,interval=c(0.001,0.1))$root
     
     equilNPP <- photo_constraint_full(equilnf, 
                                       alloc(equilnf), CO2)
