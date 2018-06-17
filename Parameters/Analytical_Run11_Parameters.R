@@ -53,7 +53,7 @@ f <- 0.5
 # C cost of N upatake specific parameters
 sd <- 1      # soil water depth, unit: m
 et <- 0.5     # m yr-1
-kr <- 1    # unit kg C m-2
+kr <- 0.1    # unit kg C m-2
 kn2 <- 1     # kg C m-2   used in c_cost_of_active
 kc2 <- 1     # kg C m-2   used in c_cost_of_active
 a1 <- -3.62

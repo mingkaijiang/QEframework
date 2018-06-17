@@ -1,4 +1,4 @@
-FUN_model <- function(nfdf, potnpp) {
+FUN_model_5 <- function(nfdf, potnpp) {
 
     ### plant C:N ratio
     rcn <- 1/(nfdf$nf * nfdf$af + nfdf$nw * nfdf$aw + nfdf$nr * nfdf$ar)
@@ -12,7 +12,7 @@ FUN_model <- function(nfdf, potnpp) {
     Npass2 <- pmin(pmin(Npass, Ndem), Nmin)
     
     ### cost of N fixation, decided not to include this
-    # cost_fix <- c_cost_fix()
+    cost_fix <- c_cost_fix()
     
     ### cost of active N uptake kg C m-2
     croot <- potnpp * nfdf$ar / sr 
@@ -22,7 +22,7 @@ FUN_model <- function(nfdf, potnpp) {
     cost_resorb <- c_cost_resorb(potnpp, nfdf)
     
     ### Total C cost
-    cost <- pmin(cost_active, cost_resorb)
+    cost <- pmin(cost_active, pmin(cost_resorb, cost_fix))
     
     ### Calculate C spent on uptake N
     Cacq <- (potnpp - rcn * Npass2) / (rcn / cost + 1.0)
@@ -36,8 +36,8 @@ FUN_model <- function(nfdf, potnpp) {
     Cgrow <- round(potnpp,4) - Cacq_real
 
     ### out df
-    out <- data.frame(nfdf$nf, Cgrow, Cacq_real, potnpp, cost)
-    colnames(out) <- c("nf", "NPP_grow", "NPP_acq", "NPP_pot", "cost")
+    out <- data.frame(nfdf$nf, Cgrow, Cacq_real, potnpp, cost, cost_resorb, cost_active, cost_fix)
+    colnames(out) <- c("nf", "NPP_grow", "NPP_acq", "NPP_pot", "cost", "cost_resorb", "cost_active", "cost_fix")
     
     return(out)   
 }

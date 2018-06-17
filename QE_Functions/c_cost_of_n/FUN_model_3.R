@@ -1,4 +1,4 @@
-FUN_model <- function(nfdf, potnpp) {
+FUN_model_3 <- function(nfdf, potnpp) {
 
     ### plant C:N ratio
     rcn <- 1/(nfdf$nf * nfdf$af + nfdf$nw * nfdf$aw + nfdf$nr * nfdf$ar)
@@ -19,13 +19,14 @@ FUN_model <- function(nfdf, potnpp) {
     cost_active <- c_cost_active(cr=croot)
     
     ### Cost of resorption
-    cost_resorb <- c_cost_resorb(potnpp, nfdf)
+    # cost_resorb <- c_cost_resorb(potnpp, nfdf)
     
     ### Total C cost
-    cost <- pmin(cost_active, cost_resorb)
+    # cost <- pmin(cost_active, cost_resorb)
+    cost <- cost_active
     
     ### Calculate C spent on uptake N
-    Cacq <- (potnpp - rcn * Npass2) / (rcn / cost + 1.0)
+    Cacq <- (potnpp) / (rcn / cost + 1.0)
     
     ### Calculate real C spent on uptake
     ### incorporating variable CN cost

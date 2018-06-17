@@ -8,6 +8,13 @@ dynamic_CN_modifier <- function(cn_plant, N_cost) {
     ccn_flex <- 150.0
     target_cn <- 20
     
+    l1 <- length(cn_plant)
+    l2 <- length(N_cost)
+    
+    if (l2 < l1) {
+        N_cost <- rep(N_cost, l1)
+    }
+    
     ### modifier - response of C expenditure to N uptake cost
     mod <- pmax(0.0, 1.0 - (N_cost - acn_flex) / bcn_flex)
     
