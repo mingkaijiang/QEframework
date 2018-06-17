@@ -26,9 +26,8 @@ FUN_model_2 <- function(nfdf, potnpp) {
     cost <- cost_resorb
     
     ### Calculate C spent on uptake N
-    # Cacq <- (potnpp - rcn * Npass2) / (rcn / cost + 1.0)
-    Cacq <- (potnpp) / (rcn / cost + 1.0)
-    
+    Cacq <- (potnpp - rcn * Npass2) / (rcn / cost + 1.0)
+
     ### Calculate real C spent on uptake
     ### incorporating variable CN cost
     modifier <- dynamic_CN_modifier(rcn, cost)

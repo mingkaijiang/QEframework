@@ -33,10 +33,6 @@ Perform_Analytical_Run19 <- function(f.flag = 1) {
     ### calculate VL equil potential NPP
     VL_eq <- solve_VL_FUN_5(CO2=CO2_1)
     
-    plot(nfseq, P350, ylim=c(0,2), type="l")
-    points(nfseq, VL$NPP_grow, col="red", type="l")
-    
-    
     ### calculate nw and nr for VL equilibrated nf value
     a_eq <- alloc(VL_eq$nf)
     
