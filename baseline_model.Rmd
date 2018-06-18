@@ -875,58 +875,58 @@ BNF is performed by bacteria living in symbiosis within root modules on certain 
 Here, I am calculating C cost of N uptake based on passive uptake, retranslocation, active uptake and fixation. 
 
 ``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE, results="hide"}
-    ### split the data.list into two data frames
-    cdf.r11 <- r11$cDF
-    edf.r11 <- r11$eDF
-
-    ### extract CO2 conc. from constraint DF
-    cdf1.r11 <- cdf.r11[cdf.r11$CO2 == 350, ]
-    cdf2.r11 <- cdf.r11[cdf.r11$CO2 == 700, ]
-
-    ### extract CO2 conc. from eq DF
-    edf1.r11 <- edf.r11[edf.r11$CO2 == 350, ]
-    edf2.r11 <- edf.r11[edf.r11$CO2 == 700, ]
-
-    ### plot
-    p<-ggplot() + 
-        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_photo, col="C350")) +   
-        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_VL, col="VL")) + 
-        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_L, col="L")) +  
-        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_M, col="M")) +            
-        geom_line(data=cdf2.r11, aes(x=nc, y=NPP_photo, col="C700")) +     
-        geom_point(data=edf1.r11, aes(x=nc_VL, y=NPP_I, fill="B"), 
-                   shape=21, color="black", size=5) +
-        geom_point(data=edf1.r11, aes(x=nc_VL, y=NPP_VL, fill="A"), 
-                color="black", shape=21, size=5) + 
-        geom_point(data=edf2.r11, aes(x=nc_L, y=NPP_L, fill="D"), 
-                   shape=21, color="black", size=5) +
-        geom_point(data=edf2.r11, aes(x=nc_M, y=NPP_M, fill="C"), 
-                   shape=21, color="black", size=5) +
-        geom_point(data=edf2.r11, aes(x=nc_VL, y=NPP_VL, fill="E"), 
-                   shape=21, color="black", size=5) +
-        ylim(0.0, 2.0) + 
-        xlim(0.001, 0.01) +
-        labs(x="Leaf N:C Ratio", 
-             y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
-        theme_linedraw() +
-        theme(panel.grid.minor=element_blank(),
-              axis.text=element_text(size=14),
-              axis.title=element_text(size=16),
-              legend.text=element_text(size=14),
-              legend.title=element_text(size=16),
-              panel.grid.major=element_line(color="grey")) +
-              scale_colour_manual(name="Constraint line", 
-                            values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
-                                       "L" = cbbPalette[4], "M" = cbbPalette[3])) +
-              scale_fill_manual(name="QE point", values = c("A" = cbPalette[1], "B" = cbPalette[2], "C" = cbPalette[3],
-                                                            "D" = cbPalette[4], "E" = cbPalette[7])) 
-
-    plot(p)
-    if (save.plot) {
-        pdf("Plots/Run11.pdf", width=8, height=6)
-        plot(p)
-        dev.off()
-    } 
+#    ### split the data.list into two data frames
+#    cdf.r11 <- r11$cDF
+#    edf.r11 <- r11$eDF
+#
+#    ### extract CO2 conc. from constraint DF
+#    cdf1.r11 <- cdf.r11[cdf.r11$CO2 == 350, ]
+#    cdf2.r11 <- cdf.r11[cdf.r11$CO2 == 700, ]
+#
+#    ### extract CO2 conc. from eq DF
+#    edf1.r11 <- edf.r11[edf.r11$CO2 == 350, ]
+#    edf2.r11 <- edf.r11[edf.r11$CO2 == 700, ]
+#
+#    ### plot
+#    p<-ggplot() + 
+#        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_photo, col="C350")) +   
+#        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_VL, col="VL")) + 
+#        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_L, col="L")) +  
+#        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_M, col="M")) +            
+#        geom_line(data=cdf2.r11, aes(x=nc, y=NPP_photo, col="C700")) +     
+#        geom_point(data=edf1.r11, aes(x=nc_VL, y=NPP_I, fill="B"), 
+#                   shape=21, color="black", size=5) +
+#        geom_point(data=edf1.r11, aes(x=nc_VL, y=NPP_VL, fill="A"), 
+#                color="black", shape=21, size=5) + 
+#        geom_point(data=edf2.r11, aes(x=nc_L, y=NPP_L, fill="D"), 
+#                   shape=21, color="black", size=5) +
+#        geom_point(data=edf2.r11, aes(x=nc_M, y=NPP_M, fill="C"), 
+#                   shape=21, color="black", size=5) +
+#        geom_point(data=edf2.r11, aes(x=nc_VL, y=NPP_VL, fill="E"), 
+#                   shape=21, color="black", size=5) +
+#        ylim(0.0, 2.0) + 
+#        xlim(0.001, 0.01) +
+#        labs(x="Leaf N:C Ratio", 
+#             y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
+#        theme_linedraw() +
+#        theme(panel.grid.minor=element_blank(),
+#              axis.text=element_text(size=14),
+#              axis.title=element_text(size=16),
+#              legend.text=element_text(size=14),
+#              legend.title=element_text(size=16),
+#              panel.grid.major=element_line(color="grey")) +
+#              scale_colour_manual(name="Constraint line", 
+#                            values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = #cbbPalette[7],
+#                                       "L" = cbbPalette[4], "M" = cbbPalette[3])) +
+#              scale_fill_manual(name="QE point", values = c("A" = cbPalette[1], "B" = #cbPalette[2], "C" = cbPalette[3],
+#                                                            "D" = cbPalette[4], "E" = #cbPalette[7])) 
+#
+#    plot(p)
+#    if (save.plot) {
+#        pdf("Plots/Run11.pdf", width=8, height=6)
+#        plot(p)
+#        dev.off()
+#    } 
 ```
 
 
@@ -934,110 +934,110 @@ Here, I am calculating C cost of N uptake based on passive uptake, retranslocati
 
 ### Run 12. CLM model C cost of N uptake, variable wood N:C ratio
 ``` {r, echo = FALSE, fig.width = 7, fig.align="center", message = FALSE, warning = FALSE, results="hide"}
-    ### split the data.list into two data frames
-    cdf.r12 <- r12$cDF
-    edf.r12 <- r12$eDF
-
-    ### extract CO2 conc. from constraint DF
-    cdf1.r12 <- cdf.r12[cdf.r12$CO2 == 350, ]
-    cdf2.r12 <- cdf.r12[cdf.r12$CO2 == 700, ]
-
-    ### extract CO2 conc. from eq DF
-    edf1.r12 <- edf.r12[edf.r12$CO2 == 350, ]
-    edf2.r12 <- edf.r12[edf.r12$CO2 == 700, ]
-
-    ### plot
-    p<-ggplot() + 
-        geom_line(data=cdf1.r12, aes(x=nc, y=NPP_photo, col="C350")) +   
-        geom_line(data=cdf1.r12, aes(x=nc, y=NPP_VL, col="VL")) + 
-        geom_line(data=cdf1.r12, aes(x=nc, y=NPP_L, col="L")) +  
-        geom_line(data=cdf1.r12, aes(x=nc, y=NPP_M, col="M")) +            
-        geom_line(data=cdf2.r12, aes(x=nc, y=NPP_photo, col="C700")) +     
-        geom_point(data=edf1.r12, aes(x=nc_VL, y=NPP_I, fill="B"), 
-                   shape=21, color="black", size=5) +
-        geom_point(data=edf1.r12, aes(x=nc_VL, y=NPP_VL, fill="A"), 
-                color="black", shape=21, size=5) + 
-        geom_point(data=edf2.r12, aes(x=nc_L, y=NPP_L, fill="D"), 
-                   shape=21, color="black", size=5) +
-        geom_point(data=edf2.r12, aes(x=nc_M, y=NPP_M, fill="C"), 
-                   shape=21, color="black", size=5) +
-        geom_point(data=edf2.r12, aes(x=nc_VL, y=NPP_VL, fill="E"), 
-                   shape=21, color="black", size=5) +
-        ylim(0.0, 2.0) + 
-        xlim(0.001, 0.01) +
-        labs(x="Leaf N:C Ratio", 
-             y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
-        theme_linedraw() +
-        theme(panel.grid.minor=element_blank(),
-              axis.text=element_text(size=14),
-              axis.title=element_text(size=16),
-              legend.text=element_text(size=14),
-              legend.title=element_text(size=16),
-              panel.grid.major=element_line(color="grey")) +
-              scale_colour_manual(name="Constraint line", 
-                            values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
-                                       "L" = cbbPalette[4], "M" = cbbPalette[3])) +
-              scale_fill_manual(name="QE point", values = c("A" = cbPalette[1], "B" = cbPalette[2], "C" = cbPalette[3],
-                                                            "D" = cbPalette[4], "E" = cbPalette[7])) 
-
-    plot(p)
-    if (save.plot) {
-        pdf("Plots/Run12.pdf", width=8, height=6)
-        plot(p)
-        dev.off()
-    } 
+#    ### split the data.list into two data frames
+#    cdf.r12 <- r12$cDF
+#    edf.r12 <- r12$eDF
+#
+#    ### extract CO2 conc. from constraint DF
+#    cdf1.r12 <- cdf.r12[cdf.r12$CO2 == 350, ]
+#    cdf2.r12 <- cdf.r12[cdf.r12$CO2 == 700, ]
+#
+#    ### extract CO2 conc. from eq DF
+#    edf1.r12 <- edf.r12[edf.r12$CO2 == 350, ]
+#    edf2.r12 <- edf.r12[edf.r12$CO2 == 700, ]
+#
+#    ### plot
+#    p<-ggplot() + 
+#        geom_line(data=cdf1.r12, aes(x=nc, y=NPP_photo, col="C350")) +   
+#        geom_line(data=cdf1.r12, aes(x=nc, y=NPP_VL, col="VL")) + 
+#        geom_line(data=cdf1.r12, aes(x=nc, y=NPP_L, col="L")) +  
+#        geom_line(data=cdf1.r12, aes(x=nc, y=NPP_M, col="M")) +            
+#        geom_line(data=cdf2.r12, aes(x=nc, y=NPP_photo, col="C700")) +     
+#        geom_point(data=edf1.r12, aes(x=nc_VL, y=NPP_I, fill="B"), 
+#                   shape=21, color="black", size=5) +
+#        geom_point(data=edf1.r12, aes(x=nc_VL, y=NPP_VL, fill="A"), 
+#                color="black", shape=21, size=5) + 
+#        geom_point(data=edf2.r12, aes(x=nc_L, y=NPP_L, fill="D"), 
+#                   shape=21, color="black", size=5) +
+#        geom_point(data=edf2.r12, aes(x=nc_M, y=NPP_M, fill="C"), 
+#                   shape=21, color="black", size=5) +
+#        geom_point(data=edf2.r12, aes(x=nc_VL, y=NPP_VL, fill="E"), 
+#                   shape=21, color="black", size=5) +
+#        ylim(0.0, 2.0) + 
+#        xlim(0.001, 0.01) +
+#        labs(x="Leaf N:C Ratio", 
+#             y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
+#        theme_linedraw() +
+#        theme(panel.grid.minor=element_blank(),
+#              axis.text=element_text(size=14),
+#              axis.title=element_text(size=16),
+#              legend.text=element_text(size=14),
+#              legend.title=element_text(size=16),
+#              panel.grid.major=element_line(color="grey")) +
+#              scale_colour_manual(name="Constraint line", 
+#                            values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = #cbbPalette[7],
+#                                       "L" = cbbPalette[4], "M" = cbbPalette[3])) +
+#              scale_fill_manual(name="QE point", values = c("A" = cbPalette[1], "B" = #cbPalette[2], "C" = cbPalette[3],
+#                                                            "D" = cbPalette[4], "E" = #cbPalette[7])) 
+#
+#    plot(p)
+#    if (save.plot) {
+#        pdf("Plots/Run12.pdf", width=8, height=6)
+#        plot(p)
+#        dev.off()
+#    } 
 ```
 
 # 4. Summary table:
 ``` {r, echo=FALSE}
-    source("QE_Analyses/make_summary_table.R")
-    sumDF <- make_summary_table(destDir = "Tables")
-    
-    ### table output
-    kable(sumDF, row.names=F, format = "markdown")
+#    source("QE_Analyses/make_summary_table.R")
+#    sumDF <- make_summary_table(destDir = "Tables")
+#    
+#    ### table output
+#    kable(sumDF, row.names=F, format = "markdown")
 
 ```
 
 The table above summarizes scenarios tested in this study. Next, I am going to make a barplot to visually compare the results. 
 
 ``` {r, echo=FALSE, warning=F, message=F}
-    ### Firstly, remove unwanted scenarios
-    sumDF2 <- sumDF[grepl("variable wood", sumDF$model),]
-    sumDF3 <-  rbind(sumDF2, sumDF[sumDF$model == "Baseline fixed wood", ])     
-    sumDF3$model <- gsub(", variable wood", "", sumDF3$model)
-    
-    ### get % change df and abs df
-    pDF <- data.frame(sumDF3$model, sumDF3$I, sumDF3$M, sumDF3$L, sumDF3$VL)
-    colnames(pDF) <- c("Model", "I", "M", "L", "VL")
-    pcDF <- melt(pDF, id="Model")
-    nDF <- sumDF3[,1:3]
-    nppDF <- melt(nDF, id="model")
-    
-    ### plot
-    p<-ggplot() + 
-        geom_bar(data=pcDF, aes(x=Model, y=value, fill=variable), 
-                 stat="identity", position=position_dodge()) +
-        theme_linedraw() +
-        theme(panel.grid.minor=element_blank(),
-              axis.text=element_text(size=14),
-              axis.title=element_text(size=16),
-              legend.text=element_text(size=14),
-              legend.title=element_text(size=16),
-              axis.text.x = element_text(angle = 90, hjust=1),
-              panel.grid.major=element_line(color="grey")) + 
-        ylab("% change") + xlab("") + 
-        scale_y_log10(breaks=c(1,3,10,30,100)) + 
-        scale_fill_manual(name="Timescale", values = c("I" = cbPalette[2], "M" = cbPalette[3],
-                                                      "L" = cbPalette[4], "VL" = cbPalette[7])) +
-        coord_flip()
-    plot(p)
-    if (save.plot) {
-        pdf("Plots/summary_plot.pdf", width=10, height=6)
-        plot(p)
-        dev.off()
-    } 
-    
-
+#    ### Firstly, remove unwanted scenarios
+#    sumDF2 <- sumDF[grepl("variable wood", sumDF$model),]
+#    sumDF3 <-  rbind(sumDF2, sumDF[sumDF$model == "Baseline fixed wood", ])     
+#    sumDF3$model <- gsub(", variable wood", "", sumDF3$model)
+#    
+#    ### get % change df and abs df
+#    pDF <- data.frame(sumDF3$model, sumDF3$I, sumDF3$M, sumDF3$L, sumDF3$VL)
+#    colnames(pDF) <- c("Model", "I", "M", "L", "VL")
+#    pcDF <- melt(pDF, id="Model")
+#    nDF <- sumDF3[,1:3]
+#    nppDF <- melt(nDF, id="model")
+#    
+#    ### plot
+#    p<-ggplot() + 
+#        geom_bar(data=pcDF, aes(x=Model, y=value, fill=variable), 
+#                 stat="identity", position=position_dodge()) +
+#        theme_linedraw() +
+#        theme(panel.grid.minor=element_blank(),
+#              axis.text=element_text(size=14),
+#              axis.title=element_text(size=16),
+#              legend.text=element_text(size=14),
+#              legend.title=element_text(size=16),
+#              axis.text.x = element_text(angle = 90, hjust=1),
+#              panel.grid.major=element_line(color="grey")) + 
+#        ylab("% change") + xlab("") + 
+#        scale_y_log10(breaks=c(1,3,10,30,100)) + 
+#        scale_fill_manual(name="Timescale", values = c("I" = cbPalette[2], "M" = cbPalette[3],
+#                                                      "L" = cbPalette[4], "VL" = cbPalette[7])) #+
+#        coord_flip()
+#    plot(p)
+#    if (save.plot) {
+#        pdf("Plots/summary_plot.pdf", width=10, height=6)
+#        plot(p)
+#        dev.off()
+#    } 
+#    
+#
 ```
 
 
@@ -1101,6 +1101,21 @@ The table above summarizes scenarios tested in this study. Next, I am going to m
         plot(p)
         dev.off()
     } 
+    
+    
+    ### save a table on equilibrated NPP
+    u1 <- r32$eDF
+    u2 <- r31$eDF
+    u3 <- r3$eDF
+    u4 <- r33$eDF
+    u5 <- r34$eDF
+    u1$u <- 0.2
+    u2$u <- 0.5
+    u3$u <- 1.0
+    u4$u <- 2.0
+    u5$u <- 5.0
+    outDF <- rbind(u1, u2, u3, u4, u5)
+    write.csv(outDF, "Tables/varying_u_summary_table.csv", row.names=F)
     
 
 ```
@@ -1427,200 +1442,200 @@ $$NUE = 1 / (n_fa_f + n_wa_w + n_ra_r) $$
 ### 5.5. Compare CLM with CLM-FUN
 #### 5.5.1 variable wood NC
 ``` {r, echo=FALSE, warning=F, message=F, results="hide"}
-
-    #### Run 9
-    ### split the data.list into two data frames
-    cdf.r9 <- r9$cDF
-    edf.r9 <- r9$eDF
-
-    ### extract CO2 conc. from constraint DF
-    cdf1.r9 <- cdf.r9[cdf.r9$CO2 == 350, ]
-    cdf2.r9 <- cdf.r9[cdf.r9$CO2 == 700, ]
-
-    ### extract CO2 conc. from eq DF
-    edf1.r9 <- edf.r9[edf.r9$CO2 == 350, ]
-    edf2.r9 <- edf.r9[edf.r9$CO2 == 700, ]
-    
-    #### Run 11
-    ### split the data.list into two data frames
-    cdf.r11 <- r11$cDF
-    edf.r11 <- r11$eDF
-
-    ### extract CO2 conc. from constraint DF
-    cdf1.r11 <- cdf.r11[cdf.r11$CO2 == 350, ]
-    cdf2.r11 <- cdf.r11[cdf.r11$CO2 == 700, ]
-
-    ### extract CO2 conc. from eq DF
-    edf1.r11 <- edf.r11[edf.r11$CO2 == 350, ]
-    edf2.r11 <- edf.r11[edf.r11$CO2 == 700, ]
-    
-    ### plot
-    p1<-ggplot() + 
-        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_photo, col="C350")) +   
-        #geom_line(data=cdf1.r9, aes(x=nc, y=NPP_photo, col="C350"), linetype="dotted") +   
-        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_VL, col="VL")) + 
-        geom_line(data=cdf1.r9, aes(x=nc, y=NPP_VL, col="VL"), linetype="dotted") + 
-        #geom_line(data=cdf1.r11, aes(x=nc, y=NPP_L, col="L")) +  
-        #geom_line(data=cdf1.r9, aes(x=nc, y=NPP_L, col="L"), linetype="dotted") +  
-        #geom_line(data=cdf1.r11, aes(x=nc, y=NPP_M, col="M")) +    
-        #geom_line(data=cdf1.r9, aes(x=nc, y=NPP_M, col="M"), linetype="dotted") +            
-        geom_line(data=cdf2.r11, aes(x=nc, y=NPP_photo, col="C700")) +     
-        #geom_line(data=cdf2.r9, aes(x=nc, y=NPP_photo, col="C700"), linetype="dotted") +     
-        geom_point(data=edf1.r11, aes(x=nc_VL, y=NPP_I, fill="B"), 
-                   shape=21, color="black", size=5) +
-        geom_point(data=edf1.r9, aes(x=nc_act_VL, y=NPP_I), 
-                   shape=19, color=cbPalette[2], size=5) +
-        geom_point(data=edf1.r11, aes(x=nc_VL, y=NPP_VL, fill="A"), 
-                color="black", shape=21, size=5) + 
-        geom_point(data=edf1.r9, aes(x=nc_act_VL, y=NPP_act_VL), 
-                color=cbPalette[1], shape=19, size=5) + 
-        #geom_point(data=edf2.r11, aes(x=nc_L, y=NPP_L, fill="D"), 
-        #           shape=21, color="black", size=5) +
-        #geom_point(data=edf2.r9, aes(x=nc_act_L, y=NPP_act_L), 
-        #           shape=19, color=cbPalette[4], size=5) +
-        #geom_point(data=edf2.r11, aes(x=nc_M, y=NPP_M, fill="C"), 
-        #           shape=21, color="black", size=5) +
-        #geom_point(data=edf2.r9, aes(x=nc_act_M, y=NPP_act_M), 
-        #           shape=19, color=cbPalette[3], size=5) +
-        geom_point(data=edf2.r11, aes(x=nc_VL, y=NPP_VL, fill="E"), 
-                   shape=21, color="black", size=5) +
-        geom_point(data=edf2.r9, aes(x=nc_act_VL, y=NPP_act_VL), 
-                   shape=19, color=cbPalette[7], size=5) +
-        ylim(0.0, 2.0) + 
-        xlim(0.001, 0.005) +
-        labs(x="Leaf N:C Ratio", 
-             y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
-        theme_linedraw() +
-        theme(panel.grid.minor=element_blank(),
-              axis.text=element_text(size=14),
-              axis.title=element_text(size=16),
-              legend.text=element_text(size=14),
-              legend.title=element_text(size=16),
-              panel.grid.major=element_line(color="grey")) +
-              scale_colour_manual(name="Constraint line", 
-                            values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
-                                       "L" = cbbPalette[4], "M" = cbbPalette[3])) +
-              scale_fill_manual(name="QE point", values = c("A" = cbPalette[1], "B" = cbPalette[2], "C" = cbPalette[3],
-                                                            "D" = cbPalette[4], "E" = cbPalette[7])) 
-    
-    
-    p2<-ggplot() + 
-        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_photo, col="C350")) +   
-        #geom_line(data=cdf1.r9, aes(x=nc, y=NPP_photo, col="C350"), linetype="dotted") +   
-        #geom_line(data=cdf1.r11, aes(x=nc, y=NPP_VL, col="VL")) + 
-        #geom_line(data=cdf1.r9, aes(x=nc, y=NPP_VL, col="VL"), linetype="dotted") + 
-        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_L, col="L")) +  
-        geom_line(data=cdf1.r9, aes(x=nc, y=NPP_L, col="L"), linetype="dotted") +  
-        #geom_line(data=cdf1.r11, aes(x=nc, y=NPP_M, col="M")) +    
-        #geom_line(data=cdf1.r9, aes(x=nc, y=NPP_M, col="M"), linetype="dotted") +            
-        geom_line(data=cdf2.r11, aes(x=nc, y=NPP_photo, col="C700")) +     
-        #geom_line(data=cdf2.r9, aes(x=nc, y=NPP_photo, col="C700"), linetype="dotted") +     
-        geom_point(data=edf1.r11, aes(x=nc_VL, y=NPP_I, fill="B"), 
-                   shape=21, color="black", size=5) +
-        geom_point(data=edf1.r9, aes(x=nc_act_VL, y=NPP_I), 
-                   shape=19, color=cbPalette[2], size=5) +
-        geom_point(data=edf1.r11, aes(x=nc_VL, y=NPP_VL, fill="A"), 
-                color="black", shape=21, size=5) + 
-        geom_point(data=edf1.r9, aes(x=nc_act_VL, y=NPP_act_VL), 
-                color=cbPalette[1], shape=19, size=5) + 
-        geom_point(data=edf2.r11, aes(x=nc_L, y=NPP_L, fill="D"), 
-                   shape=21, color="black", size=5) +
-        geom_point(data=edf2.r9, aes(x=nc_act_L, y=NPP_act_L), 
-                   shape=19, color=cbPalette[4], size=5) +
-        #geom_point(data=edf2.r11, aes(x=nc_M, y=NPP_M, fill="C"), 
-        #           shape=21, color="black", size=5) +
-        #geom_point(data=edf2.r9, aes(x=nc_act_M, y=NPP_act_M), 
-        #           shape=19, color=cbPalette[3], size=5) +
-        #geom_point(data=edf2.r11, aes(x=nc_VL, y=NPP_VL, fill="E"), 
-        #           shape=21, color="black", size=5) +
-        #geom_point(data=edf2.r9, aes(x=nc_act_VL, y=NPP_act_VL), 
-        #           shape=19, color=cbPalette[7], size=5) +
-        ylim(0.0, 2.0) + 
-        xlim(0.001, 0.005) +
-        labs(x="Leaf N:C Ratio", 
-             y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
-        theme_linedraw() +
-        theme(panel.grid.minor=element_blank(),
-              axis.text=element_text(size=14),
-              axis.title=element_text(size=16),
-              legend.text=element_text(size=14),
-              legend.title=element_text(size=16),
-              panel.grid.major=element_line(color="grey")) +
-              scale_colour_manual(name="Constraint line", 
-                            values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
-                                       "L" = cbbPalette[4], "M" = cbbPalette[3])) +
-              scale_fill_manual(name="QE point", values = c("A" = cbPalette[1], "B" = cbPalette[2], "C" = cbPalette[3],
-                                                            "D" = cbPalette[4], "E" = cbPalette[7])) 
-
-    
-    p3<-ggplot() + 
-        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_photo, col="C350")) +   
-        #geom_line(data=cdf1.r9, aes(x=nc, y=NPP_photo, col="C350"), linetype="dotted") +   
-        #geom_line(data=cdf1.r11, aes(x=nc, y=NPP_VL, col="VL")) + 
-        #geom_line(data=cdf1.r9, aes(x=nc, y=NPP_VL, col="VL"), linetype="dotted") + 
-        #geom_line(data=cdf1.r11, aes(x=nc, y=NPP_L, col="L")) +  
-        #geom_line(data=cdf1.r9, aes(x=nc, y=NPP_L, col="L"), linetype="dotted") +  
-        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_M, col="M")) +    
-        geom_line(data=cdf1.r9, aes(x=nc, y=NPP_M, col="M"), linetype="dotted") +            
-        geom_line(data=cdf2.r11, aes(x=nc, y=NPP_photo, col="C700")) +     
-        #geom_line(data=cdf2.r9, aes(x=nc, y=NPP_photo, col="C700"), linetype="dotted") +     
-        geom_point(data=edf1.r11, aes(x=nc_VL, y=NPP_I, fill="B"), 
-                   shape=21, color="black", size=5) +
-        geom_point(data=edf1.r9, aes(x=nc_act_VL, y=NPP_I), 
-                   shape=19, color=cbPalette[2], size=5) +
-        geom_point(data=edf1.r11, aes(x=nc_VL, y=NPP_VL, fill="A"), 
-                color="black", shape=21, size=5) + 
-        geom_point(data=edf1.r9, aes(x=nc_act_VL, y=NPP_act_VL), 
-                color=cbPalette[1], shape=19, size=5) + 
-        #geom_point(data=edf2.r11, aes(x=nc_L, y=NPP_L, fill="D"), 
-        #           shape=21, color="black", size=5) +
-        #geom_point(data=edf2.r9, aes(x=nc_act_L, y=NPP_act_L), 
-        #           shape=19, color=cbPalette[4], size=5) +
-        geom_point(data=edf2.r11, aes(x=nc_M, y=NPP_M, fill="C"), 
-                   shape=21, color="black", size=5) +
-        geom_point(data=edf2.r9, aes(x=nc_act_M, y=NPP_act_M), 
-                   shape=19, color=cbPalette[3], size=5) +
-        #geom_point(data=edf2.r11, aes(x=nc_VL, y=NPP_VL, fill="E"), 
-        #           shape=21, color="black", size=5) +
-        #geom_point(data=edf2.r9, aes(x=nc_act_VL, y=NPP_act_VL), 
-        #           shape=19, color=cbPalette[7], size=5) +
-        ylim(0.0, 2.0) + 
-        xlim(0.001, 0.005) +
-        labs(x="Leaf N:C Ratio", 
-             y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
-        theme_linedraw() +
-        theme(panel.grid.minor=element_blank(),
-              axis.text=element_text(size=14),
-              axis.title=element_text(size=16),
-              legend.text=element_text(size=14),
-              legend.title=element_text(size=16),
-              panel.grid.major=element_line(color="grey")) +
-              scale_colour_manual(name="Constraint line", 
-                            values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
-                                       "L" = cbbPalette[4], "M" = cbbPalette[3])) +
-              scale_fill_manual(name="QE point", values = c("A" = cbPalette[1], "B" = cbPalette[2], "C" = cbPalette[3],
-                                                            "D" = cbPalette[4], "E" = cbPalette[7]))
-    
-    plot(p1)
-    
-    plot(p2)
-    
-    plot(p3)
-        
-    if (save.plot) {
-        pdf("Plots/CLM_vs_CLM_FUN_fixed_wood_1.pdf", width=8, height=6)
-        plot(p1)
-        dev.off()
-        
-        pdf("Plots/CLM_vs_CLM_FUN_fixed_wood_2.pdf", width=8, height=6)
-        plot(p2)
-        dev.off()
-        
-        pdf("Plots/CLM_vs_CLM_FUN_fixed_wood_3.pdf", width=8, height=6)
-        plot(p3)
-        dev.off()
-    } 
-    
+#
+#    #### Run 9
+#    ### split the data.list into two data frames
+#    cdf.r9 <- r9$cDF
+#    edf.r9 <- r9$eDF
+#
+#    ### extract CO2 conc. from constraint DF
+#    cdf1.r9 <- cdf.r9[cdf.r9$CO2 == 350, ]
+#    cdf2.r9 <- cdf.r9[cdf.r9$CO2 == 700, ]
+#
+#    ### extract CO2 conc. from eq DF
+#    edf1.r9 <- edf.r9[edf.r9$CO2 == 350, ]
+#    edf2.r9 <- edf.r9[edf.r9$CO2 == 700, ]
+#    
+#    #### Run 11
+#    ### split the data.list into two data frames
+#    cdf.r11 <- r11$cDF
+#    edf.r11 <- r11$eDF
+#
+#    ### extract CO2 conc. from constraint DF
+#    cdf1.r11 <- cdf.r11[cdf.r11$CO2 == 350, ]
+#    cdf2.r11 <- cdf.r11[cdf.r11$CO2 == 700, ]
+#
+#    ### extract CO2 conc. from eq DF
+#    edf1.r11 <- edf.r11[edf.r11$CO2 == 350, ]
+#    edf2.r11 <- edf.r11[edf.r11$CO2 == 700, ]
+#    
+#    ### plot
+#    p1<-ggplot() + 
+#        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_photo, col="C350")) +   
+#        #geom_line(data=cdf1.r9, aes(x=nc, y=NPP_photo, col="C350"), linetype="dotted") +   
+#        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_VL, col="VL")) + 
+#        geom_line(data=cdf1.r9, aes(x=nc, y=NPP_VL, col="VL"), linetype="dotted") + 
+#        #geom_line(data=cdf1.r11, aes(x=nc, y=NPP_L, col="L")) +  
+#        #geom_line(data=cdf1.r9, aes(x=nc, y=NPP_L, col="L"), linetype="dotted") +  
+#        #geom_line(data=cdf1.r11, aes(x=nc, y=NPP_M, col="M")) +    
+#        #geom_line(data=cdf1.r9, aes(x=nc, y=NPP_M, col="M"), linetype="dotted") +            
+#        geom_line(data=cdf2.r11, aes(x=nc, y=NPP_photo, col="C700")) +     
+#        #geom_line(data=cdf2.r9, aes(x=nc, y=NPP_photo, col="C700"), linetype="dotted") +     
+#        geom_point(data=edf1.r11, aes(x=nc_VL, y=NPP_I, fill="B"), 
+#                   shape=21, color="black", size=5) +
+#        geom_point(data=edf1.r9, aes(x=nc_act_VL, y=NPP_I), 
+#                   shape=19, color=cbPalette[2], size=5) +
+#        geom_point(data=edf1.r11, aes(x=nc_VL, y=NPP_VL, fill="A"), 
+#                color="black", shape=21, size=5) + 
+#        geom_point(data=edf1.r9, aes(x=nc_act_VL, y=NPP_act_VL), 
+#                color=cbPalette[1], shape=19, size=5) + 
+#        #geom_point(data=edf2.r11, aes(x=nc_L, y=NPP_L, fill="D"), 
+#        #           shape=21, color="black", size=5) +
+#        #geom_point(data=edf2.r9, aes(x=nc_act_L, y=NPP_act_L), 
+#        #           shape=19, color=cbPalette[4], size=5) +
+#        #geom_point(data=edf2.r11, aes(x=nc_M, y=NPP_M, fill="C"), 
+#        #           shape=21, color="black", size=5) +
+#        #geom_point(data=edf2.r9, aes(x=nc_act_M, y=NPP_act_M), 
+#        #           shape=19, color=cbPalette[3], size=5) +
+#        geom_point(data=edf2.r11, aes(x=nc_VL, y=NPP_VL, fill="E"), 
+#                   shape=21, color="black", size=5) +
+#        geom_point(data=edf2.r9, aes(x=nc_act_VL, y=NPP_act_VL), 
+#                   shape=19, color=cbPalette[7], size=5) +
+#        ylim(0.0, 2.0) + 
+#        xlim(0.001, 0.005) +
+#        labs(x="Leaf N:C Ratio", 
+#             y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
+#        theme_linedraw() +
+#        theme(panel.grid.minor=element_blank(),
+#              axis.text=element_text(size=14),
+#              axis.title=element_text(size=16),
+#              legend.text=element_text(size=14),
+#              legend.title=element_text(size=16),
+#              panel.grid.major=element_line(color="grey")) +
+#              scale_colour_manual(name="Constraint line", 
+#                            values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = #cbbPalette[7],
+#                                       "L" = cbbPalette[4], "M" = cbbPalette[3])) +
+#              scale_fill_manual(name="QE point", values = c("A" = cbPalette[1], "B" = #cbPalette[2], "C" = cbPalette[3],
+#                                                            "D" = cbPalette[4], "E" = #cbPalette[7])) 
+#    
+#    
+#    p2<-ggplot() + 
+#        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_photo, col="C350")) +   
+#        #geom_line(data=cdf1.r9, aes(x=nc, y=NPP_photo, col="C350"), linetype="dotted") +   
+#        #geom_line(data=cdf1.r11, aes(x=nc, y=NPP_VL, col="VL")) + 
+#        #geom_line(data=cdf1.r9, aes(x=nc, y=NPP_VL, col="VL"), linetype="dotted") + 
+#        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_L, col="L")) +  
+#        geom_line(data=cdf1.r9, aes(x=nc, y=NPP_L, col="L"), linetype="dotted") +  
+#        #geom_line(data=cdf1.r11, aes(x=nc, y=NPP_M, col="M")) +    
+#        #geom_line(data=cdf1.r9, aes(x=nc, y=NPP_M, col="M"), linetype="dotted") +            
+#        geom_line(data=cdf2.r11, aes(x=nc, y=NPP_photo, col="C700")) +     
+#        #geom_line(data=cdf2.r9, aes(x=nc, y=NPP_photo, col="C700"), linetype="dotted") +     
+#        geom_point(data=edf1.r11, aes(x=nc_VL, y=NPP_I, fill="B"), 
+#                   shape=21, color="black", size=5) +
+#        geom_point(data=edf1.r9, aes(x=nc_act_VL, y=NPP_I), 
+#                   shape=19, color=cbPalette[2], size=5) +
+#        geom_point(data=edf1.r11, aes(x=nc_VL, y=NPP_VL, fill="A"), 
+#                color="black", shape=21, size=5) + 
+#        geom_point(data=edf1.r9, aes(x=nc_act_VL, y=NPP_act_VL), 
+#                color=cbPalette[1], shape=19, size=5) + 
+#        geom_point(data=edf2.r11, aes(x=nc_L, y=NPP_L, fill="D"), 
+#                   shape=21, color="black", size=5) +
+#        geom_point(data=edf2.r9, aes(x=nc_act_L, y=NPP_act_L), 
+#                   shape=19, color=cbPalette[4], size=5) +
+#        #geom_point(data=edf2.r11, aes(x=nc_M, y=NPP_M, fill="C"), 
+#        #           shape=21, color="black", size=5) +
+#        #geom_point(data=edf2.r9, aes(x=nc_act_M, y=NPP_act_M), 
+#        #           shape=19, color=cbPalette[3], size=5) +
+#        #geom_point(data=edf2.r11, aes(x=nc_VL, y=NPP_VL, fill="E"), 
+#        #           shape=21, color="black", size=5) +
+#        #geom_point(data=edf2.r9, aes(x=nc_act_VL, y=NPP_act_VL), 
+#        #           shape=19, color=cbPalette[7], size=5) +
+#        ylim(0.0, 2.0) + 
+#        xlim(0.001, 0.005) +
+#        labs(x="Leaf N:C Ratio", 
+#             y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
+#        theme_linedraw() +
+#        theme(panel.grid.minor=element_blank(),
+#              axis.text=element_text(size=14),
+#              axis.title=element_text(size=16),
+#              legend.text=element_text(size=14),
+#              legend.title=element_text(size=16),
+#              panel.grid.major=element_line(color="grey")) +
+#              scale_colour_manual(name="Constraint line", 
+#                            values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = #cbbPalette[7],
+#                                       "L" = cbbPalette[4], "M" = cbbPalette[3])) +
+#              scale_fill_manual(name="QE point", values = c("A" = cbPalette[1], "B" = #cbPalette[2], "C" = cbPalette[3],
+#                                                            "D" = cbPalette[4], "E" = #cbPalette[7])) 
+#
+#    
+#    p3<-ggplot() + 
+#        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_photo, col="C350")) +   
+#        #geom_line(data=cdf1.r9, aes(x=nc, y=NPP_photo, col="C350"), linetype="dotted") +   
+#        #geom_line(data=cdf1.r11, aes(x=nc, y=NPP_VL, col="VL")) + 
+#        #geom_line(data=cdf1.r9, aes(x=nc, y=NPP_VL, col="VL"), linetype="dotted") + 
+#        #geom_line(data=cdf1.r11, aes(x=nc, y=NPP_L, col="L")) +  
+#        #geom_line(data=cdf1.r9, aes(x=nc, y=NPP_L, col="L"), linetype="dotted") +  
+#        geom_line(data=cdf1.r11, aes(x=nc, y=NPP_M, col="M")) +    
+#        geom_line(data=cdf1.r9, aes(x=nc, y=NPP_M, col="M"), linetype="dotted") +            
+#        geom_line(data=cdf2.r11, aes(x=nc, y=NPP_photo, col="C700")) +     
+#        #geom_line(data=cdf2.r9, aes(x=nc, y=NPP_photo, col="C700"), linetype="dotted") +     
+#        geom_point(data=edf1.r11, aes(x=nc_VL, y=NPP_I, fill="B"), 
+#                   shape=21, color="black", size=5) +
+#        geom_point(data=edf1.r9, aes(x=nc_act_VL, y=NPP_I), 
+#                   shape=19, color=cbPalette[2], size=5) +
+#        geom_point(data=edf1.r11, aes(x=nc_VL, y=NPP_VL, fill="A"), 
+#                color="black", shape=21, size=5) + 
+#        geom_point(data=edf1.r9, aes(x=nc_act_VL, y=NPP_act_VL), 
+#                color=cbPalette[1], shape=19, size=5) + 
+#        #geom_point(data=edf2.r11, aes(x=nc_L, y=NPP_L, fill="D"), 
+#        #           shape=21, color="black", size=5) +
+#        #geom_point(data=edf2.r9, aes(x=nc_act_L, y=NPP_act_L), 
+#        #           shape=19, color=cbPalette[4], size=5) +
+#        geom_point(data=edf2.r11, aes(x=nc_M, y=NPP_M, fill="C"), 
+#                   shape=21, color="black", size=5) +
+#        geom_point(data=edf2.r9, aes(x=nc_act_M, y=NPP_act_M), 
+#                   shape=19, color=cbPalette[3], size=5) +
+#        #geom_point(data=edf2.r11, aes(x=nc_VL, y=NPP_VL, fill="E"), 
+#        #           shape=21, color="black", size=5) +
+#        #geom_point(data=edf2.r9, aes(x=nc_act_VL, y=NPP_act_VL), 
+#        #           shape=19, color=cbPalette[7], size=5) +
+#        ylim(0.0, 2.0) + 
+#        xlim(0.001, 0.005) +
+#        labs(x="Leaf N:C Ratio", 
+#             y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
+#        theme_linedraw() +
+#        theme(panel.grid.minor=element_blank(),
+#              axis.text=element_text(size=14),
+#              axis.title=element_text(size=16),
+#              legend.text=element_text(size=14),
+#              legend.title=element_text(size=16),
+#              panel.grid.major=element_line(color="grey")) +
+#              scale_colour_manual(name="Constraint line", 
+#                            values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = #cbbPalette[7],
+#                                       "L" = cbbPalette[4], "M" = cbbPalette[3])) +
+#              scale_fill_manual(name="QE point", values = c("A" = cbPalette[1], "B" = #cbPalette[2], "C" = cbPalette[3],
+#                                                            "D" = cbPalette[4], "E" = #cbPalette[7]))
+#    
+#    plot(p1)
+#    
+#    plot(p2)
+#    
+#    plot(p3)
+#        
+#    if (save.plot) {
+#        pdf("Plots/CLM_vs_CLM_FUN_fixed_wood_1.pdf", width=8, height=6)
+#        plot(p1)
+#        dev.off()
+#        
+#        pdf("Plots/CLM_vs_CLM_FUN_fixed_wood_2.pdf", width=8, height=6)
+#        plot(p2)
+#        dev.off()
+#        
+#        pdf("Plots/CLM_vs_CLM_FUN_fixed_wood_3.pdf", width=8, height=6)
+#        plot(p3)
+#        dev.off()
+#    } 
+#    
 
 ```
 
@@ -1628,199 +1643,199 @@ $$NUE = 1 / (n_fa_f + n_wa_w + n_ra_r) $$
 
 #### 5.5.2 variable wood NC
 ``` {r, echo=FALSE, warning=F, message=F, results="hide"}
-
-    #### Run 10
-    ### split the data.list into two data frames
-    cdf.r10 <- r10$cDF
-    edf.r10 <- r10$eDF
-
-    ### extract CO2 conc. from constraint DF
-    cdf1.r10 <- cdf.r10[cdf.r10$CO2 == 350, ]
-    cdf2.r10 <- cdf.r10[cdf.r10$CO2 == 700, ]
-
-    ### extract CO2 conc. from eq DF
-    edf1.r10 <- edf.r10[edf.r10$CO2 == 350, ]
-    edf2.r10 <- edf.r10[edf.r10$CO2 == 700, ]
-    
-    #### Run 11
-    ### split the data.list into two data frames
-    cdf.r12 <- r12$cDF
-    edf.r12 <- r12$eDF
-
-    ### extract CO2 conc. from constraint DF
-    cdf1.r12 <- cdf.r12[cdf.r12$CO2 == 350, ]
-    cdf2.r12 <- cdf.r12[cdf.r12$CO2 == 700, ]
-
-    ### extract CO2 conc. from eq DF
-    edf1.r12 <- edf.r12[edf.r12$CO2 == 350, ]
-    edf2.r12 <- edf.r12[edf.r12$CO2 == 700, ]
-    
-    ### plot
-    p1<-ggplot() + 
-        geom_line(data=cdf1.r12, aes(x=nc, y=NPP_photo, col="C350")) +   
-        #geom_line(data=cdf1.r10, aes(x=nc, y=NPP_photo, col="C350"), linetype="dotted") +   
-        geom_line(data=cdf1.r12, aes(x=nc, y=NPP_VL, col="VL")) + 
-        geom_line(data=cdf1.r10, aes(x=nc, y=NPP_VL, col="VL"), linetype="dotted") + 
-        #geom_line(data=cdf1.r12, aes(x=nc, y=NPP_L, col="L")) +  
-        #geom_line(data=cdf1.r10, aes(x=nc, y=NPP_L, col="L"), linetype="dotted") +  
-        #geom_line(data=cdf1.r12, aes(x=nc, y=NPP_M, col="M")) +    
-        #geom_line(data=cdf1.r10, aes(x=nc, y=NPP_M, col="M"), linetype="dotted") +            
-        geom_line(data=cdf2.r12, aes(x=nc, y=NPP_photo, col="C700")) +     
-        #geom_line(data=cdf2.r10, aes(x=nc, y=NPP_photo, col="C700"), linetype="dotted") +     
-        geom_point(data=edf1.r12, aes(x=nc_VL, y=NPP_I, fill="B"), 
-                   shape=21, color="black", size=5) +
-        geom_point(data=edf1.r10, aes(x=nc_act_VL, y=NPP_I), 
-                   shape=19, color=cbPalette[2], size=5) +
-        geom_point(data=edf1.r12, aes(x=nc_VL, y=NPP_VL, fill="A"), 
-                color="black", shape=21, size=5) + 
-        geom_point(data=edf1.r10, aes(x=nc_act_VL, y=NPP_act_VL), 
-                color=cbPalette[1], shape=19, size=5) + 
-        #geom_point(data=edf2.r12, aes(x=nc_L, y=NPP_L, fill="D"), 
-        #           shape=21, color="black", size=5) +
-        #geom_point(data=edf2.r10, aes(x=nc_act_L, y=NPP_act_L), 
-        #           shape=19, color=cbPalette[4], size=5) +
-        #geom_point(data=edf2.r12, aes(x=nc_M, y=NPP_M, fill="C"), 
-        #           shape=21, color="black", size=5) +
-        #geom_point(data=edf2.r10, aes(x=nc_act_M, y=NPP_act_M), 
-        #           shape=19, color=cbPalette[3], size=5) +
-        geom_point(data=edf2.r12, aes(x=nc_VL, y=NPP_VL, fill="E"), 
-                   shape=21, color="black", size=5) +
-        geom_point(data=edf2.r10, aes(x=nc_act_VL, y=NPP_act_VL), 
-                   shape=19, color=cbPalette[7], size=5) +
-        ylim(0.0, 2.0) + 
-        xlim(0.001, 0.01) +
-        labs(x="Leaf N:C Ratio", 
-             y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
-        theme_linedraw() +
-        theme(panel.grid.minor=element_blank(),
-              axis.text=element_text(size=14),
-              axis.title=element_text(size=16),
-              legend.text=element_text(size=14),
-              legend.title=element_text(size=16),
-              panel.grid.major=element_line(color="grey")) +
-              scale_colour_manual(name="Constraint line", 
-                            values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
-                                       "L" = cbbPalette[4], "M" = cbbPalette[3])) +
-              scale_fill_manual(name="QE point", values = c("A" = cbPalette[1], "B" = cbPalette[2], "C" = cbPalette[3],
-                                                            "D" = cbPalette[4], "E" = cbPalette[7])) 
-    
-    
-    p2<-ggplot() + 
-        geom_line(data=cdf1.r12, aes(x=nc, y=NPP_photo, col="C350")) +   
-        #geom_line(data=cdf1.r10, aes(x=nc, y=NPP_photo, col="C350"), linetype="dotted") +   
-        #geom_line(data=cdf1.r12, aes(x=nc, y=NPP_VL, col="VL")) + 
-        #geom_line(data=cdf1.r10, aes(x=nc, y=NPP_VL, col="VL"), linetype="dotted") + 
-        geom_line(data=cdf1.r12, aes(x=nc, y=NPP_L, col="L")) +  
-        geom_line(data=cdf1.r10, aes(x=nc, y=NPP_L, col="L"), linetype="dotted") +  
-        #geom_line(data=cdf1.r12, aes(x=nc, y=NPP_M, col="M")) +    
-        #geom_line(data=cdf1.r10, aes(x=nc, y=NPP_M, col="M"), linetype="dotted") +            
-        geom_line(data=cdf2.r12, aes(x=nc, y=NPP_photo, col="C700")) +     
-        #geom_line(data=cdf2.r10, aes(x=nc, y=NPP_photo, col="C700"), linetype="dotted") +     
-        geom_point(data=edf1.r12, aes(x=nc_VL, y=NPP_I, fill="B"), 
-                   shape=21, color="black", size=5) +
-        geom_point(data=edf1.r10, aes(x=nc_act_VL, y=NPP_I), 
-                   shape=19, color=cbPalette[2], size=5) +
-        geom_point(data=edf1.r12, aes(x=nc_VL, y=NPP_VL, fill="A"), 
-                color="black", shape=21, size=5) + 
-        geom_point(data=edf1.r10, aes(x=nc_act_VL, y=NPP_act_VL), 
-                color=cbPalette[1], shape=19, size=5) + 
-        geom_point(data=edf2.r12, aes(x=nc_L, y=NPP_L, fill="D"), 
-                   shape=21, color="black", size=5) +
-        geom_point(data=edf2.r10, aes(x=nc_act_L, y=NPP_act_L), 
-                   shape=19, color=cbPalette[4], size=5) +
-        #geom_point(data=edf2.r12, aes(x=nc_M, y=NPP_M, fill="C"), 
-        #           shape=21, color="black", size=5) +
-        #geom_point(data=edf2.r10, aes(x=nc_act_M, y=NPP_act_M), 
-        #           shape=19, color=cbPalette[3], size=5) +
-        #geom_point(data=edf2.r12, aes(x=nc_VL, y=NPP_VL, fill="E"), 
-        #           shape=21, color="black", size=5) +
-        #geom_point(data=edf2.r10, aes(x=nc_act_VL, y=NPP_act_VL), 
-        #           shape=19, color=cbPalette[7], size=5) +
-        ylim(0.0, 2.0) + 
-        xlim(0.001, 0.01) +
-        labs(x="Leaf N:C Ratio", 
-             y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
-        theme_linedraw() +
-        theme(panel.grid.minor=element_blank(),
-              axis.text=element_text(size=14),
-              axis.title=element_text(size=16),
-              legend.text=element_text(size=14),
-              legend.title=element_text(size=16),
-              panel.grid.major=element_line(color="grey")) +
-              scale_colour_manual(name="Constraint line", 
-                            values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
-                                       "L" = cbbPalette[4], "M" = cbbPalette[3])) +
-              scale_fill_manual(name="QE point", values = c("A" = cbPalette[1], "B" = cbPalette[2], "C" = cbPalette[3],
-                                                            "D" = cbPalette[4], "E" = cbPalette[7])) 
-
-    
-    p3<-ggplot() + 
-        geom_line(data=cdf1.r12, aes(x=nc, y=NPP_photo, col="C350")) +   
-        #geom_line(data=cdf1.r10, aes(x=nc, y=NPP_photo, col="C350"), linetype="dotted") +   
-        #geom_line(data=cdf1.r12, aes(x=nc, y=NPP_VL, col="VL")) + 
-        #geom_line(data=cdf1.r10, aes(x=nc, y=NPP_VL, col="VL"), linetype="dotted") + 
-        #geom_line(data=cdf1.r12, aes(x=nc, y=NPP_L, col="L")) +  
-        #geom_line(data=cdf1.r10, aes(x=nc, y=NPP_L, col="L"), linetype="dotted") +  
-        geom_line(data=cdf1.r12, aes(x=nc, y=NPP_M, col="M")) +    
-        geom_line(data=cdf1.r10, aes(x=nc, y=NPP_M, col="M"), linetype="dotted") +            
-        geom_line(data=cdf2.r12, aes(x=nc, y=NPP_photo, col="C700")) +     
-        #geom_line(data=cdf2.r10, aes(x=nc, y=NPP_photo, col="C700"), linetype="dotted") +     
-        geom_point(data=edf1.r12, aes(x=nc_VL, y=NPP_I, fill="B"), 
-                   shape=21, color="black", size=5) +
-        geom_point(data=edf1.r10, aes(x=nc_act_VL, y=NPP_I), 
-                   shape=19, color=cbPalette[2], size=5) +
-        geom_point(data=edf1.r12, aes(x=nc_VL, y=NPP_VL, fill="A"), 
-                color="black", shape=21, size=5) + 
-        geom_point(data=edf1.r10, aes(x=nc_act_VL, y=NPP_act_VL), 
-                color=cbPalette[1], shape=19, size=5) + 
-        #geom_point(data=edf2.r12, aes(x=nc_L, y=NPP_L, fill="D"), 
-        #           shape=21, color="black", size=5) +
-        #geom_point(data=edf2.r10, aes(x=nc_act_L, y=NPP_act_L), 
-        #           shape=19, color=cbPalette[4], size=5) +
-        geom_point(data=edf2.r12, aes(x=nc_M, y=NPP_M, fill="C"), 
-                   shape=21, color="black", size=5) +
-        geom_point(data=edf2.r10, aes(x=nc_act_M, y=NPP_act_M), 
-                   shape=19, color=cbPalette[3], size=5) +
-        #geom_point(data=edf2.r12, aes(x=nc_VL, y=NPP_VL, fill="E"), 
-        #           shape=21, color="black", size=5) +
-        #geom_point(data=edf2.r10, aes(x=nc_act_VL, y=NPP_act_VL), 
-        #           shape=19, color=cbPalette[7], size=5) +
-        ylim(0.0, 2.0) + 
-        xlim(0.001, 0.01) +
-        labs(x="Leaf N:C Ratio", 
-             y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
-        theme_linedraw() +
-        theme(panel.grid.minor=element_blank(),
-              axis.text=element_text(size=14),
-              axis.title=element_text(size=16),
-              legend.text=element_text(size=14),
-              legend.title=element_text(size=16),
-              panel.grid.major=element_line(color="grey")) +
-              scale_colour_manual(name="Constraint line", 
-                            values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = cbbPalette[7],
-                                       "L" = cbbPalette[4], "M" = cbbPalette[3])) +
-              scale_fill_manual(name="QE point", values = c("A" = cbPalette[1], "B" = cbPalette[2], "C" = cbPalette[3],
-                                                            "D" = cbPalette[4], "E" = cbPalette[7]))
-    
-    plot(p1)
-    
-    plot(p2)
-    
-    plot(p3)
-        
-    if (save.plot) {
-        pdf("Plots/CLM_vs_CLM_FUN_variable_wood_1.pdf", width=8, height=6)
-        plot(p1)
-        dev.off()
-        
-        pdf("Plots/CLM_vs_CLM_FUN_variable_wood_2.pdf", width=8, height=6)
-        plot(p2)
-        dev.off()
-        
-        pdf("Plots/CLM_vs_CLM_FUN_variable_wood_3.pdf", width=8, height=6)
-        plot(p3)
-        dev.off()
-    } 
+#
+#    #### Run 10
+#    ### split the data.list into two data frames
+#    cdf.r10 <- r10$cDF
+#    edf.r10 <- r10$eDF
+#
+#    ### extract CO2 conc. from constraint DF
+#    cdf1.r10 <- cdf.r10[cdf.r10$CO2 == 350, ]
+#    cdf2.r10 <- cdf.r10[cdf.r10$CO2 == 700, ]
+#
+#    ### extract CO2 conc. from eq DF
+#    edf1.r10 <- edf.r10[edf.r10$CO2 == 350, ]
+#    edf2.r10 <- edf.r10[edf.r10$CO2 == 700, ]
+#    
+#    #### Run 11
+#    ### split the data.list into two data frames
+#    cdf.r12 <- r12$cDF
+#    edf.r12 <- r12$eDF
+#
+#    ### extract CO2 conc. from constraint DF
+#    cdf1.r12 <- cdf.r12[cdf.r12$CO2 == 350, ]
+#    cdf2.r12 <- cdf.r12[cdf.r12$CO2 == 700, ]
+#
+#    ### extract CO2 conc. from eq DF
+#    edf1.r12 <- edf.r12[edf.r12$CO2 == 350, ]
+#    edf2.r12 <- edf.r12[edf.r12$CO2 == 700, ]
+#    
+#    ### plot
+#    p1<-ggplot() + 
+#        geom_line(data=cdf1.r12, aes(x=nc, y=NPP_photo, col="C350")) +   
+#        #geom_line(data=cdf1.r10, aes(x=nc, y=NPP_photo, col="C350"), linetype="dotted") +   
+#        geom_line(data=cdf1.r12, aes(x=nc, y=NPP_VL, col="VL")) + 
+#        geom_line(data=cdf1.r10, aes(x=nc, y=NPP_VL, col="VL"), linetype="dotted") + 
+#        #geom_line(data=cdf1.r12, aes(x=nc, y=NPP_L, col="L")) +  
+#        #geom_line(data=cdf1.r10, aes(x=nc, y=NPP_L, col="L"), linetype="dotted") +  
+#        #geom_line(data=cdf1.r12, aes(x=nc, y=NPP_M, col="M")) +    
+#        #geom_line(data=cdf1.r10, aes(x=nc, y=NPP_M, col="M"), linetype="dotted") +            
+#        geom_line(data=cdf2.r12, aes(x=nc, y=NPP_photo, col="C700")) +     
+#        #geom_line(data=cdf2.r10, aes(x=nc, y=NPP_photo, col="C700"), linetype="dotted") +     
+#        geom_point(data=edf1.r12, aes(x=nc_VL, y=NPP_I, fill="B"), 
+#                   shape=21, color="black", size=5) +
+#        geom_point(data=edf1.r10, aes(x=nc_act_VL, y=NPP_I), 
+#                   shape=19, color=cbPalette[2], size=5) +
+#        geom_point(data=edf1.r12, aes(x=nc_VL, y=NPP_VL, fill="A"), 
+#                color="black", shape=21, size=5) + 
+#        geom_point(data=edf1.r10, aes(x=nc_act_VL, y=NPP_act_VL), 
+#                color=cbPalette[1], shape=19, size=5) + 
+#        #geom_point(data=edf2.r12, aes(x=nc_L, y=NPP_L, fill="D"), 
+#        #           shape=21, color="black", size=5) +
+#        #geom_point(data=edf2.r10, aes(x=nc_act_L, y=NPP_act_L), 
+#        #           shape=19, color=cbPalette[4], size=5) +
+#        #geom_point(data=edf2.r12, aes(x=nc_M, y=NPP_M, fill="C"), 
+#        #           shape=21, color="black", size=5) +
+#        #geom_point(data=edf2.r10, aes(x=nc_act_M, y=NPP_act_M), 
+#        #           shape=19, color=cbPalette[3], size=5) +
+#        geom_point(data=edf2.r12, aes(x=nc_VL, y=NPP_VL, fill="E"), 
+#                   shape=21, color="black", size=5) +
+#        geom_point(data=edf2.r10, aes(x=nc_act_VL, y=NPP_act_VL), 
+#                   shape=19, color=cbPalette[7], size=5) +
+#        ylim(0.0, 2.0) + 
+#        xlim(0.001, 0.01) +
+#        labs(x="Leaf N:C Ratio", 
+#             y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
+#        theme_linedraw() +
+#        theme(panel.grid.minor=element_blank(),
+#              axis.text=element_text(size=14),
+#              axis.title=element_text(size=16),
+#              legend.text=element_text(size=14),
+#              legend.title=element_text(size=16),
+#              panel.grid.major=element_line(color="grey")) +
+#              scale_colour_manual(name="Constraint line", 
+#                            values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = #cbbPalette[7],
+#                                       "L" = cbbPalette[4], "M" = cbbPalette[3])) +
+#              scale_fill_manual(name="QE point", values = c("A" = cbPalette[1], "B" = #cbPalette[2], "C" = cbPalette[3],
+#                                                            "D" = cbPalette[4], "E" = #cbPalette[7])) 
+#    
+#    
+#    p2<-ggplot() + 
+#        geom_line(data=cdf1.r12, aes(x=nc, y=NPP_photo, col="C350")) +   
+#        #geom_line(data=cdf1.r10, aes(x=nc, y=NPP_photo, col="C350"), linetype="dotted") +   
+#        #geom_line(data=cdf1.r12, aes(x=nc, y=NPP_VL, col="VL")) + 
+#        #geom_line(data=cdf1.r10, aes(x=nc, y=NPP_VL, col="VL"), linetype="dotted") + 
+#        geom_line(data=cdf1.r12, aes(x=nc, y=NPP_L, col="L")) +  
+#        geom_line(data=cdf1.r10, aes(x=nc, y=NPP_L, col="L"), linetype="dotted") +  
+#        #geom_line(data=cdf1.r12, aes(x=nc, y=NPP_M, col="M")) +    
+#        #geom_line(data=cdf1.r10, aes(x=nc, y=NPP_M, col="M"), linetype="dotted") +            
+#        geom_line(data=cdf2.r12, aes(x=nc, y=NPP_photo, col="C700")) +     
+#        #geom_line(data=cdf2.r10, aes(x=nc, y=NPP_photo, col="C700"), linetype="dotted") +     
+#        geom_point(data=edf1.r12, aes(x=nc_VL, y=NPP_I, fill="B"), 
+#                   shape=21, color="black", size=5) +
+#        geom_point(data=edf1.r10, aes(x=nc_act_VL, y=NPP_I), 
+#                   shape=19, color=cbPalette[2], size=5) +
+#        geom_point(data=edf1.r12, aes(x=nc_VL, y=NPP_VL, fill="A"), 
+#                color="black", shape=21, size=5) + 
+#        geom_point(data=edf1.r10, aes(x=nc_act_VL, y=NPP_act_VL), 
+#                color=cbPalette[1], shape=19, size=5) + 
+#        geom_point(data=edf2.r12, aes(x=nc_L, y=NPP_L, fill="D"), 
+#                   shape=21, color="black", size=5) +
+#        geom_point(data=edf2.r10, aes(x=nc_act_L, y=NPP_act_L), 
+#                   shape=19, color=cbPalette[4], size=5) +
+#        #geom_point(data=edf2.r12, aes(x=nc_M, y=NPP_M, fill="C"), 
+#        #           shape=21, color="black", size=5) +
+#        #geom_point(data=edf2.r10, aes(x=nc_act_M, y=NPP_act_M), 
+#        #           shape=19, color=cbPalette[3], size=5) +
+#        #geom_point(data=edf2.r12, aes(x=nc_VL, y=NPP_VL, fill="E"), 
+#        #           shape=21, color="black", size=5) +
+#        #geom_point(data=edf2.r10, aes(x=nc_act_VL, y=NPP_act_VL), 
+#        #           shape=19, color=cbPalette[7], size=5) +
+#        ylim(0.0, 2.0) + 
+#        xlim(0.001, 0.01) +
+#        labs(x="Leaf N:C Ratio", 
+#             y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
+#        theme_linedraw() +
+#        theme(panel.grid.minor=element_blank(),
+#              axis.text=element_text(size=14),
+#              axis.title=element_text(size=16),
+#              legend.text=element_text(size=14),
+#              legend.title=element_text(size=16),
+#              panel.grid.major=element_line(color="grey")) +
+#              scale_colour_manual(name="Constraint line", 
+#                            values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = #cbbPalette[7],
+#                                       "L" = cbbPalette[4], "M" = cbbPalette[3])) +
+#              scale_fill_manual(name="QE point", values = c("A" = cbPalette[1], "B" = #cbPalette[2], "C" = cbPalette[3],
+#                                                            "D" = cbPalette[4], "E" = #cbPalette[7])) 
+#
+#    
+#    p3<-ggplot() + 
+#        geom_line(data=cdf1.r12, aes(x=nc, y=NPP_photo, col="C350")) +   
+#        #geom_line(data=cdf1.r10, aes(x=nc, y=NPP_photo, col="C350"), linetype="dotted") +   
+#        #geom_line(data=cdf1.r12, aes(x=nc, y=NPP_VL, col="VL")) + 
+#        #geom_line(data=cdf1.r10, aes(x=nc, y=NPP_VL, col="VL"), linetype="dotted") + 
+#        #geom_line(data=cdf1.r12, aes(x=nc, y=NPP_L, col="L")) +  
+#        #geom_line(data=cdf1.r10, aes(x=nc, y=NPP_L, col="L"), linetype="dotted") +  
+#        geom_line(data=cdf1.r12, aes(x=nc, y=NPP_M, col="M")) +    
+#        geom_line(data=cdf1.r10, aes(x=nc, y=NPP_M, col="M"), linetype="dotted") +            
+#        geom_line(data=cdf2.r12, aes(x=nc, y=NPP_photo, col="C700")) +     
+#        #geom_line(data=cdf2.r10, aes(x=nc, y=NPP_photo, col="C700"), linetype="dotted") +     
+#        geom_point(data=edf1.r12, aes(x=nc_VL, y=NPP_I, fill="B"), 
+#                   shape=21, color="black", size=5) +
+#        geom_point(data=edf1.r10, aes(x=nc_act_VL, y=NPP_I), 
+#                   shape=19, color=cbPalette[2], size=5) +
+#        geom_point(data=edf1.r12, aes(x=nc_VL, y=NPP_VL, fill="A"), 
+#                color="black", shape=21, size=5) + 
+#        geom_point(data=edf1.r10, aes(x=nc_act_VL, y=NPP_act_VL), 
+#                color=cbPalette[1], shape=19, size=5) + 
+#        #geom_point(data=edf2.r12, aes(x=nc_L, y=NPP_L, fill="D"), 
+#        #           shape=21, color="black", size=5) +
+#        #geom_point(data=edf2.r10, aes(x=nc_act_L, y=NPP_act_L), 
+#        #           shape=19, color=cbPalette[4], size=5) +
+#        geom_point(data=edf2.r12, aes(x=nc_M, y=NPP_M, fill="C"), 
+#                   shape=21, color="black", size=5) +
+#        geom_point(data=edf2.r10, aes(x=nc_act_M, y=NPP_act_M), 
+#                   shape=19, color=cbPalette[3], size=5) +
+#        #geom_point(data=edf2.r12, aes(x=nc_VL, y=NPP_VL, fill="E"), 
+#        #           shape=21, color="black", size=5) +
+#        #geom_point(data=edf2.r10, aes(x=nc_act_VL, y=NPP_act_VL), 
+#        #           shape=19, color=cbPalette[7], size=5) +
+#        ylim(0.0, 2.0) + 
+#        xlim(0.001, 0.01) +
+#        labs(x="Leaf N:C Ratio", 
+#             y=expression(paste("NPP [kg C ", m^-2, " ", yr^-1, "]"))) +
+#        theme_linedraw() +
+#        theme(panel.grid.minor=element_blank(),
+#              axis.text=element_text(size=14),
+#              axis.title=element_text(size=16),
+#              legend.text=element_text(size=14),
+#              legend.title=element_text(size=16),
+#              panel.grid.major=element_line(color="grey")) +
+#              scale_colour_manual(name="Constraint line", 
+#                            values = c("C350" = cbbPalette[1], "C700" = cbbPalette[2], "VL" = #cbbPalette[7],
+#                                       "L" = cbbPalette[4], "M" = cbbPalette[3])) +
+#              scale_fill_manual(name="QE point", values = c("A" = cbPalette[1], "B" = #cbPalette[2], "C" = cbPalette[3],
+#                                                            "D" = cbPalette[4], "E" = #cbPalette[7]))
+#    
+#    plot(p1)
+#    
+#    plot(p2)
+#    
+#    plot(p3)
+#        
+#    if (save.plot) {
+#        pdf("Plots/CLM_vs_CLM_FUN_variable_wood_1.pdf", width=8, height=6)
+#        plot(p1)
+#        dev.off()
+#        
+#        pdf("Plots/CLM_vs_CLM_FUN_variable_wood_2.pdf", width=8, height=6)
+#        plot(p2)
+#        dev.off()
+#        
+#        pdf("Plots/CLM_vs_CLM_FUN_variable_wood_3.pdf", width=8, height=6)
+#        plot(p3)
+#        dev.off()
+#    } 
     
 
 ```
