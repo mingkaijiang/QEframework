@@ -665,6 +665,33 @@ Here we see that priming is not really doing a lot. The treatment for priming ef
 Under variable wood NC assumption, we see that the M, L and VL line overlap with each other. This means that, the slow pool decomposion is hugely stimulated by root exudates, making this as large a pool as the passive N release pool. Previously (under variable wood NC but without priming effect) the combination of slow SOM and wood pools should be very small, because little N is stored in wood pool and the decomposition of slow SOM is not as fast as the decomposition of slow SOM stimualted by root exudates. 
 
 ``` {r, echo=FALSE}
+
+    ### split the data.list into two data frames
+    cdf.r70 <- r70$cDF
+    edf.r70 <- r70$eDF
+
+    ### extract CO2 conc. from constraint DF
+    cdf1.r70 <- cdf.r70[cdf.r70$CO2 == 350, ]
+    cdf2.r70 <- cdf.r70[cdf.r70$CO2 == 700, ]
+
+    ### extract CO2 conc. from eq DF
+    edf1.r70 <- edf.r70[edf.r70$CO2 == 350, ]
+    edf2.r70 <- edf.r70[edf.r70$CO2 == 700, ]
+    
+    ### split the data.list into two data frames
+    cdf.r80 <- r80$cDF
+    edf.r80 <- r80$eDF
+
+    ### extract CO2 conc. from constraint DF
+    cdf1.r80 <- cdf.r80[cdf.r80$CO2 == 350, ]
+    cdf2.r80 <- cdf.r80[cdf.r80$CO2 == 700, ]
+
+    ### extract CO2 conc. from eq DF
+    edf1.r80 <- edf.r80[edf.r80$CO2 == 350, ]
+    edf2.r80 <- edf.r80[edf.r80$CO2 == 700, ]
+    
+    
+    
     ### compute % change in NC and NPP under eCO2 condition
     chang7 <- (edf2.r7[,2:8] - edf1.r7[,2:8]) / edf1.r7[,2:8] * 100
     chang7$NPP_I <- (edf1.r7[,"NPP_I"] - edf1.r7[,"NPP_VL"]) / edf1.r7[,"NPP_VL"] * 100
@@ -689,7 +716,9 @@ Under variable wood NC assumption, we see that the M, L and VL line overlap with
     changeDF <- changeDF[,c("Run", "NPP_I", "NPP_M", "NPP_L", "NPP_VL", 
                             "nc_M", "nc_L", "nc_VL")]
     
-    write.csv(changeDF, "Tables/Exudation_and_priming_effect.csv", row.names=F)
+    subDF <- changeDF[c(2,4,6),]
+    
+    write.csv(subDF, "Tables/Exudation_and_priming_effect.csv", row.names=F)
     
     ### table output
     kable(changeDF, row.names=F, format = "markdown")
