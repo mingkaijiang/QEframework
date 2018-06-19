@@ -722,6 +722,31 @@ Under variable wood NC assumption, we see that the M, L and VL line overlap with
     
     ### table output
     kable(changeDF, row.names=F, format = "markdown")
+    
+    
+    ### Make a bar plot of M-term response
+    subDF[1,"Run"] <- "Baseline"
+    subDF[2,"Run"] <- "Priming"
+    subDF[3,"Run"] <- "Exudation"
+
+    p<-ggplot() + 
+        geom_bar(data=subDF, aes(x=Run, y=NPP_M), 
+                 stat="identity", position=position_dodge()) +
+        theme_linedraw() +
+        theme(panel.grid.minor=element_blank(),
+              axis.text=element_text(size=14),
+              axis.title=element_text(size=16),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
+              panel.grid.major=element_line(color="grey")) + 
+        ylab("% change") + xlab("") 
+    plot(p)
+    if (save.plot) {
+        pdf("Plots/exudation_effect.pdf", width=10, height=6)
+        plot(p)
+        dev.off()
+    } 
+    
 
 ```
 
