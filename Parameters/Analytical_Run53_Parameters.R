@@ -48,5 +48,5 @@ ncs <- 0.01
 
 ### following are analytical run 5 specific parameters
 ### i.e. GDAY N uptake of root biomass and mienral N pool
-sr = 1.5
+sr = 5.0
 kr = 0.5

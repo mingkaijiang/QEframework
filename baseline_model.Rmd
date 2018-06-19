@@ -1120,8 +1120,110 @@ The table above summarizes scenarios tested in this study. Next, I am going to m
 
 ```
 
+### 5.2 Varying ar and sr for GDAY
+``` {r, echo=FALSE, warning=F, message=F}
 
-### 5.2 Priming effect coefficients
+    sensDF <- matrix(nrow=5*4, ncol=4)
+    colnames(sensDF) <- c("ar", "sr", "value", "Time")
+    sensDF <- as.data.frame(sensDF)
+    sensDF$ar <- rep(c(0.2, 0.4, 0.6, 0.2, 0.2), each = 4)
+    sensDF$sr <- rep(c(1.5, 1.5, 1.5, 5, 10), each = 4)
+
+    sensDF$Time <- rep(c("I", "M", "L", "VL"), by = 5)
+
+    sensDF[sensDF$ar == 0.2 & sensDF$sr == 1.5 & sensDF$Time == "I", "value"] <- (r5$eDF$NPP_I[2] - r5$eDF$NPP_VL[1])/r5$eDF$NPP_VL[1]
+    sensDF[sensDF$ar == 0.2 & sensDF$sr == 1.5 & sensDF$Time == "M", "value"] <- (r5$eDF$NPP_M[2] - r5$eDF$NPP_VL[1])/r5$eDF$NPP_VL[1]
+    sensDF[sensDF$ar == 0.2 & sensDF$sr == 1.5 & sensDF$Time == "L", "value"] <- (r5$eDF$NPP_L[2] - r5$eDF$NPP_VL[1])/r5$eDF$NPP_VL[1]
+    sensDF[sensDF$ar == 0.2 & sensDF$sr == 1.5 & sensDF$Time == "VL", "value"] <- (r5$eDF$NPP_VL[2] - r5$eDF$NPP_VL[1])/r5$eDF$NPP_VL[1]
+
+    sensDF[sensDF$ar == 0.4 & sensDF$sr == 1.5 & sensDF$Time == "I", "value"] <- (r51$eDF$NPP_I[2] - r51$eDF$NPP_VL[1])/r51$eDF$NPP_VL[1]
+    sensDF[sensDF$ar == 0.4 & sensDF$sr == 1.5 & sensDF$Time == "M", "value"] <- (r51$eDF$NPP_M[2] - r51$eDF$NPP_VL[1])/r51$eDF$NPP_VL[1]
+    sensDF[sensDF$ar == 0.4 & sensDF$sr == 1.5 & sensDF$Time == "L", "value"] <- (r51$eDF$NPP_L[2] - r51$eDF$NPP_VL[1])/r51$eDF$NPP_VL[1]
+    sensDF[sensDF$ar == 0.4 & sensDF$sr == 1.5 & sensDF$Time == "VL", "value"] <- (r51$eDF$NPP_VL[2] - r51$eDF$NPP_VL[1])/r51$eDF$NPP_VL[1]
+    
+    sensDF[sensDF$ar == 0.6 & sensDF$sr == 1.5 & sensDF$Time == "I", "value"] <- (r52$eDF$NPP_I[2] - r52$eDF$NPP_VL[1])/r52$eDF$NPP_VL[1]
+    sensDF[sensDF$ar == 0.6 & sensDF$sr == 1.5 & sensDF$Time == "M", "value"] <- (r52$eDF$NPP_M[2] - r52$eDF$NPP_VL[1])/r52$eDF$NPP_VL[1]
+    sensDF[sensDF$ar == 0.6 & sensDF$sr == 1.5 & sensDF$Time == "L", "value"] <- (r52$eDF$NPP_L[2] - r52$eDF$NPP_VL[1])/r52$eDF$NPP_VL[1]
+    sensDF[sensDF$ar == 0.6 & sensDF$sr == 1.5 & sensDF$Time == "VL", "value"] <- (r52$eDF$NPP_VL[2] - r52$eDF$NPP_VL[1])/r52$eDF$NPP_VL[1]
+    
+    sensDF[sensDF$ar == 0.2 & sensDF$sr == 5 & sensDF$Time == "I", "value"] <- (r53$eDF$NPP_I[2] - r53$eDF$NPP_VL[1])/r53$eDF$NPP_VL[1]
+    sensDF[sensDF$ar == 0.2 & sensDF$sr == 5 & sensDF$Time == "M", "value"] <- (r53$eDF$NPP_M[2] - r53$eDF$NPP_VL[1])/r53$eDF$NPP_VL[1]
+    sensDF[sensDF$ar == 0.2 & sensDF$sr == 5 & sensDF$Time == "L", "value"] <- (r53$eDF$NPP_L[2] - r53$eDF$NPP_VL[1])/r53$eDF$NPP_VL[1]
+    sensDF[sensDF$ar == 0.2 & sensDF$sr == 5 & sensDF$Time == "VL", "value"] <- (r53$eDF$NPP_VL[2] - r53$eDF$NPP_VL[1])/r53$eDF$NPP_VL[1]
+    
+    sensDF[sensDF$ar == 0.2 & sensDF$sr == 10 & sensDF$Time == "I", "value"] <- (r54$eDF$NPP_I[2] - r54$eDF$NPP_VL[1])/r54$eDF$NPP_VL[1]
+    sensDF[sensDF$ar == 0.2 & sensDF$sr == 10 & sensDF$Time == "M", "value"] <- (r54$eDF$NPP_M[2] - r54$eDF$NPP_VL[1])/r54$eDF$NPP_VL[1]
+    sensDF[sensDF$ar == 0.2 & sensDF$sr == 10 & sensDF$Time == "L", "value"] <- (r54$eDF$NPP_L[2] - r54$eDF$NPP_VL[1])/r54$eDF$NPP_VL[1]
+    sensDF[sensDF$ar == 0.2 & sensDF$sr == 10 & sensDF$Time == "VL", "value"] <- (r54$eDF$NPP_VL[2] - r54$eDF$NPP_VL[1])/r54$eDF$NPP_VL[1]
+    
+    sensDF$ar <- as.character(sensDF$ar)
+    sensDF$sr <- as.character(sensDF$sr)
+    sensDF$value <- sensDF$value * 100
+    
+    plotDF1 <- subset(sensDF, sr == "1.5")
+    plotDF2 <- subset(sensDF, ar == "0.2")
+
+    ### plot
+    p1<-ggplot() + 
+        geom_bar(data=plotDF1, aes(x=ar, y=value, fill=Time), 
+                 stat="identity", position=position_dodge()) +
+        theme_linedraw() +
+        theme(panel.grid.minor=element_blank(),
+              axis.text=element_text(size=14),
+              axis.title=element_text(size=16),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
+              axis.text.x = element_text(angle = 90, hjust=1),
+              panel.grid.major=element_line(color="grey")) + 
+        ylab("% change") + xlab("") + 
+        scale_fill_manual(name="Timescale", values = c("I" = cbPalette[2], "M" = cbPalette[3],
+                                                      "L" = cbPalette[4], "VL" = cbPalette[7])) 
+    
+    p2<-ggplot() + 
+        geom_bar(data=plotDF2, aes(x=sr, y=value, fill=Time), 
+                 stat="identity", position=position_dodge()) +
+        theme_linedraw() +
+        theme(panel.grid.minor=element_blank(),
+              axis.text=element_text(size=14),
+              axis.title=element_text(size=16),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
+              axis.text.x = element_text(angle = 90, hjust=1),
+              panel.grid.major=element_line(color="grey")) + 
+        ylab("% change") + xlab("") + 
+        scale_fill_manual(name="Timescale", values = c("I" = cbPalette[2], "M" = cbPalette[3],
+                                                      "L" = cbPalette[4], "VL" = cbPalette[7])) 
+    plot(p1)
+    plot(p2)
+    if (save.plot) {
+        pdf("Plots/sensitivity_ar_GDAY.pdf", width=10, height=6)
+        plot(p1)
+        dev.off()
+        
+        pdf("Plots/sensitivity_sr_GDAY.pdf", width=10, height=6)
+        plot(p2)
+        dev.off()
+    } 
+    
+    
+    ### save a table on equilibrated NPP
+    u1 <- r32$eDF
+    u2 <- r31$eDF
+    u3 <- r3$eDF
+    u4 <- r33$eDF
+    u5 <- r34$eDF
+    u1$u <- 0.2
+    u2$u <- 0.5
+    u3$u <- 1.0
+    u4$u <- 2.0
+    u5$u <- 5.0
+    outDF <- rbind(u1, u2, u3, u4, u5)
+    write.csv(outDF, "Tables/varying_u_summary_table.csv", row.names=F)
+    
+
+```
+
+### 5.3 Priming effect coefficients
 ``` {r, echo=FALSE, warning=F, message=F}
 
     sensDF <- matrix(nrow=9, ncol=3)
@@ -1171,12 +1273,12 @@ The table above summarizes scenarios tested in this study. Next, I am going to m
 
 ```
 
-### 5.3 Priming effect on NUE
+### 5.4 Priming effect on NUE
 
 Here NUE is defined as: 
 $$NUE = 1 / (n_fa_f + n_wa_w + n_ra_r) $$
 
-#### 5.3.1 Fixed wood NC assumption
+#### 5.4.1 Fixed wood NC assumption
 
 ``` {r, echo=FALSE, warning=F, message=F}
 
@@ -1241,7 +1343,7 @@ $$NUE = 1 / (n_fa_f + n_wa_w + n_ra_r) $$
 
 ```
 
-#### 5.3.2 Fixed wood NC assumption
+#### 5.4.2 Fixed wood NC assumption
 
 ``` {r, echo=FALSE, warning=F, message=F}
 
@@ -1306,9 +1408,9 @@ $$NUE = 1 / (n_fa_f + n_wa_w + n_ra_r) $$
 
 ```
 
-### 5.4 NUE of baseline model
+### 5.5 NUE of baseline model
 
-#### 5.4.1 Variable wood NC assumption
+#### 5.5.1 Variable wood NC assumption
 
 ``` {r, echo=FALSE, warning=F, message=F}
 
@@ -1373,7 +1475,7 @@ $$NUE = 1 / (n_fa_f + n_wa_w + n_ra_r) $$
 
 ```
 
-#### 5.4.2 Fixed wood NC assumption
+#### 5.5.2 Fixed wood NC assumption
 
 ``` {r, echo=FALSE, warning=F, message=F, results="hide"}
 
@@ -1439,8 +1541,8 @@ $$NUE = 1 / (n_fa_f + n_wa_w + n_ra_r) $$
 ```
 
 
-### 5.5. Compare CLM with CLM-FUN
-#### 5.5.1 variable wood NC
+### 5.6. Compare CLM with CLM-FUN
+#### 5.6.1 variable wood NC
 ``` {r, echo=FALSE, warning=F, message=F, results="hide"}
 #
 #    #### Run 9
@@ -1641,7 +1743,7 @@ $$NUE = 1 / (n_fa_f + n_wa_w + n_ra_r) $$
 
 
 
-#### 5.5.2 variable wood NC
+#### 5.6.2 variable wood NC
 ``` {r, echo=FALSE, warning=F, message=F, results="hide"}
 #
 #    #### Run 10
