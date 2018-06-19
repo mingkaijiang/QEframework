@@ -672,14 +672,24 @@ Under variable wood NC assumption, we see that the M, L and VL line overlap with
     chang8 <- (edf2.r8[,2:8] - edf1.r8[,2:8]) / edf1.r8[,2:8] * 100
     chang8$NPP_I <- (edf1.r8[,"NPP_I"] - edf1.r8[,"NPP_VL"]) / edf1.r8[,"NPP_VL"] * 100
     
+    chang70 <- (edf2.r70[,2:8] - edf1.r70[,2:8]) / edf1.r70[,2:8] * 100
+    chang70$NPP_I <- (edf1.r70[,"NPP_I"] - edf1.r70[,"NPP_VL"]) / edf1.r70[,"NPP_VL"] * 100
+
+    chang80 <- (edf2.r80[,2:8] - edf1.r80[,2:8]) / edf1.r80[,2:8] * 100
+    chang80$NPP_I <- (edf1.r80[,"NPP_I"] - edf1.r80[,"NPP_VL"]) / edf1.r80[,"NPP_VL"] * 100
+    
     ### organize the df for output
-    changeDF <- round(rbind(chang2, chang1, chang7, chang8),1)
+    changeDF <- round(rbind(chang2, chang1, chang7, chang8, chang70, chang80),1)
     changeDF[1,"Run"] <- "Baseline, fixed NC" 
     changeDF[2,"Run"] <- "Baseline, variable NC" 
     changeDF[3,"Run"] <- "Priming, fixed NC" 
     changeDF[4,"Run"] <- "Priming, variable NC" 
+    changeDF[5,"Run"] <- "Exudation, fixed NC" 
+    changeDF[6,"Run"] <- "Exudation, variable NC" 
     changeDF <- changeDF[,c("Run", "NPP_I", "NPP_M", "NPP_L", "NPP_VL", 
                             "nc_M", "nc_L", "nc_VL")]
+    
+    write.csv(changeDF, "Tables/Exudation_and_priming_effect.csv", row.names=F)
     
     ### table output
     kable(changeDF, row.names=F, format = "markdown")
@@ -1941,6 +1951,7 @@ $$NUE = 1 / (n_fa_f + n_wa_w + n_ra_r) $$
     
 
 ```
+
 
 
 # 6. To-do list:
