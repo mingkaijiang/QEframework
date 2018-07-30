@@ -19,8 +19,8 @@ make_summary_table <- function(destDir) {
     out.tab[8,"model"] <- "Priming, fixed wood"
     out.tab[9,"model"] <- "Potential NPP, variable wood"
     out.tab[10,"model"] <- "Potential NPP, fixed wood"
-    out.tab[11,"model"] <- "C cost of N uptake, variable wood"
-    out.tab[12,"model"] <- "C cost of N uptake, fixed wood"
+    #out.tab[11,"model"] <- "C cost of N uptake, variable wood"
+    #out.tab[12,"model"] <- "C cost of N uptake, fixed wood"
     
     
     ### Run 1 Baseline variable wood
@@ -103,21 +103,21 @@ make_summary_table <- function(destDir) {
     out.tab[9,"L"] <- round((r10$eDF$NPP_act_L[2] - r10$eDF$NPP_act_VL[1]) / r10$eDF$NPP_act_VL[1] * 100,2)
     out.tab[9,"VL"] <- round((r10$eDF$NPP_act_VL[2] - r10$eDF$NPP_act_VL[1]) / r10$eDF$NPP_act_VL[1] * 100,2)
     
-    ### Run 11 C cost of N uptake, fixed wood
-    out.tab[12,"NPP_350"] <- round(r11$eDF$NPP_VL[1],2)
-    out.tab[12,"NPP_700"] <-  round(r11$eDF$NPP_VL[2],2)
-    out.tab[12,"I"] <- round((r11$eDF$NPP_I[2] - r11$eDF$NPP_VL[1]) / r11$eDF$NPP_VL[1] * 100,2)
-    out.tab[12,"M"] <- round((r11$eDF$NPP_M[2] - r11$eDF$NPP_VL[1]) / r11$eDF$NPP_VL[1] * 100,2)
-    out.tab[12,"L"] <- round((r11$eDF$NPP_L[2] - r11$eDF$NPP_VL[1]) / r11$eDF$NPP_VL[1] * 100,2)
-    out.tab[12,"VL"] <- round((r11$eDF$NPP_VL[2] - r11$eDF$NPP_VL[1]) / r11$eDF$NPP_VL[1] * 100,2)
-    
-    ### Run 12 C cost of N uptake, variable
-    out.tab[11,"NPP_350"] <- round(r12$eDF$NPP_VL[1],2)
-    out.tab[11,"NPP_700"] <-  round(r12$eDF$NPP_VL[2],2)
-    out.tab[11,"I"] <- round((r12$eDF$NPP_I[2] - r12$eDF$NPP_VL[1]) / r12$eDF$NPP_VL[1] * 100,2)
-    out.tab[11,"M"] <- round((r12$eDF$NPP_M[2] - r12$eDF$NPP_VL[1]) / r12$eDF$NPP_VL[1] * 100,2)
-    out.tab[11,"L"] <- round((r12$eDF$NPP_L[2] - r12$eDF$NPP_VL[1]) / r12$eDF$NPP_VL[1] * 100,2)
-    out.tab[11,"VL"] <- round((r12$eDF$NPP_VL[2] - r12$eDF$NPP_VL[1]) / r12$eDF$NPP_VL[1] * 100,2)
+    #### Run 11 C cost of N uptake, fixed wood
+    #out.tab[12,"NPP_350"] <- round(r11$eDF$NPP_VL[1],2)
+    #out.tab[12,"NPP_700"] <-  round(r11$eDF$NPP_VL[2],2)
+    #out.tab[12,"I"] <- round((r11$eDF$NPP_I[2] - r11$eDF$NPP_VL[1]) / r11$eDF$NPP_VL[1] * 100,2)
+    #out.tab[12,"M"] <- round((r11$eDF$NPP_M[2] - r11$eDF$NPP_VL[1]) / r11$eDF$NPP_VL[1] * 100,2)
+    #out.tab[12,"L"] <- round((r11$eDF$NPP_L[2] - r11$eDF$NPP_VL[1]) / r11$eDF$NPP_VL[1] * 100,2)
+    #out.tab[12,"VL"] <- round((r11$eDF$NPP_VL[2] - r11$eDF$NPP_VL[1]) / r11$eDF$NPP_VL[1] * 100,2)
+    #
+    #### Run 12 C cost of N uptake, variable
+    #out.tab[11,"NPP_350"] <- round(r12$eDF$NPP_VL[1],2)
+    #out.tab[11,"NPP_700"] <-  round(r12$eDF$NPP_VL[2],2)
+    #out.tab[11,"I"] <- round((r12$eDF$NPP_I[2] - r12$eDF$NPP_VL[1]) / r12$eDF$NPP_VL[1] * 100,2)
+    #out.tab[11,"M"] <- round((r12$eDF$NPP_M[2] - r12$eDF$NPP_VL[1]) / r12$eDF$NPP_VL[1] * 100,2)
+    #out.tab[11,"L"] <- round((r12$eDF$NPP_L[2] - r12$eDF$NPP_VL[1]) / r12$eDF$NPP_VL[1] * 100,2)
+    #out.tab[11,"VL"] <- round((r12$eDF$NPP_VL[2] - r12$eDF$NPP_VL[1]) / r12$eDF$NPP_VL[1] * 100,2)
     
     ### Save the output table
     write.csv(out.tab, paste0(destDir, "/summary_table.csv"), row.names=F)
