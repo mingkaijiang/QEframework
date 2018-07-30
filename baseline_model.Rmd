@@ -51,7 +51,7 @@ Next, we run analytical run scripts to generate the pdf files and store the rest
 
 Here I am preparing the necessary color and plot configurations. 
 
-``` {r, message = FALSE, warning=FALSE}
+``` {r, message = FALSE, warning=FALSE, results="hide"}
     # library
     require(ggplot2)
     require(knitr)
@@ -2014,8 +2014,6 @@ Below is a continuous update of the to-do list of this project:
     - Check N fixation (McMurtrie 2000)
     - Implement C cost of N uptake properly (FUN model), right now problem is L and VL term NPP response ratio is higher under fixed wood assumption as compared to the model without FUN model. We introduced c cost to acquire N, and at L term, c cost is reduced hence more response? Does it make sense?
     - NUE plotting, understand difference compared to McMurtrie 2000 and Zaehle 2014
-    - Revise manuscript (methods and results)
-    - Discussion writing
 
 <br/>
 <br/>

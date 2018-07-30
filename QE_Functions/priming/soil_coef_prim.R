@@ -79,6 +79,9 @@ soil_coef_prim <- function(df, a, in_npp) {
     # adjust decomposition rate of slow pool to close the N gap
     decomp_slow <- decomp_slow_old * (1 + km) * pmax(c_into_active/(c_into_active + km), 0.3)
     
+    #browser()
+    
+    
     ### out df
     ret <- data.frame(decomp_pass, decomp_slow, decomp_slow_old, qq_pass, qq_slow,
                       omega_af_pass, omega_ar_pass, omega_af_slow, omega_ar_slow, 

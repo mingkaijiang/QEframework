@@ -1,6 +1,6 @@
 #### setting CO2 concentrations
-CO2_1 <- 350.0  # 350
-CO2_2 <- 700.0  # 700
+CO2_1 <- 400.0  # 350
+CO2_2 <- 800.0  # 700
 
 #### define parameters
 nwood = 0.005     
