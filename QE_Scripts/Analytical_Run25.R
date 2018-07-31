@@ -1,30 +1,30 @@
 
-#### Analytical script Run 21
+#### Analytical script Run 25
 ####
 #### Assumptions:
 #### 1. baseline model
 #### 2. Variable wood NC
 #### 3. baseline N cycle
-#### 4. Medlyn and Dewar, 1996, no coupling between allocation leaf and wood
-#### 5. af = 0.25
+#### 4. Medlyn and Dewar, 1996, linear coupling between allocation leaf and wood
+#### 5. af = 0.3
 ####
 ################################################################################
 #### Functions
-Perform_Analytical_Run21 <- function(f.flag = 1) {
-    #### Function to perform analytical run 21 simulations
+Perform_Analytical_Run25 <- function(f.flag = 1) {
+    #### Function to perform analytical run 25 simulations
     #### eDF: stores equilibrium points
     #### cDF: stores constraint points (curves)
     #### f.flag: = 1 simply plot analytical solution and create individual pdf file
     #### f.flag: = 2 return a list consisting of two dataframes
 
     ######### Main program
-    source("Parameters/Analytical_Run21_Parameters.R")
+    source("Parameters/Analytical_Run25_Parameters.R")
     
     ### create a range of nc for shoot to initiate
     nfseq <- round(seq(0.001, 0.1, by = 0.001),5)
     
     ### create nc ratio for wood, root, and allocation coefficients
-    a_nf <- as.data.frame(alloc_Medlyn_Dewar_no_coupling(nfseq))
+    a_nf <- as.data.frame(alloc_Medlyn_Dewar_linear_coupling(nfseq))
     
     ### calculate photosynthetic constraint at CO2 = 350
     P350 <- photo_constraint_full(nf=nfseq, nfdf=a_nf, CO2=CO2_1)
@@ -33,10 +33,10 @@ Perform_Analytical_Run21 <- function(f.flag = 1) {
     VL <- VL_constraint(nf=nfseq, nfdf=a_nf)
     
     ### finding the equilibrium point between photosynthesis and very long term nutrient constraints
-    VL_eq <- solve_VL_Medlyn_Dewar_no_coupling(CO2=CO2_1)
+    VL_eq <- solve_VL_Medlyn_Dewar_linear_coupling(CO2=CO2_1)
 
     ### calculate nw and nr for VL equilibrated nf value
-    a_eq <- alloc_Medlyn_Dewar_no_coupling(VL_eq$nf)
+    a_eq <- alloc_Medlyn_Dewar_linear_coupling(VL_eq$nf)
     
     ### calculate soil parameters, e.g. reburial coef.
     s_coef <- soil_coef(df=VL_eq$nf, a=a_eq)
@@ -53,7 +53,7 @@ Perform_Analytical_Run21 <- function(f.flag = 1) {
                       Nin_L = Nin)
     
     ### Find long term equilibrium point
-    L_eq <- solve_L_Medlyn_Dewar_no_coupling(CO2=CO2_1, C_pass=C_pass_VL, Nin_L = Nin)
+    L_eq <- solve_L_Medlyn_Dewar_linear_coupling(CO2=CO2_1, C_pass=C_pass_VL, Nin_L = Nin)
     
     ### Get Cslow from long nutrient cycling solution
     ### return in g C m-2
@@ -70,7 +70,7 @@ Perform_Analytical_Run21 <- function(f.flag = 1) {
                       Nin_L = Nin+N_wood_L)
     
     ### calculate M equilibrium point
-    M_eq <- solve_M_Medlyn_Dewar_no_coupling(CO2=CO2_1, 
+    M_eq <- solve_M_Medlyn_Dewar_linear_coupling(CO2=CO2_1, 
                         C_pass=C_pass_VL, 
                         C_slow=C_slow_L, 
                         Nin_L = Nin+N_wood_L)
@@ -89,13 +89,13 @@ Perform_Analytical_Run21 <- function(f.flag = 1) {
     P700 <- photo_constraint_full(nf=nfseq, nfdf=a_nf, CO2=CO2_2)
     
     ### VL equilibrated point with eCO2
-    VL_eq <- solve_VL_Medlyn_Dewar_no_coupling(CO2=CO2_2)
+    VL_eq <- solve_VL_Medlyn_Dewar_linear_coupling(CO2=CO2_2)
     
     ### Find long term equilibrium point
-    L_eq <- solve_L_Medlyn_Dewar_no_coupling(CO2=CO2_2, C_pass=C_pass_VL, Nin_L = Nin)
+    L_eq <- solve_L_Medlyn_Dewar_linear_coupling(CO2=CO2_2, C_pass=C_pass_VL, Nin_L = Nin)
     
     ### Find medium term equilibrium point
-    M_eq <- solve_M_Medlyn_Dewar_no_coupling(CO2=CO2_2, 
+    M_eq <- solve_M_Medlyn_Dewar_linear_coupling(CO2=CO2_2, 
                          C_pass=C_pass_VL, 
                          C_slow=C_slow_L, 
                          Nin_L = Nin+N_wood_L)

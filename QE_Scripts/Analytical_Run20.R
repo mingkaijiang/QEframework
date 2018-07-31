@@ -1,24 +1,24 @@
 
-#### Analytical script Run 21
+#### Analytical script Run 20
 ####
 #### Assumptions:
 #### 1. baseline model
 #### 2. Variable wood NC
 #### 3. baseline N cycle
 #### 4. Medlyn and Dewar, 1996, no coupling between allocation leaf and wood
-#### 5. af = 0.25
+#### 5. af = 0.2
 ####
 ################################################################################
 #### Functions
-Perform_Analytical_Run21 <- function(f.flag = 1) {
-    #### Function to perform analytical run 21 simulations
+Perform_Analytical_Run20 <- function(f.flag = 1) {
+    #### Function to perform analytical run 20 simulations
     #### eDF: stores equilibrium points
     #### cDF: stores constraint points (curves)
     #### f.flag: = 1 simply plot analytical solution and create individual pdf file
     #### f.flag: = 2 return a list consisting of two dataframes
 
     ######### Main program
-    source("Parameters/Analytical_Run21_Parameters.R")
+    source("Parameters/Analytical_Run20_Parameters.R")
     
     ### create a range of nc for shoot to initiate
     nfseq <- round(seq(0.001, 0.1, by = 0.001),5)

@@ -2006,7 +2006,111 @@ $$NUE = 1 / (n_fa_f + n_wa_w + n_ra_r) $$
 
 ```
 
+### 5.7 Medlyn and Dewar allocation coupling
+``` {r, echo=FALSE, warning=F, message=F}
 
+    sensDF <- matrix(nrow=4*6, ncol=6)
+    colnames(sensDF) <- c("coupling", "af", "ar", "aw", "value", "Time")
+    sensDF <- as.data.frame(sensDF)
+    sensDF$coupling <- rep(c("no_coupling", "linear_coupling"), each = 3*4)
+    sensDF$Time <- rep(c("I", "M", "L", "VL"), by = 6)
+    
+    sensDF$af <- c(rep(0.18, each=4), rep(0.2, each=4), rep(0.22, each=4),
+                   rep(0.18, each=4), rep(0.2, each=4), rep(0.22, each=4))
+    sensDF$aw <- c(rep(0.6, each=3*4), rep(0.54, each=4), rep(0.6, each=4), rep(0.66, each=4))
+    sensDF$ar <- 1.0 - sensDF$aw - sensDF$af
+
+    sensDF[sensDF$af==0.18&sensDF$aw==0.6&sensDF$Time=="I","value"] <- (r20$eDF$NPP_I[2]-r20$eDF$NPP_VL[1])/r20$eDF$NPP_VL[1]
+    sensDF[sensDF$af==0.18&sensDF$aw==0.6&sensDF$Time=="M","value"] <- (r20$eDF$NPP_M[2]-r20$eDF$NPP_VL[1])/r20$eDF$NPP_VL[1]
+    sensDF[sensDF$af==0.18&sensDF$aw==0.6&sensDF$Time=="L","value"] <- (r20$eDF$NPP_L[2]-r20$eDF$NPP_VL[1])/r20$eDF$NPP_VL[1]
+    sensDF[sensDF$af==0.18&sensDF$aw==0.6&sensDF$Time=="VL","value"] <- (r20$eDF$NPP_VL[2]-r20$eDF$NPP_VL[1])/r20$eDF$NPP_VL[1]
+
+    sensDF[sensDF$af==0.2&sensDF$aw==0.6&sensDF$coupling=="no_coupling"&sensDF$Time=="I","value"] <- (r21$eDF$NPP_I[2]-r21$eDF$NPP_VL[1])/r21$eDF$NPP_VL[1]
+    sensDF[sensDF$af==0.2&sensDF$aw==0.6&sensDF$coupling=="no_coupling"&sensDF$Time=="M","value"] <- (r21$eDF$NPP_M[2]-r21$eDF$NPP_VL[1])/r21$eDF$NPP_VL[1]
+    sensDF[sensDF$af==0.2&sensDF$aw==0.6&sensDF$coupling=="no_coupling"&sensDF$Time=="L","value"] <- (r21$eDF$NPP_L[2]-r21$eDF$NPP_VL[1])/r21$eDF$NPP_VL[1]
+    sensDF[sensDF$af==0.2&sensDF$aw==0.6&sensDF$coupling=="no_coupling"&sensDF$Time=="VL","value"] <- (r21$eDF$NPP_VL[2]-r21$eDF$NPP_VL[1])/r21$eDF$NPP_VL[1]
+    
+    sensDF[sensDF$af==0.22&sensDF$aw==0.6&sensDF$Time=="I","value"] <- (r22$eDF$NPP_I[2]-r22$eDF$NPP_VL[1])/r22$eDF$NPP_VL[1]
+    sensDF[sensDF$af==0.22&sensDF$aw==0.6&sensDF$Time=="M","value"] <- (r22$eDF$NPP_M[2]-r22$eDF$NPP_VL[1])/r22$eDF$NPP_VL[1]
+    sensDF[sensDF$af==0.22&sensDF$aw==0.6&sensDF$Time=="L","value"] <- (r22$eDF$NPP_L[2]-r22$eDF$NPP_VL[1])/r22$eDF$NPP_VL[1]
+    sensDF[sensDF$af==0.22&sensDF$aw==0.6&sensDF$Time=="VL","value"] <- (r22$eDF$NPP_VL[2]-r22$eDF$NPP_VL[1])/r22$eDF$NPP_VL[1]
+    
+    sensDF[sensDF$af==0.18&sensDF$aw==0.54&sensDF$Time=="I","value"] <- (r23$eDF$NPP_I[2]-r23$eDF$NPP_VL[1])/r23$eDF$NPP_VL[1]
+    sensDF[sensDF$af==0.18&sensDF$aw==0.54&sensDF$Time=="M","value"] <- (r23$eDF$NPP_M[2]-r23$eDF$NPP_VL[1])/r23$eDF$NPP_VL[1]
+    sensDF[sensDF$af==0.18&sensDF$aw==0.54&sensDF$Time=="L","value"] <- (r23$eDF$NPP_L[2]-r23$eDF$NPP_VL[1])/r23$eDF$NPP_VL[1]
+    sensDF[sensDF$af==0.18&sensDF$aw==0.54&sensDF$Time=="VL","value"] <- (r23$eDF$NPP_VL[2]-r23$eDF$NPP_VL[1])/r23$eDF$NPP_VL[1]
+    
+    sensDF[sensDF$af==0.2&sensDF$coupling=="linear_coupling"&sensDF$Time=="I","value"] <- (r24$eDF$NPP_I[2]-r24$eDF$NPP_VL[1])/r24$eDF$NPP_VL[1]
+    sensDF[sensDF$af==0.2&sensDF$coupling=="linear_coupling"&sensDF$Time=="M","value"] <- (r24$eDF$NPP_M[2]-r24$eDF$NPP_VL[1])/r24$eDF$NPP_VL[1]
+    sensDF[sensDF$af==0.2&sensDF$coupling=="linear_coupling"&sensDF$Time=="L","value"] <- (r24$eDF$NPP_L[2]-r24$eDF$NPP_VL[1])/r24$eDF$NPP_VL[1]
+    sensDF[sensDF$af==0.2&sensDF$coupling=="linear_coupling"&sensDF$Time=="VL","value"] <- (r24$eDF$NPP_VL[2]-r24$eDF$NPP_VL[1])/r24$eDF$NPP_VL[1]
+    
+    sensDF[sensDF$af==0.22&sensDF$aw==0.66&sensDF$Time=="I","value"] <- (r25$eDF$NPP_I[2]-r25$eDF$NPP_VL[1])/r25$eDF$NPP_VL[1]
+    sensDF[sensDF$af==0.22&sensDF$aw==0.66&sensDF$Time=="M","value"] <- (r25$eDF$NPP_M[2]-r25$eDF$NPP_VL[1])/r25$eDF$NPP_VL[1]
+    sensDF[sensDF$af==0.22&sensDF$aw==0.66&sensDF$Time=="L","value"] <- (r25$eDF$NPP_L[2]-r25$eDF$NPP_VL[1])/r25$eDF$NPP_VL[1]
+    sensDF[sensDF$af==0.22&sensDF$aw==0.66&sensDF$Time=="VL","value"] <- (r25$eDF$NPP_VL[2]-r25$eDF$NPP_VL[1])/r25$eDF$NPP_VL[1]
+    
+    sensDF$af <- as.character(sensDF$af)
+    sensDF$aw <- as.character(sensDF$aw)
+    sensDF$value <- sensDF$value * 100
+    
+    plotDF1 <- subset(sensDF, coupling=="no_coupling")
+    plotDF2 <- subset(sensDF, coupling=="linear_coupling")
+    plotDF3 <- subset(sensDF, Time=="VL")
+
+    ### plot
+    p1<-ggplot() + 
+        geom_bar(data=plotDF1, aes(x=af, y=value, fill=Time), 
+                 stat="identity", position=position_dodge()) +
+        theme_linedraw() +
+        theme(panel.grid.minor=element_blank(),
+              axis.text=element_text(size=14),
+              axis.title=element_text(size=16),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
+              axis.text.x = element_text(angle = 90, hjust=1),
+              panel.grid.major=element_line(color="grey")) + 
+        ylab("% change") + xlab("") + 
+        scale_fill_manual(name="Timescale", values = c("I" = cbPalette[2], "M" = cbPalette[3],
+                                                      "L" = cbPalette[4], "VL" = cbPalette[7])) 
+
+    p2<-ggplot() + 
+        geom_bar(data=plotDF2, aes(x=af, y=value, fill=Time), 
+                 stat="identity", position=position_dodge()) +
+        theme_linedraw() +
+        theme(panel.grid.minor=element_blank(),
+              axis.text=element_text(size=14),
+              axis.title=element_text(size=16),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
+              axis.text.x = element_text(angle = 90, hjust=1),
+              panel.grid.major=element_line(color="grey")) + 
+        ylab("% change") + xlab("") + 
+        scale_fill_manual(name="Timescale", values = c("I" = cbPalette[2], "M" = cbPalette[3],
+                                                      "L" = cbPalette[4], "VL" = cbPalette[7])) 
+    
+    p3<-ggplot() + 
+        geom_bar(data=plotDF3, aes(x=af, y=value, fill=coupling), 
+                 stat="identity", position=position_dodge()) +
+        theme_linedraw() +
+        theme(panel.grid.minor=element_blank(),
+              axis.text=element_text(size=14),
+              axis.title=element_text(size=16),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
+              axis.text.x = element_text(angle = 90, hjust=1),
+              panel.grid.major=element_line(color="grey")) + 
+        ylab("% change") + xlab("") + 
+        scale_fill_manual(name="Coupling", values = c("no_coupling" = cbPalette[2], "linear_coupling" = cbPalette[3])) 
+
+    if (save.plot) {
+        pdf("Plots/sensitivity_Medlyn_Dewar_coupling.pdf", width=10, height=6)
+        plot(p3)
+        dev.off()
+    } 
+    
+
+```
 
 # 6. To-do list:
 Below is a continuous update of the to-do list of this project:

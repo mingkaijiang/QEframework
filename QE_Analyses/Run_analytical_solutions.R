@@ -15,6 +15,8 @@
 #### Run 10: CLM baseline potential NPP, variable wood NC
 #### Run 11: CLM C cost of N uptake approach, fixed wood NC
 #### Run 12: CLM C cost of N uptake approach, variable wood NC
+#### Run 20 - 22: Medlyn and Dewar, 1996, no coupling of allocation
+#### Run 23 - 25: Medlyn and Dewar, 1996, linear coupling of allocation
 
 ################################################################################
 ### f.flag: = 1 return saved plots
@@ -54,6 +56,7 @@
 #Perform_Analytical_Run17(f.flag = 1)
 #Perform_Analytical_Run19(f.flag = 1)
 
+
 #### Step 2: return data list
 r1 <- Perform_Analytical_Run1(f.flag = 2)
 r2 <- Perform_Analytical_Run2(f.flag = 2)
@@ -83,6 +86,13 @@ r9 <- Perform_Analytical_Run91(f.flag = 2)
 r10 <- Perform_Analytical_Run101(f.flag = 2)
 #r11 <- Perform_Analytical_Run11(f.flag = 2)
 #r12 <- Perform_Analytical_Run12(f.flag = 2)
+
+r20 <- Perform_Analytical_Run20(f.flag = 2)
+r21 <- Perform_Analytical_Run21(f.flag = 2)
+r22 <- Perform_Analytical_Run22(f.flag = 2)
+r23 <- Perform_Analytical_Run23(f.flag = 2)
+r24 <- Perform_Analytical_Run24(f.flag = 2)
+r25 <- Perform_Analytical_Run25(f.flag = 2)
 
 ################################################################################
 #### End
