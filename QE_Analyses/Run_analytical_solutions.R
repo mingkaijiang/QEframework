@@ -87,12 +87,18 @@ r10 <- Perform_Analytical_Run101(f.flag = 2)
 #r11 <- Perform_Analytical_Run11(f.flag = 2)
 #r12 <- Perform_Analytical_Run12(f.flag = 2)
 
-r20 <- Perform_Analytical_Run20(f.flag = 2)
-r21 <- Perform_Analytical_Run21(f.flag = 2)
-r22 <- Perform_Analytical_Run22(f.flag = 2)
-r23 <- Perform_Analytical_Run23(f.flag = 2)
-r24 <- Perform_Analytical_Run24(f.flag = 2)
-r25 <- Perform_Analytical_Run25(f.flag = 2)
+#r20 <- Perform_Analytical_Run20(f.flag = 2)
+#r21 <- Perform_Analytical_Run21(f.flag = 2)
+#r22 <- Perform_Analytical_Run22(f.flag = 2)
+#r23 <- Perform_Analytical_Run23(f.flag = 2)
+#r24 <- Perform_Analytical_Run24(f.flag = 2)
+#r25 <- Perform_Analytical_Run25(f.flag = 2)
+
+r26 <- Perform_Analytical_Run26(f.flag = 2)
+r27 <- Perform_Analytical_Run27(f.flag = 2)
+
+r28 <- Perform_Analytical_Run28(f.flag = 2)
+r29 <- Perform_Analytical_Run29(f.flag = 2)
 
 ################################################################################
 #### End
