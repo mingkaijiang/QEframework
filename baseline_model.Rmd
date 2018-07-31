@@ -2245,6 +2245,99 @@ $$NUE = 1 / (n_fa_f + n_wa_w + n_ra_r) $$
 
 ```
 
+
+### 5.9 Kirschbaum et al. 1994
+``` {r, echo=FALSE, warning=F, message=F}
+
+    ### split the data.list into two data frames
+    cdf.r1.1 <- r1.1$cDF
+    edf.r1.1 <- r1.1$eDF
+
+    ### extract CO2 conc. from constraint DF
+    cdf1.r1.1 <- cdf.r1.1[cdf.r1.1$CO2 == 400, ]
+    cdf2.r1.1 <- cdf.r1.1[cdf.r1.1$CO2 == 800, ]
+
+    ### extract CO2 conc. from eq DF
+    edf1.r1.1 <- edf.r1.1[edf.r1.1$CO2 == 400, ]
+    edf2.r1.1 <- edf.r1.1[edf.r1.1$CO2 == 800, ]
+    
+    ### split the data.list into two data frames
+    cdf.r1.2 <- r1.2$cDF
+    edf.r1.2 <- r1.2$eDF
+
+    ### extract CO2 conc. from constraint DF
+    cdf1.r1.2 <- cdf.r1.2[cdf.r1.2$CO2 == 400, ]
+    cdf2.r1.2 <- cdf.r1.2[cdf.r1.2$CO2 == 800, ]
+
+    ### extract CO2 conc. from eq DF
+    edf1.r1.2 <- edf.r1.2[edf.r1.2$CO2 == 400, ]
+    edf2.r1.2 <- edf.r1.2[edf.r1.2$CO2 == 800, ]
+    
+    ### split the data.list into two data frames
+    cdf.r1 <- r1$cDF
+    edf.r1 <- r1$eDF
+
+    ### extract CO2 conc. from constraint DF
+    cdf1.r1 <- cdf.r1[cdf.r1$CO2 == 400, ]
+    cdf2.r1 <- cdf.r1[cdf.r1$CO2 == 800, ]
+
+    ### extract CO2 conc. from eq DF
+    edf1.r1 <- edf.r1[edf.r1$CO2 == 400, ]
+    edf2.r1 <- edf.r1[edf.r1$CO2 == 800, ]
+  
+    ### Create a storage df
+    sensDF <- matrix(nrow=4*3, ncol=3)
+    colnames(sensDF) <- c("n_trans", "value", "Time")
+    sensDF <- as.data.frame(sensDF)
+    sensDF$n_trans <- rep(c(0.1, 0.5, 0.9), each = 4)
+    sensDF$Time <- rep(c("I", "M", "L", "VL"), by = 3)
+    
+
+    sensDF[sensDF$n_trans==0.1&sensDF$Time=="I","value"] <- (r1.1$eDF$NPP_I[2]-r1.1$eDF$NPP_VL[1])/r1.1$eDF$NPP_VL[1]
+    sensDF[sensDF$n_trans==0.1&sensDF$Time=="M","value"] <- (r1.1$eDF$NPP_M[2]-r1.1$eDF$NPP_VL[1])/r1.1$eDF$NPP_VL[1]
+    sensDF[sensDF$n_trans==0.1&sensDF$Time=="L","value"] <- (r1.1$eDF$NPP_L[2]-r1.1$eDF$NPP_VL[1])/r1.1$eDF$NPP_VL[1]
+    sensDF[sensDF$n_trans==0.1&sensDF$Time=="VL","value"] <- (r1.1$eDF$NPP_VL[2]-r1.1$eDF$NPP_VL[1])/r1.1$eDF$NPP_VL[1]
+    
+    
+    sensDF[sensDF$n_trans==0.5&sensDF$Time=="I","value"] <- (r1$eDF$NPP_I[2]-r1$eDF$NPP_VL[1])/r1$eDF$NPP_VL[1]
+    sensDF[sensDF$n_trans==0.5&sensDF$Time=="M","value"] <- (r1$eDF$NPP_M[2]-r1$eDF$NPP_VL[1])/r1$eDF$NPP_VL[1]
+    sensDF[sensDF$n_trans==0.5&sensDF$Time=="L","value"] <- (r1$eDF$NPP_L[2]-r1$eDF$NPP_VL[1])/r1$eDF$NPP_VL[1]
+    sensDF[sensDF$n_trans==0.5&sensDF$Time=="VL","value"] <- (r1$eDF$NPP_VL[2]-r1$eDF$NPP_VL[1])/r1$eDF$NPP_VL[1]
+    
+    sensDF[sensDF$n_trans==0.9&sensDF$Time=="I","value"] <- (r1.2$eDF$NPP_I[2]-r1.2$eDF$NPP_VL[1])/r1.2$eDF$NPP_VL[1]
+    sensDF[sensDF$n_trans==0.9&sensDF$Time=="M","value"] <- (r1.2$eDF$NPP_M[2]-r1.2$eDF$NPP_VL[1])/r1.2$eDF$NPP_VL[1]
+    sensDF[sensDF$n_trans==0.9&sensDF$Time=="L","value"] <- (r1.2$eDF$NPP_L[2]-r1.2$eDF$NPP_VL[1])/r1.2$eDF$NPP_VL[1]
+    sensDF[sensDF$n_trans==0.9&sensDF$Time=="VL","value"] <- (r1.2$eDF$NPP_VL[2]-r1.2$eDF$NPP_VL[1])/r1.2$eDF$NPP_VL[1]
+    
+    sensDF$n_trans <- as.character(sensDF$n_trans)
+    
+    ### Plotting
+    p1<-ggplot() + 
+        geom_bar(data=sensDF, aes(x=n_trans, y=value, fill=Time), 
+                 stat="identity", position=position_dodge()) +
+        theme_linedraw() +
+        theme(panel.grid.minor=element_blank(),
+              axis.text=element_text(size=14),
+              axis.title=element_text(size=16),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
+              axis.text.x = element_text(angle = 90, hjust=1),
+              panel.grid.major=element_line(color="grey")) + 
+        ylab("% change") + xlab("") + 
+        scale_fill_manual(name="Timescale", values = c("I" = cbPalette[2], "M" = cbPalette[3],
+                                                      "L" = cbPalette[4], "VL" = cbPalette[7])) 
+    
+
+    if (save.plot) {
+        pdf("Plots/sensitivity_Kirshbaum_retranslocation.pdf", width=10, height=6)
+        plot(p1)
+        dev.off()
+    
+    } 
+    
+
+```
+
 # 6. To-do list:
 Below is a continuous update of the to-do list of this project:
 

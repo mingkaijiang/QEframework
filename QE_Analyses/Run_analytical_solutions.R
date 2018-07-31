@@ -94,11 +94,17 @@ r10 <- Perform_Analytical_Run101(f.flag = 2)
 #r24 <- Perform_Analytical_Run24(f.flag = 2)
 #r25 <- Perform_Analytical_Run25(f.flag = 2)
 
+#### Allocation coupling as Medlyn and Dewar 1996
 r26 <- Perform_Analytical_Run26(f.flag = 2)
 r27 <- Perform_Analytical_Run27(f.flag = 2)
 
 r28 <- Perform_Analytical_Run28(f.flag = 2)
 r29 <- Perform_Analytical_Run29(f.flag = 2)
+
+#### Retranslocation as Kirschbaum et al. 1994
+r1 <- Perform_Analytical_Run1(f.flag = 2)
+r1.1 <- Perform_Analytical_Run1.1(f.flag = 2)
+r1.2 <- Perform_Analytical_Run1.2(f.flag = 2)
 
 ################################################################################
 #### End
