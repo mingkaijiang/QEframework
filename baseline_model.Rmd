@@ -728,9 +728,18 @@ Under variable wood NC assumption, we see that the M, L and VL line overlap with
     subDF[1,"Run"] <- "Baseline"
     subDF[2,"Run"] <- "Priming"
     subDF[3,"Run"] <- "Exudation"
+    
+    subDF[1,"F1"] <- "M"
+    subDF[2,"F1"] <- "M"
+    subDF[3,"F1"] <- "M"
+    
+    subDF[1,"F2"] <- "VL"
+    subDF[2,"F2"] <- "VL"
+    subDF[3,"F2"] <- "VL"
 
-    p<-ggplot(data=subDF, aes(x=Run, y=NPP_M)) + 
-        geom_bar(aes(fill=Run), stat="identity") +
+    p<-ggplot(data=subDF) + 
+        geom_bar(aes(x=Run, y=NPP_VL, fill=F2), stat="identity") +
+        geom_bar(aes(x=Run, y=NPP_M, fill=F1), stat="identity") +
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text=element_text(size=14),
@@ -740,8 +749,10 @@ Under variable wood NC assumption, we see that the M, L and VL line overlap with
               panel.grid.major=element_line(color="grey")) + 
         ylab("% change") + xlab("") +
         ylim(0, 15)+
-        scale_fill_manual(name="Model", values = c("Baseline"="grey","Exudation"="orange","Priming"="red"))
+        scale_fill_manual(name="Timescale", values = c("VL"="black",
+    "M"="grey"))
     plot(p)
+    
     if (save.plot) {
         pdf("Plots/exudation_effect.pdf", width=10, height=6)
         plot(p)
