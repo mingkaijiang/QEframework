@@ -1338,6 +1338,7 @@ The table above summarizes scenarios tested in this study. Next, I am going to m
               panel.grid.major=element_line(color="grey")) + 
         ylab("% change") + xlab("") + 
         scale_fill_manual(name="coefficient values", values = c(cbPalette)) 
+    
     plot(p)
     if (save.plot) {
         pdf("Plots/sensitivity_priming_effect_coefficient.pdf", width=10, height=6)
@@ -1345,6 +1346,32 @@ The table above summarizes scenarios tested in this study. Next, I am going to m
         dev.off()
     } 
     
+    sensDF <- read.csv("Tables/Priming_sensitivity.csv")
+    
+    p<-ggplot() + 
+        geom_bar(data=sensDF, aes(x=variable, y=newks, fill=as.factor(variable_value)), 
+                 stat="identity", position=position_dodge()) +
+        theme_linedraw() +
+        theme(panel.grid.minor=element_blank(),
+              axis.text=element_text(size=14),
+              axis.title=element_text(size=16),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
+              axis.text.x = element_text(angle = 90, hjust=1),
+              panel.grid.major=element_line(color="grey"),
+              legend.position="none") + 
+        ylab(expression(k[slow])) + xlab("") + 
+        scale_fill_manual(name="coefficient values", 
+                          values = c(cbPalette[1:5],cbPalette[1:5],cbPalette[1:5]))+
+        geom_hline(yintercept=0.067)+
+        scale_x_discrete(labels=c("arhizo" = expression(a[rhizo]), "fcue" = expression(f[cue]), "km" = expression(k[m])))
+    
+    plot(p)
+    if (save.plot) {
+        pdf("Plots/sensitivity_priming_effect_coefficient2.pdf", width=10, height=6)
+        plot(p)
+        dev.off()
+    } 
 
 ```
 
