@@ -48,8 +48,8 @@ Sens_Run3 <- function() {
     VL_eq <- solve_VL_full_expl_min(CO2=CO2_1)
     a_eq <- alloc(VL_eq$nf)
     s_coef <- soil_coef(df=VL_eq$nf, a=a_eq)
-    omega_ap <- a_eq$af*s_coef$omega_af_pass + a_eq$ar*s_coef$omega_ar_pass
-    omega_as <- a_eq$af*s_coef$omega_af_slow + a_eq$ar*s_coef$omega_ar_slow
+    omega_ap <- a_eq$af*s_coef$omega_af_pass + a_eq$ar*s_coef$omega_ar_pass + a_eq$aw*s_coef$omega_aw_pass
+    omega_as <- a_eq$af*s_coef$omega_af_slow + a_eq$ar*s_coef$omega_ar_slow + a_eq$aw*s_coef$omega_aw_slow
     C_pass_VL <- omega_ap*VL_eq$NPP/s_coef$decomp_pass/(1-s_coef$qq_pass)*1000.0
     L <- L_constraint_expl_min(df=nfseq, a=a_nf, 
                                C_pass=C_pass_VL, Nin_L = Nin)

@@ -29,8 +29,8 @@ M_constraint_prim <- function(df, a, C_pass, C_slow, Nin_L) {
             pass <- soil_coef_prim(df[i], a[i,], NPP)
             
             # again, exclude exudation from root allocation
-            omega_ap <- a[i,]$af*pass$omega_af_pass + (a[i,]$ar-a[i,]$ar*a[i,]$ariz)*pass$omega_ar_pass 
-            omega_as <- a[i,]$af*pass$omega_af_slow + (a[i,]$ar-a[i,]$ar*a[i,]$ariz)*pass$omega_ar_slow 
+            omega_ap <- a[i,]$af*pass$omega_af_pass + (a[i,]$ar-a[i,]$ar*a[i,]$ariz)*pass$omega_ar_pass + a[i,]$aw*pass$omega_aw_pass
+            omega_as <- a[i,]$af*pass$omega_af_slow + (a[i,]$ar-a[i,]$ar*a[i,]$ariz)*pass$omega_ar_slow + a[i,]$aw*pass$omega_aw_slow
             
             # Calculate C slow based on exudation and new decomposition values
             C_slow_new <- omega_as*NPP/pass$decomp_slow/(1-pass$qq_slow)*1000.0

@@ -59,6 +59,9 @@ soil_coef_prim <- function(df, a, in_npp) {
     omega_af_pass <- mu_f*omega_am_pass + (1-mu_f)*omega_au_pass
     omega_ar_pass <- mu_r*omega_am_pass + (1-mu_r)*omega_av_pass  
     
+    ### burial fraction for wood (omegaw) into passive pool, assuming all wood enters sfc structural pool
+    omega_aw_pass <- omega_au_pass
+    
     ### burial fractions for foliage and root into slow pool
     omega_au_slow <- (pus+pas*pua)/det
     omega_av_slow <- (pvs+pas*pva)/det
@@ -66,9 +69,13 @@ soil_coef_prim <- function(df, a, in_npp) {
     omega_af_slow <- mu_f*omega_am_slow + (1-mu_f)*omega_au_slow
     omega_ar_slow <- mu_r*omega_am_slow + (1-mu_r)*omega_av_slow
     
+    ### burial fraction for wood (omegaw) into slow pool, assuming all wood enters sfc structural pool
+    omega_aw_slow <- omega_au_slow
+    
     ### fraction of foliage and root litter being transferred to active pool
     transfer_fa <- mu_f*pma + (1-mu_f)*psa
     transfer_ra <- mu_r*pma + (1-mu_r)*psa
+    transfer_wa <- psa
     
     # calculate the extra C and N input into active SOM,
     # and the gap between what's needed and what's provided
@@ -84,8 +91,8 @@ soil_coef_prim <- function(df, a, in_npp) {
     
     ### out df
     ret <- data.frame(decomp_pass, decomp_slow, decomp_slow_old, qq_pass, qq_slow,
-                      omega_af_pass, omega_ar_pass, omega_af_slow, omega_ar_slow, 
-                      transfer_fa, transfer_ra)
+                      omega_af_pass, omega_ar_pass, omega_af_slow, omega_ar_slow, omega_aw_pass, omega_aw_slow,
+                      transfer_fa, transfer_ra, transfer_wa)
     
     return(ret)
 }

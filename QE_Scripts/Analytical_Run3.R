@@ -37,8 +37,8 @@ Perform_Analytical_Run3 <- function(f.flag = 1) {
     
     ### calculate soil parameters, e.g. reburial coef.
     s_coef <- soil_coef(df=VL_eq$nf, a=a_eq)
-    omega_ap <- a_eq$af*s_coef$omega_af_pass + a_eq$ar*s_coef$omega_ar_pass
-    omega_as <- a_eq$af*s_coef$omega_af_slow + a_eq$ar*s_coef$omega_ar_slow
+    omega_ap <- a_eq$af*s_coef$omega_af_pass + a_eq$ar*s_coef$omega_ar_pass + a_eq$aw*s_coef$omega_aw_pass
+    omega_as <- a_eq$af*s_coef$omega_af_slow + a_eq$ar*s_coef$omega_ar_slow + a_eq$aw*s_coef$omega_aw_slow
     
     ### Get C from very-long term nutrient cycling solution
     ### return in g C m-2 

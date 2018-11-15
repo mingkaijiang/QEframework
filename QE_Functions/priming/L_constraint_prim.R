@@ -15,7 +15,7 @@ L_constraint_prim <- function(df, a, C_pass, Nin_L) {
     pass <- soil_coef(df, a)
     
     # excluding part of root as it's exudation now
-    omega_ap <- a$af*pass$omega_af_pass + (a$ar-a$ar*a$ariz)*pass$omega_ar_pass 
+    omega_ap <- a$af*pass$omega_af_pass + (a$ar-a$ar*a$ariz)*pass$omega_ar_pass + a$aw*pass$omega_aw_pass
     
     # equation for N constraint with passive, wood, and leaching
     U0 <- Nin_L + (1-pass$qq_pass) * pass$decomp_pass * C_pass * ncp   

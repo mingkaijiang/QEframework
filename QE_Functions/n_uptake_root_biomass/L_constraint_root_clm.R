@@ -18,7 +18,7 @@ L_constraint_root_clm <- function(df, a, C_pass, Nin_L) {
     
     # passive pool burial 
     pass <- soil_coef(df, a)
-    omega_ap <- a$af*pass$omega_af_pass + a$ar*pass$omega_ar_pass 
+    omega_ap <- a$af*pass$omega_af_pass + a$ar*pass$omega_ar_pass + a$aw*pass$omega_aw_pass
     
     U0 <- Nin_L + (1-pass$qq_pass) * pass$decomp_pass * C_pass * ncp   
     nburial <- omega_ap*ncp

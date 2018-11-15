@@ -42,8 +42,8 @@ Perform_Analytical_Run80 <- function(f.flag = 1) {
     
     ### note: a fraction of root is used for exudation
     ###       so they should be excluded here. 
-    omega_ap <- a_eq$af*s_coef$omega_af_pass + (a_eq$ar-a_eq$ar*a_eq$ariz)*s_coef$omega_ar_pass
-    omega_as <- a_eq$af*s_coef$omega_af_slow + (a_eq$ar-a_eq$ar*a_eq$ariz)*s_coef$omega_ar_slow
+    omega_ap <- a_eq$af*s_coef$omega_af_pass + (a_eq$ar-a_eq$ar*a_eq$ariz)*s_coef$omega_ar_pass + a_eq$aw*s_coef$omega_aw_pass
+    omega_as <- a_eq$af*s_coef$omega_af_slow + (a_eq$ar-a_eq$ar*a_eq$ariz)*s_coef$omega_ar_slow + a_eq$aw*s_coef$omega_aw_slow
     
     ### Get C from very-long term nutrient cycling solution
     ### return in g C m-2 

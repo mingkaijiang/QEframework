@@ -42,8 +42,8 @@ Perform_Analytical_Run11 <- function(f.flag = 1) {
     s_coef <- soil_coef(df=VL_eq$nf, a=a_eq)
     
     ### Get omega
-    omega_ap <- a_eq$af*s_coef$omega_af_pass + a_eq$ar*s_coef$omega_ar_pass
-    omega_as <- a_eq$af*s_coef$omega_af_slow + a_eq$ar*s_coef$omega_ar_slow 
+    omega_ap <- a_eq$af*s_coef$omega_af_pass + a_eq$ar*s_coef$omega_ar_pass 
+    omega_as <- a_eq$af*s_coef$omega_af_slow + a_eq$ar*s_coef$omega_ar_slow
     
     ### Get C from very-long term nutrient cycling solution
     ### return in g C m-2 
