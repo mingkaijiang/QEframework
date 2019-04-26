@@ -19,7 +19,7 @@ Perform_Analytical_Run101 <- function(f.flag = 1) {
     source("Parameters/Analytical_Run101_Parameters.R")
     
     ### create a range of nc for shoot to initiate
-    nfseq <- round(seq(0.001, 0.1, by = 0.001),5)
+    nfseq <- round(seq(0.001, 0.1, by = 0.0001),5)
     
     ### create nc ratio for wood, root, and allocation coefficients
     a_nf <- as.data.frame(alloc(nfseq))
